@@ -19,9 +19,3 @@ public class JavaEE8Resource {
     }
 }
 
-
-
-
-
-
-//esto es un comentario
