@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  *
@@ -105,6 +106,7 @@ public class Medico {
     }
 
     public Medico() {
+        
     }
     
     
