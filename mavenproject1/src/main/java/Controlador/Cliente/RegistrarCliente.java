@@ -72,7 +72,7 @@ public class RegistrarCliente {
             
             if (!(password.equals(confirmPassword))) {
                 request.setAttribute("error-code", "Las contraseñas no coinciden");
-                request.getRequestDispatcher("/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                request.getRequestDispatcher("/RegistroClienteErrorContrasena.jsp").forward(request, response);
             }
         }catch(Exception e){
             System.out.println(e);

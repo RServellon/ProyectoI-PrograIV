@@ -23,7 +23,7 @@
                 <div class="row gx-lg-5 align-items-center mb-5">
                     <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
                         <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-                           Registro Medico <br />
+                           Registro Cliente <br />
                             <h3 style="color: hsl(218, 81%, 75%)">Por Favor ingrese sus datos</h3>
                         </h1>
                         <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
