@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author norma
+ * Clase controladora de cliente
  */
 @WebServlet(name = "ControladorCliente", urlPatterns = {"/ControladorCliente"})
 public class ControladorCliente extends HttpServlet {
