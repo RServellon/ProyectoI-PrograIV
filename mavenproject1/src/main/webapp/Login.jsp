@@ -8,13 +8,12 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>Login page</title>
       <link href="CSS/login.css" rel="stylesheet">
-      <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
 
-    <body>
-      <section class="vh-100 gradient-custom background-radial-gradient">
+    <body class=" background-radial-gradient">
+      <section class="vh-all gradient-custom background-radial-gradient">
         <div class="container py-5 h-100">
           <div class="row  justify-content-center align-items-center h-100">
             <div class="col-8 col-md-8 col-lg-6 col-xl-5">
@@ -37,7 +36,7 @@
                         <label class="form-label" for="typePasswordX">Contraseña</label>
                       </div>
 
-                      <div id="tipo_usuario" class="form-group radio-usuario">
+                      <div id="tipo_usuario" class="form-group radio-usuario" required>
                         <label>
                           <i class="fa-solid fa-user-doctor"></i>
                           Medico
@@ -64,7 +63,7 @@
 
                     <div>
                       <!--                Aqui se debe de colocar la pagina GENERAL para registrar (quitar registroMedico y registroCliente)-->
-                      <p class="mb-0">Si no tienes una cuenta registrate <a href="VistaCliente/RegistroCliente.jsp"
+                      <p class="mb-0">Si no tienes una cuenta registrate <a href="VistaMedico/RegistroMedico.jsp"
                           class="text-primary fw-bold">aqui</a>
                       </p>
                     </div>
@@ -77,6 +76,7 @@
           </div>
         </div>
       </section>
+        <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
     </body>
 
     </html>

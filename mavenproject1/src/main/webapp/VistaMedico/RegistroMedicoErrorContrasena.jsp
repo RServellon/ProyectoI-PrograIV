@@ -1,7 +1,8 @@
 <%-- Document : RegistroMedico Created on : 13 abr. 2022, 0:12:21 Author : norman --%>
-    <% //querry String nombre=(String) request.getAttribute("first-name"); String apellido=(String)
+    <% String nombre=(String) request.getAttribute("first-name"); String apellido=(String)
         request.getAttribute("last-name"); String id=(String) request.getAttribute("id"); String errorCode=(String)
         request.getAttribute("error-code"); %>
+        
         <%@page contentType="text/html" pageEncoding="UTF-8" %>
             <!DOCTYPE html>
             <html>
@@ -9,13 +10,13 @@
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
                 <title>Registro Medico</title>
-                <link rel="stylesheet" href="CSS/StyleRegistroMedico.css" type="text/css">
+                <link rel="stylesheet" href="../CSS/StyleRegistro.css" type="text/css">
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
                     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
                     crossorigin="anonymous">
             </head>
 
-            <body>
+            <body >
 
                 <!-- Section: Design Block -->
                 <section class="background-radial-gradient overflow-hidden">
@@ -78,6 +79,24 @@
                                             <input type="password" name="pwd-confirmation" class="form-control" />
                                             <label class="form-label" for="form3Example4">Confirmar Contraseña</label>
                                         </div>
+                                        
+                                        <div id="tipo_usuario" class="form-group radio-usuario" required>
+                                            <label>
+                                                <i class="fa-solid fa-user-doctor"></i>
+                                                Medico
+                                                <input for="medico" type="radio" name="tipo_usuario">
+                                            </label>
+                                            <label>
+                                                <i class="fa-solid fa-user-injured"></i>
+                                                Paciente
+                                                <input for="paciente" type="radio" name="tipo_usuario">
+                                            </label>
+                                            <label>
+                                                <i class="fa-solid fa-user-gear"></i>
+                                                Admin
+                                                <input for="administrador" type="radio" name="tipo_usuario">
+                                            </label>
+                                        </div>
 
 
                                         <!-- Submit button -->
@@ -101,6 +120,7 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
                     crossorigin="anonymous"></script>
+                <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
             </body>
 
             </html>
