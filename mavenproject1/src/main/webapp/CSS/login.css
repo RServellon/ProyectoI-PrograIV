@@ -30,9 +30,10 @@ body{
 .radio-usuario{
     display: flex;
     justify-content:space-between;
-    margin: 1em;
+    margin-top: 2em;
 }
 .boton-submit{
+    margin-top: 3em;
     padding: 1.5em;
 }
 .container-login, .p-text{
