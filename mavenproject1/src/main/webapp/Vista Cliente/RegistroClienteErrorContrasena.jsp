@@ -1,7 +1,7 @@
 <%-- 
     Document   : RegistroMedico
     Created on : 13 abr. 2022, 0:12:21
-    Author     : norma
+    Author     : @
 --%>
 <%
     //querry 

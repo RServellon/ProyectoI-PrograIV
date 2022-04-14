@@ -1,7 +1,7 @@
 <%-- 
     Document   : RegistroMedico
     Created on : 13 abr. 2022, 0:12:21
-    Author     : Norman
+    Author     : @
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -87,9 +87,6 @@
             </div>
         </section>
         <!-- Section: Design Block -->
-        
-        
-        
         
         <!--link de bootstrap-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
