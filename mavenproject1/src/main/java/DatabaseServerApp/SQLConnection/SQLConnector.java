@@ -1,4 +1,4 @@
-package SQLConnection;
+package DatabaseServerApp.SQLConnection;
 
 
 import java.sql.Connection;

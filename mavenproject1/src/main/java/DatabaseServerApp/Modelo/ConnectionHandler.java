@@ -1,7 +1,7 @@
 
-package Modelo;
+package DatabaseServerApp.Modelo;
 
-import SQLConnection.SQLExecutor;
+import DatabaseServerApp.SQLConnection.SQLExecutor;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
