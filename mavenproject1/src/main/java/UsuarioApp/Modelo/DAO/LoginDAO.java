@@ -4,28 +4,35 @@
  */
 package UsuarioApp.Modelo.DAO;
 
-import DatabaseServerApp.Modelo.ConexionMySql;
 import UsuarioApp.Modelo.Usuario;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+
+
 /**
- *
+ * aqui se hace toda la magiia de la conección
  * @author norma
  */
 public class LoginDAO {
-    int rspta = 0;
+    boolean rspta = false;
     String sql = "";
     ResultSet rs = null;
-    ConexionMySql cn = new ConexionMySql();
+ 
 
-    public int validarLogin(Usuario tm) throws Exception {
-        sql = "SELECT COUNT(*) as cantidad from `usuarios` WHERE id=" + tm.getId() + " AND clave='" + tm.getClave() + "'";
-//        sql = "SELECT COUNT(CODTRABAJADOR) AS cantidad FROM `trabajador` WHERE USUARIO='" + tm.getId()+ "' AND CLAVE='" + tm.getClave() + "'";
-        rs = cn.ejecutarConsulta(sql);
-        while (rs.next()) {
-            rspta = rs.getInt("cantidad");
-            System.out.println(rspta);
-        }
+    public boolean validarLogin(Usuario tm) throws Exception {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyecto1?useSSL=false", "root", "password");
+//        sql = "SELECT COUNT(*) as cantidad from `usuarios` WHERE id=" + tm.getId() + " AND clave='" + tm.getClave() + "'";
+        sql = "SELECT * from `usuarios` WHERE id=" + tm.getId() + " AND clave='" + tm.getClave() + "'";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        System.out.println(preparedStatement);
+        ResultSet rs = preparedStatement.executeQuery();
+        rspta = rs.next();
+        System.out.println(rs.getString("id"));
+        System.out.println(rs.getString("nombre"));
         return rspta;
     }
     

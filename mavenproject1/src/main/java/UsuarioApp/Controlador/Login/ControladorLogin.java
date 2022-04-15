@@ -55,7 +55,7 @@ public class ControladorLogin extends HttpServlet {
             Usuario newUser = new Usuario();
             LoginDAO lg = new LoginDAO();
             
-            int resp=0;
+            boolean resp=false;
             newUser.setClave(pwd);
             newUser.setId(Integer.parseInt(id));
             try {
@@ -63,7 +63,7 @@ public class ControladorLogin extends HttpServlet {
             } catch (Exception ex) {
                 Logger.getLogger(ControladorLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (resp != 0) {
+            if (resp) {
                 System.out.println("Sii jalaaaaaa");
             } else {
                 System.out.println("NOOOOOOOO");
