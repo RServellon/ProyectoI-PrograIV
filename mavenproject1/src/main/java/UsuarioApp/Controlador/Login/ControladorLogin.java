@@ -20,7 +20,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-
+//jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=CONVERT_TO_NULL [root on Default schema]
 
 /**
  *
