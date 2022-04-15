@@ -24,12 +24,11 @@
                         <div class="row gx-lg-5 align-items-center mb-5">
                             <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
                                 <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-                                    Registro Medico <br />
-                                    <h3 style="color: hsl(218, 81%, 75%)">Por Favor ingrese sus datos</h3>
+                                    Registro General <br />
                                 </h1>
+                                <h3 style="color: hsl(218, 81%, 75%)">Por Favor ingrese sus datos</h3>
                                 <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-                                    Nota: Los datos enviados en este formulario deberán ser revisados en un plazo de 4
-                                    días habiles
+                                    Nota: Debe ingresar sus datos correctos
                                 </p>
                             </div>
 
@@ -80,21 +79,21 @@
                                             <label class="form-label" for="form3Example4">Confirmar Contraseña</label>
                                         </div>
                                         
-                                        <div id="tipo_usuario" class="form-group radio-usuario" required>
+                                        <div id="tipo_usuario" class="form-group radio-usuario">
                                             <label>
                                                 <i class="fa-solid fa-user-doctor"></i>
                                                 Medico
-                                                <input for="medico" type="radio" name="tipo_usuario">
+                                                <input value="medico" type="radio" name="tipo_usuario" required>
                                             </label>
                                             <label>
                                                 <i class="fa-solid fa-user-injured"></i>
                                                 Paciente
-                                                <input for="paciente" type="radio" name="tipo_usuario">
+                                                <input value="paciente" type="radio" name="tipo_usuario">
                                             </label>
                                             <label>
                                                 <i class="fa-solid fa-user-gear"></i>
                                                 Admin
-                                                <input for="administrador" type="radio" name="tipo_usuario">
+                                                <input value="administrador" type="radio" name="tipo_usuario">
                                             </label>
                                         </div>
 
