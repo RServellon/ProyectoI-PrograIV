@@ -4,6 +4,8 @@
  */
 package UsuarioApp.Controlador.Login;
 
+import UsuarioApp.Modelo.DAO.LoginDAO;
+import UsuarioApp.Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -13,11 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 
 //jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=CONVERT_TO_NULL [root on Default schema]
@@ -55,19 +52,26 @@ public class ControladorLogin extends HttpServlet {
             request.setAttribute("user", id);
             request.setAttribute("password", pwd);
             request.setAttribute("tipo_usuario", userTipe);  
+            Usuario newUser = new Usuario();
+            LoginDAO lg = new LoginDAO();
             
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=nombre;","sa", "1234");
-            PreparedStatement pst = conn.prepareStatement("Select nombre from medicos where id=? and clave=?");
-            pst.setString(1, id);
-            pst.setString(2, pwd);
+            int resp=0;
+            newUser.setClave(pwd);
+            newUser.setId(Integer.parseInt(id));
+            try {
+                resp = lg.validarLogin(newUser);
+            } catch (Exception ex) {
+                Logger.getLogger(ControladorLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (resp != 0) {
+                System.out.println("Sii jalaaaaaa");
+            } else {
+                System.out.println("NOOOOOOOO");
+               
+            }
             
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                System.out.println("Valido");
-                
-            }else
-                System.out.println("no valido");
+            
+         
             
         } catch (Exception e) {
             System.out.println(e);
