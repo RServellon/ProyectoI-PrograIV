@@ -40,17 +40,17 @@
                         <label>
                           <i class="fa-solid fa-user-doctor"></i>
                           Medico
-                          <input for="medico" type="radio" name="tipo_usuario">
+                          <input value="medico" type="radio" name="tipo_usuario">
                         </label>
                         <label>
                           <i class="fa-solid fa-user-injured"></i>
                           Paciente
-                          <input for="paciente" type="radio" name="tipo_usuario">
+                          <input value="paciente" type="radio" name="tipo_usuario">
                         </label>
                         <label>
                           <i class="fa-solid fa-user-gear"></i>
                           Admin
-                          <input for="administrador" type="radio" name="tipo_usuario">
+                          <input value="administrador" type="radio" name="tipo_usuario">
                         </label>
                       </div>
 

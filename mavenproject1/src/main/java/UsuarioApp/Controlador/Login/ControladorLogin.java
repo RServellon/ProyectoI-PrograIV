@@ -34,10 +34,17 @@ public class ControladorLogin extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             
            
-            System.out.println("Sexooooooooooooo---------------------------");
-            
-            
-            
+            String id = request.getParameter("user");
+            String pwd = request.getParameter("password");
+            String userTipe = request.getParameter("tipo_usuario");
+
+            System.out.println(id);
+            System.out.println(pwd);
+            System.out.println(userTipe);
+
+            request.setAttribute("user", id);
+            request.setAttribute("password", pwd);
+            request.setAttribute("tipo_usuario", userTipe);     
         }
     }
 
