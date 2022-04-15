@@ -6,11 +6,21 @@ package UsuarioApp.Controlador.Login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+
+
 
 /**
  *
@@ -44,8 +54,24 @@ public class ControladorLogin extends HttpServlet {
 
             request.setAttribute("user", id);
             request.setAttribute("password", pwd);
-            request.setAttribute("tipo_usuario", userTipe);     
-        }
+            request.setAttribute("tipo_usuario", userTipe);  
+            
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=nombre;","sa", "1234");
+            PreparedStatement pst = conn.prepareStatement("Select nombre from medicos where id=? and clave=?");
+            pst.setString(1, id);
+            pst.setString(2, pwd);
+            
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                System.out.println("Valido");
+                
+            }else
+                System.out.println("no valido");
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
