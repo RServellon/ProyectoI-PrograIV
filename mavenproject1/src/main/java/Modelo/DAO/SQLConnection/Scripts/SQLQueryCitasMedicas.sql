@@ -133,7 +133,7 @@ insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuario
 insert into administradores(id) values (100);
 
 -- Medicos
-insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (101, 1, 70000, 1000, 'Athena', 'APRO');
+insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (101, 1, 70000, 1000, 'Athena', 'ESP');
 insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (102, 4, 100000, 1002, 'Pacific Global', 'APRO');
 
 -- Pacientes
