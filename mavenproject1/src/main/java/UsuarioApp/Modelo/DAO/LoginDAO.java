@@ -25,7 +25,6 @@ public class LoginDAO {
     public boolean validarLogin(Usuario tm) throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyecto1?useSSL=false", "root", "password");
-//        sql = "SELECT COUNT(*) as cantidad from `usuarios` WHERE id=" + tm.getId() + " AND clave='" + tm.getClave() + "'";
         sql = "SELECT * from `usuarios` WHERE id=" + tm.getId() + " AND clave='" + tm.getClave() + "'";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         System.out.println(preparedStatement);
@@ -34,6 +33,5 @@ public class LoginDAO {
         System.out.println(rs.getString("id"));
         System.out.println(rs.getString("nombre"));
         return rspta;
-    }
-    
+    }   
 }
