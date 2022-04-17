@@ -10,12 +10,8 @@ import Modelo.DAO.SQLConnection.SQLExecutor;
  *
  * @author rebec
  */
-public class MedicoHandler {
-    private final String usernameBD = "sa";
-    private final String passwordBD = "password";
-    private SQLExecutor executor;
-
-    public MedicoHandler(SQLExecutor executor) {
+public class MedicoHandler extends GeneralHandler {
+    public MedicoHandler() {
         this.executor = new SQLExecutor(usernameBD, passwordBD);
     }
     

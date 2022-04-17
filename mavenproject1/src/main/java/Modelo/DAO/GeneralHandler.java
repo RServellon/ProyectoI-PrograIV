@@ -19,9 +19,9 @@ import java.sql.SQLException;
  * @author norma
  */
 public class GeneralHandler {
-    private final String usernameBD = "sa";
-    private final String passwordBD = "password";
-    private SQLExecutor executor;
+    final String usernameBD = "sa";
+    final String passwordBD = "password";
+    SQLExecutor executor;
 
     public GeneralHandler() {
         this.executor = new SQLExecutor(usernameBD, passwordBD);
