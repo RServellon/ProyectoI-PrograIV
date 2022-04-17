@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package UsuarioApp.Controlador.Cliente;
+package Controlador.Cliente;
 
 import java.io.IOException;
-import UsuarioApp.Controlador.Medico.PasswordValidator;
+import Controlador.Medico.PasswordValidator;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

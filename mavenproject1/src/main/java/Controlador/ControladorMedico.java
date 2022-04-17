@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package UsuarioApp.Controlador;
+package Controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,10 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Clase controladora de cliente
+ *
+ * @author norma
  */
-@WebServlet(name = "ControladorCliente", urlPatterns = {"/ControladorCliente"})
-public class ControladorCliente extends HttpServlet {
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico"})
+public class ControladorMedico extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +36,10 @@ public class ControladorCliente extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorCliente</title>");            
+            out.println("<title>Servlet ControladorMedico</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControladorCliente at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControladorMedico at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

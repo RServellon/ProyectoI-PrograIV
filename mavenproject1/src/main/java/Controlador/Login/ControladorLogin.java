@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package UsuarioApp.Controlador.Login;
+package Controlador.Login;
 
-import UsuarioApp.Modelo.DAO.LoginDAO;
-import UsuarioApp.Modelo.Usuario;
+import Modelo.DAO.GeneralHandler;
+import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -52,27 +52,19 @@ public class ControladorLogin extends HttpServlet {
             request.setAttribute("user", id);
             request.setAttribute("password", pwd);
             request.setAttribute("tipo_usuario", userTipe);  
-            Usuario newUser = new Usuario();
-            LoginDAO lg = new LoginDAO();
             
+            Usuario newUser = new Usuario("100", "Lucia Hernandez", "Password100", "ADMIN");
+            GeneralHandler general = new GeneralHandler();
             boolean resp=false;
-            newUser.setClave(pwd);
-            newUser.setId(Integer.parseInt(id));
-            try {
-                resp = lg.validarLogin(newUser);
-            } catch (Exception ex) {
-                Logger.getLogger(ControladorLogin.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
+            resp = general.validarLogin(newUser);
+
             if (resp) {
                 System.out.println("Sii jalaaaaaa");
             } else {
                 System.out.println("NOOOOOOOO");
                
             }
-            
-            
-         
-            
         } catch (Exception e) {
             System.out.println(e);
         } 
