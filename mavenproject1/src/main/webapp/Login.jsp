@@ -10,17 +10,57 @@
       <link href="CSS/login.css" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
     </head>
 
-    <body class=" background-radial-gradient">
-      <section class="vh-all gradient-custom background-radial-gradient">
+    <body class="">
+        
+        <nav class="navbar navbar-light " style="background-color: #8AB5D3;">
+            <a class="navbar-brand mx-4" href="#">
+                Inicio
+                <img src="assets/Icon pages/home.png">
+            </a>
+            
+            <div class="mx-10" id="navbarNav">
+                <ul class="nav justify-content-end" >
+                    <li class="nav-item">
+                        <a class="nav-link active" style="color:black" href="#">
+                            <img src="assets/Icon pages/info.png">
+                            About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:black" href="#">
+                            <img src="assets/Icon pages/search.png">
+                            Buscar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:black" href="#">
+                            <img src="assets/Icon pages/log-in.png">
+                            Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        
+   
+        
+        
+      <section class="vh-all ">
         <div class="container py-5 h-100">
           <div class="row  justify-content-center align-items-center h-100">
-            <div class="col-8 col-md-8 col-lg-6 col-xl-5">
+              
+            <div class="col-8 col-md-8 col-lg-6 col-xl-5"  >
                 
-                <div class="card bg-glass" style="border-radius: 1rem;">
-                    <div class="card-body px-5 py-4 px-md-5 text-center container-login ">
-                  <form method="POST" name="pagina_logeo" action="login">
+                <div class="ilustration-container " style="text-align:center;"> 
+                    <img src="assets/ilustrations/medic girl.svg" width="50%" height="50%" >
+                </div>  
+                <div class="card bg-glass" style="border-radius: 1rem;"  >
+                 <div class="card-body px-5 py-4 px-md-5 text-center container-login " >
+                  <form method="POST" name="pagina_logeo" action="login" >
 
                     <div class="mb-md-0 mt-md-4 pb-5">
                       <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
@@ -76,6 +116,7 @@
           </div>
         </div>
       </section>
+        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
         <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
     </body>
 

@@ -12,8 +12,7 @@ import java.sql.ResultSet;
 
 
 
-/**
- * aqui se hace toda la magiia de la conección
+/*
  * @author norma
  */
 public class LoginDAO {

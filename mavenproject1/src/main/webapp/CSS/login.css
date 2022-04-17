@@ -39,15 +39,15 @@
 .container-login, .p-text{
     font-weight: bold;
     color: gray;
-/*    background-color: #ade5de ;*/
+    background-color: #ade5de ;
 }
 
 .background-radial-gradient {
     background-color: hsl(218, 41%, 15%);
     background-image: radial-gradient(650px circle at 0% 0%,
-        hsl(218, 41%, 35%) 15%,
-        hsl(218, 41%, 30%) 35%,
-        hsl(218, 41%, 20%) 75%,
+        hsl(205, 45%, 68%) 15%,
+        hsl(205, 45%, 68%) 35%,
+        hsl(205, 45%, 62%) 75%,
         hsl(218, 41%, 19%) 80%,
         transparent 100%),
         radial-gradient(1250px circle at 100% 100%,
@@ -67,3 +67,12 @@ background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 11
 validez a otros browsers W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ 
 background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }*/
+
+
+
+.ilustration-container{
+    position: absolute;
+    left: 0px;
+    top: 93px;
+}
+
