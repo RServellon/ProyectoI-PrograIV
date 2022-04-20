@@ -58,7 +58,7 @@ public class GeneralHandler {
         try {
             executor = new SQLExecutor(usernameBD, passwordBD);
             rs = executor.ejecutaQuery(sql);
-            if (rs.first()){
+            while (rs.next()){
                 usuario.setId(id);
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setTipo(rs.getString("tipo"));
