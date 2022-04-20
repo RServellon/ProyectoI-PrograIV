@@ -16,9 +16,60 @@
     <body class="">
         <%@ include file  ="/Components/Header.jsp" %>
         
-     <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-                            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-                            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+        <nav class="navbar navbar-light " style="background-color: #20304c;">
+            <a class="navbar-brand mx-4" href="#" style="color: white">
+                <img src="assets/Icon pages/home.png">
+                <label class="form-label" >Inicio</label>
+            </a>
+
+            <div class="mx-10" id="navbarNav">
+                <ul class="nav justify-content-end" >
+                    <li class="nav-item">
+                        <a class="nav-link active" style="color:white" href="#">
+                            <img src="assets/Icon pages/info.png">
+
+                            <label class="form-label" >About</label>
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="#">
+                            <img src="assets/Icon pages/search.png">
+
+                            <label class="form-label" >Buscar</label>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="#">
+                            <img src="assets/Icon pages/log-in.png">
+
+                            <label class="form-label" >Login</label>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        
+   
+        
+        
+      <section class="vh-all ">
+        <div class="container py-5 h-100">
+          <div class="row  justify-content-center align-items-center h-100">
+              
+            <div class="col-8 col-md-8 col-lg-6 col-xl-5"  >
+                
+                <div class="ilustration-container " style="text-align:center;"> 
+                    <img src="assets/ilustrations/medic girl.svg" width="50%" height="50%" >
+                </div>  
+                <div class="card bg-glass" style="border-radius: 1rem;"  >
+                 <div class="card-body px-5 py-4 px-md-5 text-center container-login " >
+                  <form method="POST" name="pagina_logeo" action="login" >
+
+                    <div class="mb-md-0 mt-md-4 pb-5">
+                      <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                      <p class="mb-5" color="gray">Por favor digite su usuario y contraseña!</p>
 
                             <div class="card bg-glass">
                                 <div class="card-body px-4 py-5 px-md-5">
