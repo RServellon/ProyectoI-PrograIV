@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author norma
  */
-@WebServlet(name = "RegistrarMedico", urlPatterns = {"/registrarmedico"})
+@WebServlet(name = "RegistrarMedico", urlPatterns = {"/registrarmedico", "/VistaMedico/registrarmedico"})
 public class RegistrarMedico extends HttpServlet {
 
     /**
@@ -38,59 +38,74 @@ public class RegistrarMedico extends HttpServlet {
             String id = request.getParameter("id");
             String password = request.getParameter("pwd");
             String confirmPassword = request.getParameter("pwd-confirmation");
+            String userTipe = request.getParameter("tipo_usuario");
             
             System.out.println(nombre);
             System.out.println(apellido);
             System.out.println(id);
             System.out.println(password);
             System.out.println(confirmPassword);
+            System.out.println(userTipe);
             
             request.setAttribute("first-name", nombre);
             request.setAttribute("last-name", apellido);
             request.setAttribute("id", id);
+            request.setAttribute("tipo_usuario", userTipe);
+            
+            
+            
+            if (!(password.equals(confirmPassword))) {
+                request.setAttribute("error-code", "Las contraseñas no coinciden");
+                request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+            }
+            
             
             switch (PasswordValidator.isValidPassword(password)) {
                 case 1:
-//                    request.getRequestDispatcher("/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                    request.setAttribute("pwd", password);
+                    switch (userTipe) {
+                        case "medico":
+                            request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                            break;
+                        case "paciente":
+                            request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                            break;
+
+                        case "administrador":
+                            request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                            break;
+                        default:
+                            throw new AssertionError();
+                    }
+                    
                     
                     break;
                 case -1:
                     request.setAttribute("error-code", "La contraseña debe tener menos de 20 y más de 8 caracteres de longitud.");
-                    request.getRequestDispatcher("/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                    request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
                     break;
                     
                 case -2:
                     request.setAttribute("error-code", "La contraseña debe tener al menos un carácter en mayúscula.");
-                    request.getRequestDispatcher("/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                    request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
                     
                     break;
                 
                 case -3:
                     request.setAttribute("error-code", "La contraseña debe tener al menos un carácter en minúscula");
-                    request.getRequestDispatcher("/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                    request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
                     
                     break;
                 
                 case -4:
-                    request.setAttribute("error-code", "La contraseña debe tener al menos un carácter especial");
-                    request.getRequestDispatcher("/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                    request.setAttribute("error-code", "La contraseña debe tener al menos un carácter especial @,#,$,%");
+                    request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
                     
                     break;
                 default:
                     throw new AssertionError();
             }
-            
-            
-            if (!(password.equals(confirmPassword))) {
-                request.setAttribute("error-code", "Las contraseñas no coinciden");
-                request.getRequestDispatcher("/RegistroMedicoErrorContrasena.jsp").forward(request, response);
-            }
-            
-            
-                    
-            
-          
-              
+             
         }catch(Exception e){
             System.out.println(e);
         }

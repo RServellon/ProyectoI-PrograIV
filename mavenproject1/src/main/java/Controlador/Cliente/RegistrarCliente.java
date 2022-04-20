@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 /**
  *
- * @author Dell
+ * @author norma
  */
 @WebServlet(name = "RegistrarCliente", urlPatterns = {"/registrarcliente"})
 public class RegistrarCliente {
