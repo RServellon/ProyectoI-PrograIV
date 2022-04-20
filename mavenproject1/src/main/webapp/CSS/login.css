@@ -10,7 +10,8 @@
 .container-login, .p-text{
     font-weight: bold;
     color: gray;
-    background-color: #ade5de ;
+    background-color: #e8ebf1 ;
+    
 }
 
 .background-radial-gradient {
@@ -42,7 +43,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
 
 
 .ilustration-container{
-    position: absolute;
+
     left: 0px;
     top: 93px;
 }

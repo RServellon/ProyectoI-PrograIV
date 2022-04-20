@@ -53,68 +53,38 @@
    
         
         
-      <section class="vh-all ">
-        <div class="container py-5 h-100">
-          <div class="row  justify-content-center align-items-center h-100">
-              
-            <div class="col-8 col-md-8 col-lg-6 col-xl-5"  >
-                
-                <div class="ilustration-container " style="text-align:center;"> 
-                    <img src="assets/ilustrations/medic girl.svg" width="50%" height="50%" >
-                </div>  
-                <div class="card bg-glass" style="border-radius: 1rem;"  >
-                    
-                 <div class="card-body px-5 py-4 px-md-5 text-center container-login " >
-                  <form method="POST" name="pagina_logeo" action="login" >
+        <section class="vh-all ">
+            <div class="container py-5 h-100">
+                <div class="row  justify-content-center align-items-center h-100">
 
-                    <div class="mb-md-0 mt-md-4 pb-5">
-                      <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                      <p class="mb-5" color="gray">Por favor digite su usuario y contraseña!</p>
+                    <div class="col-8 col-md-8 col-lg-6 col-xl-5"  >
+                        <div class="ilustration-container " style="text-align:center;"> 
+                            <img src="assets/ilustrations/medic girl.svg" width="50%" height="50%" >
+                        </div>  
 
-                            <div class="card bg-glass">
-                                <div class="card-body px-4 py-5 px-md-5">
-                                    <form method="POST" name="RegistrarMedico" action="/mavenproject1/VistaMedico/registrarmedico">
-                                        <!-- 2 column grid layout with text inputs for the first and last names -->
-                                        <div class="row">
-                                            <div class="col-md-6 mb-4">
-                                                <div class="form-outline">
-                                                    <input type="text" name="first-name" class="form-control" />
-                                                    <label class="form-label" for="form3Example1">Nombre</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 mb-4">
-                                                <div class="form-outline">
-                                                    <input type="text" name="last-name" class="form-control" />
-                                                    <label class="form-label" for="form3Example2">Apellidos</label>
-                                                </div>
-                                            </div>
+                        <div class="card bg-glass" style="border-radius: 1rem;"  >
+                            <div class="card-body px-5 py-4 px-md-5 text-center container-login " >
+                                <form method="POST" name="pagina_logeo" action="login" >
+
+                                    <div class="mb-md-0 mt-md-4 pb-5">
+                                        <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                                        <p class="mb-5" color="gray">Por favor digite su usuario y contraseña!</p>
+
+                                        <div id="ingresoUser" class="form-outline form-white mb-4">
+                                            <input type="text" id="nombreUsuario" name="user" class="form-control form-control-lg" />
+                                            <label class="form-label" for="typeUser">Usuario</label>
                                         </div>
 
-                                        <!-- ID-->
-                                        <div class="form-outline mb-4">
-                                            <input required type="text" name="id" class="form-control" />
-                                            <label class="form-label" for="form3Example3">Identificación</label>
+                                        <div id="ingresoPass" class="form-outline form-white mb-4">
+                                            <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                                            <label class="form-label" for="typePasswordX">Contraseña</label>
                                         </div>
 
-
-
-                                        <!-- Password input -->
-                                        <div class="form-outline mb-4">
-                                            <input required type="password" name="pwd" class="form-control" />
-                                            <label class="form-label" for="form3Example4">Contraseña</label>
-                                        </div>
-                                        <!-- Password input -->
-                                        <div class="form-outline mb-4">
-                                            <input required type="password" name="pwd-confirmation"
-                                                   class="form-control" />
-                                            <label class="form-label" for="form3Example4">Confirmar Contraseña</label>
-                                        </div>
-
-                                        <div id="tipo_usuario" class="form-group radio-usuario">
+                                        <div id="tipo_usuario" class="form-group radio-usuario" required>
                                             <label>
                                                 <i class="fa-solid fa-user-doctor"></i>
                                                 Medico
-                                                <input value="medico" type="radio" name="tipo_usuario" required>
+                                                <input value="medico" type="radio" name="tipo_usuario">
                                             </label>
                                             <label>
                                                 <i class="fa-solid fa-user-injured"></i>
@@ -128,16 +98,28 @@
                                             </label>
                                         </div>
 
+                                        <div id="boton_submit" class="boton-submit">
+                                            <button class="btn btn-outline-secondary btn-lg px-5" type="submit">Iniciar sesion</button>
+                                        </div>
 
-                                        <!-- Submit button -->
-                                        <button type="submit" class="btn btn-primary btn-block mb-4">
-                                            Registrarse
-                                        </button>
 
-                                    </form>
-                                </div>
+                                    </div>
+
+                                    <div>
+                                        <!--                Aqui se debe de colocar la pagina GENERAL para registrar (quitar registroMedico y registroCliente)-->
+                                        <p class="mb-0">Si no tienes una cuenta registrate <a href="VistaMedico/RegistroMedico.jsp"
+                                                                                              class="text-primary fw-bold">aqui</a>
+                                        </p>
+                                    </div>
+
+                                </form>
+
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
         <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
     </body>
