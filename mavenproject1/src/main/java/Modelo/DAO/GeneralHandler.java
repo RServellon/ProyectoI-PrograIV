@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -81,5 +83,25 @@ public class GeneralHandler {
             exception.printStackTrace();
         }
         return false;
+    }
+    
+    public Usuario retornaUserPorId(String id){
+        Usuario usuario = new Usuario();
+        executor = new SQLExecutor(usernameBD, passwordBD);
+        String sql ="select * from usuarios where id = " + id + ";";
+        ResultSet rs = executor.ejecutaQuery(sql);
+       
+        try{
+            while(rs.next()){
+            usuario.setId(rs.getString("id"));
+            usuario.setNombre(rs.getString("nombre"));
+            usuario.setClave(rs.getString("clave"));
+            usuario.setTipo(rs.getString("tipo"));
+            }
+
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }   
+        return usuario;
     }
 }

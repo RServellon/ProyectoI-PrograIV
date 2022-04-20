@@ -7,6 +7,13 @@ package Modelo.DAO;
 import Modelo.Ciudad;
 import Modelo.DAO.SQLConnection.SQLExecutor;
 import Modelo.Especialidad;
+import Modelo.Medico;
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,7 +22,8 @@ import Modelo.Especialidad;
 public class AdminHandler extends GeneralHandler {
     
     // admitir medicos, agregar ciudades, agregar especialidades
-    // listar medicos por estado, listar ciudades y epsecialidades
+    // listar medicos por estado, listar medicos por especialidad, ubicacion
+    // listar ciudades y epsecialidades
     
     public AdminHandler(){
         this.executor = new SQLExecutor(usernameBD, passwordBD);
@@ -74,4 +82,31 @@ public class AdminHandler extends GeneralHandler {
         return false;
     }
     
+    public List<Medico> listarMedicosPorEstado(String estado){
+        List<Medico> lista = new ArrayList<>();
+        Medico medico = new Medico();
+        executor = new SQLExecutor(usernameBD, passwordBD);
+        String sql1 ="select * from medicos where estado = " + estado + ";";
+        ResultSet rs = executor.ejecutaQuery(sql1);
+       
+        try{
+            while(rs.next()){
+                medico.setId(rs.getString("id"));
+                medico.setEspecialidad(rs.getString("especialidad"));
+                medico.setCostoConsulta((Double.parseDouble(rs.getString("costo"))));
+                medico.setCiudad(rs.getString("ciudad"));
+                medico.setClinica(rs.getString("clinica"));
+                medico.setEstado(rs.getString("estado"));
+                lista.add(medico);
+            }
+            
+            String nombre = this.retornaUserPorId(medico.getId()).getNombre();
+
+            
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }   
+        return lista;
+    }
+   
 }
