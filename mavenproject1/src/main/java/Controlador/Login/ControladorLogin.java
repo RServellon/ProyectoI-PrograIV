@@ -12,10 +12,6 @@ import Modelo.Especialidad;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,7 +63,12 @@ public class ControladorLogin extends HttpServlet {
             switch (request.getServletPath()) {
                 case "/loginError":
                     //todo: validar en sql @Rebe
-                    if (general.validarLogin(newUser)) { //modifiqué el metodo, solo ocupamos ver id y clave
+                    request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
+                break;
+                case "/login":
+                    //System.out.println("a");
+                    //request.getRequestDispatcher("/loginError").forward(request, response);
+                    if (general.validarLogin(newUser)) { 
                         System.out.println("Sii");
                         
                         //retorna usuario por id
@@ -79,15 +80,14 @@ public class ControladorLogin extends HttpServlet {
                         
                         // Listar medicos
                         System.out.println(admin.listarMedicos().toString());
+                        
+                        // Listar medicos por estado
+                        System.out.println(admin.listarMedicosPorEstado("APRO").toString());
 
 
                     } else {
                     request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
                     }
-                break;
-                case "/login":
-                    System.out.println("a");
-                    request.getRequestDispatcher("/loginError").forward(request, response);
                 break;
                 default:
                     throw new AssertionError();

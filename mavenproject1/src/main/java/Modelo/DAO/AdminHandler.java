@@ -105,25 +105,18 @@ public class AdminHandler extends GeneralHandler {
     
     public List<Medico> listarMedicosPorEstado(String estado){
         List<Medico> lista = new ArrayList<>();
-        Medico medico = new Medico();
-        executor = new SQLExecutor(usernameBD, passwordBD);
-        String sql1 ="select * from medicos where estado = " + estado + ";";
-        ResultSet rs = executor.ejecutaQuery(sql1);
+        Medico medico;
+        String sql ="select * from medicos where estado = " + estado + ";";
        
         try{
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql);
             while(rs.next()){
-                medico.setId(rs.getString("id"));
-                medico.setEspecialidad(rs.getString("especialidad"));
-                medico.setCostoConsulta((Double.parseDouble(rs.getString("costo"))));
-                medico.setCiudad(rs.getString("ciudad"));
-                medico.setClinica(rs.getString("clinica"));
-                medico.setEstado(rs.getString("estado"));
-                lista.add(medico);
+                if(rs.getString("estado").equals("APRO")){
+                    medico = this.retornaMedicoPorId(rs.getString("id"));
+                    lista.add(medico);
+                }
             }
-            
-            String nombre = this.retornaUserPorId(medico.getId()).getNombre();
-
-            
         } catch(SQLException throwables){
             throwables.printStackTrace();
         }   

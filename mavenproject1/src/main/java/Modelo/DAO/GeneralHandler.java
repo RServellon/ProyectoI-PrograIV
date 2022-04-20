@@ -22,8 +22,8 @@ import java.util.List;
  * @author norma
  */
 public class GeneralHandler {
-//    final String usernameBD = "sa";
-    final String usernameBD = "sas";
+    final String usernameBD = "sa";
+//    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 
@@ -76,7 +76,7 @@ public class GeneralHandler {
         Usuario user = this.retornaUserPorId(id);
         Medico usuario = new Medico(user);
         String sql1 ="select * from medicos where id = " + id + ";";
-        ResultSet rs;
+        ResultSet rs = null;
         
         try {
             executor = new SQLExecutor(usernameBD, passwordBD);
@@ -93,8 +93,7 @@ public class GeneralHandler {
         }
         return usuario;
     }
-        
-        
+    
     
     public boolean registrarUsuarioGeneral(String username, String id, String password, String tipo){
          if(!verificaUsuarioExiste(id)){
