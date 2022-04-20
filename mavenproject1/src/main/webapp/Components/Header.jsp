@@ -9,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
     <body>
         
@@ -37,14 +38,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="#">
-                            <img src="../assets/Icon pages/log-in.png">
-                            
-                            <label class="form-label" >Login</label>
-                        </a>
+                        <label>
+                               <i class=<i class="fa-solid fa-arrow-right-to-arc"></i>></i>
+                                Login
+                               <input value="administrador" type="radio" name="tipo_usuario">
+                               </label>
                     </li>
                 </ul>
             </div>
         </nav>
+         <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+        <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
     </body>
 </html>

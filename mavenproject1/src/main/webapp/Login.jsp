@@ -14,7 +14,7 @@
     </head>
 
     <body class="">
-        <%@ include file  ="Components/Header.jsp" %>
+        <%@ include file  ="/Components/Header.jsp" %>
         
      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
                             <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
