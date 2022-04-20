@@ -38,11 +38,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <label>
-                               <i class=<i class="fa-solid fa-arrow-right-to-arc"></i>></i>
-                                Login
-                               <input value="administrador" type="radio" name="tipo_usuario">
-                               </label>
+                        <a class="nav-link" style="color: white" href="../Login.jsp">
+                            <img src="../assets/Icon pages/log-in.png">
+                            <label class="form-label" >Login</label>
+                        </a>
                     </li>
                 </ul>
             </div>
