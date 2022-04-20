@@ -14,7 +14,6 @@
     </head>
 
     <body class="">
-        <%@ include file  ="Components/Header.jsp" %>
         
         <nav class="navbar navbar-light " style="background-color: #20304c;">
             <a class="navbar-brand mx-4" href="#" style="color: white">
