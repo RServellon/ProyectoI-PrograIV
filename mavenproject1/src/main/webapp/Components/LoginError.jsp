@@ -1,20 +1,20 @@
 <%-- Document : Login Created on : Apr 13, 2022, 7:04:07 PM Author : @ --%>
 
-  <%@page contentType="text/html" pageEncoding="UTF-8" %>
-    <!DOCTYPE html>
-    <html>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
 
     <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>Login page</title>
-      <link href="CSS/login.css" rel="stylesheet">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Login page</title>
+        <link href="CSS/login.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     </head>
 
     <body class="">
-        
+
         <nav class="navbar navbar-light " style="background-color: #20304c;">
             <a class="navbar-brand mx-4" href="#" style="color: white">
                 <img src="assets/Icon pages/home.png">
@@ -48,16 +48,21 @@
                 </ul>
             </div>
         </nav>
-        
-        
-   
-        
-        
+
+
+
+
+
+
         <section class="vh-all ">
             <div class="container py-5 h-100">
                 <div class="row  justify-content-center align-items-center h-100">
+                    
 
                     <div class="col-8 col-md-8 col-lg-6 col-xl-5"  >
+                        <div class="alert alert-danger " role="alert">
+                            Usuario o contraseña incorrecta
+                        </div> 
                         <div class="ilustration-container " style="text-align:center;"> 
                             <img src="assets/ilustrations/medic girl.svg" width="50%" height="50%" >
                         </div>  
@@ -107,4 +112,4 @@
         <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
     </body>
 
-    </html>
+</html>

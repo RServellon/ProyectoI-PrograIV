@@ -36,10 +36,9 @@ public class GeneralHandler {
             executor = new SQLExecutor(usernameBD, passwordBD);
             resultSet = executor.ejecutaQuery("select * from usuarios");
             while (resultSet.next()) {
-                if (resultSet.getString("nombre").equals(usuario.getNombre()) &&
-                        resultSet.getString("clave").equals(usuario.getClave()) &&
-                        resultSet.getString("id").equals(usuario.getId()) && 
-                        resultSet.getString("tipo").equals(usuario.getTipo())) {
+                if (    resultSet.getString("clave").equals(usuario.getClave()) 
+                        &&
+                        resultSet.getString("id").equals(usuario.getId())) {
                     return true;
                 }
             }            

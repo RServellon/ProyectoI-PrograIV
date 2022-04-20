@@ -47,44 +47,31 @@ public class ControladorLogin extends HttpServlet {
            
             String id = request.getParameter("user");
             String pwd = request.getParameter("password");
-            String userTipe = request.getParameter("tipo_usuario");
 
             System.out.println(id);
             System.out.println(pwd);
-            System.out.println(userTipe);
 
             request.setAttribute("user", id);
             request.setAttribute("password", pwd);
-            request.setAttribute("tipo_usuario", userTipe);  
             
             
-            GeneralHandler general = new GeneralHandler();
-            AdminHandler admin = new AdminHandler();
-            MedicoHandler medico = new MedicoHandler();
-            
-            boolean aceptarMedico = false;
-            boolean ingresarCiudad = false;
-            boolean ingresarEsp = false;
-            boolean ingresarMedico = false;
-            boolean ingresarUsuario = false;
-
-            Usuario newUser = new Usuario("100", "Lucia Hernandez", "Password100", "ADMIN");
-            Ciudad newCiudad = new Ciudad("1003", "Barva", "Heredia");
-            Especialidad newEsp = new Especialidad("6", "Anestecia General", null);
-            
-            aceptarMedico = admin.aceptarMedico("101");
-            ingresarCiudad = admin.registrarCiudad(newCiudad);
-            ingresarEsp = admin.registrarEspecialidad(newEsp);
-            ingresarUsuario = admin.registrarUsuarioGeneral("Felicia Ramirez", "105", "Password105", "MEDICO");
-            ingresarMedico = medico.registrarMedico("105", "1", "1000000000", "1003", "Salud", "APRO");
+//            GeneralHandler generalDAO = new GeneralHandler();
             
 
-            if (aceptarMedico && ingresarCiudad && ingresarEsp && ingresarUsuario && ingresarMedico) {
-                System.out.println("Sii");
-            } else {
-                System.out.println("NOOOOOOOO");
-               
-            }
+            Usuario newUser = new Usuario();
+            newUser.setClave(pwd);
+            newUser.setId(id);
+            
+            
+            System.out.println("nooo");
+            request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
+
+//            if (generalDAO.validarLogin(newUser)) {
+//                System.out.println("Sii");
+//            } else {
+//                System.out.println("nooo");
+//                request.getRequestDispatcher("/Componentes/LoginError.jsp").forward(request, response);
+//            }
         } catch (Exception e) {
             System.out.println(e);
         } 
