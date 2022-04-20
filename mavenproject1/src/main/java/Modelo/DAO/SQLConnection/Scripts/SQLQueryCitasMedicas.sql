@@ -34,7 +34,7 @@ create sequence sec_ciudades
 --Se crean las tablas
 create table usuarios(id int not null, nombre varchar(20) not null, clave varchar(20) not null, tipo varchar(10) not null);
 create table administradores(id int not null);
-create table medicos(id int not null, especialidad int not null, costo decimal(20,4) null, ciudad int not null, clinica varchar(20) not null, estado varchar(20) not null);
+create table medicos(id int not null, especialidad int not null, costo decimal(11,4) null, ciudad int not null, clinica varchar(20) not null, estado varchar(20) not null);
 create table pacientes(id int not null);
 create table horarios(id_medico int not null, fecha date not null, hora_inicio time not null, hora_final time not null, frecuencia time not null);
 create table ciudades(codigo int not null, nombre varchar(20) not null, provincia varchar(20) not null);

@@ -12,6 +12,8 @@ import Modelo.Especialidad;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -67,6 +69,7 @@ public class ControladorLogin extends HttpServlet {
             boolean ingresarEsp = false;
             boolean ingresarMedico = false;
             boolean ingresarUsuario = false;
+            List listarMedicosApro = new ArrayList<>();
 
             Usuario newUser = new Usuario("100", "Lucia Hernandez", "Password100", "ADMIN");
             Ciudad newCiudad = new Ciudad("1003", "Barva", "Heredia");
@@ -76,12 +79,17 @@ public class ControladorLogin extends HttpServlet {
             ingresarCiudad = admin.registrarCiudad(newCiudad);
             ingresarEsp = admin.registrarEspecialidad(newEsp);
             ingresarUsuario = admin.registrarUsuarioGeneral("Felicia Ramirez", "105", "Password105", "MEDICO");
-            ingresarMedico = medico.registrarMedico("105", "1", "1000000000", "1003", "Salud", "APRO");
+            ingresarMedico = medico.registrarMedico("105", "1", "1000000.0000", "1003", "Salud", "APRO");
+            listarMedicosApro = admin.listarMedicosPorEstado("APRO");
             
-            
+            Usuario user = new Usuario();
+            user = general.retornaUserPorId("101");
+
 
             if (aceptarMedico && ingresarCiudad && ingresarEsp && ingresarUsuario && ingresarMedico) {
                 System.out.println("Sii");
+                System.out.println(user.toString());
+                System.out.println(listarMedicosApro.toString());
             } else {
                 System.out.println("NOOOOOOOO");
                
