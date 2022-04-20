@@ -10,54 +10,30 @@ package Modelo;
  */
 public class Cliente {
     private String nombre;
-    private String clave;
-    private String user;
-    private String rutaFotoPerfil;
+    //cedula?
+    private Usuario usuario;
 
-    public Cliente(String nombre, String clave, String user, String rutaFotoPerfil) {
+    public Cliente(String nombre, Usuario usuario) {
         this.nombre = nombre;
-        this.clave = clave;
-        this.user = user;
-        this.rutaFotoPerfil = rutaFotoPerfil;
+        this.usuario = usuario;
     }
 
     public Cliente() {
         this.nombre = "null";
-        this.clave = "null";
-        this.user = "null";
-        this.rutaFotoPerfil = "null";
+        this.usuario = null;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getClave() {
-        return clave;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public String getRutaFotoPerfil() {
-        return rutaFotoPerfil;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public void setRutaFotoPerfil(String rutaFotoPerfil) {
-        this.rutaFotoPerfil = rutaFotoPerfil;
+    public void setUsuario(Usuario user) {
+        this.usuario = user;
     }
 
     @Override
@@ -65,9 +41,6 @@ public class Cliente {
         StringBuilder sb = new StringBuilder();
         sb.append("Cliente{");
         sb.append("nombre=").append(nombre);
-        sb.append(", clave=").append(clave);
-        sb.append(", user=").append(user);
-        sb.append(", rutaFotoPerfil=").append(rutaFotoPerfil);
         sb.append('}');
         return sb.toString();
     }
