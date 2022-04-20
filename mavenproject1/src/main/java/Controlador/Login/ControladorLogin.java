@@ -2,10 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package UsuarioApp.Controlador.Login;
+package Controlador.Login;
 
-import UsuarioApp.Modelo.DAO.LoginDAO;
-import UsuarioApp.Modelo.Usuario;
+import Modelo.Ciudad;
+import Modelo.DAO.AdminHandler;
+import Modelo.DAO.GeneralHandler;
+import Modelo.DAO.MedicoHandler;
+import Modelo.Especialidad;
+import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -52,27 +56,36 @@ public class ControladorLogin extends HttpServlet {
             request.setAttribute("user", id);
             request.setAttribute("password", pwd);
             request.setAttribute("tipo_usuario", userTipe);  
-            Usuario newUser = new Usuario();
-            LoginDAO lg = new LoginDAO();
             
-            boolean resp=false;
-            newUser.setClave(pwd);
-            newUser.setId(Integer.parseInt(id));
-            try {
-                resp = lg.validarLogin(newUser);
-            } catch (Exception ex) {
-                Logger.getLogger(ControladorLogin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (resp) {
-                System.out.println("Sii jalaaaaaa");
+            
+            GeneralHandler general = new GeneralHandler();
+            AdminHandler admin = new AdminHandler();
+            MedicoHandler medico = new MedicoHandler();
+            
+            boolean aceptarMedico = false;
+            boolean ingresarCiudad = false;
+            boolean ingresarEsp = false;
+            boolean ingresarMedico = false;
+            boolean ingresarUsuario = false;
+
+            Usuario newUser = new Usuario("100", "Lucia Hernandez", "Password100", "ADMIN");
+            Ciudad newCiudad = new Ciudad("1003", "Barva", "Heredia");
+            Especialidad newEsp = new Especialidad("6", "Anestecia General", null);
+            
+            aceptarMedico = admin.aceptarMedico("101");
+            ingresarCiudad = admin.registrarCiudad(newCiudad);
+            ingresarEsp = admin.registrarEspecialidad(newEsp);
+            ingresarUsuario = admin.registrarUsuarioGeneral("Felicia Ramirez", "105", "Password105", "MEDICO");
+            ingresarMedico = medico.registrarMedico("105", "1", "1000000000", "1003", "Salud", "APRO");
+            
+            
+
+            if (aceptarMedico && ingresarCiudad && ingresarEsp && ingresarUsuario && ingresarMedico) {
+                System.out.println("Sii");
             } else {
                 System.out.println("NOOOOOOOO");
                
             }
-            
-            
-         
-            
         } catch (Exception e) {
             System.out.println(e);
         } 

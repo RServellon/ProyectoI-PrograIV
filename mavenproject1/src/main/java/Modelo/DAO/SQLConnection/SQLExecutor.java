@@ -1,4 +1,4 @@
-package DatabaseServerApp.SQLConnection;
+package Modelo.DAO.SQLConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package UsuarioApp.Modelo;
+package Modelo;
 
 /**
  *
@@ -10,7 +10,7 @@ package UsuarioApp.Modelo;
  */
 public class Usuario {
     
-    private int id;
+    private String id;
     private String nombre;
     private String clave;
     private String tipo;
@@ -18,14 +18,14 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int id, String nombre, String clave, String tipo) {
+    public Usuario(String id, String nombre, String clave, String tipo) {
         this.id = id;
         this.nombre = nombre;
         this.clave = clave;
         this.tipo = tipo;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -41,7 +41,7 @@ public class Usuario {
         return tipo;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
