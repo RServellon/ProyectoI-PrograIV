@@ -4,21 +4,15 @@
  */
 package Modelo;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.logging.Logger;
 
 /**
  *
  * @author norma
  */
-public class Medico {
-    private String id;
-    private String nombre;
+public class Medico extends Usuario {
     private String especialidad;
     private String ciudad;
-    private Double costoConsulta;
+    private double costoConsulta;
     private constructorDeHorario horario;
     private String clinica;
     private String estado;
@@ -30,12 +24,8 @@ public class Medico {
     public Medico() {
         
     }
-   
-    
 
-    public Medico(String id, String nombre, String especialidad, String ciudad, Double costoConsulta, constructorDeHorario horario, String clinica, String estado, String rutaFotoPerfil, String resena) {
-        this.id = id;
-        this.nombre = nombre;
+    public Medico(String especialidad, String ciudad, double costoConsulta, constructorDeHorario horario, String clinica, String estado, String rutaFotoPerfil, String resena) {
         this.especialidad = especialidad;
         this.ciudad = ciudad;
         this.costoConsulta = costoConsulta;
@@ -46,17 +36,24 @@ public class Medico {
         this.resena = resena;
     }
 
+    public Medico(String especialidad, String ciudad, double costoConsulta, constructorDeHorario horario, String clinica, String estado, String rutaFotoPerfil, String resena, String id, String nombre, String clave, String tipo) {
+        super(id, nombre, clave, tipo);
+        this.especialidad = especialidad;
+        this.ciudad = ciudad;
+        this.costoConsulta = costoConsulta;
+        this.horario = horario;
+        this.clinica = clinica;
+        this.estado = estado;
+        this.rutaFotoPerfil = rutaFotoPerfil;
+        this.resena = resena;
+    }
+   
+   
+
    
     
     //sets
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
@@ -92,13 +89,6 @@ public class Medico {
     
     
     //gets
-    public String getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
 
     public String getEspecialidad() {
         return especialidad;
@@ -133,14 +123,15 @@ public class Medico {
     public String getEstado() {
         return estado;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "Medico{" + "id=" + id + ", nombre=" + nombre + ", especialidad=" + especialidad + ", ciudad=" + ciudad + ", costoConsulta=" + costoConsulta + ", horario=" + horario + ", rutaFotoPerfil=" + rutaFotoPerfil + ", resena=" + resena + '}';
+        return "Medico{" + "especialidad=" + especialidad + ", ciudad=" + ciudad + ", costoConsulta=" + costoConsulta + ", horario=" + horario + ", clinica=" + clinica + ", estado=" + estado + ", rutaFotoPerfil=" + rutaFotoPerfil + ", resena=" + resena + '}';
     }
+    
+    
 
+   
 
     
     

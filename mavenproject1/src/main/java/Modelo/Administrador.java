@@ -8,6 +8,15 @@ package Modelo;
  *
  * @author norma
  */
-public class Administrador {
+public class Administrador extends Usuario {
+
+    public Administrador() {
+    }
+
+    public Administrador(String id, String nombre, String clave, String tipo) {
+        super(id, nombre, clave, tipo);
+    }
+    
+    
     
 }
