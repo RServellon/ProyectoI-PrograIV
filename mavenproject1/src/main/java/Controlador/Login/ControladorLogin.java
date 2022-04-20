@@ -78,7 +78,6 @@ public class ControladorLogin extends HttpServlet {
             ingresarUsuario = admin.registrarUsuarioGeneral("Felicia Ramirez", "105", "Password105", "MEDICO");
             ingresarMedico = medico.registrarMedico("105", "1", "1000000000", "1003", "Salud", "APRO");
             
-            
 
             if (aceptarMedico && ingresarCiudad && ingresarEsp && ingresarUsuario && ingresarMedico) {
                 System.out.println("Sii");
