@@ -21,7 +21,8 @@ import java.util.List;
  * @author norma
  */
 public class GeneralHandler {
-    final String usernameBD = "sa";
+//    final String usernameBD = "sa";
+    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 
@@ -32,15 +33,15 @@ public class GeneralHandler {
 
     public boolean validarLogin(Usuario usuario){
         String cadena;
-        ResultSet resultSet;
+        ResultSet rs;
         
         try {
             executor = new SQLExecutor(usernameBD, passwordBD);
-            resultSet = executor.ejecutaQuery("select * from usuarios");
-            while (resultSet.next()) {
-                if (    resultSet.getString("clave").equals(usuario.getClave()) 
+            rs = executor.ejecutaQuery("select * from usuarios");
+            while (rs.next()) {
+                if (rs.getString("clave").equals(usuario.getClave()) 
                         &&
-                        resultSet.getString("id").equals(usuario.getId())) {
+                        rs.getString("id").equals(usuario.getId())) {
                     return true;
                 }
             }            
@@ -48,6 +49,26 @@ public class GeneralHandler {
             throwables.printStackTrace();
         }
         return false;
+    }
+    
+     public Usuario retornaUserPorId(String id){
+        Usuario usuario = new Usuario();
+        String sql ="select * from usuarios where id = " + id + ";";
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql);
+            while (rs.next()){
+                usuario.setId(id);
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setTipo(rs.getString("tipo"));
+                usuario.setClave(rs.getString("clave"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return usuario;
     }
     
     public boolean registrarUsuarioGeneral(String username, String id, String password, String tipo){
@@ -85,23 +106,5 @@ public class GeneralHandler {
         return false;
     }
     
-    public Usuario retornaUserPorId(String id){
-        Usuario usuario = new Usuario();
-        executor = new SQLExecutor(usernameBD, passwordBD);
-        String sql ="select * from usuarios where id = " + id + ";";
-        ResultSet rs = executor.ejecutaQuery(sql);
-       
-        try{
-            while(rs.next()){
-            usuario.setId(rs.getString("id"));
-            usuario.setNombre(rs.getString("nombre"));
-            usuario.setClave(rs.getString("clave"));
-            usuario.setTipo(rs.getString("tipo"));
-            }
-
-        } catch(SQLException throwables){
-            throwables.printStackTrace();
-        }   
-        return usuario;
-    }
+   
 }
