@@ -63,6 +63,7 @@
                     <img src="assets/ilustrations/medic girl.svg" width="50%" height="50%" >
                 </div>  
                 <div class="card bg-glass" style="border-radius: 1rem;"  >
+                    
                  <div class="card-body px-5 py-4 px-md-5 text-center container-login " >
                   <form method="POST" name="pagina_logeo" action="login" >
 
