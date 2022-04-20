@@ -68,16 +68,17 @@ public class ControladorLogin extends HttpServlet {
                     //todo: validar en sql @Rebe
                     if (general.validarLogin(newUser)) { //modifiqué el metodo, solo ocupamos ver id y clave
                         System.out.println("Sii");
+                        
+                        Usuario u = general.retornaUserPorId("100");
+                        System.out.println(u.toString());
                     } else {
-                        request.getRequestDispatcher("/loginError").forward(request, response);
-                    }
-                    System.out.println("nooo");   
                     request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
-                    break;
+                    }
+                break;
                 case "/login":
                     System.out.println("a");
                     request.getRequestDispatcher("/loginError").forward(request, response);
-                    break;
+                break;
                 default:
                     throw new AssertionError();
             }
