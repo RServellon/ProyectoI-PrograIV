@@ -78,7 +78,7 @@ public class ControladorLogin extends HttpServlet {
                 case "/loginError":
                     System.out.println("a");
                     request.getRequestDispatcher("/loginError").forward(request, response);
-                    break;
+                break;
                 default:
                     throw new AssertionError();
             }
