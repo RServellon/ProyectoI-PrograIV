@@ -64,17 +64,18 @@ public class ControladorLogin extends HttpServlet {
             
             
             switch (request.getServletPath()) {
-                case "/loginError":
+                case "/login":
                     //todo: validar en sql @Rebe
                     if (general.validarLogin(newUser)) { //modifiqué el metodo, solo ocupamos ver id y clave
-                        System.out.println("Sii");
+                        System.out.println("Sexooooooooooooooooooooooooooooooo");
                     } else {
-                        request.getRequestDispatcher("/loginError").forward(request, response);
+//                        request.getRequestDispatcher("/loginError").forward(request, response);
+                        System.out.println("NOOOOOOOOOOOOO------------------------------");
                     }
                     System.out.println("nooo");   
                     request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
                     break;
-                case "/login":
+                case "/loginError":
                     System.out.println("a");
                     request.getRequestDispatcher("/loginError").forward(request, response);
                     break;

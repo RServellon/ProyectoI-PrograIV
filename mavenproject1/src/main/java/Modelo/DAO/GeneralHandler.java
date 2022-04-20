@@ -21,7 +21,8 @@ import java.util.List;
  * @author norma
  */
 public class GeneralHandler {
-    final String usernameBD = "sa";
+//    final String usernameBD = "sa";
+    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 
