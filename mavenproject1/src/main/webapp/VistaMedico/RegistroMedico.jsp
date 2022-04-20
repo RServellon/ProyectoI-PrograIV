@@ -17,28 +17,26 @@
         <body class="background-radial-gradient ">
             <!-- Section: Design Block -->
             <!-- Section: Design Block -->
+            <%@ include file  ="../Components/Header.jsp" %>
             <section class="overflow-hidden">
-                <style>
-                </style>
 
                 <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
                     <div class="row gx-lg-5 align-items-center mb-5">
                         <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-                            <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                            <h1 class="my-5 display-5 fw-bold ls-tight" >
                                 Registro General <br />
                             </h1>
-                            <h3 style="color: hsl(218, 81%, 75%)">Por Favor ingrese sus datos</h3>
-                            <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+                            <h3 style="color: hsl(218, 81%, 15%)">Por Favor ingrese sus datos</h3>
+                            <p class="mb-4 opacity-70" style="color: #26395b">
                                 Nota: Debe ingresar sus datos correctos
                             </p>
                         </div>
 
                         <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-                            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-                            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+                            
 
                             <div class="card bg-glass">
-                                <div class="card-body px-4 py-5 px-md-5">
+                                <div class="card-body px-6 py-5 px-md-5">
                                     <form method="POST" name="RegistrarMedico" action="/mavenproject1/VistaMedico/registrarmedico">
                                         <!-- 2 column grid layout with text inputs for the first and last names -->
                                         <div class="row">

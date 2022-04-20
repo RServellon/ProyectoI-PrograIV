@@ -18,28 +18,32 @@
 
             <body >
 
-                <!-- Section: Design Block -->
-                <section class="background-radial-gradient overflow-hidden">
-                    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+                <%@ include file  ="../Components/Header.jsp" %>
+                <section class="overflow-hidden">
+
+                    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5 align-items-center">
                         <div class="row gx-lg-5 align-items-center mb-5">
                             <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-                                <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                                <h1 class="mt-1 display-5 fw-bold ls-tight" >
                                     Registro General <br />
                                 </h1>
-                                <h3 style="color: hsl(218, 81%, 75%)">Por Favor ingrese sus datos</h3>
-                                <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+                                <h3 style="color: hsl(218, 81%, 15%)">Por Favor ingrese sus datos</h3>
+                                <p class="mb-4 opacity-70" style="color: #26395b">
                                     Nota: Debe ingresar sus datos correctos
                                 </p>
                             </div>
 
-                            <div class="alert alert-danger" role="alert">
-                                <%=errorCode%>
-                            </div <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-                            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-                            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+                            <div class="col-lg-1 ">
+                                
+                            </div>
+                            <div class="col-lg-10 mb-5 mb-lg-0 ml-6 position-relative align-items-center">
+                                <div class="alert alert-danger" role="alert">
+                                    <%=errorCode%>
+                                </div> 
+                            
 
                             <div class="card bg-glass">
-                                <div class="card-body px-4 py-5 px-md-5">
+                                <div class="card-body px-4 ml-6 py-5 px-md-5">
                                     <form method="POST" name="registrarmedico" action="registrarmedico">
                                         <!-- 2 column grid layout with text inputs for the first and last names -->
                                         <div class="row">
@@ -110,7 +114,7 @@
                     </div>
                     </div>
                 </section>
-                <!-- Section: Design Block -->
+                
 
 
 

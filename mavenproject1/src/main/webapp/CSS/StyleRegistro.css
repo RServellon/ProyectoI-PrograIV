@@ -6,48 +6,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : 13 abr. 2022, 0:34:14
     Author     : norma
 */
-body{
-    /* se coloca el url de imagen (reocomendable colocar direccion local) */
-    
-   /*Linkk de fondo
-   https://img.freepik.com/vector-gratis/antecedentes-medicos-limpios_53876-97927.jpg?t=st=1649910086~exp=1649910686~hmac=637913c6fe5b1b0f8182cdf99f2fd57c8bc3aebca5c0558501062cab5946d6d9&w=740
-   */
-    /*background-image: url(https://img.freepik.com/vector-gratis/antecedentes-medicos-limpios_53876-97927.jpg?t=st=1649910086~exp=1649910686~hmac=637913c6fe5b1b0f8182cdf99f2fd57c8bc3aebca5c0558501062cab5946d6d9&w=740);*/
-    /* seteamos el tamano del fondo a cover*/
-    /*background-size: cover;*/
-    /* se centra la imagen centrada verticual y horizontalmente*/
-    /*background-position: center center;*/
-    /*Para que la imagen no se repita*/
-    /*background-repeat: no-repeat;*/
-    /*Se coloca la imagen cde fondo como fixed*/
-    /*background-attachment: fixed;*/
-    /*color por defecto del background por si la imagen no aparece */
-    /*background-color: cornflowerblue;*/
-    /* recomendable padding and margin */
-    /*margin: 0;*/
-    /*padding: 0;*/
-}
 
 
 
 
 
 
-.background-radial-gradient {
-    background-color: hsl(218, 41%, 15%);
-   background-image: radial-gradient(650px circle at 0% 0%,
-        hsl(218, 41%, 35%) 15%,
-        hsl(218, 41%, 30%) 35%,
-        hsl(218, 41%, 20%) 75%,
-        hsl(218, 41%, 19%) 80%,
-        transparent 100%),
-        radial-gradient(1250px circle at 100% 100%,
-        hsl(218, 41%, 45%) 15%,
-        hsl(218, 41%, 30%) 35%,
-        hsl(218, 41%, 20%) 75%,
-        hsl(218, 41%, 19%) 80%,
-        transparent 100%);
-}
+
 
 .radio-usuario{
     display: flex;
@@ -58,7 +23,7 @@ body{
 }
 
 .bg-glass {
-    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    background-color: #e8ebf1 !important;
     backdrop-filter: saturate(200%) blur(25px);
 }
 
