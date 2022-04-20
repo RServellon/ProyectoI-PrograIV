@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorLogin", urlPatterns = {"/login"})
+@WebServlet(name = "ControladorLogin", urlPatterns = {"/login", "/loginError"})
 public class ControladorLogin extends HttpServlet {
 
     /**
@@ -60,40 +60,55 @@ public class ControladorLogin extends HttpServlet {
             request.setAttribute("tipo_usuario", userTipe);  
             
             
-            GeneralHandler general = new GeneralHandler();
-            AdminHandler admin = new AdminHandler();
-            MedicoHandler medico = new MedicoHandler();
-            
-            boolean aceptarMedico = false;
-            boolean ingresarCiudad = false;
-            boolean ingresarEsp = false;
-            boolean ingresarMedico = false;
-            boolean ingresarUsuario = false;
-            List listarMedicosApro = new ArrayList<>();
+//            GeneralHandler general = new GeneralHandler();
+//            AdminHandler admin = new AdminHandler();
+//            MedicoHandler medico = new MedicoHandler();
+//            
+//            boolean aceptarMedico = false;
+//            boolean ingresarCiudad = false;
+//            boolean ingresarEsp = false;
+//            boolean ingresarMedico = false;
+//            boolean ingresarUsuario = false;
+//            List listarMedicosApro = new ArrayList<>();
 
-            Usuario newUser = new Usuario("100", "Lucia Hernandez", "Password100", "ADMIN");
-            Ciudad newCiudad = new Ciudad("1003", "Barva", "Heredia");
-            Especialidad newEsp = new Especialidad("6", "Anestecia General", null);
+//            Usuario newUser = new Usuario("100", "Lucia Hernandez", "Password100", "ADMIN");
+//            Usuario newUser = new Usuario();
+//            Ciudad newCiudad = new Ciudad("1003", "Barva", "Heredia");
+//            Especialidad newEsp = new Especialidad("6", "Anestecia General", null);
             
-            aceptarMedico = admin.aceptarMedico("101");
-            ingresarCiudad = admin.registrarCiudad(newCiudad);
-            ingresarEsp = admin.registrarEspecialidad(newEsp);
-            ingresarUsuario = admin.registrarUsuarioGeneral("Felicia Ramirez", "105", "Password105", "MEDICO");
-            ingresarMedico = medico.registrarMedico("105", "1", "1000000.0000", "1003", "Salud", "APRO");
-            listarMedicosApro = admin.listarMedicosPorEstado("APRO");
+//            aceptarMedico = admin.aceptarMedico("101");
+//            ingresarCiudad = admin.registrarCiudad(newCiudad);
+//            ingresarEsp = admin.registrarEspecialidad(newEsp);
+//            ingresarUsuario = admin.registrarUsuarioGeneral("Felicia Ramirez", "105", "Password105", "MEDICO");
+//            ingresarMedico = medico.registrarMedico("105", "1", "1000000.0000", "1003", "Salud", "APRO");
+//            listarMedicosApro = admin.listarMedicosPorEstado("APRO");
             
-            Usuario user = new Usuario();
-            user = general.retornaUserPorId("101");
+//            Usuario user = new Usuario();
+//            user = general.retornaUserPorId("101");
 
 
-            if (aceptarMedico && ingresarCiudad && ingresarEsp && ingresarUsuario && ingresarMedico) {
-                System.out.println("Sii");
-                System.out.println(user.toString());
-                System.out.println(listarMedicosApro.toString());
-            } else {
-                System.out.println("NOOOOOOOO");
-               
+//                    request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
+            
+            switch (request.getServletPath()) {
+                case "/loginError":
+                    //todo: validar en sql
+                    System.out.println("nooo");   
+                    request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
+                    break;
+                case "/login":
+                    System.out.println("a");
+                    request.getRequestDispatcher("/loginError").forward(request, response);
+                    break;
+                default:
+                    throw new AssertionError();
             }
+//
+//            if (general.validarLogin(newUser)) {
+//                System.out.println("Sii");
+//            } else {
+//                System.out.println("nooo");
+//                request.getRequestDispatcher("/Componentes/LoginError").forward(request, response);
+//            }
         } catch (Exception e) {
             System.out.println(e);
         } 
