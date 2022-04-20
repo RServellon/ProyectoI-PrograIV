@@ -8,6 +8,7 @@ import Modelo.Ciudad;
 import Modelo.DAO.SQLConnection.SQLExecutor;
 import Modelo.Especialidad;
 import Modelo.Medico;
+import Modelo.Usuario;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,6 +81,26 @@ public class AdminHandler extends GeneralHandler {
             throwables.printStackTrace();
         }   
         return false;
+    }
+    
+    public List<Medico> listarMedicos(){
+        List<Medico> lista = new ArrayList<>();
+        Medico medico;
+        String sql1 ="select * from medicos";
+        String id;
+       
+        try{
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql1);
+            while(rs.next()){
+                id = rs.getString("id");                
+                medico = this.retornaMedicoPorId(id);                
+                lista.add(medico);
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }   
+        return lista;
     }
     
     public List<Medico> listarMedicosPorEstado(String estado){

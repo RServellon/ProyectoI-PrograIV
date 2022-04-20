@@ -5,6 +5,7 @@
 package Modelo.DAO;
 
 import Modelo.DAO.SQLConnection.SQLExecutor;
+import Modelo.Medico;
 import Modelo.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -50,7 +51,7 @@ public class GeneralHandler {
         return false;
     }
     
-     public Usuario retornaUserPorId(String id){
+    public Usuario retornaUserPorId(String id){
         Usuario usuario = new Usuario();
         String sql ="select * from usuarios where id = " + id + ";";
         ResultSet rs;
@@ -70,6 +71,30 @@ public class GeneralHandler {
         return usuario;
     }
     
+    public Medico retornaMedicoPorId(String id){
+        Usuario user = this.retornaUserPorId(id);
+        Medico usuario = new Medico(user);
+        String sql1 ="select * from medicos where id = " + id + ";";
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql1);
+            while (rs.next()){
+                usuario.setEspecialidad(rs.getString("especialidad"));
+                usuario.setCostoConsulta(Double.parseDouble(rs.getString("costo")));
+                usuario.setCiudad(rs.getString("ciudad"));
+                usuario.setClinica(rs.getString("clinica"));
+                usuario.setEstado(rs.getString("estado"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return usuario;
+    }
+        
+        
+    
     public boolean registrarUsuarioGeneral(String username, String id, String password, String tipo){
          if(!verificaUsuarioExiste(id)){
             try{
@@ -88,6 +113,8 @@ public class GeneralHandler {
         }
         return false;
     }
+   
+    
     
     public boolean verificaUsuarioExiste(String id){
         ResultSet resultSet;

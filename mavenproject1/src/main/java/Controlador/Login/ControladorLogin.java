@@ -61,6 +61,7 @@ public class ControladorLogin extends HttpServlet {
             newUser.setClave(pwd);
             newUser.setId(id);
             GeneralHandler general = new GeneralHandler();
+            AdminHandler admin = new AdminHandler();
             
             
             switch (request.getServletPath()) {
@@ -69,8 +70,17 @@ public class ControladorLogin extends HttpServlet {
                     if (general.validarLogin(newUser)) { //modifiqué el metodo, solo ocupamos ver id y clave
                         System.out.println("Sii");
                         
+                        //retorna usuario por id
                         Usuario u = general.retornaUserPorId("100");
                         System.out.println(u.toString());
+                        
+                        //Retorna lista de medicos
+                        System.out.println(admin.retornaMedicoPorId("101").toString());
+                        
+                        // Listar medicos
+                        System.out.println(admin.listarMedicos().toString());
+
+
                     } else {
                     request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
                     }

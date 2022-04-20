@@ -24,6 +24,13 @@ public class Medico extends Usuario {
     public Medico() {
         
     }
+    
+    public Medico(Usuario user){
+        super.setNombre(user.getNombre());
+        super.setId(user.getId());
+        super.setClave(user.getClave());
+        super.setTipo(user.getTipo());
+    }
 
     public Medico(String especialidad, String ciudad, double costoConsulta, constructorDeHorario horario, String clinica, String estado, String rutaFotoPerfil, String resena) {
         this.especialidad = especialidad;
@@ -126,9 +133,10 @@ public class Medico extends Usuario {
 
     @Override
     public String toString() {
-        return "Medico{" + "especialidad=" + especialidad + ", ciudad=" + ciudad + ", costoConsulta=" + costoConsulta + ", horario=" + horario + ", clinica=" + clinica + ", estado=" + estado + ", rutaFotoPerfil=" + rutaFotoPerfil + ", resena=" + resena + '}';
+        return "Medico{" + " nombre = " + super.getNombre() +  ", id = " + super.getId() + ", tipo = " + super.getTipo() + ", clave = " + super.getClave() + ", especialidad = " + especialidad + ", ciudad=" + ciudad + ", costoConsulta=" + costoConsulta + ", horario=" + horario + ", clinica=" + clinica + ", estado=" + estado + ", rutaFotoPerfil=" + rutaFotoPerfil + ", resena=" + resena + '}';
     }
-    
+
+ 
     
 
    
