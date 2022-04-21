@@ -17,3 +17,4 @@ public class Cliente extends Usuario {
         super(id, nombre, clave, tipo);
     }
 }
+

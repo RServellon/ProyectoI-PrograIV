@@ -18,98 +18,62 @@
         <%@ include file  ="../Components/Header.jsp" %>
         
 
-        <div class="container ">
-            <div class="row mx-2">
+         <div class="container-lg">
+<!--        fila de busqueda-->
+       <div class="row row-padding">
+          <form class="form-inline d-flex" method="POST" name="pagina_busqueda" action="inicio/busquedaCita">
                 
-                <div class="col-8  mx-2 listado-citas-container" style=" margin-top: 30px;">
-                    <div class="listado-citas">
-                        Listado Medicos
-                    </div>
-                    
+<!--                campo de busqueda especialidad-->
+            <div class="col-sm d-flex ">
+                <div class="input-group-prepend">
+                   <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-briefcase-medical icons"></i></span>
                 </div>
-                <div class="col-3 search-filter-container" style=" margin-top: 30px;">
-                    <div class="search-filter">
-                        
-                        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-                            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-                            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
-
-                            <div class="card bg-glass">
-                                <div class="card-body px-4 py-5 px-md-5">
-                                    <form method="POST" name="RegistrarMedico" action="/mavenproject1/VistaMedico/registrarmedico">
-                                        <!-- 2 column grid layout with text inputs for the first and last names -->
-                                        <div class="row">
-                                            <div class="col-md-6 mb-4">
-                                                <div class="form-outline">
-                                                    <input type="text" name="first-name" class="form-control" />
-                                                    <label class="form-label" for="form3Example1">Nombre</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 mb-4">
-                                                <div class="form-outline">
-                                                    <input type="text" name="last-name" class="form-control" />
-                                                    <label class="form-label" for="form3Example2">Apellidos</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- ID-->
-                                        <div class="form-outline mb-4">
-                                            <input required type="text" name="id" class="form-control" />
-                                            <label class="form-label" for="form3Example3">Identificación</label>
-                                        </div>
-
-
-
-                                        <!-- Password input -->
-                                        <div class="form-outline mb-4">
-                                            <input required type="password" name="pwd" class="form-control" />
-                                            <label class="form-label" for="form3Example4">Contraseña</label>
-                                        </div>
-                                        <!-- Password input -->
-                                        <div class="form-outline mb-4">
-                                            <input required type="password" name="pwd-confirmation"
-                                                   class="form-control" />
-                                            <label class="form-label" for="form3Example4">Confirmar Contraseña</label>
-                                        </div>
-
-                                        <div id="tipo_usuario" class="form-group radio-usuario">
-                                            <label>
-                                                <i class="fa-solid fa-user-doctor"></i>
-                                                Medico
-                                                <input value="medico" type="radio" name="tipo_usuario" required>
-                                            </label>
-                                            <label>
-                                                <i class="fa-solid fa-user-injured"></i>
-                                                Paciente
-                                                <input value="paciente" type="radio" name="tipo_usuario">
-                                            </label>
-                                            <label>
-                                                <i class="fa-solid fa-user-gear"></i>
-                                                Admin
-                                                <input value="administrador" type="radio" name="tipo_usuario">
-                                            </label>
-                                        </div>
-
-
-                                        <!-- Submit button -->
-                                        <button type="submit" class="btn btn-primary btn-block mb-4">
-                                            Registrarse
-                                        </button>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
+                <input name="Especialidad" type="text" class="form-control" placeholder="Especialidad" aria-label="Especialidad" aria-describedby="basic-addon1">
             </div>
-            
-        </div>
-        
-        
+
+<!--                campo de busqueda provincia-->
+             <div class="col-sm d-flex col-padding margin-space">
+                <div class="input-group-prepend margin-space">
+                   <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-city icons"></i></span>
+                </div>
+               <input name= "Provincia" type="text" class="form-control" placeholder="Provincia" aria-label="Provincia" aria-describedby="basic-addon1">
+             </div>
+
+ <!--                cboton de submit-->
+              <div class="col-sm d-flex justify-content-evenly">
+                  <div class="">
+                      <button class="btn btn-primary my-2 my-sm-0 boton" type="submit">Buscar</button>
+                  </div>
+              </div>
+                
+          </form>
+       </div>
+
+<!--    Fila de informacion-->
+     <div class="row row-padding justify-content-evenly">
+         
+         <div class="col-sm col-padding margin-space justify-content-evenly">
+                 <div class="input-group-prepend">
+                   <span class="input-group-text size-span" id="basic-addon1">
+                       <i class="fa-solid fa-magnifying-glass icons-1"></i>
+                   </span>
+                      <br> <p class="fs-3">Busca doctores segun la <br>especialidad que necesites y ciudad</p>
+                </div>
+         </div>
+         <div class="col-sm col-padding margin-space justify-content-evenly">
+                 <div class="input-group-prepend">
+                   <span class="input-group-text size-span" id="basic-addon1">
+                       <i class="fa-solid fa-calendar-days icons-1"></i>
+                   </span>
+                      <p class="fs-3">Realiza una cita con ese doctor  <br>seleccionando el horario que mejor <br>se te ajuste y eso es todo!</p>
+                </div>
+         </div>
+         
+     </div>
+
+
+    </div>
+        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
         <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
     </body>
 </html>

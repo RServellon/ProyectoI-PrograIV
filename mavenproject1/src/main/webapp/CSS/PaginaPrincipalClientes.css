@@ -6,7 +6,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : 17 abr. 2022, 2:02:05
     Author     : norma
 */
-
 .navbar{
     position: absolute;
     width: 100%;
@@ -63,12 +62,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .row-padding{
     padding:2em;
 }
-/*.col-padding{
+.row-margin{
     margin: 1em;
-}*/
+}
 .margin-space{
     margin-left: 10px;
 }
 .size-span{
     width: 6em;
 }
+
