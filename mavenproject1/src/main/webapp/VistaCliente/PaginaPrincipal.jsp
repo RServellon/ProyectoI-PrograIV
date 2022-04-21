@@ -20,15 +20,15 @@
 
          <div class="container-lg">
 <!--        fila de busqueda-->
-       <div class="row row-padding">
+       <div class="row row-padding" >
           <form class="form-inline d-flex" method="POST" name="pagina_busqueda" action="inicio/busquedaCita">
                 
 <!--                campo de busqueda especialidad-->
-            <div class="col-sm d-flex ">
+            <div class="col-sm d-flex">
                 <div class="input-group-prepend">
                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-briefcase-medical icons"></i></span>
                 </div>
-                <input name="Especialidad" type="text" class="form-control" placeholder="Especialidad" aria-label="Especialidad" aria-describedby="basic-addon1">
+                <input name="Especialidad" type="text" class="form-control fs-4" placeholder="Especialidad" aria-label="Especialidad" aria-describedby="basic-addon1">
             </div>
 
 <!--                campo de busqueda provincia-->
@@ -36,13 +36,13 @@
                 <div class="input-group-prepend margin-space">
                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-city icons"></i></span>
                 </div>
-               <input name= "Provincia" type="text" class="form-control" placeholder="Provincia" aria-label="Provincia" aria-describedby="basic-addon1">
+               <input name= "Provincia" type="text" class="form-control fs-4" placeholder="Provincia" aria-label="Provincia" aria-describedby="basic-addon1">
              </div>
 
  <!--                cboton de submit-->
               <div class="col-sm d-flex justify-content-evenly">
                   <div class="">
-                      <button class="btn btn-primary my-2 my-sm-0 boton" type="submit">Buscar</button>
+                      <button class="btn btn-primary my-2 my-sm-0 boton fs-4" type="submit">Buscar</button>
                   </div>
               </div>
                 
