@@ -115,11 +115,14 @@ insert into especialidades(codigo, nombre, descripcion) values (next value for s
 insert into especialidades(codigo, nombre, descripcion) values (next value for sec_especialidades, 'Psicologia', 'Estudia las funciones mentales y de comportamiento.');
 insert into especialidades(codigo, nombre, descripcion) values (next value for sec_especialidades, 'Odontologia', 'Diagnóstico y tratamiento del aparato estomagnático.');
 insert into especialidades(codigo, nombre, descripcion) values (next value for sec_especialidades, 'Pediatria', 'Atención médica de bebés, niños y adolescentes.');
+insert into especialidades(codigo, nombre, descripcion) values (next value for sec_especialidades, 'Anestecia General',  null);
+
 
 -- Ciudades
 insert into ciudades(codigo, nombre, provincia) values (next value for sec_ciudades, 'San Jose', 'San Jose');
 insert into ciudades(codigo, nombre, provincia) values (next value for sec_ciudades, 'Tibas', 'San Jose');
 insert into ciudades(codigo, nombre, provincia) values (next value for sec_ciudades, 'Heredia', 'Heredia');
+insert into ciudades(codigo, nombre, provincia) values (next value for sec_ciudades, 'Barva', 'Heredia');
 
 
 -- Usuarios
@@ -128,6 +131,7 @@ insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuario
 insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Nicolas Suarez', 'Password102', 'MEDICO');
 insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Joseph Romero', 'Password103', 'PACIENTE');
 insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Maria Vargas', 'Password104', 'PACIENTE');
+insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Felicia Ramirez', 'Password105', 'MEDICO');
 
 -- Admins
 insert into administradores(id) values (100);
@@ -135,6 +139,7 @@ insert into administradores(id) values (100);
 -- Medicos
 insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (101, 1, 70000, 1000, 'Athena', 'ESP');
 insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (102, 4, 100000, 1002, 'Pacific Global', 'APRO');
+insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (105, 1, 100000, 1003, 'Salud', 'APRO');
 
 -- Pacientes
 insert into pacientes(id) values (103);

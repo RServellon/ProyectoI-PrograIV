@@ -34,7 +34,7 @@ public class AdminHandler extends GeneralHandler {
         try {
             String valores[] = new String[3];
             valores[0] = "update medicos set estado = ? where id = ?;";
-            valores[1] = "APRO";
+            valores[1] = "ESP";
             valores[2] = id;
 
             executor.prepareStatement(valores);

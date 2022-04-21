@@ -58,6 +58,7 @@ public class ControladorLogin extends HttpServlet {
             newUser.setId(id);
             GeneralHandler general = new GeneralHandler();
             AdminHandler admin = new AdminHandler();
+            MedicoHandler medico = new MedicoHandler();
             
             
             switch (request.getServletPath()) {
@@ -79,6 +80,7 @@ public class ControladorLogin extends HttpServlet {
                         System.out.println(admin.retornaMedicoPorId("101").toString());
                         
                         // Listar medicos
+                        admin.aceptarMedico("101");
                         System.out.println(admin.listarMedicos().toString());
                         
                         // Listar medicos por estado
