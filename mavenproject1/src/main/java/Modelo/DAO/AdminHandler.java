@@ -23,26 +23,52 @@ import java.util.List;
 public class AdminHandler extends GeneralHandler {
     
     // admitir medicos, agregar ciudades, agregar especialidades
-    // listar medicos por estado, listar medicos por especialidad, ubicacion
+    // listar medicos por estado
     // listar ciudades y epsecialidades
     
     public AdminHandler(){
         this.executor = new SQLExecutor(usernameBD, passwordBD);
     }
     
-    public boolean aceptarMedico(String id){
+    public boolean cambiarEstadoDeMedico(String id, String estado){
+        boolean resultado = false;
         try {
-            String valores[] = new String[3];
-            valores[0] = "update medicos set estado = ? where id = ?;";
-            valores[1] = "APRO";
-            valores[2] = id;
+            switch(estado){
+                case "APRO":
+                    String valores1[] = new String[3];
+                    valores1[0] = "update medicos set estado = ? where id = ?;";
+                    valores1[1] = "APRO";
+                    valores1[2] = id;
 
-            executor.prepareStatement(valores);
-            return true;
+                    executor.prepareStatement(valores1);
+                    resultado = true;
+                break;
+                case "ESP":
+                    String valores2[] = new String[3];
+                    valores2[0] = "update medicos set estado = ? where id = ?;";
+                    valores2[1] = "ESP";
+                    valores2[2] = id;
+
+                    executor.prepareStatement(valores2);
+                    resultado = true;
+                break;
+                case "REC":
+                    String valores3[] = new String[3];
+                    valores3[0] = "update medicos set estado = ? where id = ?;";
+                    valores3[1] = "REC";
+                    valores3[2] = id;
+
+                    executor.prepareStatement(valores3);
+                    resultado = true;
+                break;
+                default:
+                break;
+            }
+           
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }
-        return false;
+        return resultado;
     }
     
     public boolean registrarCiudad(Ciudad ciudad) {
@@ -105,29 +131,51 @@ public class AdminHandler extends GeneralHandler {
     
     public List<Medico> listarMedicosPorEstado(String estado){
         List<Medico> lista = new ArrayList<>();
-        Medico medico = new Medico();
-        executor = new SQLExecutor(usernameBD, passwordBD);
-        String sql1 ="select * from medicos where estado = " + estado + ";";
-        ResultSet rs = executor.ejecutaQuery(sql1);
+        Medico medico;
+        String sql ="select * from medicos where estado = '" + estado + "';";
+        String id;
        
         try{
-            while(rs.next()){
-                medico.setId(rs.getString("id"));
-                medico.setEspecialidad(rs.getString("especialidad"));
-                medico.setCostoConsulta((Double.parseDouble(rs.getString("costo"))));
-                medico.setCiudad(rs.getString("ciudad"));
-                medico.setClinica(rs.getString("clinica"));
-                medico.setEstado(rs.getString("estado"));
-                lista.add(medico);
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql);
+            
+            switch(estado){
+                case "APRO":
+                    while(rs.next()){
+                        if(rs.getString("estado").equals("APRO")){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                        }
+                    }
+                break;
+                case "ESP":
+                     while(rs.next()){
+                        if(rs.getString("estado").equals("ESP")){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                        }
+                    }
+                break;
+                case "REC":
+                     while(rs.next()){
+                        if(rs.getString("estado").equals("REC")){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                        }
+                    }
+                break;
+                default:
+                break;
             }
-            
-            String nombre = this.retornaUserPorId(medico.getId()).getNombre();
-
-            
         } catch(SQLException throwables){
             throwables.printStackTrace();
         }   
         return lista;
     }
+    
+    
    
 }

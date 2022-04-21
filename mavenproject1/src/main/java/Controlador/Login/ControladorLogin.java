@@ -12,10 +12,6 @@ import Modelo.Especialidad;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,12 +58,18 @@ public class ControladorLogin extends HttpServlet {
             newUser.setId(id);
             GeneralHandler general = new GeneralHandler();
             AdminHandler admin = new AdminHandler();
+            MedicoHandler medico = new MedicoHandler();
             
             
             switch (request.getServletPath()) {
                 case "/loginError":
                     //todo: validar en sql @Rebe
-                    if (general.validarLogin(newUser)) { //modifiqué el metodo, solo ocupamos ver id y clave
+                    request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
+                break;
+                case "/login":
+                    //System.out.println("a");
+                    //request.getRequestDispatcher("/loginError").forward(request, response);
+                    if (general.validarLogin(newUser)) { 
                         System.out.println("Sii");
                         
                         //retorna usuario por id
@@ -79,15 +81,27 @@ public class ControladorLogin extends HttpServlet {
                         
                         // Listar medicos
                         System.out.println(admin.listarMedicos().toString());
+                        
+                        //Cambiar estado del medico
+                        admin.cambiarEstadoDeMedico("101", "REC");
+                        
+                        // Listar medicos por estado
+                        System.out.println("Sii");
+                        System.out.println(admin.listarMedicosPorEstado("REC").toString());
 
+                        // Listar medicos aprobados por prov
+                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA", null).toString());
 
+                        // Listar medicos aprobados por especialidad
+                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad(null,"Anestecia General").toString());
+
+                        // Listar medicos aprobados por provincia y especialidad
+                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA","Anestecia General").toString());
+
+                        
                     } else {
                     request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
                     }
-                break;
-                case "/login":
-                    System.out.println("a");
-                    request.getRequestDispatcher("/loginError").forward(request, response);
                 break;
                 default:
                     throw new AssertionError();

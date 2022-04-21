@@ -9,6 +9,6 @@ package Modelo;
  * 
  * Clase encargada de manejar el horario de un médico
  */
-class constructorDeHorario {
+class Horario {
     
 }
