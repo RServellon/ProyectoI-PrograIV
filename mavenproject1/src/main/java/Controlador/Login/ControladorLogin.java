@@ -9,6 +9,7 @@ import Modelo.DAO.AdminHandler;
 import Modelo.DAO.GeneralHandler;
 import Modelo.DAO.MedicoHandler;
 import Modelo.Especialidad;
+import Modelo.Modelo;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 //jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=CONVERT_TO_NULL [root on Default schema]
@@ -43,14 +45,13 @@ public class ControladorLogin extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             
            
-            String id = request.getParameter("user");
+            String id = request.getParameter("id");
             String pwd = request.getParameter("password");
-            String userTipe = request.getParameter("tipo_usuario");
 
             System.out.println(id);
             System.out.println(pwd);
 
-            request.setAttribute("user", id);
+            request.setAttribute("id", id);
             request.setAttribute("password", pwd); 
             //creamos el usuario
             Usuario newUser = new Usuario();
@@ -70,6 +71,33 @@ public class ControladorLogin extends HttpServlet {
                     //System.out.println("a");
                     //request.getRequestDispatcher("/loginError").forward(request, response);
                     if (general.validarLogin(newUser)) { 
+                        
+                        //=======================================================================================
+                        //Test Norman
+                        newUser = general.retornaUserPorId(newUser.getId());
+                        request.setAttribute("user", newUser);
+                        updateModel(request);
+                        HttpSession session = request.getSession(true);
+                        session.setAttribute("user", newUser);
+                        
+                        switch (newUser.getTipo()) {
+                            case "ADMIN":
+
+
+
+                                
+                                break;
+                            case "MEDICO":
+                                
+                                break;
+                            case "PACIENTE":
+                                
+                                break;
+                            default:
+                                throw new AssertionError();
+                        }
+                        
+                        //=======================================================================================
                         System.out.println("Sii");
                         
                         //retorna usuario por id
@@ -149,5 +177,15 @@ public class ControladorLogin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void updateModel(HttpServletRequest request) {
+        Modelo modelo = (Modelo) request.getAttribute("model");
+        modelo.getCurrent().setClave(request.getParameter("password"));
+        modelo.getCurrent().setId(request.getParameter("user"));
+    }
+
+    private void loginAction(HttpServletRequest request) {
+    
+    }
 
 }
