@@ -106,16 +106,43 @@ public class AdminHandler extends GeneralHandler {
     public List<Medico> listarMedicosPorEstado(String estado){
         List<Medico> lista = new ArrayList<>();
         Medico medico;
-        String sql ="select * from medicos where estado = " + estado + ";";
+        String sql ="select * from medicos where estado = '" + estado + "';";
+        String id;
        
         try{
             executor = new SQLExecutor(usernameBD, passwordBD);
             ResultSet rs = executor.ejecutaQuery(sql);
-            while(rs.next()){
-                if(rs.getString("estado").equals("APRO")){
-                    medico = this.retornaMedicoPorId(rs.getString("id"));
-                    lista.add(medico);
-                }
+            
+            switch(estado){
+                case "APRO":
+                    while(rs.next()){
+                        if(rs.getString("estado").equals("APRO")){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                        }
+                    }
+                break;
+                case "ESP":
+                     while(rs.next()){
+                        if(rs.getString("estado").equals("ESP")){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                        }
+                    }
+                break;
+                case "REC":
+                     while(rs.next()){
+                        if(rs.getString("estado").equals("REC")){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                        }
+                    }
+                break;
+                default:
+                break;
             }
         } catch(SQLException throwables){
             throwables.printStackTrace();

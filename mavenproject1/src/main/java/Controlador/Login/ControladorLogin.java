@@ -82,7 +82,8 @@ public class ControladorLogin extends HttpServlet {
                         System.out.println(admin.listarMedicos().toString());
                         
                         // Listar medicos por estado
-                        System.out.println(admin.listarMedicosPorEstado("APRO").toString());
+                        System.out.println("Sii");
+                        System.out.println(admin.listarMedicosPorEstado("ESP").toString());
 
 
                     } else {

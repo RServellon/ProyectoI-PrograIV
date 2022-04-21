@@ -167,4 +167,3 @@ select * from ciudades;
 select * from horarios;
 select * from especialidades;
 select * from calificaciones;
-
