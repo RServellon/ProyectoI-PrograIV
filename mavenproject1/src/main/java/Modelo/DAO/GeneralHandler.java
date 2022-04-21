@@ -99,20 +99,70 @@ public class GeneralHandler {
     }
     
     
-    public boolean registrarUsuarioGeneral(String username, String id, String password, String tipo){
-         if(!verificaUsuarioExiste(id)){
+    public boolean registrarUsuario(String username, String id, String password, String tipo){
+        if(!verificaUsuarioExiste(id)){
             try{
                 executor = new SQLExecutor(usernameBD, passwordBD);
-                String valores[] = new String[5];
-                valores[0] = "insert into usuarios(id, nombre, clave, tipo) values (?, ?, ?, ?);";
-                valores[1] = id;
-                valores[2] = username;
-                valores[3] = password;
-                valores[4] = tipo;
-                executor.prepareStatement(valores);
-                return true;
+                String valores1[] = new String[5];
+                valores1[0] = "insert into usuarios(id, nombre, clave, tipo) values (?, ?, ?, ?);";
+                valores1[1] = id;
+                valores1[2] = username;
+                valores1[3] = password;
+                valores1[4] = tipo;
+                executor.prepareStatement(valores1);
+                  
             } catch(Exception throwables){
-            throwables.printStackTrace();
+                throwables.printStackTrace();
+            }
+            
+            switch(tipo){
+                case "admin":
+                    try{
+                        executor = new SQLExecutor(usernameBD, passwordBD);
+                        String valores1[] = new String[2];
+                        valores1[0] = "insert into administradores(id) values (?);";
+                        valores1[1] = id;
+                        executor.prepareStatement(valores1);
+                        return true;
+
+                    } catch(Exception throwables){
+                        throwables.printStackTrace();
+                    }
+                break;
+                case "paciente":
+                    try{
+                        executor = new SQLExecutor(usernameBD, passwordBD);
+                        String valores1[] = new String[2];
+                        valores1[0] = "insert into pacientes(id) values (?);";
+                        valores1[1] = id;
+                        executor.prepareStatement(valores1);
+                        return true;
+
+                    } catch(Exception throwables){
+                        throwables.printStackTrace();
+                    }
+                break;
+                case "medico":
+                    try{
+                        executor = new SQLExecutor(usernameBD, passwordBD);
+                        String valores1[] = new String[7];
+                        valores1[0] = "insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (?, ?, ?, ?, ?, ?);";
+                        valores1[1] = id;
+                        valores1[2] = null;
+                        valores1[3] = null;
+                        valores1[4] = null;
+                        valores1[5] = null;
+                        valores1[6] = null;
+                        
+                        executor.prepareStatement(valores1);
+                        return true;
+
+                    } catch(Exception throwables){
+                        throwables.printStackTrace();
+                    }
+                break;
+                default:
+                break;
             }
         }
         return false;
