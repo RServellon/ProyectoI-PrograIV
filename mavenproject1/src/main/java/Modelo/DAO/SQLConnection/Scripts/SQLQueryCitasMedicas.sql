@@ -139,7 +139,7 @@ insert into administradores(id) values (100);
 -- Medicos
 insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (101, 1, 70000, 1000, 'Athena', 'APRO');
 insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (102, 4, 100000, 1002, 'Pacific Global', 'APRO');
-insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (105, 1, 100000, 1003, 'Salud', 'APRO');
+insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (105, 6, 100000, 1003, 'Salud', 'APRO');
 
 -- Pacientes
 insert into pacientes(id) values (103);
