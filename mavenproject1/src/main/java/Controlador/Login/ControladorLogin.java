@@ -129,7 +129,17 @@ public class ControladorLogin extends HttpServlet {
 
                         // Prueba formato de fecha en cita
                         Cita cita = new Cita("102", "104", "2022-04-12 09:30:10", "FINALIZADO", "abc-abc-abc");
-                        System.out.println(cita.toString());
+                        System.out.println(cita.getFechaString());
+
+                                                
+                        // Mostrar datos de fecha
+                        System.out.println(cita.getFecha());
+                        System.out.println(cita.getFecha().getFechaHora());
+                        System.out.println(cita.getFecha().getFecha());
+                        System.out.println(cita.getFecha().getHora());
+                        
+                        
+                        
                         
                     } else {
                     request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);

@@ -4,15 +4,7 @@
  */
 package Modelo;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  *
@@ -21,7 +13,7 @@ import java.util.List;
 public class Cita {
     private String id_medico;
     private String id_paciente;
-    private LocalDateTime fecha; //LocalDateTime year-month-day HH-mm-ss-ns
+    private Fecha fecha= new Fecha(); //LocalDateTime year-month-day HH-mm-ss-ns
     private String estado;
     private String anotaciones;
     
@@ -29,7 +21,7 @@ public class Cita {
     }
 
     public Cita(String id_medico, String id_paciente, String fecha, String estado, String anotaciones) {
-        this.crearFechaHora(fecha);
+        this.fecha.setFechaHora(fecha);
         this.id_medico = id_medico;
         this.id_paciente = id_paciente;
         this.estado = estado;
@@ -53,12 +45,16 @@ public class Cita {
         this.id_paciente = id_paciente;
     }
 
-    public LocalDateTime getFecha() {
+    public String getFechaString() {
+        return fecha.getFechaHora();
+    }
+    
+    public Fecha getFecha(){
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setFecha(String fecha) {
+        this.fecha.setFechaHora(fecha);
     }
 
 
@@ -77,17 +73,13 @@ public class Cita {
     public void setAnotaciones(String anotaciones) {
         this.anotaciones = anotaciones;
     }
-    
-    public void crearFechaHora(String fechaHora){ // "2020-09-12 09:40:30:00"
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.from(f.parse(fechaHora));
-        this.fecha= dateTime;
-    }
 
     @Override
     public String toString() {
-        return "Cita{" + "id_medico=" + id_medico + ", id_paciente=" + id_paciente + ", fecha=" + fecha + ", estado=" + estado + ", anotaciones=" + anotaciones + '}';
+        return "Cita{" + "id_medico=" + id_medico + ", id_paciente=" + id_paciente + ", fecha=" + fecha.getFechaHora()+ ", estado=" + estado + ", anotaciones=" + anotaciones + '}';
     }
+   
+
 
  
 }

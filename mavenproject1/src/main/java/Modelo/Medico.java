@@ -13,7 +13,6 @@ public class Medico extends Usuario {
     private String especialidad;
     private String ciudad;
     private double costoConsulta;
-    private Horario horario;
     private String clinica;
     private String estado;
     private String rutaFotoPerfil;
@@ -29,11 +28,10 @@ public class Medico extends Usuario {
         super.setTipo(user.getTipo());
     }
 
-    public Medico(String especialidad, String ciudad, double costoConsulta, Horario horario, String clinica, String estado, String rutaFotoPerfil) {
+    public Medico(String especialidad, String ciudad, double costoConsulta, String clinica, String estado, String rutaFotoPerfil) {
         this.especialidad = especialidad;
         this.ciudad = ciudad;
         this.costoConsulta = costoConsulta;
-        this.horario = horario;
         this.clinica = clinica;
         this.estado = estado;
         this.rutaFotoPerfil = rutaFotoPerfil;
@@ -44,7 +42,6 @@ public class Medico extends Usuario {
         this.especialidad = especialidad;
         this.ciudad = ciudad;
         this.costoConsulta = costoConsulta;
-        this.horario = horario;
         this.clinica = clinica;
         this.estado = estado;
         this.rutaFotoPerfil = rutaFotoPerfil;
@@ -77,9 +74,6 @@ public class Medico extends Usuario {
         this.costoConsulta = costoConsulta;
     }
 
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
 
     public void setRutaFotoPerfil(String rutaFotoPerfil) {
         this.rutaFotoPerfil = rutaFotoPerfil;
@@ -99,9 +93,6 @@ public class Medico extends Usuario {
         return costoConsulta;
     }
 
-    public Horario getHorario() {
-        return horario;
-    }
 
     public String getRutaFotoPerfil() {
         return rutaFotoPerfil;
@@ -119,8 +110,9 @@ public class Medico extends Usuario {
 
     @Override
     public String toString() {
-        return "Medico{" + "especialidad=" + especialidad + ", ciudad=" + ciudad + ", costoConsulta=" + costoConsulta + ", horario=" + horario + ", clinica=" + clinica + ", estado=" + estado + ", rutaFotoPerfil=" + rutaFotoPerfil + '}';
+        return "Medico{" + "especialidad=" + especialidad + ", ciudad=" + ciudad + ", costoConsulta=" + costoConsulta + ", clinica=" + clinica + ", estado=" + estado + ", rutaFotoPerfil=" + rutaFotoPerfil + '}';
     }
+
 
 
  
