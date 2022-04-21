@@ -13,7 +13,7 @@ public class Medico extends Usuario {
     private String especialidad;
     private String ciudad;
     private double costoConsulta;
-    private constructorDeHorario horario;
+    private Horario horario;
     private String clinica;
     private String estado;
     private String rutaFotoPerfil;
@@ -32,7 +32,7 @@ public class Medico extends Usuario {
         super.setTipo(user.getTipo());
     }
 
-    public Medico(String especialidad, String ciudad, double costoConsulta, constructorDeHorario horario, String clinica, String estado, String rutaFotoPerfil, String resena) {
+    public Medico(String especialidad, String ciudad, double costoConsulta, Horario horario, String clinica, String estado, String rutaFotoPerfil, String resena) {
         this.especialidad = especialidad;
         this.ciudad = ciudad;
         this.costoConsulta = costoConsulta;
@@ -43,7 +43,7 @@ public class Medico extends Usuario {
         this.resena = resena;
     }
 
-    public Medico(String especialidad, String ciudad, double costoConsulta, constructorDeHorario horario, String clinica, String estado, String rutaFotoPerfil, String resena, String id, String nombre, String clave, String tipo) {
+    public Medico(String especialidad, String ciudad, double costoConsulta, Horario horario, String clinica, String estado, String rutaFotoPerfil, String resena, String id, String nombre, String clave, String tipo) {
         super(id, nombre, clave, tipo);
         this.especialidad = especialidad;
         this.ciudad = ciudad;
@@ -82,7 +82,7 @@ public class Medico extends Usuario {
         this.costoConsulta = costoConsulta;
     }
 
-    public void setHorario(constructorDeHorario horario) {
+    public void setHorario(Horario horario) {
         this.horario = horario;
     }
 
@@ -109,7 +109,7 @@ public class Medico extends Usuario {
         return costoConsulta;
     }
 
-    public constructorDeHorario getHorario() {
+    public Horario getHorario() {
         return horario;
     }
 

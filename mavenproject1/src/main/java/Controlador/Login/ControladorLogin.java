@@ -83,12 +83,11 @@ public class ControladorLogin extends HttpServlet {
                         System.out.println(admin.listarMedicos().toString());
                         
                         //Cambiar estado del medico
-                        admin.cambiarEstadoDeMedico("101", "APRO");
-
+                        admin.cambiarEstadoDeMedico("101", "REC");
                         
                         // Listar medicos por estado
                         System.out.println("Sii");
-                        System.out.println(admin.listarMedicosPorEstado("ESP").toString());
+                        System.out.println(admin.listarMedicosPorEstado("REC").toString());
 
 
                     } else {
