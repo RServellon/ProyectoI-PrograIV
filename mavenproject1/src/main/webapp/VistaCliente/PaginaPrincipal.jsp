@@ -21,7 +21,7 @@
          <div class="container-lg">
 <!--        fila de busqueda-->
        <div class="row row-padding" >
-          <form class="form-inline d-flex" method="POST" name="pagina_busqueda" action="inicio/busquedaCita">
+          <form class="form-inline d-flex" method="POST" name="pagina_busqueda" action="search">
                 
 <!--                campo de busqueda especialidad-->
             <div class="col-sm d-flex">

@@ -26,8 +26,8 @@ import java.util.List;
  * listar medicos por especialidad y ubicacion
  */
 public class GeneralHandler {
-//    final String usernameBD = "sa";
-    final String usernameBD = "sas";
+    final String usernameBD = "sa";
+//    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 
@@ -146,13 +146,14 @@ public class GeneralHandler {
                     try{
                         executor = new SQLExecutor(usernameBD, passwordBD);
                         String valores1[] = new String[7];
-                        valores1[0] = "insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (?, ?, ?, ?, ?, ?);";
+                        valores1[0] = "insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (?, ?, ?, ?, ?, '?');";
                         valores1[1] = id;
                         valores1[2] = null;
                         valores1[3] = null;
                         valores1[4] = null;
                         valores1[5] = null;
-                        valores1[6] = null;
+                        valores1[6] = "ESP";
+                        //al registrar un medico siempre su estado es espera a aprobación
                         
                         executor.prepareStatement(valores1);
                         return true;
@@ -186,7 +187,7 @@ public class GeneralHandler {
         return false;
     }
     
-   public List<Medico> listarMedicoPorProvinciaYEspecialidad(String provincia, String especialidad){
+    public List<Medico> listarMedicoPorProvinciaYEspecialidad(String provincia, String especialidad){
         List<Medico> lista = new ArrayList<>();
         Medico medico;        
         String id;
@@ -252,6 +253,28 @@ public class GeneralHandler {
                 }
             }
         }
+        return lista;
+    }
+   
+    public List<Medico> listarMedicosAprobados(){
+        List<Medico> lista = new ArrayList<>();
+        Medico medico;
+        String sql ="select * from medicos where estado = 'APRO';";
+        String id;
+       
+        try{
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql);
+            while(rs.next()){
+                if(rs.getString("estado").equals("APRO")){
+                    id = rs.getString("id");                
+                    medico = this.retornaMedicoPorId(id);                
+                    lista.add(medico);
+                }
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }   
         return lista;
     }
 }
