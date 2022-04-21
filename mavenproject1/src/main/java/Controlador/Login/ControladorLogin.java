@@ -90,12 +90,15 @@ public class ControladorLogin extends HttpServlet {
                         System.out.println(admin.listarMedicosPorEstado("REC").toString());
 
                         // Listar medicos aprobados por prov
-                        System.out.println(general.listarMedicoPorProvincia("HEREDIA").toString());
+                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA", null).toString());
 
                         // Listar medicos aprobados por especialidad
-                        System.out.println(general.listarMedicoPorEspecialidad("Anestecia General").toString());
+                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad(null,"Anestecia General").toString());
 
+                        // Listar medicos aprobados por provincia y especialidad
+                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA","Anestecia General").toString());
 
+                        
                     } else {
                     request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
                     }

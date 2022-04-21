@@ -18,8 +18,12 @@ import java.util.List;
 
 
 /**
- * aqui se hace toda la magiia de la conección
- * @author norma
+ * validar login, retorna usuario por id, retorna medico por id
+ * registra usuario general
+ * registra usuario segun tipo
+ * verifica usuario existe
+ * listar medicos por especialidad, ubicacion
+ * listar medicos por especialidad y ubicacion
  */
 public class GeneralHandler {
     final String usernameBD = "sa";
@@ -132,139 +136,72 @@ public class GeneralHandler {
         return false;
     }
     
-   public List<Medico> listarMedicoPorProvincia(String provincia){
+   public List<Medico> listarMedicoPorProvinciaYEspecialidad(String provincia, String especialidad){
         List<Medico> lista = new ArrayList<>();
-        Medico medico;
-        String sql = "select medicos.id, ciudades.provincia from medicos, ciudades where "
-                + "ciudades.codigo = medicos.ciudad and ciudades.provincia = '" + provincia + "' and "
-                + "medicos.estado = 'APRO';";
+        Medico medico;        
         String id;
-       
-        try{
-            executor = new SQLExecutor(usernameBD, passwordBD);
-            ResultSet rs = executor.ejecutaQuery(sql);
-            
-            switch(provincia){
-                case "SAN JOSE":
-                    while(rs.next()){
-                        id = rs.getString("id");   
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                case "HEREDIA":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                case "ALAJUELA":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                case "CARTAGO":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                case "LIMON":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                case "PUNTARENAS":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                case "GUANACASTE":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                default:
-                break;
-            }
-        } catch(SQLException throwables){
-            throwables.printStackTrace();
-        }   
-        return lista;
-    }
-    
-    public List<Medico> listarMedicoPorEspecialidad(String especialidad){
-        List<Medico> lista = new ArrayList<>();
-        Medico medico;
+        ResultSet rs;
+        String sql;
+              
         
-        String sql = "select medicos.id, especialidades.nombre from medicos, especialidades where "
+        if(provincia == null && especialidad != null){
+            sql = "select medicos.id, especialidades.nombre from medicos, especialidades where "
                 + "especialidades.codigo = medicos.especialidad and especialidades.nombre = '" + especialidad + "' and "
                 + "medicos.estado = 'APRO';";
-        String id;
-       
-        try{
-            executor = new SQLExecutor(usernameBD, passwordBD);
-            ResultSet rs = executor.ejecutaQuery(sql);
-            
-            switch(especialidad){
-                case "General":
+            try{
+                executor = new SQLExecutor(usernameBD, passwordBD);
+                rs = executor.ejecutaQuery(sql);
+
+                while(rs.next()){
+                    id = rs.getString("id");   
+                    medico = this.retornaMedicoPorId(id);                
+                    lista.add(medico);
+                  }
+            } catch(SQLException throwables){
+                  throwables.printStackTrace();
+            }   
+        }
+        else{
+            if(especialidad == null && provincia != null){
+                sql = "select medicos.id, ciudades.provincia from medicos, ciudades where "
+                    + "ciudades.codigo = medicos.ciudad and ciudades.provincia = '" + provincia + "' and "
+                    + "medicos.estado = 'APRO';";
+                 
+                try{
+                    executor = new SQLExecutor(usernameBD, passwordBD);
+                    rs = executor.ejecutaQuery(sql);
+
                     while(rs.next()){
                         id = rs.getString("id");   
                         medico = this.retornaMedicoPorId(id);                
                         lista.add(medico);
                     }
-                break;
-                case "Cardiologia":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                case "Psicologia":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                case "Anestecia General":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                case "Odontologia":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                case "Pediatria":
-                    while(rs.next()){
-                        id = rs.getString("id");                
-                        medico = this.retornaMedicoPorId(id);                
-                        lista.add(medico);
-                    }
-                break;
-                default:
-                break;
+                } catch(SQLException throwables){
+                      throwables.printStackTrace();
+                }   
             }
-        } catch(SQLException throwables){
-            throwables.printStackTrace();
-        }   
+            else{
+                if(especialidad != null && provincia != null){
+                    sql = "select medicos.id, especialidades.nombre, ciudades.provincia from " 
+                        + "medicos, especialidades, ciudades where " 
+                        + "especialidades.codigo = medicos.especialidad and ciudades.codigo = medicos.ciudad and "
+                        + "especialidades.nombre = '"+ especialidad +"' and ciudades.provincia = '"+ provincia + "' and medicos.estado = 'APRO';";
+                 
+                    try{
+                        executor = new SQLExecutor(usernameBD, passwordBD);
+                        rs = executor.ejecutaQuery(sql);
+
+                        while(rs.next()){
+                            id = rs.getString("id");   
+                            medico = this.retornaMedicoPorId(id);                
+                            lista.add(medico);
+                        }
+                    } catch(SQLException throwables){
+                          throwables.printStackTrace();
+                    }   
+                }
+            }
+        }
         return lista;
     }
 }

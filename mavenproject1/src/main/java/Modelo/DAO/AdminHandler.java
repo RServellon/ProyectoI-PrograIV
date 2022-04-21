@@ -23,7 +23,7 @@ import java.util.List;
 public class AdminHandler extends GeneralHandler {
     
     // admitir medicos, agregar ciudades, agregar especialidades
-    // listar medicos por estado, listar medicos por especialidad, ubicacion
+    // listar medicos por estado
     // listar ciudades y epsecialidades
     
     public AdminHandler(){
