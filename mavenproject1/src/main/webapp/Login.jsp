@@ -70,7 +70,7 @@
                                         <p class="mb-5" color="gray">Por favor digite su usuario y contraseña!</p>
 
                                         <div id="ingresoUser" class="form-outline form-white mb-4">
-                                            <input type="text" id="nombreUsuario" name="user" class="form-control form-control-lg" required />
+                                            <input type="text" id="nombreUsuario" name="id" class="form-control form-control-lg" required />
                                             <label class="form-label" for="typeUser">Usuario</label>
                                         </div>
 

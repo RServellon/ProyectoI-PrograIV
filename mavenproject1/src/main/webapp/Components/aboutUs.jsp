@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%@ include file  ="../Components/Header.jsp" %>
         <h1>About US!</h1>
     </body>
 </html>
