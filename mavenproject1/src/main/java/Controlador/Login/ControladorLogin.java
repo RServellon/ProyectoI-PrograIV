@@ -89,6 +89,9 @@ public class ControladorLogin extends HttpServlet {
                         System.out.println("Sii");
                         System.out.println(admin.listarMedicosPorEstado("REC").toString());
 
+                        // Listar medicos aprobados por prov
+                        System.out.println(admin.listarMedicoPorProvincia("HEREDIA").toString());
+
 
                     } else {
                     request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);

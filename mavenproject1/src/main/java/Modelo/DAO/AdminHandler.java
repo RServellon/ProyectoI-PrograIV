@@ -175,5 +175,76 @@ public class AdminHandler extends GeneralHandler {
         }   
         return lista;
     }
+    
+     public List<Medico> listarMedicoPorProvincia(String provincia){
+        List<Medico> lista = new ArrayList<>();
+        Medico medico;
+        String sql = "select medicos.id, ciudades.provincia from medicos, ciudades where "
+                + "ciudades.codigo = medicos.ciudad and ciudades.provincia = '" + provincia + "' and "
+                + "medicos.estado = 'APRO';";
+        String id;
+       
+        try{
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql);
+            
+            switch(provincia){
+                case "SAN JOSE":
+                    while(rs.next()){
+                        id = rs.getString("id");   
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                    }
+                break;
+                case "HEREDIA":
+                    while(rs.next()){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                    }
+                break;
+                case "ALAJUELA":
+                    while(rs.next()){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                    }
+                break;
+                case "CARTAGO":
+                    while(rs.next()){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                    }
+                break;
+                case "LIMON":
+                    while(rs.next()){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                    }
+                break;
+                case "PUNTARENAS":
+                    while(rs.next()){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                    }
+                break;
+                case "GUANACASTE":
+                    while(rs.next()){
+                        id = rs.getString("id");                
+                        medico = this.retornaMedicoPorId(id);                
+                        lista.add(medico);
+                    }
+                break;
+                default:
+                break;
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }   
+        return lista;
+    }
    
 }
