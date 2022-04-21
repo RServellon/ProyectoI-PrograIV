@@ -25,9 +25,9 @@ public class ClaseServicio {
     
     private ClaseServicio(){
        listMedicos = new ArrayList();
-       listMedicos.add(new Medico("Odontologia", "Heredia", 5000, null, "Clinica", "estado", "foto de perfil", "resena"));
+       listMedicos.add(new Medico("Odontologia", "Heredia", 5000, null, "Clinica", "estado", "foto de perfil"));
 
-       listMedicos.add(new Medico("Neurocirugia", "San Jose", 15000, null, "Clinica", "estado", "foto de perfil", "resena"));
+       listMedicos.add(new Medico("Neurocirugia", "San Jose", 15000, null, "Clinica", "estado", "foto de perfil"));
     }
     
     

@@ -4,7 +4,12 @@
  */
 package Modelo.DAO;
 
+import Modelo.Cita;
 import Modelo.DAO.SQLConnection.SQLExecutor;
+import Modelo.Medico;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,26 +20,54 @@ public class MedicoHandler extends GeneralHandler {
         this.executor = new SQLExecutor(usernameBD, passwordBD);
     }
     
+    public boolean modificarDatos(String id, String especialidad, String costo, String ciudad, String clinica){
+        boolean respuesta = false;
+        if(this.verificaUsuarioExiste(id)){
+            // El id no se puede cambiar
+            // tampoco su estado
+            try{
+                executor = new SQLExecutor(usernameBD, passwordBD);
+                String valores[] = new String[6];
+                valores[0] = "update medicos set especialidad = ?, costo = ?, ciudad = ?, clinica = ? where medicos id = ?;";
+                valores[1] = especialidad;
+                valores[2] = costo;
+                valores[3] = ciudad;
+                valores[4] = clinica;
+                valores[5] = id;
+                executor.prepareStatement(valores);
+                  
+            } catch(Exception throwables){
+                throwables.printStackTrace();
+            }
+        }
+        return respuesta;
+    }
     
-    public boolean registrarMedico(String id, String especialidad, String costo, String ciudad, String clinica, String estado){
+    public List<Cita> listarCitasPorEstado(String estado){
+        List<Cita> lista = new ArrayList<>();
+        Cita cita;
+        String sql ="select * from citas where estado = 'APRO';";
+        String id;
+       
+        /*
+        
          try{
             executor = new SQLExecutor(usernameBD, passwordBD);
-           
-            String valores[] = new String[7];
-            valores[0] = "insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (?, ?, ?, ?, ?, ?);";
-            valores[1] = id;
-            valores[2] = especialidad;
-            valores[3] = costo;
-            valores[4] = ciudad;
-            valores[5] = clinica;
-            valores[6] = estado;
-
-            executor.prepareStatement(valores);
-            return true;
-         
-            } catch(Exception throwables){
+            ResultSet rs = executor.ejecutaQuery(sql);
+            while(rs.next()){
+                if(rs.getString("estado").equals("APRO")){
+                    id = rs.getString("id");                
+                    cita = this.retornaCitaPorIdMedico(id);                
+                    lista.add(cita);
+                }
+            }
+        } catch(SQLException throwables){
             throwables.printStackTrace();
         }   
-        return false;
+        
+        */
+       
+        return lista;
     }
+    
 }

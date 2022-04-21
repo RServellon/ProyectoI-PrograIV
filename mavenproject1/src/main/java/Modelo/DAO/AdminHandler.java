@@ -32,41 +32,42 @@ public class AdminHandler extends GeneralHandler {
     
     public boolean cambiarEstadoDeMedico(String id, String estado){
         boolean resultado = false;
-        try {
-            switch(estado){
-                case "APRO":
-                    String valores1[] = new String[3];
-                    valores1[0] = "update medicos set estado = ? where id = ?;";
-                    valores1[1] = "APRO";
-                    valores1[2] = id;
+        if(this.verificaUsuarioExiste(id)){
+            try {
+                switch(estado){
+                    case "APRO":
+                        String valores1[] = new String[3];
+                        valores1[0] = "update medicos set estado = ? where id = ?;";
+                        valores1[1] = "APRO";
+                        valores1[2] = id;
 
-                    executor.prepareStatement(valores1);
-                    resultado = true;
-                break;
-                case "ESP":
-                    String valores2[] = new String[3];
-                    valores2[0] = "update medicos set estado = ? where id = ?;";
-                    valores2[1] = "ESP";
-                    valores2[2] = id;
+                        executor.prepareStatement(valores1);
+                        resultado = true;
+                    break;
+                    case "ESP":
+                        String valores2[] = new String[3];
+                        valores2[0] = "update medicos set estado = ? where id = ?;";
+                        valores2[1] = "ESP";
+                        valores2[2] = id;
 
-                    executor.prepareStatement(valores2);
-                    resultado = true;
-                break;
-                case "REC":
-                    String valores3[] = new String[3];
-                    valores3[0] = "update medicos set estado = ? where id = ?;";
-                    valores3[1] = "REC";
-                    valores3[2] = id;
+                        executor.prepareStatement(valores2);
+                        resultado = true;
+                    break;
+                    case "REC":
+                        String valores3[] = new String[3];
+                        valores3[0] = "update medicos set estado = ? where id = ?;";
+                        valores3[1] = "REC";
+                        valores3[2] = id;
 
-                    executor.prepareStatement(valores3);
-                    resultado = true;
-                break;
-                default:
-                break;
+                        executor.prepareStatement(valores3);
+                        resultado = true;
+                    break;
+                    default:
+                    break;
+                }
+            } catch (Exception throwables) {
+                throwables.printStackTrace();
             }
-           
-        } catch (Exception throwables) {
-            throwables.printStackTrace();
         }
         return resultado;
     }

@@ -4,6 +4,7 @@
  */
 package Controlador.Login;
 
+import Modelo.Cita;
 import Modelo.Ciudad;
 import Modelo.DAO.AdminHandler;
 import Modelo.DAO.GeneralHandler;
@@ -74,28 +75,28 @@ public class ControladorLogin extends HttpServlet {
                         
                         //=======================================================================================
                         //Test Norman
-                        newUser = general.retornaUserPorId(newUser.getId());
-                        request.setAttribute("user", newUser);
-                        updateModel(request);
-                        HttpSession session = request.getSession(true);
-                        session.setAttribute("user", newUser);
-                        
-                        switch (newUser.getTipo()) {
-                            case "ADMIN":
-
-
-
-                                
-                                break;
-                            case "MEDICO":
-                                
-                                break;
-                            case "PACIENTE":
-                                
-                                break;
-                            default:
-                                throw new AssertionError();
-                        }
+//                        newUser = general.retornaUserPorId(newUser.getId());
+//                        request.setAttribute("user", newUser);
+//                        updateModel(request);
+//                        HttpSession session = request.getSession(true);
+//                        session.setAttribute("user", newUser);
+//                        
+//                        switch (newUser.getTipo()) {
+//                            case "ADMIN":
+//
+//
+//
+//                                
+//                                break;
+//                            case "MEDICO":
+//                                
+//                                break;
+//                            case "PACIENTE":
+//                                
+//                                break;
+//                            default:
+//                                throw new AssertionError();
+//                        }
                         
                         //=======================================================================================
                         System.out.println("Sii");
@@ -126,6 +127,9 @@ public class ControladorLogin extends HttpServlet {
                         // Listar medicos aprobados por provincia y especialidad
                         System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA","Anestecia General").toString());
 
+                        // Prueba formato de fecha en cita
+                        Cita cita = new Cita("102", "104", "2022-04-12 09:30:10", "FINALIZADO", "abc-abc-abc");
+                        System.out.println(cita.toString());
                         
                     } else {
                     request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);

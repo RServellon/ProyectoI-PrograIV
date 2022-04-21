@@ -1,7 +1,13 @@
+-- Cosas que podría cambiar
+-- las citas se manejas con codigo, un sequence
+-- las citas tienen en lugar de date y time por separado, usar un datetime type
+-- 
+
 -- Se borran las secuencias
 drop sequence sec_usuarios;
 drop sequence sec_especialidades;
 drop sequence sec_ciudades;
+--drop sequence sec_citas;
 
 -- Se borran las tablas
 
@@ -29,6 +35,10 @@ create sequence sec_ciudades
 	as int
 	start with 1000 
 	increment by 1;
+--create sequence sec_citas
+--        as int
+--        start with 2000
+--        increment by 1
 
 
 --Se crean las tablas

@@ -17,9 +17,6 @@ public class Medico extends Usuario {
     private String clinica;
     private String estado;
     private String rutaFotoPerfil;
-    private String resena;
-    
-    
     
     public Medico() {
         
@@ -32,7 +29,7 @@ public class Medico extends Usuario {
         super.setTipo(user.getTipo());
     }
 
-    public Medico(String especialidad, String ciudad, double costoConsulta, Horario horario, String clinica, String estado, String rutaFotoPerfil, String resena) {
+    public Medico(String especialidad, String ciudad, double costoConsulta, Horario horario, String clinica, String estado, String rutaFotoPerfil) {
         this.especialidad = especialidad;
         this.ciudad = ciudad;
         this.costoConsulta = costoConsulta;
@@ -40,10 +37,9 @@ public class Medico extends Usuario {
         this.clinica = clinica;
         this.estado = estado;
         this.rutaFotoPerfil = rutaFotoPerfil;
-        this.resena = resena;
     }
 
-    public Medico(String especialidad, String ciudad, double costoConsulta, Horario horario, String clinica, String estado, String rutaFotoPerfil, String resena, String id, String nombre, String clave, String tipo) {
+    public Medico(String especialidad, String ciudad, double costoConsulta, Horario horario, String clinica, String estado, String rutaFotoPerfil, String id, String nombre, String clave, String tipo) {
         super(id, nombre, clave, tipo);
         this.especialidad = especialidad;
         this.ciudad = ciudad;
@@ -52,7 +48,6 @@ public class Medico extends Usuario {
         this.clinica = clinica;
         this.estado = estado;
         this.rutaFotoPerfil = rutaFotoPerfil;
-        this.resena = resena;
     }
    
    
@@ -89,11 +84,6 @@ public class Medico extends Usuario {
     public void setRutaFotoPerfil(String rutaFotoPerfil) {
         this.rutaFotoPerfil = rutaFotoPerfil;
     }
-
-    public void setResena(String resena) {
-        this.resena = resena;
-    }
-    
     
     //gets
 
@@ -117,10 +107,6 @@ public class Medico extends Usuario {
         return rutaFotoPerfil;
     }
 
-    public String getResena() {
-        return resena;
-    }
-
     public String getClinica() {
         return clinica;
     }
@@ -133,8 +119,9 @@ public class Medico extends Usuario {
 
     @Override
     public String toString() {
-        return "Medico{" + " nombre = " + super.getNombre() +  ", id = " + super.getId() + ", tipo = " + super.getTipo() + ", clave = " + super.getClave() + ", especialidad = " + especialidad + ", ciudad=" + ciudad + ", costoConsulta=" + costoConsulta + ", horario=" + horario + ", clinica=" + clinica + ", estado=" + estado + ", rutaFotoPerfil=" + rutaFotoPerfil + ", resena=" + resena + '}';
+        return "Medico{" + "especialidad=" + especialidad + ", ciudad=" + ciudad + ", costoConsulta=" + costoConsulta + ", horario=" + horario + ", clinica=" + clinica + ", estado=" + estado + ", rutaFotoPerfil=" + rutaFotoPerfil + '}';
     }
+
 
  
     
