@@ -24,22 +24,33 @@ public class ClaseServicio {
     
     
     private ClaseServicio(){
-       listMedicos = new ArrayList();
-       listMedicos.add(new Medico("Odontologia", "Heredia", 5000, "Clinica", "estado", "foto de perfil"));
-
-       listMedicos.add(new Medico("Neurocirugia", "San Jose", 15000, "Clinica", "estado", "foto de perfil"));
+        Medico med1 = new Medico("Odontologia", "Heredia", 5000, null, "Clinica", "estado", "foto de perfil", "123", "Eren Jaeger", "pass1", "medico");
+        Medico med2 = new Medico("Neurocirugia", "Alajuela", 5000, null, "Clinica", "estado", "foto de perfil", "id", "Sanji Vismoke", "pass2", "medico");
+        Medico med3 = new Medico("Otorringsdasn", "Guanacaste", 5000, null, "Clinica", "estado", "foto de perfil", "id", "Nami Sandia", "pass2", "medico");
+       
+        listMedicos = new ArrayList();
+        listMedicos.add(med1);
+        listMedicos.add(med2);
+        listMedicos.add(med3);
+        listMedicos.add(med3);
+        listMedicos.add(med1);
+        listMedicos.add(med1);
+        listMedicos.add(med1);
+        listMedicos.add(med1);
+        
     }
     
     
-    //este metodo me buscara un medico por especialidad y provincia
-    public Medico retornarMedico(String especialidad, String provincia){
-        for(int i = 0 ; i < listMedicos.size(); i++){
+    //este metodo me buscara medicos por especialidad y provincia
+    public ArrayList<Medico> retornarMedico(String especialidad, String provincia){
+         ArrayList<Medico> listMedicosFiltrados = new ArrayList();
+         for(int i = 0 ; i < listMedicos.size(); i++){
             Medico med = listMedicos.get(i);
-            if(med.getEspecialidad() == especialidad && med.getCiudad() == provincia){
-              return med;  
+            if(med.getEspecialidad().equals(especialidad) && med.getCiudad().equals(provincia)){
+              listMedicosFiltrados.add(med);
             }
         }
-       return null; //no existe
+       return listMedicosFiltrados;
     }
 
 }

@@ -65,7 +65,7 @@
                    <span class="input-group-text size-span" id="basic-addon1">
                        <i class="fa-solid fa-calendar-days icons-1"></i>
                    </span>
-                      <p class="fs-3">Realiza una cita con ese doctor  <br>seleccionando el horario que mejor <br>se te ajuste y eso es todo!</p>
+                      <p class="fs-3">Agenda una cita con ese doctor  <br>seleccionando el horario que mejor <br>se te ajuste y eso es todo!</p>
                 </div>
          </div>
          

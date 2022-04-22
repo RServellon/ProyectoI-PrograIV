@@ -4,7 +4,10 @@
  */
 package Controlador.Cliente;
 
+import Modelo.ClaseServicio;
+import Modelo.Medico;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,11 +29,10 @@ public class BusquedaCita extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try{
             String viewURL = showSearch(request);
-        request.getRequestDispatcher("/VistaCliente/search.jsp").forward(request, response);
+            request.getRequestDispatcher(viewURL).forward(request, response);
                     
         }catch(Exception e){
-            System.out.println("Ha ocurrido un error: "+ e);
-                   
+            System.out.println("Ha ocurrido un error: "+ e);  
         }
     }
      
@@ -81,7 +83,18 @@ public class BusquedaCita extends HttpServlet {
     //hara una busqueda en la lista de medicos registrados y insertara en otra lista distinta los medicos que cumplan
     //con las especificaciones de la busqueda para mandarlo al jsp de search y que me filtre esos medicos encontrados
     public String showActionSearch(HttpServletRequest request){
-        String especialidad = "a";
-        return especialidad;
+        //se llama a la clase de servicio para probar con datos quemados existentes
+        ClaseServicio service = ClaseServicio.instance();
+        //Creacion de lista en donde se insertaran los medicos que cumplan con la busqueda
+        ArrayList<Medico> listaMedicos = new ArrayList();
+        //extraemos los parametros de los campos de busqueda para filtrar la lista de medicos con esos requisitos
+        String especialidad = request.getParameter("Especialidad");
+        String provincia = request.getParameter("Provincia");
+        System.out.println("PRUEBA: "+ especialidad +" "+ provincia);
+        //Se envia la info al search.jsp para que filtre la informacion
+         request.setAttribute("Especialidad", especialidad);
+         request.setAttribute("Provincia", provincia);
+        //posterior a esto retornamos el search.jsp para que se muestre con la busqueda realizada
+        return "/VistaCliente/search.jsp";
     }
 }

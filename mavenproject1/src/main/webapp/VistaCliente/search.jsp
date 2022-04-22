@@ -1,18 +1,16 @@
 
+<%@page import="Modelo.ClaseServicio"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Medico"%>
 
 <%
-    //datos de prueba
-    Medico med1 = new Medico("Odontologia", "Heredia", 5000, null, "Clinica", "estado", "foto de perfil", "123", "Eren Jaeger", "pass1", "medico");
-    Medico med2 = new Medico("Neurocirugia", "Alajuela", 5000, null, "Clinica", "estado", "foto de perfil", "id", "Sanji Vismoke", "pass2", "medico");
-    Medico med3 = new Medico("Otorringsdasn", "Guanacaste", 5000, null, "Clinica", "estado", "foto de perfil", "id", "Nami Sandia", "pass2", "medico");
-  //  Model model = (Model) request.getAttribute("model"); //extrae el modelo que es una clase que tiene al usuario y una lista de cuentas asociadas a ese usuario
-    ArrayList<Medico> medicos = new ArrayList();
-    medicos.add(med1);
-    medicos.add(med2);
-    medicos.add(med3);
+         //llamamos a la clase de servicio que tiene el metodo para retornar a esos medicos segun especialidad y provincia
+         ClaseServicio service = ClaseServicio.instance();
+         String especialidad = (String)request.getAttribute("Especialidad");
+         String provincia = (String)request.getAttribute("Provincia");
+         //obtenemos la lista con los medicos que se hayan encontrado
+         ArrayList<Medico> medicos = service.retornarMedico(especialidad, provincia);
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,6 +18,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <link href="../CSS/PaginaPrincipalClientes.css" rel="stylesheet">
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <title>buscar</title>
     </head>
     <body>
@@ -28,7 +28,7 @@
           <div class="container-lg">
 <!--        fila de busqueda(HACERLO EN INCLUDE-->
              <div class="row row-padding" >
-          <form class="form-inline d-flex" method="POST" name="pagina_busqueda" action="inicio/busquedaCita">
+          <form class="form-inline d-flex" method="POST" name="pagina_busqueda" action="search">
                 
 <!--                campo de busqueda especialidad-->
             <div class="col-sm d-flex">
@@ -56,6 +56,19 @@
           </form>
        </div>
 
+<!--    Se realiza un if si no se encuentra informacion para ningun medico-->
+       <% if(medicos.size()==0){ %>
+             <div class="row row-padding justify-content-evenly">
+                   <div class="input-group-prepend d-flex" >
+                      <span class="input-group-text size-span-2" id="basic-addon1">
+                           <i class="fa-solid fa-calendar-days icons-2"></i>
+                      </span>
+                      <p class="fs-3">Lo sentimos no hemos encontrado ningun doctor en nuestros registros con
+                          <br> Especialidad: <%=especialidad %>
+                          <br> Pronvincia: <%= provincia %>
+                      </p>
+                   </div>
+       <% } %>
 <!--Aqui se realiza for con la informacion de los medicos que existen segun la busqueda realizada-->
         <% for(Medico c:medicos){%>
         <div class="row row-padding row-margin border border-3 shadow p-3 mb-5 bg-body rounded-3">
@@ -65,6 +78,7 @@
            <h3><%= c.getEspecialidad()%></h3>
         </div>
         <% } %>
-          </div>
+        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+        <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
     </body>
 </html>

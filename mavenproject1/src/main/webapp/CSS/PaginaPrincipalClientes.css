@@ -1,45 +1,3 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : 17 abr. 2022, 2:02:05
-    Author     : norma
-*/
-.navbar{
-    position: absolute;
-    width: 100%;
-    height: 65px;
-    left: 0px;
-    top: 0px;
-
-    background: #8AB5D3;
-}
-
-.listado-citas{
-    
-    
-    height: 95vh;
-}
-
-
-.search-filter{
-    height: 95vh;
-}
-
-.search-filter-container{
-    background: #F7F7F7;
-    margin-top: 60px;
-    border-radius: 20px;
-}
-
-.listado-citas-container{
-    border-radius: 20px;
-    background: #F7F7F7;
-    margin-top: 60px;
-}
-
-/*pagina index*/
 .container-lg{
     
 }
@@ -53,7 +11,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .icons-1{
     font-size: 4em;
 }
-
+.icons-2{
+     font-size: 6em;
+}
 .boton{
     height: 100%;
     background-color: rgb(32, 48, 76);
@@ -72,3 +32,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     width: 6em;
 }
 
+.size-span-2{
+    width: 8em;
+}
