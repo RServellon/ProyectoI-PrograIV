@@ -44,6 +44,7 @@ public class ControladorLogin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            request.setAttribute("model", new Modelo());
             
            
             String id = request.getParameter("id");
@@ -75,28 +76,25 @@ public class ControladorLogin extends HttpServlet {
                         
                         //=======================================================================================
                         //Test Norman
-//                        newUser = general.retornaUserPorId(newUser.getId());
-//                        request.setAttribute("user", newUser);
-//                        updateModel(request);
-//                        HttpSession session = request.getSession(true);
-//                        session.setAttribute("user", newUser);
-//                        
-//                        switch (newUser.getTipo()) {
-//                            case "ADMIN":
-//
-//
-//
-//                                
-//                                break;
-//                            case "MEDICO":
-//                                
-//                                break;
-//                            case "PACIENTE":
-//                                
-//                                break;
-//                            default:
-//                                throw new AssertionError();
-//                        }
+                        newUser = general.retornaUserPorId(newUser.getId());
+                        request.setAttribute("user", newUser);
+                        updateModel(request);
+                        HttpSession session = request.getSession(true);
+                        session.setAttribute("user", newUser);
+                        
+                        switch (newUser.getTipo()) {
+                            case "ADMIN":
+                                
+                                break;
+                            case "MEDICO":
+                                
+                                break;
+                            case "PACIENTE":
+                                
+                                break;
+                            default:
+                                throw new AssertionError();
+                        }
                         
                         //=======================================================================================
                         System.out.println("Sii");
@@ -198,8 +196,5 @@ public class ControladorLogin extends HttpServlet {
         modelo.getCurrent().setId(request.getParameter("user"));
     }
 
-    private void loginAction(HttpServletRequest request) {
-    
-    }
 
 }
