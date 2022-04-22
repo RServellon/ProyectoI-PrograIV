@@ -2,16 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controlador.Login;
+package Controlador.Cliente;
 
-import Modelo.Ciudad;
-import Modelo.DAO.AdminHandler;
-import Modelo.DAO.GeneralHandler;
-import Modelo.DAO.MedicoHandler;
-import Modelo.Especialidad;
-import Modelo.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,24 +18,26 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author norma
  */
-@WebServlet(name = "BusquedaCita", urlPatterns = {"/search", "/VistaCliente/search"})
+@WebServlet(name = "BusquedaCita", urlPatterns = {"/VistaCliente/search"})
 public class BusquedaCita extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
+        try{
+            String viewURL = showSearch(request);
         request.getRequestDispatcher("/VistaCliente/search.jsp").forward(request, response);
+                    
+        }catch(Exception e){
+            System.out.println("Ha ocurrido un error: "+ e);
+                   
+        }
     }
-
+     
+    //este metodo es para abrir la ventana de search con los medicos correspondientes segun la busqueda realizada
+    public String showSearch(HttpServletRequest request){
+        return this.showActionSearch(request);
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -82,4 +77,11 @@ public class BusquedaCita extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    //este metodo extraera la informacion de los campos de especialidad y provincia que se colocaron, posterior a eso
+    //hara una busqueda en la lista de medicos registrados y insertara en otra lista distinta los medicos que cumplan
+    //con las especificaciones de la busqueda para mandarlo al jsp de search y que me filtre esos medicos encontrados
+    public String showActionSearch(HttpServletRequest request){
+        String especialidad = "a";
+        return especialidad;
+    }
 }

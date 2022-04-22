@@ -5,9 +5,9 @@
 
 <%
     //datos de prueba
-    Medico med1 = new Medico("Odontologia", "Heredia", 5000, null, "Clinica", "estado", "foto de perfil", "resena", "123", "Eren Jaeger", "pass1", "medico");
-    Medico med2 = new Medico("Neurocirugia", "Alajuela", 5000, null, "Clinica", "estado", "foto de perfil", "resena", "id", "Sanji Vismoke", "pass2", "medico");
-     Medico med3 = new Medico("Otorringsdasn", "Guanacaste", 5000, null, "Clinica", "estado", "foto de perfil", "resena", "id", "Nami Sandia", "pass2", "medico");
+    Medico med1 = new Medico("Odontologia", "Heredia", 5000, null, "Clinica", "estado", "foto de perfil", "123", "Eren Jaeger", "pass1", "medico");
+    Medico med2 = new Medico("Neurocirugia", "Alajuela", 5000, null, "Clinica", "estado", "foto de perfil", "id", "Sanji Vismoke", "pass2", "medico");
+    Medico med3 = new Medico("Otorringsdasn", "Guanacaste", 5000, null, "Clinica", "estado", "foto de perfil", "id", "Nami Sandia", "pass2", "medico");
   //  Model model = (Model) request.getAttribute("model"); //extrae el modelo que es una clase que tiene al usuario y una lista de cuentas asociadas a ese usuario
     ArrayList<Medico> medicos = new ArrayList();
     medicos.add(med1);
