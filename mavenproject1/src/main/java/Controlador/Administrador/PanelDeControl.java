@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "PanelDeControl", urlPatterns = {"/PanelDeControl", "/mavenproject1/admin-dash-board"})
+@WebServlet(name = "PanelDeControl", urlPatterns = {"/PanelDeControl", "/mavenproject1/admin-dash-board", "/admin-dash-board"})
 public class PanelDeControl extends HttpServlet {
 
     /**
@@ -34,21 +34,22 @@ public class PanelDeControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            //solicitud de ingreso a la vista
+            HttpSession session = request.getSession(true);
+            Usuario user = (Usuario) session.getAttribute("user");
+            System.out.println(user);
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+//                    request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
+            request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
             switch (request.getServletPath()) {
                 case "/mavenproject1/admin-dash-board":
                     //solicitud de ingreso a la vista
-                    HttpSession session = request.getSession(true);
-                    Usuario user = (Usuario) session.getAttribute("user");
-                    System.out.println(user);
-                    System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-//                    request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
                     request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
-                    
                     break;
-
-                
+                case "/admin-dash-board":
+                    request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
+                    break;
             }
-
         }
     }
 
