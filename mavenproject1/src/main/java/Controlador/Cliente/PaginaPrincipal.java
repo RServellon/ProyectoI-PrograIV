@@ -20,6 +20,7 @@ public class PaginaPrincipal extends HttpServlet {
             throws ServletException, IOException {
 //          String viewUrl="/VistaAdmin/borar.jsp";
         //en base a lo que retorno el switch en la variable viewUrl realiza el foward respectivo 
+          response.setContentType("text/html;charset=UTF-8");
         try{
             request.getRequestDispatcher("VistaCliente/search.jsp").forward( request, response); //cuando el forward se ejecuta el jsp tendra acceso al objeto request y response
         }catch(Exception e){
