@@ -26,8 +26,8 @@ import java.util.List;
  * listar medicos por especialidad y ubicacion
  */
 public class GeneralHandler {
-    final String usernameBD = "sa";
-//    final String usernameBD = "sas";
+//    final String usernameBD = "sa";
+    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 

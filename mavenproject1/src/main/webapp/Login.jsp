@@ -32,7 +32,6 @@
                         <div class="card bg-glass" style="border-radius: 1rem;"  >
                             <div class="card-body px-5 py-4 px-md-5 text-center container-login " >
                                 <form method="POST" name="pagina_logeo" action="login" >
-
                                     <div class="mb-md-0 mt-md-4 pb-5">
                                         <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                                         <p class="mb-5" color="gray">Por favor digite su usuario y contraseña!</p>
@@ -46,13 +45,9 @@
                                             <input type="password" id="password" name="password" class="form-control form-control-lg" required />
                                             <label class="form-label" for="typePasswordX">Contraseña</label>
                                         </div>
-
-
                                         <div id="boton_submit" class="boton-submit">
                                             <button class="btn btn-outline-secondary btn-lg px-5" type="submit">Iniciar sesion</button>
                                         </div>
-
-
                                     </div>
 
                                     <div>
