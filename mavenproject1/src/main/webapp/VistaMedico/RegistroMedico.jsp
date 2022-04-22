@@ -17,7 +17,7 @@
         <body class="background-radial-gradient ">
             <!-- Section: Design Block -->
             <!-- Section: Design Block -->
-            <%@ include file  ="../Components/Header.jsp" %>
+            <%@ include file  ="/Components/Header.jsp" %>
             <section class="overflow-hidden">
 
                 <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">

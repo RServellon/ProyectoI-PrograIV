@@ -44,6 +44,7 @@ public class ControladorLogin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            request.setAttribute("model", new Modelo());
             
            
             String id = request.getParameter("id");
@@ -75,78 +76,73 @@ public class ControladorLogin extends HttpServlet {
                         
                         //=======================================================================================
                         //Test Norman
-//                        newUser = general.retornaUserPorId(newUser.getId());
-//                        request.setAttribute("user", newUser);
-//                        updateModel(request);
-//                        HttpSession session = request.getSession(true);
-//                        session.setAttribute("user", newUser);
-//                        
-//                        switch (newUser.getTipo()) {
-//                            case "ADMIN":
-//
-//
-//
-//                                
-//                                break;
-//                            case "MEDICO":
-//                                
-//                                break;
-//                            case "PACIENTE":
-//                                
-//                                break;
-//                            default:
-//                                throw new AssertionError();
-//                        }
+                        newUser = general.retornaUserPorId(newUser.getId());
+                        request.setAttribute("user", newUser);
+                        updateModel(request);
+                        HttpSession session = request.getSession(true);
+                        session.setAttribute("user", newUser);
+                        
+                        switch (newUser.getTipo()) {
+                            case "ADMIN":
+                                request.getRequestDispatcher("/mavenproject1/admin-dash-board").forward(request, response);
+                                
+                                break;
+                            case "MEDICO":
+                                
+                                break;
+                            case "PACIENTE":
+                                
+                                break;
+
+                        }
                         
                         //=======================================================================================
-                        System.out.println("Sii");
-                        
-                        //retorna usuario por id
-                        Usuario u = general.retornaUserPorId("100");
-                        System.out.println(u.toString());
-                        
-                        //Retorna lista de medicos
-                        System.out.println(admin.retornaMedicoPorId("101").toString());
-                        
-                        // Listar medicos
-                        System.out.println(admin.listarMedicos().toString());
-                        
-                        //Cambiar estado del medico
-                        admin.cambiarEstadoDeMedico("101", "REC");
-                        
-                        // Listar medicos por estado
-                        System.out.println("Sii");
-                        System.out.println(admin.listarMedicosPorEstado("REC").toString());
-
-                        // Listar medicos aprobados por prov
-                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA", null).toString());
-
-                        // Listar medicos aprobados por especialidad
-                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad(null,"Anestecia General").toString());
-
-                        // Listar medicos aprobados por provincia y especialidad
-                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA","Anestecia General").toString());
-
-                        // Prueba formato de fecha en cita
-                        Cita cita = new Cita("102", "104", "2022-04-12 09:30:10", "FINALIZADO", "abc-abc-abc");
-                        System.out.println(cita.getFechaString());
-
-                                                
-                        // Mostrar datos de fecha
-                        System.out.println(cita.getFecha());
-                        System.out.println(cita.getFecha().getFechaHora());
-                        System.out.println(cita.getFecha().getFecha());
-                        System.out.println(cita.getFecha().getHora());
-                        
-                        
-                        
-                        
+//                        System.out.println("Sii");
+//                        
+//                        //retorna usuario por id
+//                        Usuario u = general.retornaUserPorId("100");
+//                        System.out.println(u.toString());
+//                        
+//                        //Retorna lista de medicos
+//                        System.out.println(admin.retornaMedicoPorId("101").toString());
+//                        
+//                        // Listar medicos
+//                        System.out.println(admin.listarMedicos().toString());
+//                        
+//                        //Cambiar estado del medico
+//                        admin.cambiarEstadoDeMedico("101", "REC");
+//                        
+//                        // Listar medicos por estado
+//                        System.out.println("Sii");
+//                        System.out.println(admin.listarMedicosPorEstado("REC").toString());
+//
+//                        // Listar medicos aprobados por prov
+//                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA", null).toString());
+//
+//                        // Listar medicos aprobados por especialidad
+//                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad(null,"Anestecia General").toString());
+//
+//                        // Listar medicos aprobados por provincia y especialidad
+//                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA","Anestecia General").toString());
+//
+//                        // Prueba formato de fecha en cita
+//                        Cita cita = new Cita("102", "104", "2022-04-12 09:30:10", "FINALIZADO", "abc-abc-abc");
+//                        System.out.println(cita.getFechaString());
+//
+//                                                
+//                        // Mostrar datos de fecha
+//                        System.out.println(cita.getFecha());
+//                        System.out.println(cita.getFecha().getFechaHora());
+//                        System.out.println(cita.getFecha().getFecha());
+//                        System.out.println(cita.getFecha().getHora());
+//                        
+//                        
+//                        
+//                        
                     } else {
                     request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
                     }
                 break;
-                default:
-                    throw new AssertionError();
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -198,8 +194,5 @@ public class ControladorLogin extends HttpServlet {
         modelo.getCurrent().setId(request.getParameter("user"));
     }
 
-    private void loginAction(HttpServletRequest request) {
-    
-    }
 
 }
