@@ -59,15 +59,14 @@
 <!--    Se realiza un if si no se encuentra informacion para ningun medico-->
        <% if(medicos.size()==0){ %>
              <div class="row row-padding justify-content-evenly">
-                   <div class="input-group-prepend d-flex" >
-                      <span class="input-group-text size-span-2" id="basic-addon1">
-                           <i class="fa-solid fa-calendar-days icons-2"></i>
-                      </span>
-                      <p class="fs-3">Lo sentimos no hemos encontrado ningun doctor en nuestros registros con
-                          <br> Especialidad: <%=especialidad %>
-                          <br> Pronvincia: <%= provincia %>
-                      </p>
+                       <div class="alert alert-danger " role="alert">
+                            <p class="fs-3">Lo sentimos no hemos encontrado ningun doctor en nuestros registros con
+                              <br> Especialidad: <%=especialidad %>
+                              <br> Pronvincia: <%= provincia %>
+                            </p>
+                        </div> 
                    </div>
+                     
        <% } %>
 <!--Aqui se realiza for con la informacion de los medicos que existen segun la busqueda realizada-->
         <% for(Medico c:medicos){%>
