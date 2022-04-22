@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "PaginaPrincipal", urlPatterns = {"/VistaCliente/PaginaPrincipal", "/mavenproject1"})
+@WebServlet(name = "PaginaPrincipal", urlPatterns = {"/VistaCliente/PaginaPrincipal"})
 
 public class PaginaPrincipal extends HttpServlet {
 

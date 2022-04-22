@@ -17,7 +17,6 @@
     <body>
         <%@ include file  ="/Components/Header.jsp" %>
         
-
          <div class="container-lg">
 <!--        fila de busqueda-->
        <div class="row row-padding" >

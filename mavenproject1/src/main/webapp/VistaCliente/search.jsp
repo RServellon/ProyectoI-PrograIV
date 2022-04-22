@@ -16,19 +16,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+           <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <link href="../CSS/PaginaPrincipalClientes.css" rel="stylesheet">
-          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        <title>Busqueda de cita</title>
+        <link href="../CSS/PaginaPrincipalClientes.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <title>buscar</title>
     </head>
     <body>
         <%@ include file  ="../Components/Header.jsp" %>
         
           <div class="container-lg">
 <!--        fila de busqueda(HACERLO EN INCLUDE-->
-             <div class="row row-padding" >
-          <form class="form-inline d-flex" method="POST" name="pagina_busqueda" action="search">
+              <div class="row row-padding" >
+          <form class="form-inline d-flex" method="POST" name="BusquedaCita" action="search">
                 
 <!--                campo de busqueda especialidad-->
             <div class="col-sm d-flex">
@@ -76,6 +77,7 @@
           <h3><%= c.getCiudad()%></h3>
            <h3><%= c.getEspecialidad()%></h3>
         </div>
+          </div>
         <% } %>
         <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
         <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
