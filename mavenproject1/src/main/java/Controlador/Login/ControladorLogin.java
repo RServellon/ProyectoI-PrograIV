@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorLogin", urlPatterns = {"/login", "/loginError"})
+@WebServlet(name = "ControladorLogin", urlPatterns = {"/login", "/loginError", "/log-out"})
 public class ControladorLogin extends HttpServlet {
 
     /**
@@ -45,7 +45,7 @@ public class ControladorLogin extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             request.setAttribute("model", new Modelo());
-            
+            String viewUrl="";
            
             String id = request.getParameter("id");
             String pwd = request.getParameter("password");
@@ -66,37 +66,13 @@ public class ControladorLogin extends HttpServlet {
             
             switch (request.getServletPath()) {
                 case "/loginError":
-                    //todo: validar en sql @Rebe
-                    request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
+                    viewUrl = "/Components/LoginError.jsp";
+                break;
+                case "/log-out":
+                    viewUrl=this.logout(request);
                 break;
                 case "/login":
-                    //System.out.println("a");
-                    //request.getRequestDispatcher("/loginError").forward(request, response);
-                    if (general.validarLogin(newUser)) { 
-                        
-                        //=======================================================================================
-                        //Test Norman
-                        newUser = general.retornaUserPorId(newUser.getId());
-                        request.setAttribute("user", newUser);
-                        updateModel(request);
-                        HttpSession session = request.getSession(true);
-                        session.setAttribute("user", newUser);
-                        
-                        switch (newUser.getTipo()) {
-                            case "ADMIN":
-                                request.getRequestDispatcher("/mavenproject1/admin-dash-board").forward(request, response);
-                                
-                                break;
-                            case "MEDICO":
-                                
-                                break;
-                            case "PACIENTE":
-                                
-                                break;
-
-                        }
-                        
-                        //=======================================================================================
+                    viewUrl=this.login(request, general,newUser);
 //                        System.out.println("Sii");
 //                        
 //                        //retorna usuario por id
@@ -139,11 +115,9 @@ public class ControladorLogin extends HttpServlet {
 //                        
 //                        
 //                        
-                    } else {
-                    request.getRequestDispatcher("/Components/LoginError.jsp").forward(request, response);
-                    }
                 break;
             }
+            request.getRequestDispatcher(viewUrl).forward(request, response);
         } catch (Exception e) {
             System.out.println(e);
         } 
@@ -192,6 +166,40 @@ public class ControladorLogin extends HttpServlet {
         Modelo modelo = (Modelo) request.getAttribute("model");
         modelo.getCurrent().setClave(request.getParameter("password"));
         modelo.getCurrent().setId(request.getParameter("user"));
+    }
+
+    private String logout(HttpServletRequest request) {
+        return this.logoutAction(request);
+    }
+
+    private String logoutAction(HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        session.removeAttribute("user");
+        session.invalidate();
+        return "/index.jsp";
+    }
+
+    private String login(HttpServletRequest request, GeneralHandler general, Usuario newUser) {
+        
+        if (general.validarLogin(newUser)) {
+            newUser = general.retornaUserPorId(newUser.getId());
+            request.setAttribute("user", newUser);
+            updateModel(request);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user", newUser);
+
+            switch (newUser.getTipo()) {
+                case "ADMIN":
+                    return "/mavenproject1/admin-dash-board";
+                case "MEDICO":
+                    return "/index.jsp";//todo
+                case "PACIENTE":
+                    return "/index.jsp";//todo
+            }              
+        } else {
+            return "/Components/LoginError.jsp";
+        }
+        return "/Components/LoginError.jsp";
     }
 
 
