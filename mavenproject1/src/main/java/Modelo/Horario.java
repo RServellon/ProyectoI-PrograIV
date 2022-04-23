@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * 
  * Clase encargada de manejar el horario de un médico
  */
-class Horario {
+public class Horario {
     private String id_medico;
     private Fecha hora_inicio = new Fecha();
     private Fecha hora_final = new Fecha();

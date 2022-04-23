@@ -5,6 +5,7 @@
 package Modelo.DAO;
 
 import Modelo.DAO.SQLConnection.SQLExecutor;
+import Modelo.Especialidad;
 import Modelo.Medico;
 import Modelo.Usuario;
 import java.sql.Connection;
@@ -271,6 +272,68 @@ public class GeneralHandler {
                     medico = this.retornaMedicoPorId(id);                
                     lista.add(medico);
                 }
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }   
+        return lista;
+    }
+    
+    public boolean registrarCita(String codigo, String id_medico, String id_paciente, String fechaHora, String anotaciones){
+        if(this.verificaUsuarioExiste(id_medico) && this.verificaUsuarioExiste(id_paciente)){
+             try{
+                executor = new SQLExecutor(usernameBD, passwordBD);
+                String valores1[] = new String[7];
+                valores1[0] = "insert into citas(codigo, id_medico, id_paciente, fechaHora, estado, anotaciones) values (?, ?, ?, '?', '?', '?');";
+                valores1[1] = codigo;
+                valores1[2] = id_medico;
+                valores1[3] = id_paciente;
+                valores1[4] = fechaHora; // con este formato 2022-04-10 16:00:00
+                valores1[5] = "REGISTRADO"; // todas las citas empiezan siendo registradas
+                valores1[6] = anotaciones;
+
+                executor.prepareStatement(valores1);
+                return true;
+
+            } catch(Exception throwables){
+                throwables.printStackTrace();
+            }
+        }
+        return false;
+    }
+    
+    public Especialidad retornaEspecialidadPorCodigo(String codigo){
+        Especialidad especialidad = new Especialidad();
+        String sql ="select * from especialidades where codigo = " + codigo + ";";
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql);
+            while (rs.next()){
+                especialidad.setCodigo(codigo);
+                especialidad.setNombre(rs.getString("nombre"));
+                especialidad.setDescripcion(rs.getString("descripcion"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return especialidad;
+    }
+    
+    public List<Especialidad> listarEspecialidades(){
+        List<Especialidad> lista = new ArrayList<>();
+        Especialidad especialidad = null;
+        String sql ="select * from especialidades;";
+        String codigo;
+       
+        try{
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql);
+            while(rs.next()){
+                codigo = rs.getString("codigo");                
+                especialidad = this.retornaEspecialidadPorCodigo(codigo);                
+                lista.add(especialidad);
             }
         } catch(SQLException throwables){
             throwables.printStackTrace();

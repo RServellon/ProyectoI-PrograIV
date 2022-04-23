@@ -4,8 +4,10 @@
  */
 package Modelo.DAO;
 
+import Modelo.Calificacion;
 import Modelo.Cita;
 import Modelo.DAO.SQLConnection.SQLExecutor;
+import Modelo.Horario;
 import Modelo.Medico;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +17,9 @@ import java.util.List;
 /**
  *
  * @author rebec
+ * ingresar horario
+ * listar horarios
+ * borrar horario
  */
 public class MedicoHandler extends GeneralHandler {
     public MedicoHandler() {
@@ -86,5 +91,84 @@ public class MedicoHandler extends GeneralHandler {
         
         return lista;
     }
+        
+    public List<Calificacion> listarCalificaciones(String id_medico){
+        List<Calificacion> lista = new ArrayList<>();
+        Calificacion calificacion = new Calificacion();
+        String sql ="select * from calificaciones where id_medico = " + id_medico + ";";
+         
+        try{
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql);
+            while(rs.next()){
+                calificacion.setId_medico(id_medico);
+                calificacion.setId_paciente(rs.getString("id_paciente"));
+                calificacion.setCalificacion(rs.getString("calificacion"));
+                lista.add(calificacion);
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }   
+        
+        return lista;
+    }
     
+    public boolean registrarHorario(String id_medico, String fechaHoraInicio, String fechaHoraFinal, String frecuencia){
+        if(this.verificaUsuarioExiste(id_medico)){
+             try{
+                executor = new SQLExecutor(usernameBD, passwordBD);
+                String valores[] = new String[5];
+                valores[0] = "insert into horarios(id_medico, fechaHoraInicio, fechaHoraFinal, frecuencia) values (?, '?', '?', '?');";
+                valores[1] = id_medico;
+                valores[2] = fechaHoraInicio;// con este formato 2022-04-10 16:00:00
+                valores[3] = fechaHoraFinal;// con este formato 2022-04-10 16:00:00
+                valores[4] = frecuencia; 
+                executor.prepareStatement(valores);
+                return true;
+            } catch(Exception throwables){
+                throwables.printStackTrace();
+            }
+        }
+        return false;
+    }
+    
+     public boolean borrarHorario(String id_medico, String fechaHoraInicio){
+        if(this.verificaUsuarioExiste(id_medico)){
+             try{
+                executor = new SQLExecutor(usernameBD, passwordBD);
+                String valores[] = new String[3];
+                valores[0] = "delete from horarios where id_medico = ? and fechaHoraInicio = ?;";
+                valores[1] = id_medico;
+                valores[2] = fechaHoraInicio;// con este formato 2022-04-10 16:00:00
+                executor.prepareStatement(valores);
+                return true;
+            } catch(Exception throwables){
+                throwables.printStackTrace();
+            }
+        }
+        return false;
+    }
+    
+    
+    public List<Horario> listarHorarios(String id_medico){
+        List<Horario> lista = new ArrayList<>();
+        Horario horario = new Horario();
+        String sql ="select * from horarios where id_medico = " + id_medico + ";";
+         
+        try{
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql);
+            while(rs.next()){
+                horario.setId_medico(id_medico);
+                horario.setHora_inicio(rs.getString("fechaHoraInicio"));
+                horario.setHora_final(rs.getString("fechaHoraFinal"));
+                horario.setFrecuencia(rs.getString("frecuencia"));
+                lista.add(horario);
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }   
+        
+        return lista;
+    }
 }

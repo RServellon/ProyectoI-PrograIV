@@ -114,8 +114,15 @@ public class ControladorLogin extends HttpServlet {
                         System.out.println(cita.getFecha().getFecha());
                         System.out.println(cita.getFecha().getHora());
                         
+                        // Listar calificaciones
+                        System.out.println(medico.listarCalificaciones("101").toString());
                         
+                        // falta verificar registro cliente, registro usuario, registro cita
+                        // registro horario, eliminar cita, eliminar horario, eliminar usuario, listar horarios
                         
+                        // Listar especialidades
+                        System.out.println(general.listarEspecialidades().toString());
+
                         
 
                     

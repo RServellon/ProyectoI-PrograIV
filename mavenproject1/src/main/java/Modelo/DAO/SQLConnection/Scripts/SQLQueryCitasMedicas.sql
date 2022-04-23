@@ -113,6 +113,9 @@ alter table calificaciones
 alter table usuarios add constraint usuarios_nombre_uk unique (nombre);
 alter table especialidades add constraint especialidades_nombre_uk unique (nombre);
 alter table ciudades add constraint ciudades_nombre_uk unique (nombre);
+alter table horarios add constraint medicos_horarios_uk unique(id_medico, fechaHoraInicio);
+alter table citas add constraint medicos_citas_uk unique(id_medico, fechaHora);
+
 
 -- Ingresando datos de prueba
 -- Especialidades
