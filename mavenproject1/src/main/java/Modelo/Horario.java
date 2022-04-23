@@ -40,18 +40,26 @@ public class Horario {
     }
 
 
-    public String getHora_inicio() {
+    public String getHora_inicioString() {
         return this.hora_inicio.toString();
+    }
+    
+    public Fecha getHora_inicio() {
+        return this.hora_inicio;
     }
 
     public void setHora_inicio(String hora_inicio) {
         this.hora_inicio.setFechaHora(hora_inicio);
     }
 
-    public String getHora_final() {
+    public String getHora_finalString() {
         return hora_final.toString();
     }
-
+    
+    public Fecha getHora_final() {
+        return hora_final;
+    }
+    
     public void setHora_final(String hora_final) {
         this.hora_final.setFechaHora(hora_final);
     }
@@ -68,8 +76,4 @@ public class Horario {
     public String toString() {
         return "Horario{" + "id_medico=" + id_medico + ", horaFechaInicio=" + hora_inicio.toString() + ", horaFechaFinal=" + hora_final.toString() + ", frecuencia=" + frecuencia + '}';
     }
-
-
-    
-    
 }
