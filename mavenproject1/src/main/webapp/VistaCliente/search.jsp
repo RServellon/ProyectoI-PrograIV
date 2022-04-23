@@ -1,16 +1,17 @@
 
+<%@page import="Modelo.DAO.MedicoHandler"%>
 <%@page import="Modelo.ClaseServicio"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Medico"%>
 
 <%
-         //llamamos a la clase de servicio que tiene el metodo para retornar a esos medicos segun especialidad y provincia
-         ClaseServicio service = ClaseServicio.instance();
+    //llamamos a la clase handler del medico para utilizar sus metodos en base de datos
+         MedicoHandler handlerMed = new MedicoHandler();
          String especialidad = (String)request.getAttribute("Especialidad");
          String provincia = (String)request.getAttribute("Provincia");
          //obtenemos la lista con los medicos que se hayan encontrado
-         ArrayList<Medico> medicos = service.retornarMedico(especialidad, provincia);
+         List<Medico> medicos = handlerMed.listarMedicoPorProvinciaYEspecialidad(provincia, especialidad);
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -58,7 +59,7 @@
        </div>
 
 <!--    Se realiza un if si no se encuentra informacion para ningun medico-->
-       <% if(medicos.size()==0){ %>
+     <% if(medicos.isEmpty()){ %>
              <div class="row row-padding justify-content-evenly">
                        <div class="alert alert-danger " role="alert">
                             <p class="fs-3">Lo sentimos no hemos encontrado ningun doctor en nuestros registros con
@@ -66,8 +67,7 @@
                               <br> Pronvincia: <%= provincia %>
                             </p>
                         </div> 
-                   </div>
-                     
+                   </div> 
        <% } %>
 <!--Aqui se realiza for con la informacion de los medicos que existen segun la busqueda realizada-->
         <% for(Medico c:medicos){%>
