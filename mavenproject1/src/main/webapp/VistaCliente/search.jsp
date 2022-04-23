@@ -77,8 +77,8 @@
           <h3><%= c.getCiudad()%></h3>
            <h3><%= c.getEspecialidad()%></h3>
         </div>
-          </div>
         <% } %>
+         </div>
         <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
         <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
     </body>
