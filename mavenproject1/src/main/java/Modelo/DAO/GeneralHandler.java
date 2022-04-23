@@ -21,11 +21,11 @@ import java.util.List;
 
 /**
  * validar login, retorna usuario por id, retorna medico por id
- * registra usuario general
- * registra usuario segun tipo
+ * registra usuario general -> falta probar
+ * registra usuario segun tipo -> falta probar
  * verifica usuario existe
- * listar medicos por especialidad, ubicacion
  * listar medicos por especialidad y ubicacion
+ * listar medicos aprobados
  */
 public class GeneralHandler {
     final String usernameBD = "sa";

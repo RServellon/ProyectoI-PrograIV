@@ -18,9 +18,9 @@ import java.util.List;
 /**
  *
  * @author rebec
- * ingresar horario
- * listar horarios
- * borrar horario
+ * ingresar horario, listar horarios, modificar datos, retorna cita por codigo
+ * listar citas, listar calificaciones
+ * registrar horario, borrar horario-> falta probar
  */
 public class MedicoHandler extends GeneralHandler {
     public MedicoHandler() {

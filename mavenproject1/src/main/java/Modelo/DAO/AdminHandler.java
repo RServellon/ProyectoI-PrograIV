@@ -25,6 +25,7 @@ public class AdminHandler extends GeneralHandler {
     // admitir medicos, agregar ciudades, agregar especialidades
     // listar medicos por estado
     // listar ciudades y epsecialidades
+    // borrar ciudad, especialdiad -> falta probar
     
     public AdminHandler(){
         this.executor = new SQLExecutor(usernameBD, passwordBD);
@@ -91,6 +92,20 @@ public class AdminHandler extends GeneralHandler {
         return false;
     }
 
+     public boolean borrarCiudad(String codigo){
+        try{
+           executor = new SQLExecutor(usernameBD, passwordBD);
+           String valores[] = new String[2];
+           valores[0] = "delete from ciudades where codigo = ?;";
+           valores[1] = codigo;
+           executor.prepareStatement(valores);
+           return true;
+       } catch(Exception throwables){
+           throwables.printStackTrace();
+       }
+        return false;
+    }
+    
     public boolean registrarEspecialidad(Especialidad especialidad) {
         try{
             executor = new SQLExecutor(usernameBD, passwordBD);
@@ -107,6 +122,22 @@ public class AdminHandler extends GeneralHandler {
         } catch(Exception throwables){
             throwables.printStackTrace();
         }   
+        return false;
+    }
+    
+    
+    
+    public boolean borrarEspecialidad(String codigo){
+        try{
+           executor = new SQLExecutor(usernameBD, passwordBD);
+           String valores[] = new String[2];
+           valores[0] = "delete from especialidades where codigo = ?;";
+           valores[1] = codigo;
+           executor.prepareStatement(valores);
+           return true;
+       } catch(Exception throwables){
+           throwables.printStackTrace();
+       }
         return false;
     }
     
