@@ -154,13 +154,14 @@ public class MedicoHandler extends GeneralHandler {
     
     public List<Horario> listarHorarios(String id_medico){
         List<Horario> lista = new ArrayList<>();
-        Horario horario = new Horario();
+        Horario horario = null;
         String sql ="select * from horarios where id_medico = " + id_medico + ";";
          
         try{
             executor = new SQLExecutor(usernameBD, passwordBD);
             ResultSet rs = executor.ejecutaQuery(sql);
             while(rs.next()){
+                horario = new Horario();
                 horario.setId_medico(id_medico);
                 horario.setHora_inicio(rs.getString("fechaHoraInicio"));
                 horario.setHora_final(rs.getString("fechaHoraFinal"));
