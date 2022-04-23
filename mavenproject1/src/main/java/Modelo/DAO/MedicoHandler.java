@@ -9,6 +9,7 @@ import Modelo.Cita;
 import Modelo.DAO.SQLConnection.SQLExecutor;
 import Modelo.Horario;
 import Modelo.Medico;
+import com.sun.tools.javac.util.StringUtils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -94,13 +95,14 @@ public class MedicoHandler extends GeneralHandler {
         
     public List<Calificacion> listarCalificaciones(String id_medico){
         List<Calificacion> lista = new ArrayList<>();
-        Calificacion calificacion = new Calificacion();
+        Calificacion calificacion = null;
         String sql ="select * from calificaciones where id_medico = " + id_medico + ";";
          
         try{
             executor = new SQLExecutor(usernameBD, passwordBD);
             ResultSet rs = executor.ejecutaQuery(sql);
             while(rs.next()){
+                calificacion = new Calificacion();
                 calificacion.setId_medico(id_medico);
                 calificacion.setId_paciente(rs.getString("id_paciente"));
                 calificacion.setCalificacion(rs.getString("calificacion"));

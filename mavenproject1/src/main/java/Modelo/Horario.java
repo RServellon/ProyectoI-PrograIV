@@ -66,7 +66,7 @@ public class Horario {
 
     @Override
     public String toString() {
-        return "Horario{" + "id_medico=" + id_medico + ", hora_inicio=" + hora_inicio.toString() + ", hora_final=" + hora_final.toString() + ", frecuencia=" + frecuencia + '}';
+        return "Horario{" + "id_medico=" + id_medico + ", horaFechaInicio=" + hora_inicio.toString() + ", horaFechaFinal=" + hora_final.toString() + ", frecuencia=" + frecuencia + '}';
     }
 
 

@@ -117,6 +117,9 @@ public class ControladorLogin extends HttpServlet {
                         // Listar calificaciones
                         System.out.println(medico.listarCalificaciones("101").toString());
                         
+                        // Listar horarios
+                        System.out.println(medico.listarHorarios("102").toString());
+                        
                         // falta verificar registro cliente, registro usuario, registro cita
                         // registro horario, eliminar cita, eliminar horario, eliminar usuario, listar horarios
                         
@@ -125,7 +128,6 @@ public class ControladorLogin extends HttpServlet {
 
                         
 
-                    
                 break;
             }
             request.getRequestDispatcher(viewUrl).forward(request, response);
