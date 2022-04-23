@@ -4,8 +4,11 @@
  */
 package Modelo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 /**
  *
@@ -18,15 +21,15 @@ public class Fecha {
     }
 
     public Fecha(String fechaHora) {
-        crearFechaHora(fechaHora);
+        fechaHoraFormateada(fechaHora);
     }
 
-    public String getFechaHora() {
-        return fechaHora.toString();
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
     }
 
     public void setFechaHora(String fechaHora) {
-        crearFechaHora(fechaHora);
+        fechaHoraFormateada(fechaHora.toString());
     }
     
     public String getFecha(){
@@ -40,15 +43,22 @@ public class Fecha {
        return  String.format("%d: %d: %d", hora, min, seg);
     }
     
-    public void crearFechaHora(String fechaHora){ // "2020-09-12 09:40:30:00"
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.from(f.parse(fechaHora));
+    public String getFechaHoraSinFormato(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+        String strDate = dateFormat.format(fechaHora);
+        return strDate;
+    }
+    
+    
+    public void fechaHoraFormateada(String fechaHora){ // "2020-09-12 09:40:30:00"
+        DateTimeFormatter f =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        LocalDateTime dateTime = LocalDateTime.parse(fechaHora, f);
         this.fechaHora = dateTime;
     }
 
     @Override
     public String toString() {
-        return "Fecha{" + "fechaHora=" + this.getFechaHora() + '}';
+        return this.getFecha() + " " + this.getHora();
     }
     
     

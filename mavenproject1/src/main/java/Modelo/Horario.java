@@ -41,7 +41,7 @@ class Horario {
 
 
     public String getHora_inicio() {
-        return this.hora_inicio.getFechaHora();
+        return this.hora_inicio.toString();
     }
 
     public void setHora_inicio(String hora_inicio) {
@@ -49,7 +49,7 @@ class Horario {
     }
 
     public String getHora_final() {
-        return hora_final.getFechaHora();
+        return hora_final.toString();
     }
 
     public void setHora_final(String hora_final) {
@@ -66,7 +66,7 @@ class Horario {
 
     @Override
     public String toString() {
-        return "Horario{" + "id_medico=" + id_medico + ", hora_inicio=" + hora_inicio.getFechaHora() + ", hora_final=" + hora_final.getFechaHora() + ", frecuencia=" + frecuencia + '}';
+        return "Horario{" + "id_medico=" + id_medico + ", hora_inicio=" + hora_inicio.toString() + ", hora_final=" + hora_final.toString() + ", frecuencia=" + frecuencia + '}';
     }
 
 

@@ -73,48 +73,52 @@ public class ControladorLogin extends HttpServlet {
                 break;
                 case "/login":
                     viewUrl=this.login(request, general,newUser);
-//                        System.out.println("Sii");
-//                        
-//                        //retorna usuario por id
-//                        Usuario u = general.retornaUserPorId("100");
-//                        System.out.println(u.toString());
-//                        
-//                        //Retorna lista de medicos
-//                        System.out.println(admin.retornaMedicoPorId("101").toString());
-//                        
-//                        // Listar medicos
-//                        System.out.println(admin.listarMedicos().toString());
-//                        
-//                        //Cambiar estado del medico
-//                        admin.cambiarEstadoDeMedico("101", "REC");
-//                        
-//                        // Listar medicos por estado
-//                        System.out.println("Sii");
-//                        System.out.println(admin.listarMedicosPorEstado("REC").toString());
-//
-//                        // Listar medicos aprobados por prov
-//                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA", null).toString());
-//
-//                        // Listar medicos aprobados por especialidad
-//                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad(null,"Anestecia General").toString());
-//
-//                        // Listar medicos aprobados por provincia y especialidad
-//                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA","Anestecia General").toString());
-//
-//                        // Prueba formato de fecha en cita
-//                        Cita cita = new Cita("102", "104", "2022-04-12 09:30:10", "FINALIZADO", "abc-abc-abc");
-//                        System.out.println(cita.getFechaString());
-//
-//                                                
-//                        // Mostrar datos de fecha
-//                        System.out.println(cita.getFecha());
-//                        System.out.println(cita.getFecha().getFechaHora());
-//                        System.out.println(cita.getFecha().getFecha());
-//                        System.out.println(cita.getFecha().getHora());
-//                        
-//                        
-//                        
-//                        
+                        System.out.println("Sii");
+                        
+                        //retorna usuario por id
+                        Usuario u = general.retornaUserPorId("100");
+                        System.out.println(u.toString());
+                        
+                        //Retorna lista de medicos
+                        System.out.println(admin.retornaMedicoPorId("101").toString());
+                        
+                        // Listar medicos
+                        System.out.println(admin.listarMedicos().toString());
+                        
+                        //Cambiar estado del medico
+                        admin.cambiarEstadoDeMedico("101", "REC");
+                        
+                        // Listar medicos por estado
+                        System.out.println("Sii");
+                        System.out.println(admin.listarMedicosPorEstado("REC").toString());
+
+                        // Listar medicos aprobados por prov
+                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA", null).toString());
+
+                        // Listar medicos aprobados por especialidad
+                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad(null,"Anestecia General").toString());
+
+                        // Listar medicos aprobados por provincia y especialidad
+                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA","Anestecia General").toString());
+
+                        // Listar citas por estado y id del medico
+                        System.out.println(medico.listarCitasPorEstado("FINALIZADO", "101").toString());
+                        
+                        // Prueba formato de fecha en cita
+                        Cita cita = new Cita("102", "104", "2022-04-10 16:00:00.0", "FINALIZADO", "abc-abc-abc");
+                        System.out.println(cita.getFechaString());
+
+                                                
+                        // Mostrar datos de fecha
+                        System.out.println(cita.getFecha());
+                        System.out.println(cita.getFecha().getFecha());
+                        System.out.println(cita.getFecha().getHora());
+                        
+                        
+                        
+                        
+
+                    
                 break;
             }
             request.getRequestDispatcher(viewUrl).forward(request, response);

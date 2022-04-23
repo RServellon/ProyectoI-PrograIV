@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class SQLConnector {
     private static SQLConnector instance;
     private Connection dbConn;
-    private String URL = "jdbc:sqlserver://localhost:1433;databaseName=CitasMedicas;"; // localhost = 127.0.0.1
+    private String URL = "jdbc:sqlserver://localhost:1433;databaseName=pruebasCitasMedicas;"; // localhost = 127.0.0.1
 
     // Constructor privado
     private SQLConnector(String user, String password) {

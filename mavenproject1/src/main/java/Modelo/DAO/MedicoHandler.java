@@ -8,6 +8,7 @@ import Modelo.Cita;
 import Modelo.DAO.SQLConnection.SQLExecutor;
 import Modelo.Medico;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,30 +44,46 @@ public class MedicoHandler extends GeneralHandler {
         return respuesta;
     }
     
-    public List<Cita> listarCitasPorEstado(String estado){
-        List<Cita> lista = new ArrayList<>();
-        Cita cita;
-        String sql ="select * from citas where estado = 'APRO';";
-        String id;
-       
-        /*
+    public Cita retornaCitaPorCodigo(String codigo){
+        Cita cita = new Cita();
+        String sql ="select * from citas where codigo = " + codigo + ";";
+        ResultSet rs;
         
-         try{
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql);
+            while (rs.next()){
+                cita.setId_medico(rs.getString("id_medico"));   
+                cita.setId_paciente(rs.getString("id_paciente"));
+                cita.setFecha(rs.getString("fechaHora"));
+                cita.setEstado(rs.getString("estado"));
+                cita.setAnotaciones(rs.getString("anotaciones"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return cita;
+    }
+    
+    public List<Cita> listarCitasPorEstado(String estado, String id_medico){
+        List<Cita> lista = new ArrayList<>();
+        Cita cita = null;
+        String sql ="select * from citas where estado = '"+ estado +"' and id_medico = " + id_medico + ";";
+        String codigo;
+         
+        try{
             executor = new SQLExecutor(usernameBD, passwordBD);
             ResultSet rs = executor.ejecutaQuery(sql);
             while(rs.next()){
-                if(rs.getString("estado").equals("APRO")){
-                    id = rs.getString("id");                
-                    cita = this.retornaCitaPorIdMedico(id);                
-                    lista.add(cita);
-                }
+                codigo = rs.getString("codigo");
+                cita = this.retornaCitaPorCodigo(codigo);
+                lista.add(cita);
+                
             }
         } catch(SQLException throwables){
             throwables.printStackTrace();
         }   
         
-        */
-       
         return lista;
     }
     

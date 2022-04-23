@@ -13,7 +13,7 @@ package Modelo;
 public class Cita {
     private String id_medico;
     private String id_paciente;
-    private Fecha fecha= new Fecha(); //LocalDateTime year-month-day HH-mm-ss-ns
+    private Fecha fecha = new Fecha(); //LocalDateTime year-month-day HH-mm-ss-ns
     private String estado;
     private String anotaciones;
     
@@ -46,7 +46,7 @@ public class Cita {
     }
 
     public String getFechaString() {
-        return fecha.getFechaHora();
+        return fecha.toString();
     }
     
     public Fecha getFecha(){
@@ -79,7 +79,4 @@ public class Cita {
         return "Cita{" + "id_medico=" + id_medico + ", id_paciente=" + id_paciente + ", fecha=" + fecha.getFechaHora()+ ", estado=" + estado + ", anotaciones=" + anotaciones + '}';
     }
    
-
-
- 
 }

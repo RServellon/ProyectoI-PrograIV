@@ -26,8 +26,8 @@ import java.util.List;
  * listar medicos por especialidad y ubicacion
  */
 public class GeneralHandler {
-//    final String usernameBD = "sa";
-    final String usernameBD = "sas";
+    final String usernameBD = "sa";
+//    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 
@@ -189,7 +189,7 @@ public class GeneralHandler {
     
     public List<Medico> listarMedicoPorProvinciaYEspecialidad(String provincia, String especialidad){
         List<Medico> lista = new ArrayList<>();
-        Medico medico;        
+        Medico medico = null;        
         String id;
         ResultSet rs;
         String sql;
@@ -258,7 +258,7 @@ public class GeneralHandler {
    
     public List<Medico> listarMedicosAprobados(){
         List<Medico> lista = new ArrayList<>();
-        Medico medico;
+        Medico medico = null;
         String sql ="select * from medicos where estado = 'APRO';";
         String id;
        

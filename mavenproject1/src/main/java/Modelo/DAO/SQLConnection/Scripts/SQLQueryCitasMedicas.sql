@@ -1,13 +1,9 @@
--- Cosas que podría cambiar
--- las citas se manejas con codigo, un sequence
--- las citas tienen en lugar de date y time por separado, usar un datetime type
--- 
 
 -- Se borran las secuencias
 drop sequence sec_usuarios;
 drop sequence sec_especialidades;
 drop sequence sec_ciudades;
---drop sequence sec_citas;
+drop sequence sec_citas;
 
 -- Se borran las tablas
 
@@ -35,10 +31,10 @@ create sequence sec_ciudades
 	as int
 	start with 1000 
 	increment by 1;
---create sequence sec_citas
---        as int
---        start with 2000
---        increment by 1
+create sequence sec_citas
+    as int
+    start with 2000
+	increment by 1
 
 
 --Se crean las tablas
@@ -46,10 +42,10 @@ create table usuarios(id int not null, nombre varchar(20) not null, clave varcha
 create table administradores(id int not null);
 create table medicos(id int not null, especialidad int not null, costo decimal(11,4) null, ciudad int not null, clinica varchar(20) not null, estado varchar(20) not null);
 create table pacientes(id int not null);
-create table horarios(id_medico int not null, fecha date not null, hora_inicio time not null, hora_final time not null, frecuencia time not null);
+create table horarios(id_medico int not null, fechaHoraInicio datetime not null, fechaHoraFinal datetime not null, frecuencia time not null);
 create table ciudades(codigo int not null, nombre varchar(20) not null, provincia varchar(20) not null);
 create table especialidades(codigo int not null, nombre varchar(20) not null, descripcion text null);
-create table citas(id_medico int not null, id_paciente int not null, fecha date not null, hora time not null, estado varchar(20) not null, anotaciones text not null);
+create table citas(codigo int not null, id_medico int not null, id_paciente int not null, fechaHora datetime not null, estado varchar(20) not null, anotaciones text not null);
 create table calificaciones(id_medico int not null, id_paciente int not null, calificacion varchar(20) not null);
 
 -- Se crean todas las llaves
@@ -60,10 +56,10 @@ alter table medicos add constraint medicos_pk primary key(id);
 alter table pacientes add constraint pacientes_pk primary key(id);
 alter table especialidades add constraint especialidades_pk primary key(codigo);
 alter table ciudades add constraint ciudades_pk primary key(codigo);
+alter table citas add constraint medicos_citas_pk primary key(codigo);
 
 --PK compuestas
-alter table horarios add constraint medicos_horarios_pk primary key(id_medico, fecha);
-alter table citas add constraint medicos_citas_pk primary key(id_medico, id_paciente, fecha);
+alter table horarios add constraint medicos_horarios_pk primary key(id_medico, fechaHoraInicio, fechaHoraFinal);
 alter table calificaciones add constraint medicos_calificaciones_pk primary key(id_medico, id_paciente);
 
 -- FK
@@ -156,16 +152,16 @@ insert into pacientes(id) values (103);
 insert into pacientes(id) values (104);
 
 -- Horarios
-insert into horarios(id_medico, fecha, hora_inicio, hora_final, frecuencia) values (101, '2022-04-10', '16:00:00', '20:00:00','00:30:00');
-insert into horarios(id_medico, fecha, hora_inicio, hora_final, frecuencia) values (101, '2022-04-11', '13:00:00', '17:00:00','01:00:00');
-insert into horarios(id_medico, fecha, hora_inicio, hora_final, frecuencia) values (102, '2022-04-10', '08:00:00', '11:00:00','00:30:00');
-insert into horarios(id_medico, fecha, hora_inicio, hora_final, frecuencia) values (102, '2022-04-11', '18:00:00', '21:00:00','00:30:00');
+insert into horarios(id_medico, fechaHoraInicio, fechaHoraFinal, frecuencia) values (101, '2022-04-10 16:00:00', '2022-04-10 20:00:00','00:30:00');
+insert into horarios(id_medico, fechaHoraInicio, fechaHoraFinal, frecuencia) values (101, '2022-04-11 13:00:00', '2022-04-11 17:00:00','01:00:00');
+insert into horarios(id_medico, fechaHoraInicio, fechaHoraFinal, frecuencia) values (102, '2022-04-10 08:00:00', '2022-04-10 11:00:00','00:30:00');
+insert into horarios(id_medico, fechaHoraInicio, fechaHoraFinal, frecuencia) values (102, '2022-04-11 18:00:00', '2022-04-11 21:00:00','00:30:00');
 
 -- Citas
-insert into citas(id_medico, id_paciente, fecha, hora, estado, anotaciones) values (101, 103, '2022-04-10', '16:00:00', 'FINALIZADO', 'Problemas respiratorios por asma.');
-insert into citas(id_medico, id_paciente, fecha, hora, estado, anotaciones) values (101, 104, '2022-04-11', '14:00:00', 'FINALIZADO', 'Chequeo general.');
-insert into citas(id_medico, id_paciente, fecha, hora, estado, anotaciones) values (102, 103, '2022-04-10', '09:30:00', 'FINALIZADO', 'Limpieza bucal.');
-insert into citas(id_medico, id_paciente, fecha, hora, estado, anotaciones) values (102, 104, '2022-04-11', '20:30:00', 'FINALIZADO', 'Extracción del molar superior izquierdo.');
+insert into citas(codigo, id_medico, id_paciente, fechaHora, estado, anotaciones) values (next value for sec_citas, 101, 103, '2022-04-10 16:00:00', 'FINALIZADO', 'Problemas respiratorios por asma.');
+insert into citas(codigo, id_medico, id_paciente, fechaHora, estado, anotaciones) values (next value for sec_citas,101, 104, '2022-04-11 14:00:00', 'FINALIZADO', 'Chequeo general.');
+insert into citas(codigo, id_medico, id_paciente, fechaHora, estado, anotaciones) values (next value for sec_citas,102, 103, '2022-04-10 09:30:00', 'FINALIZADO', 'Limpieza bucal.');
+insert into citas(codigo, id_medico, id_paciente, fechaHora, estado, anotaciones) values (next value for sec_citas,102, 104, '2022-04-11 20:30:00', 'FINALIZADO', 'Extracción del molar superior izquierdo.');
 
 -- Calificaciones
 insert into calificaciones(id_medico, id_paciente, calificacion) values (101, 103, 'EXCELENTE');
