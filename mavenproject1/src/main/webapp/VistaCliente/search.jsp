@@ -1,4 +1,5 @@
 
+<%@page import="Modelo.Horario"%>
 <%@page import="Modelo.Especialidad"%>
 <%@page import="Modelo.DAO.MedicoHandler"%>
 <%@page import="Modelo.ClaseServicio"%>
@@ -14,6 +15,7 @@
          //obtenemos la lista con los medicos que se hayan encontrado
          List<Medico> medicos = handlerMed.listarMedicoPorProvinciaYEspecialidad(provincia, especialidad);
          Especialidad espec;
+         List<Horario> listHorarios=null;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -63,7 +65,7 @@
        </div>
 
 <!--    Se realiza un if si no se encuentra informacion para ningun medico-->
-     <% if(medicos.isEmpty()){ %>
+     <% if(medicos.isEmpty()){;%>
              <div class="row row-padding justify-content-evenly">
                        <div class="alert alert-danger " role="alert">
                             <p class="fs-3">Lo sentimos no hemos encontrado ningun doctor en nuestros registros con
@@ -95,13 +97,18 @@
                 </div>
              </div>
 <!--            Columnas de los horarios-->
+               <% listHorarios=handlerMed.listarHorarios(c.getId());
+               if(!listHorarios.isEmpty() || listHorarios!=null)
+                  for(Horario h:listHorarios){      
+                  System.out.println("ToString de la lista de horarios: \n"+listHorarios.toString());
+               %>
              <div class="col-sm">
-    
+                 <h5><%=h.getHora_inicioString() + " " +h.getHora_finalString() %></h5>
              </div>
+             <%}%>
                       
-        </div>
-        </div>
+        </div>   <!-- row -->
         <% } %>
-         </div>
+         </div><!-- container-->
     </body>
 </html>
