@@ -1,4 +1,5 @@
 
+<%@page import="Modelo.Especialidad"%>
 <%@page import="Modelo.DAO.MedicoHandler"%>
 <%@page import="Modelo.ClaseServicio"%>
 <%@page import="java.util.List"%>
@@ -12,17 +13,20 @@
          String provincia = (String)request.getAttribute("Provincia");
          //obtenemos la lista con los medicos que se hayan encontrado
          List<Medico> medicos = handlerMed.listarMedicoPorProvinciaYEspecialidad(provincia, especialidad);
+         Especialidad espec;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
            <head>
+        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+        <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Busqueda de cita</title>
-        <link href="../CSS/PaginaPrincipalClientes.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="../CSS/PaginaPrincipalClientes.css" rel="stylesheet">
     </head>
     <body>
         <%@ include file  ="../Components/Header.jsp" %>
@@ -73,13 +77,31 @@
         <% for(Medico c:medicos){%>
         <div class="row row-padding row-margin border border-3 shadow p-3 mb-5 bg-body rounded-3">
 <!--            informacion de cada medico -->
-          <h3><%= c.getNombre()%></h3>
-          <h3><%= c.getCiudad()%></h3>
-           <h3><%= c.getEspecialidad()%></h3>
+<!--             Columna de informacion del medico-->
+            <div class="col-sm">
+                <div class="d-flex">
+                      <div class="block-size">
+                      <img src="../assets/images/retrato-perfil-doc.jpg" class="imagen-perfil">
+                      <% espec=handlerMed.retornaEspecialidadPorCodigo(c.getEspecialidad()); %>
+                      <p class="p-especialidad" title=<%=espec.getDescripcion()%>> <%= espec.getNombre()%></p>
+                      </div>
+                      <div>
+                       <p class="fs-4 fw-bold p-info-doc"><%=c.getNombre()%></p>
+                       <p class="fs-5 p-info-doc">Costo:<%=" "+Math.round(c.getCostoConsulta())%></p>
+                       <p class="fs-5 p-info-doc">Ciudad:<%=" "+handlerMed.retornaCiudadPorCodigo(c.getCiudad()).getNombre()%></p>
+                       <hr class="hr-margin">
+                       <p class="fs-5 p-info-doc"><%=" "+c.getClinica()%></p>
+                      </div>
+                </div>
+             </div>
+<!--            Columnas de los horarios-->
+             <div class="col-sm">
+    
+             </div>
+                      
+        </div>
         </div>
         <% } %>
          </div>
-        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
-        <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
     </body>
 </html>

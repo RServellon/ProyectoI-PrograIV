@@ -28,4 +28,30 @@
 .size-span{
     width: 6em;
 }
+.img-thumbnail{
+    max-width: 15% !important;
+}
+.imagen-perfil{
+  border-radius: 50%;
+  max-width: 60%;
+  margin-left: 12px;
+}
 
+.p-especialidad{
+    margin: 0;
+    padding-top:0.5em;
+    font-size: 20px;
+}
+.perf-espec{
+    margin: 0;
+    padding: 0;
+}
+.block-size{
+    width: 10em;
+}
+.p-info-doc{
+    margin-bottom: 5px;
+}
+.hr-margin{
+     margin-bottom: 10px;
+}
