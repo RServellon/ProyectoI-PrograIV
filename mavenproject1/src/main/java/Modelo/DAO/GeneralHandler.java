@@ -4,6 +4,7 @@
  */
 package Modelo.DAO;
 
+import Modelo.Ciudad;
 import Modelo.DAO.SQLConnection.SQLExecutor;
 import Modelo.Especialidad;
 import Modelo.Medico;
@@ -334,6 +335,46 @@ public class GeneralHandler {
                 codigo = rs.getString("codigo");                
                 especialidad = this.retornaEspecialidadPorCodigo(codigo);                
                 lista.add(especialidad);
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }   
+        return lista;
+    }
+    
+    public Ciudad retornaCiudadPorCodigo(String codigo){
+        Ciudad ciudad = null;
+        String sql ="select * from ciudades where codigo = " + codigo + ";";
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql);
+            while (rs.next()){
+                ciudad = new Ciudad();
+                ciudad.setCodigo(codigo);
+                ciudad.setNombre(rs.getString("nombre"));
+                ciudad.setProvincia(rs.getString("provincia"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return ciudad;
+    }
+    
+     public List<Ciudad> listarCiudades(){
+        List<Ciudad> lista = new ArrayList<>();
+        Ciudad ciudad = null;
+        String sql ="select * from ciudades;";
+        String codigo;
+       
+        try{
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql);
+            while(rs.next()){
+                codigo = rs.getString("codigo");                
+                ciudad = this.retornaCiudadPorCodigo(codigo);                
+                lista.add(ciudad);
             }
         } catch(SQLException throwables){
             throwables.printStackTrace();
