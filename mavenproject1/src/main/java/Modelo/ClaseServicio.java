@@ -24,33 +24,34 @@ public class ClaseServicio {
     
     
     private ClaseServicio(){
-        Medico med1 = new Medico("Odontologia", "Heredia", 5000, null, "Clinica", "estado", "foto de perfil", "123", "Eren Jaeger", "pass1", "medico");
-        Medico med2 = new Medico("Neurocirugia", "Alajuela", 5000, null, "Clinica", "estado", "foto de perfil", "id", "Sanji Vismoke", "pass2", "medico");
-        Medico med3 = new Medico("Otorringsdasn", "Guanacaste", 5000, null, "Clinica", "estado", "foto de perfil", "id", "Nami Sandia", "pass2", "medico");
-       
-        listMedicos = new ArrayList();
-        listMedicos.add(med1);
-        listMedicos.add(med2);
-        listMedicos.add(med3);
-        listMedicos.add(med3);
-        listMedicos.add(med1);
-        listMedicos.add(med1);
-        listMedicos.add(med1);
-        listMedicos.add(med1);
         
     }
-    
-    
-    //este metodo me buscara medicos por especialidad y provincia
-    public ArrayList<Medico> retornarMedico(String especialidad, String provincia){
-         ArrayList<Medico> listMedicosFiltrados = new ArrayList();
-         for(int i = 0 ; i < listMedicos.size(); i++){
-            Medico med = listMedicos.get(i);
-            if(med.getEspecialidad().equals(especialidad) && med.getCiudad().equals(provincia)){
-              listMedicosFiltrados.add(med);
+   
+    public List<List<Horario>> retornarListaListaHorarios(List<Horario> li){
+        //String para almacenar el formato de dia
+        String formatoFecha = "";
+        List<String> fechasRegistradas = new ArrayList();
+         //se insertara aqui una lista distinta segun el dia
+        List<List<Horario>> listlistH = new ArrayList();
+        for(int i = 0 ; i<li.size() ; i++){
+         //se insertara en este los horarios de un unico dia
+         List<Horario> listHorariosFijos = new ArrayList();
+            //se verifica que la fecha no este en el registro
+            if(!fechasRegistradas.contains(li.get(i).getFechaHoraInicio().getFormatoddMMyyyy())){
+                formatoFecha = li.get(i).getFechaHoraInicio().getFormatoddMMyyyy();
+                //se inserta en el registro
+                fechasRegistradas.add(formatoFecha);
+             //ingresamos en la lista nueva los horarios que correspondan con la fecha correspondiente
+             for(int j = 0 ; j<li.size(); j++){
+                 if(formatoFecha.equals(li.get(j).getFechaHoraInicio().getFormatoddMMyyyy())){
+                     //agrega el horario
+                     listHorariosFijos.add(li.get(j));
+                 }
+             }
+             listlistH.add(listHorariosFijos);
             }
         }
-       return listMedicosFiltrados;
+        return listlistH;
     }
 
 }

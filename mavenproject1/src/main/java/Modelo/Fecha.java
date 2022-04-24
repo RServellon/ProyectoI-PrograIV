@@ -36,11 +36,34 @@ public class Fecha {
         return fechaHora.getDayOfWeek().toString() + ", "+ fechaHora.getDayOfMonth()+ " " + fechaHora.getMonth().name() + " " + fechaHora.getYear();
     }
     
+    public String getFormatoddMMyyyy(){ //"##/##/##"
+        return fechaHora.getDayOfMonth()+"/"+fechaHora.getMonth()+"/"+fechaHora.getYear();
+    }
+    
     public String getHora(){
        int hora = fechaHora.getHour();
        int  min = fechaHora.getMinute();
        int seg = fechaHora.getSecond();
        return  String.format("%d: %d: %d", hora, min, seg);
+    }
+    public String getHoraHHMMSS(){
+       int hora = fechaHora.getHour();
+       int  min = fechaHora.getMinute();
+       int seg = fechaHora.getSecond();
+       return  String.format("%d: %d: %d", hora, min, seg);
+    }
+     public String getHoraHHMM(){
+       int hora = fechaHora.getHour();
+       int  min = fechaHora.getMinute();
+       return  hora+":"+min+"";
+    }
+      public String getHoraHH(){
+       int hora = fechaHora.getHour();
+       return  hora+"";
+    }
+       public String getHoraMM(){
+       int  min = fechaHora.getMinute();
+       return min+"";
     }
     
     public String getFechaHoraSinFormato(){

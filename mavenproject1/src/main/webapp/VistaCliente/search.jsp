@@ -8,7 +8,9 @@
 <%@page import="Modelo.Medico"%>
 
 <%
-    //llamamos a la clase handler del medico para utilizar sus metodos en base de datos
+         //clase de servicio para metodos de ayuda
+         ClaseServicio ser = ClaseServicio.instance();
+         //llamamos a la clase handler del medico para utilizar sus metodos en base de datos
          MedicoHandler handlerMed = new MedicoHandler();
          String especialidad = (String)request.getAttribute("Especialidad");
          String provincia = (String)request.getAttribute("Provincia");
@@ -16,6 +18,8 @@
          List<Medico> medicos = handlerMed.listarMedicoPorProvinciaYEspecialidad(provincia, especialidad);
          Especialidad espec;
          List<Horario> listHorarios=null;
+         //Lista de lista de horarios para la vista
+         List<List<Horario>> liliHorarios = null;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -65,7 +69,7 @@
        </div>
 
 <!--    Se realiza un if si no se encuentra informacion para ningun medico-->
-     <% if(medicos.isEmpty()){;%>
+     <% if(medicos.isEmpty()){%>
              <div class="row row-padding justify-content-evenly">
                        <div class="alert alert-danger " role="alert">
                             <p class="fs-3">Lo sentimos no hemos encontrado ningun doctor en nuestros registros con
@@ -77,15 +81,16 @@
        <% } %>
 <!--Aqui se realiza for con la informacion de los medicos que existen segun la busqueda realizada-->
         <% for(Medico c:medicos){%>
-        <div class="row row-padding row-margin border border-3 shadow p-3 mb-5 bg-body rounded-3">
+<!--        style="overflow-x: auto; width: 530px; white-space: nowrap;"-->
+        <div class="row row-padding row-margin border border-3 shadow p-3 mb-5 bg-body rounded-3 d-flex" >
 <!--            informacion de cada medico -->
 <!--             Columna de informacion del medico-->
-            <div class="col-sm">
+            <div class="container-info d-flex" style="max-width: 360px;">
                 <div class="d-flex">
                       <div class="block-size">
                       <img src="../assets/images/retrato-perfil-doc.jpg" class="imagen-perfil">
                       <% espec=handlerMed.retornaEspecialidadPorCodigo(c.getEspecialidad()); %>
-                      <p class="p-especialidad" title=<%=espec.getDescripcion()%>> <%= espec.getNombre()%></p>
+                      <p class="p-especialidad fs-4" title=<%=espec.getDescripcion()%>> <%= espec.getNombre()%></p>
                       </div>
                       <div>
                        <p class="fs-4 fw-bold p-info-doc"><%=c.getNombre()%></p>
@@ -96,17 +101,25 @@
                       </div>
                 </div>
              </div>
-<!--            Columnas de los horarios-->
-               <% listHorarios=handlerMed.listarHorarios(c.getId());
-               if(!listHorarios.isEmpty() || listHorarios!=null)
-                  for(Horario h:listHorarios){      
-                  System.out.println("ToString de la lista de horarios: \n"+listHorarios.toString());
-               %>
-             <div class="col-sm">
-                 <h5><%=h.getFechaHoraInicioString() + " " +h.getFechaHoraFinalString() %></h5>
-             </div>
-             <%}%>
                       
+               
+               <!--            Columnas de los horarios-->
+            <div id="scroll" class="container-horarios d-flex": style="overflow-x: auto; overflow-y: auto; white-space: nowrap; max-width: 900px;" >
+                <% listHorarios=handlerMed.listarHorarios(c.getId()); 
+                 liliHorarios = ser.retornarListaListaHorarios(listHorarios);
+                if(!liliHorarios.isEmpty() || liliHorarios != null){
+                for(int i = 0 ; i<liliHorarios.size(); i++){ 
+               %> 
+                <div class="col-sm pad-horario" style="margin-right:15px;" >
+                    <h5><%= liliHorarios.get(i).get(0).getFechaHoraFinal().getFormatoddMMyyyy()%></h5>
+                 <div style="width:100%; height:130px; overflow-y: scroll;">
+                   <%  for(Horario hor: liliHorarios.get(i)){ %>
+                   <a href="ConfirmarCita.jsp"><p><%= hor.HoraInicio_Final() %></p></a>
+                  <%}%>
+                 </div>
+                </div>
+             <%}}%>
+            </div> <!-- container horarios-->
         </div>   <!-- row -->
         <% } %>
          </div><!-- container-->

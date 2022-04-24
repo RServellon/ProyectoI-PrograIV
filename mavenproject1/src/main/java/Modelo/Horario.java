@@ -71,6 +71,45 @@ public class Horario {
     public String getHoraFinal(){
         return this.fecha_hora_final.getHora();
     }
+    
+    
+    public String getInicHoraFinal_y_inicio(){ //"##:##"
+        String hora = "";
+        String minutos = " ";
+        if(fecha_hora_inicio.getHoraHH().length()== 1){
+          hora = "0"+fecha_hora_inicio.getHoraHH();
+        }else{
+            hora = fecha_hora_inicio.getHoraHH();
+        }
+        
+        if(fecha_hora_inicio.getHoraMM().length()==1){
+            minutos = fecha_hora_inicio.getHoraMM()+"0";
+        }else{
+             minutos = fecha_hora_inicio.getHoraMM();
+        }
+        return hora+":"+minutos;
+    }
+    
+    public String getFinHoraFinal_y_inicio(){ //"##:##-##:##"
+        String hora = "";
+        String minutos = " ";
+        if(fecha_hora_final.getHoraHH().length()== 1){
+          hora = "0"+fecha_hora_final.getHoraHH();
+        }else{
+            hora = fecha_hora_final.getHoraHH();
+        }
+        
+        if(fecha_hora_final.getHoraMM().length()==1){
+            minutos = fecha_hora_final.getHoraMM()+"0";
+        }else{
+             minutos = fecha_hora_final.getHoraMM();
+        }
+        return hora+":"+minutos;
+    }
+    
+    public String HoraInicio_Final(){
+        return getInicHoraFinal_y_inicio()+"-"+getFinHoraFinal_y_inicio();
+    }
 
     public String getFrecuencia() {
         return frecuencia;
@@ -79,6 +118,7 @@ public class Horario {
     public void setFrecuencia(String frecuencia) {
         this.frecuencia = frecuencia;
     }
+    
 
     @Override
     public String toString() {
