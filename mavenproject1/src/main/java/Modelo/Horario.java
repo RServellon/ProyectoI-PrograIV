@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
  */
 public class Horario {
     private String id_medico;
-    private Fecha hora_inicio = new Fecha();
-    private Fecha hora_final = new Fecha();
+    private Fecha fecha_hora_inicio = new Fecha();
+    private Fecha fecha_hora_final = new Fecha();
     private String frecuencia;
 
     public Horario() {
@@ -25,8 +25,8 @@ public class Horario {
     public Horario(String id_medico, String fechaHora_inicio, String fechaHora_final, String frecuencia) {
         this.id_medico = id_medico;
         this.frecuencia = frecuencia;
-        this.hora_inicio.setFechaHora(fechaHora_inicio);
-        this.hora_inicio.setFechaHora(fechaHora_final);
+        this.fecha_hora_inicio.setFechaHora(fechaHora_inicio);
+        this.fecha_hora_final.setFechaHora(fechaHora_final);
     }
 
 
@@ -40,28 +40,36 @@ public class Horario {
     }
 
 
-    public String getHora_inicioString() {
-        return this.hora_inicio.toString();
+    public String getFechaHoraInicioString() {
+        return this.fecha_hora_inicio.toString();
     }
     
-    public Fecha getHora_inicio() {
-        return this.hora_inicio;
+    public Fecha getFechaHoraInicio() {
+        return this.fecha_hora_inicio;
     }
 
-    public void setHora_inicio(String hora_inicio) {
-        this.hora_inicio.setFechaHora(hora_inicio);
+    public void setFechaHoraInicio(String hora_inicio) {
+        this.fecha_hora_inicio.setFechaHora(hora_inicio);
     }
 
-    public String getHora_finalString() {
-        return hora_final.toString();
+    public String getFechaHoraFinalString() {
+        return fecha_hora_final.toString();
     }
     
-    public Fecha getHora_final() {
-        return hora_final;
+    public Fecha getFechaHoraFinal() {
+        return fecha_hora_final;
     }
     
-    public void setHora_final(String hora_final) {
-        this.hora_final.setFechaHora(hora_final);
+    public void setFechaHoraFinal(String hora_final) {
+        this.fecha_hora_final.setFechaHora(hora_final);
+    }
+    
+    public String getHoraInicio(){
+        return this.fecha_hora_inicio.getHora();
+    }
+    
+    public String getHoraFinal(){
+        return this.fecha_hora_final.getHora();
     }
 
     public String getFrecuencia() {
@@ -74,6 +82,6 @@ public class Horario {
 
     @Override
     public String toString() {
-        return "Horario{" + "id_medico=" + id_medico + ", horaFechaInicio=" + hora_inicio.toString() + ", horaFechaFinal=" + hora_final.toString() + ", frecuencia=" + frecuencia + '}';
+        return "Horario{" + "id_medico=" + id_medico + ", horaFechaInicio=" + fecha_hora_inicio.toString() + ", horaFechaFinal=" + fecha_hora_final.toString() + ", frecuencia=" + frecuencia + '}';
     }
 }

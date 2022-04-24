@@ -163,8 +163,8 @@ public class MedicoHandler extends GeneralHandler {
             while(rs.next()){
                 horario = new Horario();
                 horario.setId_medico(id_medico);
-                horario.setHora_inicio(rs.getString("fechaHoraInicio"));
-                horario.setHora_final(rs.getString("fechaHoraFinal"));
+                horario.setFechaHoraInicio(rs.getString("fechaHoraInicio"));
+                horario.setFechaHoraFinal(rs.getString("fechaHoraFinal"));
                 horario.setFrecuencia(rs.getString("frecuencia"));
                 lista.add(horario);
             }

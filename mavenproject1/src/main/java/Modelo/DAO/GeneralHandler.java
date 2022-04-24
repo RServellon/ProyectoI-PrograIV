@@ -197,7 +197,7 @@ public class GeneralHandler {
         String sql;
               
         
-        if(provincia == null && especialidad != null){
+        if(provincia.equals("") && especialidad != null){
             sql = "select medicos.id, especialidades.nombre from medicos, especialidades where "
                 + "especialidades.codigo = medicos.especialidad and especialidades.nombre = '" + especialidad + "' and "
                 + "medicos.estado = 'APRO';";
@@ -215,7 +215,7 @@ public class GeneralHandler {
             }   
         }
         else{
-            if(especialidad == null && provincia != null){
+            if(especialidad.equals("") && provincia != null){
                 sql = "select medicos.id, ciudades.provincia from medicos, ciudades where "
                     + "ciudades.codigo = medicos.ciudad and ciudades.provincia = '" + provincia + "' and "
                     + "medicos.estado = 'APRO';";

@@ -103,7 +103,7 @@
                   System.out.println("ToString de la lista de horarios: \n"+listHorarios.toString());
                %>
              <div class="col-sm">
-                 <h5><%=h.getHora_inicioString() + " " +h.getHora_finalString() %></h5>
+                 <h5><%=h.getFechaHoraInicioString() + " " +h.getFechaHoraFinalString() %></h5>
              </div>
              <%}%>
                       
