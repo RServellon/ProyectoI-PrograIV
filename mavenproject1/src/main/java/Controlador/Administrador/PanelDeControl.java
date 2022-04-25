@@ -37,17 +37,10 @@ public class PanelDeControl extends HttpServlet {
             //solicitud de ingreso a la vista
             HttpSession session = request.getSession(true);
             Usuario user = (Usuario) session.getAttribute("user");
-            System.out.println(user);
-            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-//                    request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
             request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
             switch (request.getServletPath()) {
                 case "/mavenproject1/admin-dash-board":
                     //solicitud de ingreso a la vista
-                    System.out.println("entra con ruta iniiiciiial");
-                    request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
-                    break;
-                case "/admin-dash-board":
                     request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
                     break;
             }

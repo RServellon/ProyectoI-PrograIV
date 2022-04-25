@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorLogin", urlPatterns = {"/login", "/loginError", "/log-out"})
+@WebServlet(name = "ControladorLogin", urlPatterns = {"/login/show","/login/login", "/loginError", "/log-out"})
 public class ControladorLogin extends HttpServlet {
 
     /**
@@ -50,19 +50,10 @@ public class ControladorLogin extends HttpServlet {
             String id = request.getParameter("id");
             String pwd = request.getParameter("password");
 
-            System.out.println(id);
-            System.out.println(pwd);
-
-            request.setAttribute("id", id);
-            request.setAttribute("password", pwd); 
-            //creamos el usuario
-            Usuario newUser = new Usuario();
-            newUser.setClave(pwd);
-            newUser.setId(id);
             GeneralHandler general = new GeneralHandler();
             AdminHandler admin = new AdminHandler();
             MedicoHandler medico = new MedicoHandler();
-            
+            System.out.println("path ->>>>>>" + request.getServletPath());
             
             
             switch (request.getServletPath()) {
@@ -72,8 +63,12 @@ public class ControladorLogin extends HttpServlet {
                 case "/log-out":
                     viewUrl=this.logout(request);
                 break;
-                case "/login":
-                    viewUrl=this.login(request, general,newUser);
+                case "/login/show":
+                    viewUrl=this.show(request);
+                break;
+                case "/login/login":
+                    System.out.println("Case login");
+                    viewUrl=this.login(request, general,null);
 //                        System.out.println("Sii");
 //                        
 //                        //retorna usuario por id
@@ -180,7 +175,8 @@ public class ControladorLogin extends HttpServlet {
     private void updateModel(HttpServletRequest request) {
         Modelo modelo = (Modelo) request.getAttribute("model");
         modelo.getCurrent().setClave(request.getParameter("password"));
-        modelo.getCurrent().setId(request.getParameter("user"));
+        modelo.getCurrent().setId(request.getParameter("id"));
+        System.out.println(modelo.getCurrent());
     }
 
     private String logout(HttpServletRequest request) {
@@ -195,26 +191,46 @@ public class ControladorLogin extends HttpServlet {
     }
 
     private String login(HttpServletRequest request, GeneralHandler general, Usuario newUser) {
-        if (general.validarLogin(newUser)) {
-            newUser = general.retornaUserPorId(newUser.getId());
-            request.setAttribute("user", newUser);
-            updateModel(request);
-            HttpSession session = request.getSession(true);
-            session.setAttribute("user", newUser);
-            System.out.println("");
-            System.out.println(newUser);
+        this.updateModel(request);
+        return this.loginAction(request, general);
+    }
 
-            switch (newUser.getTipo()) {
+    private String show(HttpServletRequest request) {
+        return this.showActionRequest(request);
+    }
+
+    private String showActionRequest(HttpServletRequest request) {
+        Modelo model = (Modelo) request.getAttribute("model");
+        model.getCurrent().setId("");
+        model.getCurrent().setClave("");
+        return "/Login.jsp";
+    }
+
+
+    private String loginAction(HttpServletRequest request, GeneralHandler general) {
+        Modelo modelo = (Modelo) request.getAttribute("model");
+        Usuario newUser = modelo.getCurrent();
+        if (general.validarLogin(newUser)) {
+            Usuario user = general.retornaUserPorId(newUser.getId());
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user", user);
+            System.out.println("\n Usuario<<<<<<<<<<<<<<<<>>>>>>>>>>>>>");
+            System.out.println(user);
+            System.out.println("Usuario<<<<<<<<<<<<<<<<>>>>>>>>>>>>>");
+
+            switch (user.getTipo()) {
                 case "admin":
                     return "/mavenproject1/admin-dash-board";
                 case "medico":
-                    return "/index.jsp";//todo
+                    return "/mavenproject1/configurar-medico-primera-vez";//todo
                 case "paciente":
                     return "/index.jsp";//todo
-            }              
+            }
         } else {
+            System.out.println("entra al error");
             return "/Components/LoginError.jsp";
         }
+            System.out.println("entra al error");
         return "/Components/LoginError.jsp";
     }
 
