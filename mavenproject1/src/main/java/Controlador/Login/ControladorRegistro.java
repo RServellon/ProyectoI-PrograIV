@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorRegistro", urlPatterns = {"/ControladorRegistro", "/mavenproject1/registrar-medico", "/mavenproject1/registrar-paciente","/mavenproject1/registrar-administrador"})
+@WebServlet(name = "ControladorRegistro", urlPatterns = {"/registrar", "/registrar/medico", "/registrar/paciente","/registrar/administrador"})
 public class ControladorRegistro extends HttpServlet {
 
     /**
@@ -51,7 +51,9 @@ public class ControladorRegistro extends HttpServlet {
             
             System.out.println("\n");
             System.out.println("Estamos en el Controlador de regiistro");
+            
             Usuario user = new Usuario(id,name,pwd,tipo);
+            System.out.println(user);
             GeneralHandler general = new GeneralHandler();
             
             switch (tipo) {
@@ -125,12 +127,16 @@ public class ControladorRegistro extends HttpServlet {
         general.registrarUsuario(medico.getNombre(), medico.getId(), medico.getClave(), "medico");
         
         //procedemos a que el medico configure su perfil
-        return "/mavenproject1/configurar-medico-primera-vez";
+        request.setAttribute("id", user.getId());
+        request.setAttribute("password", user.getClave());
+        return "/configurar-medico-primera-vez";
     }
 
     private String CrearPaciente(HttpServletRequest request, Usuario user, GeneralHandler general) {
+        HttpSession session = request.getSession(true);
         Cliente cliente = new Cliente(user.getId(), user.getNombre(), user.getClave(), user.getTipo());
 //        general.registrarUsuario(cliente.getNombre(), cliente.getId(), cliente.getClave(), "paciente");
+        session.setAttribute("user", user);
         general.registrarUsuario(cliente.getNombre(), cliente.getId(), cliente.getClave(), cliente.getTipo());
 
         //procedemos a que el medico configure su perfil
@@ -138,7 +144,7 @@ public class ControladorRegistro extends HttpServlet {
         request.setAttribute("id", cliente.getId());
         request.setAttribute("password", cliente.getClave());
         
-        return "/VistaCliente/PaginaPrincipal.jsp";
+        return "/index.jsp";
     }
 
 }

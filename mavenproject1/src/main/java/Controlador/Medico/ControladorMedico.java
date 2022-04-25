@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez"})
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/configurar-medico-primera-vez"})
 public class ControladorMedico extends HttpServlet {
 
     /**

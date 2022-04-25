@@ -207,13 +207,10 @@ public class ControladorLogin extends HttpServlet {
             switch (newUser.getTipo()) {
                 case "admin":
                     return "/mavenproject1/admin-dash-board";
-                case "ADMIN":
-                    return "/mavenproject1/admin-dash-board";
                 case "medico":
                     return "/index.jsp";//todo
                 case "paciente":
-//                    return "/mavenproject1/VistaCliente/PaginaPrincipal-paciente";//todo
-                    return "/VistaCliente/PaginaPrincipal.jsp";//todo
+                    return "/index.jsp";//todo
             }              
         } else {
             return "/Components/LoginError.jsp";
