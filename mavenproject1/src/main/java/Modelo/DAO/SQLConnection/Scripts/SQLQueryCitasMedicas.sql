@@ -135,12 +135,12 @@ insert into ciudades(codigo, nombre, provincia) values (next value for sec_ciuda
 
 
 -- Usuarios
-insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Lucia Hernandez', 'Password100', 'ADMIN');
-insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Juan Leon', 'Password101', 'MEDICO');
-insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Nicolas Suarez', 'Password102', 'MEDICO');
-insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Joseph Romero', 'Password103', 'PACIENTE');
-insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Maria Vargas', 'Password104', 'PACIENTE');
-insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Felicia Ramirez', 'Password105', 'MEDICO');
+insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Lucia Hernandez', 'Password100', 'admin');
+insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Juan Leon', 'Password101', 'medico');
+insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Nicolas Suarez', 'Password102', 'medico');
+insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Joseph Romero', 'Password103', 'paciente');
+insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Maria Vargas', 'Password104', 'paciente');
+insert into usuarios(id, nombre, clave, tipo) values (next value for sec_usuarios, 'Felicia Ramirez', 'Password105', 'medico');
 
 -- Admins
 insert into administradores(id) values (100);

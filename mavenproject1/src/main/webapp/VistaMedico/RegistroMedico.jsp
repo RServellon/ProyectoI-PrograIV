@@ -14,7 +14,7 @@
             
         </head>
 
-        <body class="background-radial-gradient ">
+        <body >
             <!-- Section: Design Block -->
             <!-- Section: Design Block -->
             <%@ include file  ="/Components/Header.jsp" %>
@@ -88,7 +88,7 @@
                                             <label>
                                                 <i class="fa-solid fa-user-gear"></i>
                                                 Admin
-                                                <input value="administrador" type="radio" name="tipo_usuario">
+                                                <input value="admin" type="radio" name="tipo_usuario">
                                             </label>
                                         </div>
 

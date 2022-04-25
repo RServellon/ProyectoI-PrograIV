@@ -64,6 +64,7 @@ public class ControladorLogin extends HttpServlet {
             MedicoHandler medico = new MedicoHandler();
             
             
+            
             switch (request.getServletPath()) {
                 case "/loginError":
                     viewUrl = "/Components/LoginError.jsp";
@@ -73,61 +74,61 @@ public class ControladorLogin extends HttpServlet {
                 break;
                 case "/login":
                     viewUrl=this.login(request, general,newUser);
-                        System.out.println("Sii");
-                        
-                        //retorna usuario por id
-                        Usuario u = general.retornaUserPorId("100");
-                        System.out.println(u.toString());
-                        
-                        //Retorna lista de medicos
-                        System.out.println(admin.retornaMedicoPorId("101").toString());
-                        
-                        // Listar medicos
-                        System.out.println(admin.listarMedicos().toString());
-                        
-                        //Cambiar estado del medico
-                        admin.cambiarEstadoDeMedico("101", "REC");
-                        
-                        // Listar medicos por estado
-                        System.out.println("Sii");
-                        System.out.println(admin.listarMedicosPorEstado("REC").toString());
-
-                        // Listar medicos aprobados por prov
-                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA", null).toString());
-
-                        // Listar medicos aprobados por especialidad
-                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad(null,"Anestecia General").toString());
-
-                        // Listar medicos aprobados por provincia y especialidad
-                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA","Anestecia General").toString());
-
-                        // Listar citas por estado y id del medico
-                        System.out.println(medico.listarCitasPorEstado("FINALIZADO", "101").toString());
-                        
-                        // Prueba formato de fecha en cita
-                        Cita cita = new Cita("102", "104", "2022-04-10 16:00:00.0", "FINALIZADO", "abc-abc-abc");
-                        System.out.println(cita.getFechaString());
-
-                                                
-                        // Mostrar datos de fecha
-                        System.out.println(cita.getFecha());
-                        System.out.println(cita.getFecha().getFecha());
-                        System.out.println(cita.getFecha().getHora());
-                        
-                        // Listar calificaciones
-                        System.out.println(medico.listarCalificaciones("101").toString());
-                        
-                        // Listar horarios
-                        System.out.println(medico.listarHorarios("102").toString());
-                        
-                        // falta verificar registro cliente, registro usuario, registro cita
-                        // registro horario, eliminar cita, eliminar horario, eliminar usuario
-                        
-                        // Listar especialidades
-                        System.out.println(general.listarEspecialidades().toString());
-
-                        // Listar ciudades
-                        System.out.println(general.listarCiudades().toString());
+//                        System.out.println("Sii");
+//                        
+//                        //retorna usuario por id
+//                        Usuario u = general.retornaUserPorId("100");
+//                        System.out.println(u.toString());
+//                        
+//                        //Retorna lista de medicos
+//                        System.out.println(admin.retornaMedicoPorId("101").toString());
+//                        
+//                        // Listar medicos
+//                        System.out.println(admin.listarMedicos().toString());
+//                        
+//                        //Cambiar estado del medico
+//                        admin.cambiarEstadoDeMedico("101", "REC");
+//                        
+//                        // Listar medicos por estado
+//                        System.out.println("Sii");
+//                        System.out.println(admin.listarMedicosPorEstado("REC").toString());
+//
+//                        // Listar medicos aprobados por prov
+//                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA", null).toString());
+//
+//                        // Listar medicos aprobados por especialidad
+//                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad(null,"Anestecia General").toString());
+//
+//                        // Listar medicos aprobados por provincia y especialidad
+//                        System.out.println(general.listarMedicoPorProvinciaYEspecialidad("HEREDIA","Anestecia General").toString());
+//
+//                        // Listar citas por estado y id del medico
+//                        System.out.println(medico.listarCitasPorEstado("FINALIZADO", "101").toString());
+//                        
+//                        // Prueba formato de fecha en cita
+//                        Cita cita = new Cita("102", "104", "2022-04-10 16:00:00.0", "FINALIZADO", "abc-abc-abc");
+//                        System.out.println(cita.getFechaString());
+//
+//                                                
+//                        // Mostrar datos de fecha
+//                        System.out.println(cita.getFecha());
+//                        System.out.println(cita.getFecha().getFecha());
+//                        System.out.println(cita.getFecha().getHora());
+//                        
+//                        // Listar calificaciones
+//                        System.out.println(medico.listarCalificaciones("101").toString());
+//                        
+//                        // Listar horarios
+//                        System.out.println(medico.listarHorarios("102").toString());
+//                        
+//                        // falta verificar registro cliente, registro usuario, registro cita
+//                        // registro horario, eliminar cita, eliminar horario, eliminar usuario
+//                        
+//                        // Listar especialidades
+//                        System.out.println(general.listarEspecialidades().toString());
+//
+//                        // Listar ciudades
+//                        System.out.println(general.listarCiudades().toString());
 
                 break;
             }
@@ -194,21 +195,25 @@ public class ControladorLogin extends HttpServlet {
     }
 
     private String login(HttpServletRequest request, GeneralHandler general, Usuario newUser) {
-        
         if (general.validarLogin(newUser)) {
             newUser = general.retornaUserPorId(newUser.getId());
             request.setAttribute("user", newUser);
             updateModel(request);
             HttpSession session = request.getSession(true);
             session.setAttribute("user", newUser);
+            System.out.println("");
+            System.out.println(newUser);
 
             switch (newUser.getTipo()) {
+                case "admin":
+                    return "/mavenproject1/admin-dash-board";
                 case "ADMIN":
                     return "/mavenproject1/admin-dash-board";
-                case "MEDICO":
+                case "medico":
                     return "/index.jsp";//todo
-                case "PACIENTE":
-                    return "/index.jsp";//todo
+                case "paciente":
+//                    return "/mavenproject1/VistaCliente/PaginaPrincipal-paciente";//todo
+                    return "/VistaCliente/PaginaPrincipal.jsp";//todo
             }              
         } else {
             return "/Components/LoginError.jsp";
