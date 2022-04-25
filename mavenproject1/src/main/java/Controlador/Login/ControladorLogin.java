@@ -222,7 +222,7 @@ public class ControladorLogin extends HttpServlet {
                 case "admin":
                     return "/mavenproject1/admin-dash-board";
                 case "medico":
-                    return "/mavenproject1/configurar-medico-primera-vez";//todo
+                    return "/mavenproject1/paciente/gestion/perfil";//todo
                 case "paciente":
                     return "/index.jsp";//todo
             }

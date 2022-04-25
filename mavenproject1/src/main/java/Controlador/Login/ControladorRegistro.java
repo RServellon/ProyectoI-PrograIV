@@ -120,16 +120,17 @@ public class ControladorRegistro extends HttpServlet {
 
 
     private String CrearMedico(HttpServletRequest request, Usuario user, GeneralHandler general) {
-        HttpSession session = request.getSession(true);
+//        HttpSession session = request.getSession(true);
 
         Medico medico = new Medico(user);
-        session.setAttribute("user", user);
+//        session.setAttribute("user", user);
         general.registrarUsuario(medico.getNombre(), medico.getId(), medico.getClave(), "medico");
         
         //procedemos a que el medico configure su perfil
         request.setAttribute("id", user.getId());
         request.setAttribute("password", user.getClave());
-        return "/configurar-medico-primera-vez";
+        System.out.println(medico.getId());
+        return "/mavenproject1/configurar-medico-primera-vez";
     }
 
     private String CrearPaciente(HttpServletRequest request, Usuario user, GeneralHandler general) {

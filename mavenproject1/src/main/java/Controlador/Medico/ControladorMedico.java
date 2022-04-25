@@ -4,6 +4,8 @@
  */
 package Controlador.Medico;
 
+import Modelo.DAO.GeneralHandler;
+import Modelo.Medico;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez"})
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil"})
 public class ControladorMedico extends HttpServlet {
 
     /**
@@ -35,11 +37,36 @@ public class ControladorMedico extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
 
-            HttpSession session = request.getSession(true);
-            Usuario user = (Usuario) session.getAttribute("user");
-            System.out.println(user);
-            
-            
+//            HttpSession session = request.getSession(true);
+//            Usuario user = (Usuario) session.getAttribute("user");
+//            System.out.println(user);
+//            request.setAttribute("clave", user.getClave());
+            switch (request.getServletPath()) {
+                case "/mavenproject1/configurar-medico-primera-vez":
+                    request.getRequestDispatcher("/login/show").forward(request, response);
+                    break;
+                case "/mavenproject1/paciente/gestion/perfil":
+                    GeneralHandler general = new GeneralHandler();
+                    HttpSession session = request.getSession(true);
+                    Usuario user = (Usuario) session.getAttribute("user");
+                    Medico medico =  general.retornaMedicoPorId(user.getId());
+                    System.out.println(medico);
+                    
+                    if (medico.getEstado()==null) {
+                        System.out.println("Primer ingreso, iinigrese a terminar de configurar el perfil");  
+                        request.getRequestDispatcher("/VistaMedico/ConfiguraciónInicialDelPerfil.jsp").forward(request, response);
+                    }else{
+                        System.out.println("Ingresar a configurar los datos de configurar el perfil");  
+                        request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
+                    }
+                    
+                        
+                    
+                    
+                    break;
+                default:
+                    request.getRequestDispatcher("/Components/Error.jsp").forward(request, response);
+            }
         }
     }
 
@@ -81,5 +108,11 @@ public class ControladorMedico extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    
+
+    
+
+   
 
 }

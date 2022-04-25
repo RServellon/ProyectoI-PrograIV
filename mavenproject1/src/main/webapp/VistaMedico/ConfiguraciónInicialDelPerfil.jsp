@@ -1,6 +1,6 @@
 <%-- 
-    Document   : GestionarPerfil
-    Created on : 25 abr. 2022, 11:41:03
+    Document   : ConfiguraciónInicialDelPerfil
+    Created on : 25 abr. 2022, 15:08:29
     Author     : norma
 --%>
 
@@ -13,7 +13,7 @@
     </head>
     <body>
         <%@ include file  ="/Components/Header.jsp" %>
-        <h1>Gestionar perfil de médico</h1>
+        <h1>Confiiguraciión inicial del médico</h1>
         <h1>
             <%=user.getNombre()%>
         </h1>

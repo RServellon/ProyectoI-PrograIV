@@ -12,8 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Gestiionar perfil de Paciente</h1>
         <%@ include file  ="/Components/Header.jsp" %>
+        <h1>Gestiionar perfil de Paciente</h1>
         <h1>
             <%=user.getNombre()%>
         </h1>

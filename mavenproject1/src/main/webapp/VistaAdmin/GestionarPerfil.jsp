@@ -12,8 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Gestionar Perfil de admin</h1>
         <%@ include file  ="/Components/Header.jsp" %>
+        <h1>Gestionar Perfil de admin</h1>
         <h1>
             <%=user.getNombre()%>
         </h1>
