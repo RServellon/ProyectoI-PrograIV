@@ -42,7 +42,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: white" href="/mavenproject1/Login.jsp">
+                            <a class="nav-link" style="color: white" href="/mavenproject1/login/show">
                                 <img src="/mavenproject1/assets/Icon pages/log-in.png">
                                 <label class="form-label" >Login</label>
                             </a>
@@ -81,6 +81,12 @@
                             <img src="/mavenproject1/assets/Icon pages/search.png">
 
                             <label class="form-label" >Buscar</label>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="/mavenproject1/manage/profile">
+                            <img src="/mavenproject1/assets/Icon pages/profile.png">
+                            <label class="form-label" ><%=user.getNombre()%></label>
                         </a>
                     </li>
                     <li class="nav-item">

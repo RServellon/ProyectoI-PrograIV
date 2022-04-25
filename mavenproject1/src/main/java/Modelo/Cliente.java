@@ -16,5 +16,6 @@ public class Cliente extends Usuario {
     public Cliente(String id, String nombre, String clave, String tipo) {
         super(id, nombre, clave, tipo);
     }
+
 }
 

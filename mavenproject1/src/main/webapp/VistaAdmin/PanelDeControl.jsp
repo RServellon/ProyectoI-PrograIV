@@ -17,18 +17,53 @@
     <body>
         <%@ include file  ="/Components/Header.jsp" %>
         
-        <h1 class="h">
-            hola mundo
-        </h1>
         
-        <div class="mx-0" id="contenedor-dash">
+        <div class="mx-0  vh-100" id="contenedor-dash">
            
-            <div class="row justify-content-center">
-                <div class="col-3" style="background: blue">
-                    One of two columns
+            <div class="row justify-content-center  vh-100">
+                <div class="col-3  h-100">
+                    <div class=" d-flex flex-column flex-shrink-0 p-3 text-white  h-100" style="background: #20304c">
+                        <span class="fs-4">Dashboard</span>
+                        <hr>
+                        <ul class="nav nav-pills flex-column mb-auto">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link active bg-white " aria-current="page" style="color: black">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    
+                                    Orders
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    
+                                    Products
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    
+                                    Customers
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
                 </div>
-                <div class="col-9" style="background: red">
-                    main
+                <div class="col-9  h-100 my-5" >
+                    <!--border border-3-->
+                    <div class="container" id="main" style="border-radius: 9px; height: 80%; overflow: scroll;"  >
+                        Lasdasadasd
+                    </div>
                 </div>
             </div>
             

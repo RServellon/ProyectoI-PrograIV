@@ -14,7 +14,7 @@
             
         </head>
 
-        <body class="background-radial-gradient ">
+        <body >
             <!-- Section: Design Block -->
             <!-- Section: Design Block -->
             <%@ include file  ="/Components/Header.jsp" %>
@@ -37,7 +37,7 @@
 
                             <div class="card bg-glass">
                                 <div class="card-body px-6 py-5 px-md-5">
-                                    <form method="POST" name="RegistrarMedico" action="/mavenproject1/VistaMedico/registrarmedico">
+                                    <form method="POST" name="ControladorRegistro" action="/mavenproject1/registrar">
                                         <!-- 2 column grid layout with text inputs for the first and last names -->
                                         <div class="row">
                                             <div class="col-md-6 mb-4">
@@ -88,7 +88,7 @@
                                             <label>
                                                 <i class="fa-solid fa-user-gear"></i>
                                                 Admin
-                                                <input value="administrador" type="radio" name="tipo_usuario">
+                                                <input value="admin" type="radio" name="tipo_usuario">
                                             </label>
                                         </div>
 

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "PaginaPrincipal", urlPatterns = {"/VistaCliente/PaginaPrincipal"})
+@WebServlet(name = "PaginaPrincipal", urlPatterns = {"/VistaCliente/PaginaPrincipal", "/VistaCliente/PaginaPrincipal-paciente", })
 
 public class PaginaPrincipal extends HttpServlet {
 
@@ -22,7 +22,13 @@ public class PaginaPrincipal extends HttpServlet {
         //en base a lo que retorno el switch en la variable viewUrl realiza el foward respectivo 
           response.setContentType("text/html;charset=UTF-8");
         try{
-            request.getRequestDispatcher("VistaCliente/search.jsp").forward( request, response); //cuando el forward se ejecuta el jsp tendra acceso al objeto request y response
+            
+            if (request.getServletPath().equals("/VistaCliente/PaginaPrincipal-paciente")) {
+                request.getRequestDispatcher("/VistaCliente/PaginaPrincipal.jsp").forward(request, response);
+                
+            }else{
+                request.getRequestDispatcher("VistaCliente/search.jsp").forward( request, response); //cuando el forward se ejecuta el jsp tendra acceso al objeto request y response
+            }
         }catch(Exception e){
             //si en el registro del prestamo me da un error entonces mando una ventana de error (getRequestDispatcher)
             request.getRequestDispatcher("/PaginaPrincipal.jsp").forward( request, response); 

@@ -97,7 +97,7 @@
                                             <label>
                                                 <i class="fa-solid fa-user-gear"></i>
                                                 Admin
-                                                <input value="administrador" type="radio" name="tipo_usuario">
+                                                <input value="admi" type="radio" name="tipo_usuario">
                                             </label>
                                         </div>
 

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controlador.Administrador;
+package Controlador.Sesion;
 
 import Modelo.Usuario;
 import java.io.IOException;
@@ -18,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "PanelDeControl", urlPatterns = {"/PanelDeControl", "/mavenproject1/admin-dash-board", "/admin-dash-board"})
-public class PanelDeControl extends HttpServlet {
+@WebServlet(name = "ControladorSesion", urlPatterns = {"/ControladorSesion", "/manage/profile"})
+public class ControladorSesion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,17 +34,31 @@ public class PanelDeControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            //solicitud de ingreso a la vista
             HttpSession session = request.getSession(true);
             Usuario user = (Usuario) session.getAttribute("user");
-            request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
-            switch (request.getServletPath()) {
-                case "/mavenproject1/admin-dash-board":
-                    //solicitud de ingreso a la vista
-                    request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
+            System.out.println("\n\nControlador de sesion");
+            System.out.println(user);
+            /**             
+             * en este momento se encuentra logueado el usuario
+             * lo que se hace es redireccionar a las diferentes paginas de 
+             * configuración del prrfil para cada caso
+             */
+            
+            switch (user.getTipo()) {
+                case "medico":
+                    request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
+                    break;
+                case "paciente":
+                    request.getRequestDispatcher("/VistaCliente/GestionarPerfil.jsp").forward(request, response);
+                    
+                    break;
+                case "admin":
+                    request.getRequestDispatcher("/VistaAdmin/GestionarPerfil.jsp").forward(request, response);
+                    
                     break;
             }
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

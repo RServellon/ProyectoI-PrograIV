@@ -22,10 +22,6 @@ public class PasswordValidator {
         if (!password.matches(lowerCaseChars)) {
             code = -3;
         }
-        String specialChars = "(.*[@,#,$,%].*$)";
-        if (!password.matches(specialChars)) {
-            code = -4;
-        }
         return code;
     }
     

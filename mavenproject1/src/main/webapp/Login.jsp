@@ -26,12 +26,12 @@
 
                     <div class="col-8 col-md-8 col-lg-6 col-xl-5"  >
                         <div class="ilustration-container " style="text-align:center;"> 
-                            <img src="assets/ilustrations/medic girl.svg" width="50%" height="50%" >
+                            <img src="/mavenproject1/assets/ilustrations/medic girl.svg" width="50%" height="50%" >
                         </div>  
 
                         <div class="card bg-glass" style="border-radius: 1rem;"  >
                             <div class="card-body px-5 py-4 px-md-5 text-center container-login " >
-                                <form method="POST" name="pagina_logeo" action="login" >
+                                <form method="POST" name="pagina_logeo" action="/mavenproject1/login/login" >
                                     <div class="mb-md-0 mt-md-4 pb-5">
                                         <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                                         <p class="mb-5" color="gray">Por favor digite su usuario y contraseña!</p>
@@ -52,7 +52,7 @@
 
                                     <div>
                                         <!--                Aqui se debe de colocar la pagina GENERAL para registrar (quitar registroMedico y registroCliente)-->
-                                        <p class="mb-0">Si no tienes una cuenta registrate <a href="VistaMedico/RegistroMedico.jsp"
+                                        <p class="mb-0">Si no tienes una cuenta registrate <a href="/mavenproject1/VistaMedico/RegistroMedico.jsp"
                                                                                               class="text-primary fw-bold">aqui</a>
                                         </p>
                                     </div>

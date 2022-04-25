@@ -5,7 +5,7 @@
 package Controlador.Medico;
 
 import java.io.IOException;
-import Controlador.Medico.PasswordValidator;
+import Modelo.DAO.GeneralHandler;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +33,7 @@ public class RegistrarMedico extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            GeneralHandler g = new GeneralHandler();
             String nombre = request.getParameter("first-name");
             String apellido = request.getParameter("last-name");
             String id = request.getParameter("id");
@@ -56,54 +57,52 @@ public class RegistrarMedico extends HttpServlet {
             
             if (!(password.equals(confirmPassword))) {
                 request.setAttribute("error-code", "Las contraseñas no coinciden");
-                request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                request.getRequestDispatcher("/mavenproject1/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
             }
             
             
-            switch (PasswordValidator.isValidPassword(password)) {
-                case 1:
-                    request.setAttribute("pwd", password);
-                    switch (userTipe) {
-                        case "medico":
-                            request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
-                            break;
-                        case "paciente":
-                            request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
-                            break;
+            if (g.retornaUserPorId(id).getId() == null) {
+                switch (PasswordValidator.isValidPassword(password)) {
+                    case 1:
+                        request.setAttribute("pwd", password);
+                        switch (userTipe) {
+                            case "medico":
+                                request.getRequestDispatcher("/mavenproject1/registrar-medico").forward(request, response);
+                                break;
+                            case "paciente":
+                                request.getRequestDispatcher("/mavenproject1/registrar-paciente").forward(request, response);
+                                break;
 
-                        case "administrador":
-                            request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
-                            break;
-                        default:
-                            throw new AssertionError();
-                    }
-                    
-                    
-                    break;
-                case -1:
-                    request.setAttribute("error-code", "La contraseña debe tener menos de 20 y más de 8 caracteres de longitud.");
-                    request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
-                    break;
-                    
-                case -2:
-                    request.setAttribute("error-code", "La contraseña debe tener al menos un carácter en mayúscula.");
-                    request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
-                    
-                    break;
-                
-                case -3:
-                    request.setAttribute("error-code", "La contraseña debe tener al menos un carácter en minúscula");
-                    request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
-                    
-                    break;
-                
-                case -4:
-                    request.setAttribute("error-code", "La contraseña debe tener al menos un carácter especial @,#,$,%");
-                    request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
-                    
-                    break;
-                default:
-                    throw new AssertionError();
+                            case "administrador":
+                                request.getRequestDispatcher("/mavenproject1/registrar-administrador").forward(request, response);
+                                break;
+                            default:
+                                throw new AssertionError();
+                        }
+
+                        break;
+                    case -1:
+                        request.setAttribute("error-code", "La contraseña debe tener menos de 20 y más de 8 caracteres de longitud.");
+                        request.getRequestDispatcher("/mavenproject1/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                        break;
+
+                    case -2:
+                        request.setAttribute("error-code", "La contraseña debe tener al menos un carácter en mayúscula.");
+                        request.getRequestDispatcher("/mavenproject1/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+
+                        break;
+
+                    case -3:
+                        request.setAttribute("error-code", "La contraseña debe tener al menos un carácter en minúscula");
+                        request.getRequestDispatcher("/mavenproject1/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+            }else{
+                request.setAttribute("error-code", "Ya existe un usuario con la identificación "+id);
+                request.getRequestDispatcher("/mavenproject1/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);   
             }
              
         }catch(Exception e){

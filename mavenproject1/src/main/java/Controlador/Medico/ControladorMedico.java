@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controlador.Administrador;
+package Controlador.Medico;
 
 import Modelo.Usuario;
 import java.io.IOException;
@@ -18,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "PanelDeControl", urlPatterns = {"/PanelDeControl", "/mavenproject1/admin-dash-board", "/admin-dash-board"})
-public class PanelDeControl extends HttpServlet {
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez"})
+public class ControladorMedico extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,16 +34,12 @@ public class PanelDeControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            //solicitud de ingreso a la vista
+
             HttpSession session = request.getSession(true);
             Usuario user = (Usuario) session.getAttribute("user");
-            request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
-            switch (request.getServletPath()) {
-                case "/mavenproject1/admin-dash-board":
-                    //solicitud de ingreso a la vista
-                    request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
-                    break;
-            }
+            System.out.println(user);
+            
+            
         }
     }
 
