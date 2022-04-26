@@ -73,7 +73,7 @@ public class Fecha {
     }
     
     
-    public void fechaHoraFormateada(String fechaHora){ // "2020-09-12 09:40:30:00"
+    public void fechaHoraFormateada(String fechaHora){ // "2020-09-12 09:40:30.00"
         DateTimeFormatter f =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
         LocalDateTime dateTime = LocalDateTime.parse(fechaHora, f);
         this.fechaHora = dateTime;
