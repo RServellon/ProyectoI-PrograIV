@@ -125,6 +125,28 @@ public class ControladorLogin extends HttpServlet {
 //                        // Listar ciudades
 //                        System.out.println(general.listarCiudades().toString());
 
+                        // Registrar ciudad
+                        //admin.registrarCiudad(new Ciudad("1100", "Mercedes", "Heredia"));
+                        //System.out.println(admin.retornaCiudadPorCodigo("1100").toString());
+                        //admin.borrarCiudad("1100");
+                    
+                        // Registrar especialidad
+                        //admin.registrarEspecialidad(new Especialidad("1004", "Dermatologia", "Encargado del cuidado de la piel"));
+                        //System.out.println(admin.retornaEspecialidadPorCodigo("1004").toString());
+                        //admin.borrarEspecialidad("1004");
+
+                        // Agregar y eliminar usuarios, medicos, admins, pacientes
+                        //System.out.println("PRUEBA: " + general.registrarUsuario("Rebe4", "109", "Password109", "medico"));
+                        //System.out.println("PRUEBA: " + general.registrarUsuario("Rebe4", "110", "Password109", "paciente"));
+                        //System.out.println("PRUEBA: " + general.registrarUsuario("Rebe4", "111", "Password109", "admin"));
+                        //System.out.println("PRUEBA: " + general.registrarUsuario("Rebe4", "112", "Password109", "admin"));
+
+                        //System.out.println("prueba" + general.retornaUserPorId("112").toString());
+                        System.out.println("PRUEBA: " + general.borrarUsuario("109", "medico"));
+                        System.out.println("PRUEBA: " + general.borrarUsuario("110", "paciente"));
+                        System.out.println("PRUEBA: " + general.borrarUsuario("111", "admin"));
+                        System.out.println("PRUEBA: " + general.borrarUsuario("112", "admin"));
+                    
                 break;
             }
             request.getRequestDispatcher(viewUrl).forward(request, response);

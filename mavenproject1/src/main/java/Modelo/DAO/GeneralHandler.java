@@ -28,8 +28,8 @@ import java.util.List;
  * listar medicos aprobados
  */
 public class GeneralHandler {
-//    final String usernameBD = "sa";
-    final String usernameBD = "sas";
+    final String usernameBD = "sa";
+//    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 
@@ -90,7 +90,12 @@ public class GeneralHandler {
             rs = executor.ejecutaQuery(sql1);
             while (rs.next()){
                 usuario.setEspecialidad(rs.getString("especialidad"));
-                usuario.setCostoConsulta(Double.parseDouble(rs.getString("costo")));
+                if(rs.getString("costo")!=null){
+                    usuario.setCostoConsulta(Double.parseDouble(rs.getString("costo")));
+                }
+                else{
+                    usuario.setCostoConsulta(0.00);
+                }
                 usuario.setCiudad(rs.getString("ciudad"));
                 usuario.setClinica(rs.getString("clinica"));
                 usuario.setEstado(rs.getString("estado"));
@@ -101,55 +106,11 @@ public class GeneralHandler {
         return usuario;
     }
     
-    
-    public boolean registrarUsuario(String username, String id, String password, String tipo){
-        if(!verificaUsuarioExiste(id)){
-            try{
-                executor = new SQLExecutor(usernameBD, passwordBD);
-                String valores1[] = new String[5];
-                valores1[0] = "insert into usuarios(id, nombre, clave, tipo) values (?, ?, ?, ?);";
-                valores1[1] = id;
-                valores1[2] = username;
-                valores1[3] = password;
-                valores1[4] = tipo;
-                executor.prepareStatement(valores1);
-                  
-            } catch(Exception throwables){
-                throwables.printStackTrace();
-            }
-            
-            switch(tipo){
-                case "admin":
-                    try{
-                        executor = new SQLExecutor(usernameBD, passwordBD);
-                        String valores1[] = new String[2];
-                        valores1[0] = "insert into administradores(id) values (?);";
-                        valores1[1] = id;
-                        executor.prepareStatement(valores1);
-                        return true;
-
-                    } catch(Exception throwables){
-                        throwables.printStackTrace();
-                    }
-                break;
-                case "paciente":
-                    try{
-                        executor = new SQLExecutor(usernameBD, passwordBD);
-                        String valores1[] = new String[2];
-                        valores1[0] = "insert into pacientes(id) values (?);";
-                        valores1[1] = id;
-                        executor.prepareStatement(valores1);
-                        return true;
-
-                    } catch(Exception throwables){
-                        throwables.printStackTrace();
-                    }
-                break;
-                case "medico":
-                    try{
+    public boolean registrarMedico(String id, String especialidad, String costo, String ciudad, String clinica){
+          try{
                         executor = new SQLExecutor(usernameBD, passwordBD);
                         String valores1[] = new String[7];
-                        valores1[0] = "insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (?, ?, ?, ?, ?, '?');";
+                        valores1[0] = "insert into medicos(id, especialidad, costo, ciudad, clinica, estado) values (?, ?, ?, ?, ?, ?);";
                         valores1[1] = id;
                         valores1[2] = null;
                         valores1[3] = null;
@@ -164,11 +125,140 @@ public class GeneralHandler {
                     } catch(Exception throwables){
                         throwables.printStackTrace();
                     }
-                break;
-                default:
-                break;
+          return false;
+    }
+    
+    public boolean registrarAdministrador(String id){
+         try{
+                        executor = new SQLExecutor(usernameBD, passwordBD);
+                        String valores1[] = new String[2];
+                        valores1[0] = "insert into administradores(id) values (?);";
+                        valores1[1] = id;
+                        executor.prepareStatement(valores1);
+                        return true;
+
+                    } catch(Exception throwables){
+                        throwables.printStackTrace();
+                    }
+         return false;
+    }
+    
+    public boolean registrarPaciente(String id){
+            try{
+                executor = new SQLExecutor(usernameBD, passwordBD);
+                String valores1[] = new String[2];
+                valores1[0] = "insert into pacientes(id) values (?);";
+                valores1[1] = id;
+                executor.prepareStatement(valores1);
+                return true;
+
+            } catch(Exception throwables){
+                throwables.printStackTrace();
             }
+        
+         return false;
+    }
+    
+    
+    public boolean registrarUsuario(String username, String id, String password, String tipo){
+        if(!verificaUsuarioExiste(id)){
+            try{
+                executor = new SQLExecutor(usernameBD, passwordBD);
+                String valores1[] = new String[5];
+                valores1[0] = "insert into usuarios(id, nombre, clave, tipo) values (?, ?, ?, ?)";
+                valores1[1] = id;
+                valores1[2] = username;
+                valores1[3] = password;
+                valores1[4] = tipo;
+                executor.prepareStatement(valores1);
+                
+                switch(tipo){
+                    case "admin":
+                        this.registrarAdministrador(id);
+                    break;
+                    case "medico":
+                        this.registrarMedico(id, null, null, null, null);
+                    break;
+                    case "paciente":
+                        this.registrarPaciente(id);
+                    break;
+                }
+                return true;
+            } catch(Exception throwables){
+                throwables.printStackTrace();
+            }
+        
+          
         }
+
+        return false;
+    }
+    
+    public boolean borarMedico(String id){
+         try{
+                     executor = new SQLExecutor(usernameBD, passwordBD);
+                    String valores[] = new String[2];
+                    valores[0] = "delete from medicos where id = ?;";
+                    valores[1] = id;
+                    executor.prepareStatement(valores);
+                    } catch(Exception throwables){
+                        throwables.printStackTrace();
+                    }
+         return false;
+    }
+    
+    public boolean borarAdmin(String id){
+          try{
+                    executor = new SQLExecutor(usernameBD, passwordBD);
+                    String valores[] = new String[2];
+                    valores[0] = "delete from administradores where id = ?;";
+                    valores[1] = id;
+                    executor.prepareStatement(valores);
+                    } catch(Exception throwables){
+                        throwables.printStackTrace();
+                    }
+          return false;
+    }
+    
+    public boolean borrarPaciente(String id){
+        try{
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            String valores[] = new String[2];
+            valores[0] = "delete from pacientes where id = ?;";
+            valores[1] = id;
+            executor.prepareStatement(valores);
+            } catch(Exception throwables){
+                throwables.printStackTrace();
+            }
+          return false;
+    }
+    
+        public boolean borrarUsuario(String id, String tipo){
+            try{
+                switch(tipo){
+                    case "admin":
+                        this.borarAdmin(id);
+                    break;
+                    case "medico":
+                        this.borarMedico(id);
+                    break;
+                    case "paciente":
+                        this.borrarPaciente(id);
+                    break;
+                    
+                }
+                
+                executor = new SQLExecutor(usernameBD, passwordBD);
+                String valores1[] = new String[2];
+                valores1[0] = "delete from usuarios where id = ?;";
+                valores1[1] = id;
+                executor.prepareStatement(valores1);
+          
+             return true;
+            } catch(Exception throwables){
+                throwables.printStackTrace();
+            }
+            
         return false;
     }
    

@@ -105,6 +105,8 @@ public class AdminHandler extends GeneralHandler {
        }
         return false;
     }
+     
+
     
     public boolean registrarEspecialidad(Especialidad especialidad) {
         try{
