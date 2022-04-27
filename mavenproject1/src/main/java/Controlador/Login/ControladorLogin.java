@@ -9,6 +9,7 @@ import Modelo.Ciudad;
 import Modelo.DAO.AdminHandler;
 import Modelo.DAO.GeneralHandler;
 import Modelo.DAO.MedicoHandler;
+import Modelo.DAO.PacienteHandler;
 import Modelo.Especialidad;
 import Modelo.Modelo;
 import Modelo.Usuario;
@@ -53,6 +54,7 @@ public class ControladorLogin extends HttpServlet {
             GeneralHandler general = new GeneralHandler();
             AdminHandler admin = new AdminHandler();
             MedicoHandler medico = new MedicoHandler();
+            PacienteHandler pac = new PacienteHandler();
             System.out.println("path ->>>>>>" + request.getServletPath());
             
             
@@ -142,10 +144,41 @@ public class ControladorLogin extends HttpServlet {
                         //System.out.println("PRUEBA: " + general.registrarUsuario("Rebe4", "112", "Password109", "admin"));
 
                         //System.out.println("prueba" + general.retornaUserPorId("112").toString());
-                        System.out.println("PRUEBA: " + general.borrarUsuario("109", "medico"));
-                        System.out.println("PRUEBA: " + general.borrarUsuario("110", "paciente"));
-                        System.out.println("PRUEBA: " + general.borrarUsuario("111", "admin"));
-                        System.out.println("PRUEBA: " + general.borrarUsuario("112", "admin"));
+                        //System.out.println("PRUEBA: " + general.borrarUsuario("109", "medico"));
+                        //System.out.println("PRUEBA: " + general.borrarUsuario("110", "paciente"));
+                        //System.out.println("PRUEBA: " + general.borrarUsuario("111", "admin"));
+                        //System.out.println("PRUEBA: " + general.borrarUsuario("112", "admin"));
+                        
+                        // Registrar y eliminar horario -> para eliminar es con el id y la fechayhora de inicio
+                        //System.out.println("PRUEBA: " + medico.registrarHorario("101", "2022-05-10 13:00:00", "2022-05-10 15:00:00", "00:30:00"));
+                        //System.out.println("PRUEBA: " + medico.registrarHorario("102", "2022-05-10 13:00:00", "2022-05-10 15:00:00", "00:30:00"));
+                        
+                        //System.out.println("PRUEBA: " + medico.borrarHorario("101", "2022-05-10 13:00:00"));
+                        //System.out.println("PRUEBA: " + medico.borrarHorario("102", "2022-05-10 13:00:00"));
+
+                    // Registrar y eliminar cita
+                    //System.out.println("PRUEBA: " + pac.registrarCita("2005", "101", "103", "2022-04-10 15:00:00", "anotacion"));
+                    //System.out.println("PRUEBA: " + pac.registrarCita("2006", "101", "104", "2022-04-10 14:00:00", "anotacion"));
+
+                    //System.out.println("PRUEBA: " + pac.borrarCita("2005"));
+                    //System.out.println("PRUEBA: " + pac.borrarCita("2006"));
+                    
+                    // Cambiar estado de cita -> FINALIZADO, REGISTRADO, CANCELADO
+                    //System.out.println("PRUEBA: " + pac.cambiarEstadoCita("2003", "FINALIZADO"));
+                    //System.out.println("PRUEBA: " + pac.cambiarEstadoCita("2000", "FINALIZADO"));
+                    
+                    
+                    // Registrar y eliminar calificaciones ACEPTABLE, EXCELENTE, DEFICIENTE
+                    //System.out.println("PRUEBA: " +  pac.registrarCalificacion("102", "104", "EXCELENTE"));
+                    //System.out.println("PRUEBA: " +  pac.registrarCalificacion("105", "104", "DEFICIENTE"));
+                    //System.out.println("PRUEBA retorna calif: " +  general.retornaCalificacion("105", "104"));
+                    
+                    //System.out.println("PRUEBA: " +  pac.cambiarCalificacion("105", "104", "EXCELENTE"));                  
+                    //System.out.println("PRUEBA retorna calif: " +  general.retornaCalificacion("105", "104"));
+
+                    //System.out.println("PRUEBA: " +  pac.borrarCalificacion("102", "104"));
+                    //System.out.println("PRUEBA: " +  pac.borrarCalificacion("105", "104"));
+
                     
                 break;
             }

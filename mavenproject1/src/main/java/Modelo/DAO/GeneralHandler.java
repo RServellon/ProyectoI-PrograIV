@@ -4,6 +4,7 @@
  */
 package Modelo.DAO;
 
+import Modelo.Calificacion;
 import Modelo.Ciudad;
 import Modelo.DAO.SQLConnection.SQLExecutor;
 import Modelo.Especialidad;
@@ -78,6 +79,8 @@ public class GeneralHandler {
         }
         return usuario;
     }
+    
+   
     
     public Medico retornaMedicoPorId(String id){
         Usuario user = this.retornaUserPorId(id);
@@ -201,6 +204,7 @@ public class GeneralHandler {
                     valores[0] = "delete from medicos where id = ?;";
                     valores[1] = id;
                     executor.prepareStatement(valores);
+                    return true;
                     } catch(Exception throwables){
                         throwables.printStackTrace();
                     }
@@ -214,6 +218,7 @@ public class GeneralHandler {
                     valores[0] = "delete from administradores where id = ?;";
                     valores[1] = id;
                     executor.prepareStatement(valores);
+                    return true;
                     } catch(Exception throwables){
                         throwables.printStackTrace();
                     }
@@ -227,6 +232,7 @@ public class GeneralHandler {
             valores[0] = "delete from pacientes where id = ?;";
             valores[1] = id;
             executor.prepareStatement(valores);
+            return true;
             } catch(Exception throwables){
                 throwables.printStackTrace();
             }
@@ -371,29 +377,7 @@ public class GeneralHandler {
         return lista;
     }
     
-    public boolean registrarCita(String codigo, String id_medico, String id_paciente, String fechaHora, String anotaciones){
-        if(this.verificaUsuarioExiste(id_medico) && this.verificaUsuarioExiste(id_paciente)){
-             try{
-                executor = new SQLExecutor(usernameBD, passwordBD);
-                String valores1[] = new String[7];
-                valores1[0] = "insert into citas(codigo, id_medico, id_paciente, fechaHora, estado, anotaciones) values (?, ?, ?, '?', '?', '?');";
-                valores1[1] = codigo;
-                valores1[2] = id_medico;
-                valores1[3] = id_paciente;
-                valores1[4] = fechaHora; // con este formato 2022-04-10 16:00:00
-                valores1[5] = "REGISTRADO"; // todas las citas empiezan siendo registradas
-                valores1[6] = anotaciones;
-
-                executor.prepareStatement(valores1);
-                return true;
-
-            } catch(Exception throwables){
-                throwables.printStackTrace();
-            }
-        }
-        return false;
-    }
-    
+  
     public Especialidad retornaEspecialidadPorCodigo(String codigo){
         Especialidad especialidad = new Especialidad();
         String sql ="select * from especialidades where codigo = " + codigo + ";";
@@ -471,5 +455,25 @@ public class GeneralHandler {
             throwables.printStackTrace();
         }   
         return lista;
+    }
+     
+     
+      public Calificacion retornaCalificacion(String idMedico, String idPaciente){
+        Calificacion calif = new Calificacion();
+        String sql ="select * from calificaciones where id_medico = " + idMedico + " and id_paciente = "+ idPaciente + ";";
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql);
+            while (rs.next()){
+                calif.setId_medico(rs.getString("id_medico"));   
+                calif.setId_paciente(rs.getString("id_paciente"));
+                calif.setCalificacion(rs.getString("calificacion"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return calif;
     }
 }

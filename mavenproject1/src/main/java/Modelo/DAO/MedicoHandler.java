@@ -92,6 +92,7 @@ public class MedicoHandler extends GeneralHandler {
         
         return lista;
     }
+    
         
     public List<Calificacion> listarCalificaciones(String id_medico){
         List<Calificacion> lista = new ArrayList<>();
@@ -120,7 +121,7 @@ public class MedicoHandler extends GeneralHandler {
              try{
                 executor = new SQLExecutor(usernameBD, passwordBD);
                 String valores[] = new String[5];
-                valores[0] = "insert into horarios(id_medico, fechaHoraInicio, fechaHoraFinal, frecuencia) values (?, '?', '?', '?');";
+                valores[0] = "insert into horarios(id_medico, fechaHoraInicio, fechaHoraFinal, frecuencia) values (?, ?, ?, ?);";
                 valores[1] = id_medico;
                 valores[2] = fechaHoraInicio;// con este formato 2022-04-10 16:00:00
                 valores[3] = fechaHoraFinal;// con este formato 2022-04-10 16:00:00
