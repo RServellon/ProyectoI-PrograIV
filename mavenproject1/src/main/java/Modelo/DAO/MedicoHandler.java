@@ -142,10 +142,10 @@ public class MedicoHandler extends GeneralHandler {
             executor = new SQLExecutor(usernameBD, passwordBD);
             rs = executor.ejecutaQuery("select * from citas where id_medico = "+idMedico + ";");
             while (rs.next()) {
-                System.out.println("La que viene " + hora);
-                System.out.println("La de la base " + rs.getString("fechaHora").substring(0,5) + rs.getString("fechaHora").substring(6, 16));
-                System.out.println("PRUEBA " + ((rs.getString("fechaHora").substring(0, 5) + rs.getString("fechaHora").substring(6, 11) + rs.getString("fechaHora").substring(12, 16))));
-                System.out.println("P " + rs.getString("fechaHora").charAt(11));
+                //System.out.println("La que viene " + hora);
+                //System.out.println("La de la base " + rs.getString("fechaHora").substring(0,5) + rs.getString("fechaHora").substring(6, 16));
+                //System.out.println("PRUEBA " + ((rs.getString("fechaHora").substring(0, 5) + rs.getString("fechaHora").substring(6, 11) + rs.getString("fechaHora").substring(12, 16))));
+                //System.out.println("P " + rs.getString("fechaHora").charAt(11));
                  if(rs.getString("fechaHora").charAt(11) != '0' && rs.getString("id_medico").equals(idMedico) && (rs.getString("fechaHora").substring(0, 5) + rs.getString("fechaHora").substring(6, 16)).equals(hora)) {
                      return true;
                  }
