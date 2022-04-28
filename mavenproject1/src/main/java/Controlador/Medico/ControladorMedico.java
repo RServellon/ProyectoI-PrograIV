@@ -4,11 +4,14 @@
  */
 package Controlador.Medico;
 
+import Modelo.Ciudad;
 import Modelo.DAO.GeneralHandler;
+import Modelo.Especialidad;
 import Modelo.Medico;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil"})
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos"})
 public class ControladorMedico extends HttpServlet {
 
     /**
@@ -54,6 +57,12 @@ public class ControladorMedico extends HttpServlet {
                     
                     if (medico.getEstado()==null) {
                         System.out.println("Primer ingreso, iinigrese a terminar de configurar el perfil");  
+                        List<Ciudad> ciudades = general.listarCiudades();
+                        session.setAttribute("ciudades", ciudades);
+                        List<Especialidad> esp =  general.listarEspecialidades();
+                        session.setAttribute("especialidades", esp);
+                        System.out.println(esp);
+                        System.out.println(ciudades);
                         request.getRequestDispatcher("/VistaMedico/ConfiguraciónInicialDelPerfil.jsp").forward(request, response);
                     }else{
                         System.out.println("Ingresar a configurar los datos de configurar el perfil");  
@@ -61,6 +70,22 @@ public class ControladorMedico extends HttpServlet {
                     }
                     
                         
+                    
+                    
+                    break;
+                case "/configurar/medico/actualizar/datos":
+                    
+                    String especialidad = (String) request.getParameter("especialidad");
+                    String codeCiudad = (String) request.getParameter("ciudad");
+                    String costoConsulta = (String)request.getParameter("costoConsulta");
+                    String clinica = (String) request.getParameter("clinica");
+                    String foto = (String) request.getParameter("foto");
+                    
+                    System.out.println(especialidad);
+                    System.out.println(codeCiudad);
+                    System.out.println(costoConsulta);
+                    System.out.println(clinica);
+                    System.out.println(foto);
                     
                     
                     break;
