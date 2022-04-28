@@ -68,6 +68,14 @@ public class Horario {
         return this.fecha_hora_inicio.getHora();
     }
     
+    public int getHoraInicialSola(){
+        return fecha_hora_inicio.getHoraSola();
+    }
+    
+    public int getHoraFinalSola(){
+        return fecha_hora_final.getHoraSola();
+    }
+    
     public String getHoraFinal(){
         return this.fecha_hora_final.getHora();
     }

@@ -38,5 +38,8 @@ public class principal {
         System.out.println("Lista de Horarios del medico: "+medicos.get(1).getNombre()+"\n"+listHorarios.toString());
         
         System.out.println("\nLista de lista de Horarios:" + "\n" + liliHorarios.toString());
+        
+        
+        
         }
 }

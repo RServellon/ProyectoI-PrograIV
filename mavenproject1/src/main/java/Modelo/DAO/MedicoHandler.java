@@ -135,6 +135,27 @@ public class MedicoHandler extends GeneralHandler {
         return false;
     }
     
+    public boolean verificaHoraRegistrada(String idMedico, String hora){
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery("select * from citas;");
+            while (rs.next()) {
+                if (rs.getString("id_medico").equals(idMedico) 
+                        &&
+                        rs.getString("fechaHora").equals(hora)) {
+                    return true;
+                }
+            }            
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+    
+    
+    
      public boolean borrarHorario(String id_medico, String fechaHoraInicio){
         if(this.verificaUsuarioExiste(id_medico)){
              try{

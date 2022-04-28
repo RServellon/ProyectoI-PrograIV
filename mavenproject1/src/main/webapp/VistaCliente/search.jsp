@@ -85,7 +85,7 @@
                       <div class="block-size">
                       <img src="../assets/images/retrato-perfil-doc.jpg" class="imagen-perfil">
                       <% espec=handlerMed.retornaEspecialidadPorCodigo(c.getEspecialidad()); %>
-                      <p class="p-especialidad fs-4" title=<%=espec.getDescripcion()%>> <%= espec.getNombre()%></p>
+                      <p class="p-especialidad fs-4" title=<%=espec.getDescripcion()%> <%= espec.getNombre()%></p>
                       </div>
                       <div>
                        <p class="fs-4 fw-bold p-info-doc"><%=c.getNombre()%></p>
@@ -99,7 +99,7 @@
                       
                
                <!--            Columnas de los horarios-->
-            <div id="scroll" class="container-horarios d-flex": style="overflow-x: auto; overflow-y: auto; white-space: nowrap; max-width: 900px;" >
+            <div id="scroll" class="container-horarios d-flex" style="overflow-x: auto; overflow-y: auto; white-space: nowrap; max-width: 900px;" >
                 <% listHorarios=handlerMed.listarHorarios(c.getId()); 
                  liliHorarios = ser.retornarListaListaHorarios(listHorarios);
                 if(!liliHorarios.isEmpty() || liliHorarios != null){
@@ -108,7 +108,10 @@
                 <div class="col-sm pad-horario" style="margin-right:15px;" >
                     <h5><%= liliHorarios.get(i).get(0).getFechaHoraFinal().getFormatoddMMyyyy()%></h5>
                  <div style="width:100%; height:130px; overflow-y: scroll;">
-                   <%  for(Horario hor: liliHorarios.get(i)){ %>
+                   <%  for(Horario hor: liliHorarios.get(i)){%>
+                   <%System.out.println("HORARIO: " + hor);%>
+                   <%System.out.println("PRUEBA: " + ser.horasSegunFrecuencia(hor).toString());%>
+                   
                    <a href="ConfirmarCita.jsp"><p><%= hor.HoraInicio_Final() %></p></a>
                   <%}%>
                  </div>

@@ -19,6 +19,7 @@ public class Fecha {
 
     public Fecha() {
     }
+   
 
     public Fecha(String fechaHora) {
         fechaHoraFormateada(fechaHora);
@@ -38,6 +39,10 @@ public class Fecha {
     
     public String getFormatoddMMyyyy(){ //"##/##/##"
         return fechaHora.getDayOfMonth()+"/"+fechaHora.getMonth()+"/"+fechaHora.getYear();
+    }
+    
+    public String getFormatoyyyyMMdd(){ //"##/##/##"
+        return fechaHora.getYear()+"-"+fechaHora.getMonthValue()+"-"+fechaHora.getDayOfMonth();
     }
     
     public String getHora(){
@@ -65,11 +70,17 @@ public class Fecha {
        int  min = fechaHora.getMinute();
        return min+"";
     }
+       
+    
     
     public String getFechaHoraSinFormato(){
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
         String strDate = dateFormat.format(fechaHora);
         return strDate;
+    }
+    
+    public int getHoraSola(){
+        return fechaHora.getHour();
     }
     
     

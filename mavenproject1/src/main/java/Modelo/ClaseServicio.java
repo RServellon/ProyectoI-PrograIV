@@ -3,6 +3,7 @@
  */
 package Modelo;
 
+import Modelo.DAO.MedicoHandler;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,26 @@ public class ClaseServicio {
             }
         }
         return listlistH;
+    }
+    
+    public List<String> horasSegunFrecuencia(Horario horario){
+        MedicoHandler handler = new MedicoHandler();
+        List<String> horas = new ArrayList();
+        System.out.println("Antes del for " + horario.getHoraInicialSola() + ", " + horario.getHoraFinalSola());
+
+        for(int i=horario.getHoraInicialSola(); i <= horario.getHoraFinalSola(); i++){
+            String f = horario.getFechaHoraInicio().getFormatoyyyyMMdd();
+            String fechaA = f.concat(" " + String.valueOf(i) + ":00:");
+            System.out.println("Entro: " + fechaA);
+            if(handler.verificaHoraRegistrada(horario.getId_medico(), "2022-04-10 16:00:00")){
+                horas.add(fechaA);
+            }
+            if(horario.getFrecuencia().equals("00:30:00") && horario.getHoraFinalSola() != i){
+                String fechaB = horario.getFechaHoraInicio().getFormatoyyyyMMdd().concat(" " + String.valueOf(i) + ":30:00");
+                horas.add(fechaB);
+            }
+        }
+        return horas;
     }
 
 }
