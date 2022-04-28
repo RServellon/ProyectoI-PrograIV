@@ -140,13 +140,21 @@ public class MedicoHandler extends GeneralHandler {
         
         try {
             executor = new SQLExecutor(usernameBD, passwordBD);
-            rs = executor.ejecutaQuery("select * from citas;");
+            rs = executor.ejecutaQuery("select * from citas where id_medico = "+idMedico + ";");
             while (rs.next()) {
-                if (rs.getString("id_medico").equals(idMedico) 
-                        &&
-                        rs.getString("fechaHora").equals(hora)) {
-                    return true;
-                }
+                System.out.println("La que viene " + hora);
+                System.out.println("La de la base " + rs.getString("fechaHora").substring(0,5) + rs.getString("fechaHora").substring(6, 16));
+                System.out.println("PRUEBA " + ((rs.getString("fechaHora").substring(0, 5) + rs.getString("fechaHora").substring(6, 11) + rs.getString("fechaHora").substring(12, 16))));
+                System.out.println("P " + rs.getString("fechaHora").charAt(11));
+                 if(rs.getString("fechaHora").charAt(11) != '0' && rs.getString("id_medico").equals(idMedico) && (rs.getString("fechaHora").substring(0, 5) + rs.getString("fechaHora").substring(6, 16)).equals(hora)) {
+                     return true;
+                 }
+                 else{
+                     if(rs.getString("id_medico").equals(idMedico) &&(rs.getString("fechaHora").substring(0, 5) + rs.getString("fechaHora").substring(6, 11) + rs.getString("fechaHora").substring(12, 16)).equals(hora)){
+                         return true;
+                     }
+                 }
+                
             }            
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -156,7 +164,29 @@ public class MedicoHandler extends GeneralHandler {
     
     
     
-     public boolean borrarHorario(String id_medico, String fechaHoraInicio){
+     public Horario retornaHorario(String id_medico, String fechaHoraInicio){
+        Horario horario = new Horario();
+        String sql ="select * from horarios where id_medico = " + id_medico + " and fechaHoraInicio = " + fechaHoraInicio+ ";";
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql);
+            while (rs.next()){
+                horario.setId_medico(rs.getString("id_medico"));   
+                horario.setFechaHoraInicio(rs.getString("fechaHoraInicio"));
+                horario.setFechaHoraFinal(rs.getString("fechaHoraFinal"));
+                horario.setFrecuencia(rs.getString("frecuencia"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return horario;
+    }
+     
+
+     
+      public boolean borrarHorario(String id_medico, String fechaHoraInicio){
         if(this.verificaUsuarioExiste(id_medico)){
              try{
                 executor = new SQLExecutor(usernameBD, passwordBD);
