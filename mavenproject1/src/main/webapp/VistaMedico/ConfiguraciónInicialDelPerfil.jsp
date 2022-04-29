@@ -129,10 +129,10 @@
 
                             <div class="row my-5" style="border-top:  3px solid #20304c; ">
 
-
+                                <div class="col"></div>
                              
                                 <%for(int i = 0; i<7; i++){%>
-                                    <div class="col align-items-center text-center my-5"  >
+                                    <div class="col-1 align-items-center text-center my-5"  >
                                         <div class="row">
                                             <div class="row">
                                                 <h6>
@@ -147,7 +147,7 @@
                                                     <select  name="horaInicio<%=i%>" class='form-control form-control-sm'>
 
 
-                                                        <option value="no" >Nada</option>
+                                                        <option value="null" >Nada</option>
                                                         <option value="07" >7</option>
                                                         <option value="08" >8</option>
                                                         <option value="09" >9</option>
@@ -166,13 +166,6 @@
 
 
                                                     </select>
-                                                </div>
-                                                <div class="col mx-0">
-                                                    <select  name="minInicio<%=i%>" class='form-control form-control-sm'>
-                                                        <option value="00" >00</option>
-                                                        <option value="30" >30</option>
-                                                    </select>
-
                                                 </div>
 
                                             </div>
@@ -183,7 +176,7 @@
                                                 <div class="col">
                                                     <select  name="horaFinal<%=i%>" class='form-control form-control-sm'>
 
-                                                        <option value="no" >Nada</option>
+                                                        <option value="null" >Nada</option>
                                                         <option value="07" >7</option>
                                                         <option value="08" >8</option>
                                                         <option value="09" >9</option>
@@ -203,19 +196,19 @@
 
                                                     </select>
                                                 </div>
-                                                <div class="col">
-                                                    <select  name="minFinal<%=i%>" class='form-control form-control-sm'>
-                                                        <option value="30" >30</option>
-                                                        <option value="00" >00</option>
-                                                    </select>
-                                                </div>
+                                                
                                             </div>
                                             <div class="row">
                                                 <h6>
                                                     Frecuencia de consulta<br>
-                                                    (minutos)
                                                 </h6>
-                                                <input type="number" name="frecuencia<%=i%>" class="form-control form-control-sm" required />
+                                                <div class="col">
+                                                    <select  name="minFinal<%=i%>" class='form-control form-control-sm'>
+                                                        <option value="null" >Nada</option>
+                                                        <option value="30" >Cada 30 Minutos</option>
+                                                        <option value="00" >Cada 60 Minutos</option>
+                                                    </select>
+                                                </div>
 
                                             </div>
 
@@ -223,6 +216,8 @@
 
                                     </div>  
                                 <%}%>
+                                
+                                <div class="col"></div>
 
                              
 
@@ -240,6 +235,21 @@
                                             
                                             
 
+                            <div class="row">
+
+                                <div class="col" >
+
+                                </div>
+                                <div class="col-4" >
+                                    <h6>
+                                        NOTA: Para que el horario sea tomado en cuenta todos los campos deben estar seleccionados
+                                    </h6>
+                                </div>
+                                <div class="col" >
+
+                                </div>
+                            </div>
+                                
                             <div class="row">
 
                                 <div class="col-2" style="border-top: 3px solid #20304c">

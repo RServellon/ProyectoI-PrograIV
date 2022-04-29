@@ -71,6 +71,8 @@ public class ControladorMedico extends HttpServlet {
                         session.setAttribute("fecha", fecha);
                         
                         System.out.println(fecha.toString());
+                        
+                        
                         request.getRequestDispatcher("/VistaMedico/ConfiguraciónInicialDelPerfil.jsp").forward(request, response);
                     }else{
                         request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
@@ -102,7 +104,9 @@ public class ControladorMedico extends HttpServlet {
                     System.out.println("Medico actualizado");
                     System.out.println(m);
                     
-                    request.getRequestDispatcher("/login/show").forward(request, response);
+//                    this.buidCitas(request, medicoHandler);
+                    
+                    request.getRequestDispatcher("/login/show").forward(request, response);//TODO: cambiar a que mande a la parte de confit perfil
                     
                     
                     break;

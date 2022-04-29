@@ -50,7 +50,7 @@
                 </div>
             </nav>
         <% }%>
-        <% if (user != null && user.getTipo()=="admin"){%>
+        <% if (user != null && user.getTipo().equals("admin")){%>
         <nav class="navbar navbar-light " style="background-color: #20304c;">
             <a class="navbar-brand mx-4" href="/mavenproject1/index.jsp" style="color: white">
                 <img src="/mavenproject1/assets/Icon pages/home.png">
@@ -98,7 +98,7 @@
             </div>
         </nav>
         <% }%>
-        <% if (user != null && user.getTipo() == "medico") {%>
+        <% if (user != null && user.getTipo().equals("medico") ) {%>
         <nav class="navbar navbar-light " style="background-color: #20304c;">
             <a class="navbar-brand mx-4" href="/mavenproject1/index.jsp" style="color: white">
                 <img src="/mavenproject1/assets/Icon pages/home.png">
@@ -146,7 +146,7 @@
             </div>
         </nav>
         <% }%>
-        <% if (user != null && user.getTipo() == "paciente") {%>
+        <% if (user != null && user.getTipo().equals("paciente")) {%>
         <nav class="navbar navbar-light " style="background-color: #20304c;">
             <a class="navbar-brand mx-4" href="/mavenproject1/index.jsp" style="color: white">
                 <img src="/mavenproject1/assets/Icon pages/home.png">
