@@ -1,6 +1,6 @@
 <%-- 
-    Document   : aboutUs
-    Created on : 20 abr. 2022, 8:35:40
+    Document   : Error
+    Created on : 25 abr. 2022, 12:36:36
     Author     : norma
 --%>
 
@@ -12,7 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%@ include file  ="/Components/Header.jsp" %>
-        <h1>About US!</h1>
+        <h1>Error</h1>
     </body>
 </html>

@@ -4,59 +4,55 @@
  */
 package Modelo;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.logging.Logger;
 
 /**
  *
  * @author norma
  */
-public class Medico {
-    private String id;
-    private String nombre;
+public class Medico extends Usuario {
     private String especialidad;
     private String ciudad;
-    private Double costoConsulta;
-    private constructorDeHorario horario;
+    private double costoConsulta;
     private String clinica;
     private String estado;
     private String rutaFotoPerfil;
-    private String resena;
-    
-    
     
     public Medico() {
         
     }
-   
     
+    public Medico(Usuario user){
+        super.setNombre(user.getNombre());
+        super.setId(user.getId());
+        super.setClave(user.getClave());
+        super.setTipo(user.getTipo());
+    }
 
-    public Medico(String id, String nombre, String especialidad, String ciudad, Double costoConsulta, constructorDeHorario horario, String clinica, String estado, String rutaFotoPerfil, String resena) {
-        this.id = id;
-        this.nombre = nombre;
+    public Medico(String especialidad, String ciudad, double costoConsulta, String clinica, String estado, String rutaFotoPerfil) {
         this.especialidad = especialidad;
         this.ciudad = ciudad;
         this.costoConsulta = costoConsulta;
-        this.horario = horario;
         this.clinica = clinica;
         this.estado = estado;
         this.rutaFotoPerfil = rutaFotoPerfil;
-        this.resena = resena;
     }
+
+    public Medico(String especialidad, String ciudad, double costoConsulta, Horario horario, String clinica, String estado, String rutaFotoPerfil, String id, String nombre, String clave, String tipo) {
+        super(id, nombre, clave, tipo);
+        this.especialidad = especialidad;
+        this.ciudad = ciudad;
+        this.costoConsulta = costoConsulta;
+        this.clinica = clinica;
+        this.estado = estado;
+        this.rutaFotoPerfil = rutaFotoPerfil;
+    }
+   
+   
 
    
     
     //sets
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
@@ -78,27 +74,12 @@ public class Medico {
         this.costoConsulta = costoConsulta;
     }
 
-    public void setHorario(constructorDeHorario horario) {
-        this.horario = horario;
-    }
 
     public void setRutaFotoPerfil(String rutaFotoPerfil) {
         this.rutaFotoPerfil = rutaFotoPerfil;
     }
-
-    public void setResena(String resena) {
-        this.resena = resena;
-    }
-    
     
     //gets
-    public String getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
 
     public String getEspecialidad() {
         return especialidad;
@@ -112,16 +93,9 @@ public class Medico {
         return costoConsulta;
     }
 
-    public constructorDeHorario getHorario() {
-        return horario;
-    }
 
     public String getRutaFotoPerfil() {
         return rutaFotoPerfil;
-    }
-
-    public String getResena() {
-        return resena;
     }
 
     public String getClinica() {
@@ -133,14 +107,18 @@ public class Medico {
     public String getEstado() {
         return estado;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "Medico{" + "id=" + id + ", nombre=" + nombre + ", especialidad=" + especialidad + ", ciudad=" + ciudad + ", costoConsulta=" + costoConsulta + ", horario=" + horario + ", rutaFotoPerfil=" + rutaFotoPerfil + ", resena=" + resena + '}';
+        return "Medico{" + "especialidad=" + especialidad + ", ciudad=" + ciudad + ", costoConsulta=" + costoConsulta + ", clinica=" + clinica + ", estado=" + estado + ", rutaFotoPerfil=" + rutaFotoPerfil + '}';
     }
 
+
+
+ 
+    
+
+   
 
     
     

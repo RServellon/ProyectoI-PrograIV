@@ -1,5 +1,8 @@
 <%-- Document : Login Created on : Apr 13, 2022, 7:04:07 PM Author : @ --%>
+<%
+String error = (String) request.getAttribute("error");
 
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -14,42 +17,8 @@
     </head>
 
     <body class="">
-        <nav class="navbar navbar-light " style="background-color: #20304c;">
-            <a class="navbar-brand mx-4" href="index.jsp" style="color: white">
-                <img src="assets/Icon pages/home.png">
-                <label class="form-label" >Inicio</label>
-            </a>
-
-            <div class="mx-10" id="navbarNav">
-                <ul class="nav justify-content-end" >
-                    <li class="nav-item">
-                        <a class="nav-link active" style="color:white" href="Components/aboutUs.jsp">
-                            <img src="assets/Icon pages/info.png">
-
-                            <label class="form-label" >About</label>
-
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="VistaCliente/PaginaPrincipal.jsp">
-                            <img src="assets/Icon pages/search.png">
-
-                            <label class="form-label" >Buscar</label>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="Login.jsp">
-                            <img src="assets/Icon pages/log-in.png">
-                            <label class="form-label" >Login</label>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-
-
-
+        
+        <%@ include file  ="/Components/Header.jsp" %>
 
 
         <section class="vh-all ">
@@ -59,22 +28,29 @@
 
                     <div class="col-8 col-md-8 col-lg-6 col-xl-5"  >
                         <div class="alert alert-danger " role="alert">
-                            Usuario o contraseña incorrecta
+                            <%if(error == null){%>
+                                Usuario o contraseña incorrecta
+                            
+                            <%}%>
+                            <%if(error != null){%>
+                                <%= error%>
+                            
+                            <%}%>
                         </div> 
                         <div class="ilustration-container " style="text-align:center;"> 
-                            <img src="assets/ilustrations/medic girl.svg" width="50%" height="50%" >
+                            <img src="/mavenproject1/assets/ilustrations/medic girl.svg" width="50%" height="50%" >
                         </div>  
 
                         <div class="card bg-glass" style="border-radius: 1rem;"  >
                             <div class="card-body px-5 py-4 px-md-5 text-center container-login " >
-                                <form method="POST" name="pagina_logeo" action="login" >
+                                <form method="POST" name="pagina_logeo" action="/mavenproject1/login/login" >
 
                                     <div class="mb-md-0 mt-md-4 pb-5">
                                         <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                                         <p class="mb-5" color="gray">Por favor digite su usuario y contraseña!</p>
 
                                         <div id="ingresoUser" class="form-outline form-white mb-4">
-                                            <input type="text" id="nombreUsuario" name="user" class="form-control form-control-lg" />
+                                            <input type="text" id="nombreUsuario" name="id" class="form-control form-control-lg" />
                                             <label class="form-label" for="typeUser">Usuario</label>
                                         </div>
 

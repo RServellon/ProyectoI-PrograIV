@@ -1,6 +1,6 @@
 <%-- 
-    Document   : aboutUs
-    Created on : 20 abr. 2022, 8:35:40
+    Document   : GestionarPerfil
+    Created on : 25 abr. 2022, 11:41:03
     Author     : norma
 --%>
 
@@ -13,6 +13,12 @@
     </head>
     <body>
         <%@ include file  ="/Components/Header.jsp" %>
-        <h1>About US!</h1>
+        <h1>Gestionar perfil de médico</h1>
+        <h1>
+            <%=user.getNombre()%>
+        </h1>
+        <h1>
+            <%=user.getId()%>
+        </h1>
     </body>
 </html>
