@@ -6,18 +6,18 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Medico"%>
+<%@page import="Controlador.Cliente.ModelBusquedaCita"%>
 
 <%
          //clase de servicio para metodos de ayuda
          ClaseServicio ser = ClaseServicio.instance();
          //llamamos a la clase handler del medico para utilizar sus metodos en base de datos
          MedicoHandler handlerMed = new MedicoHandler();
-         String especialidad = (String)request.getAttribute("Especialidad");
-         String provincia = (String)request.getAttribute("Provincia");
+         ModelBusquedaCita model =(ModelBusquedaCita) request.getAttribute("model");;
          //obtenemos la lista con los medicos que se hayan encontrado
-         List<Medico> medicos = handlerMed.listarMedicoPorProvinciaYEspecialidad(provincia, especialidad);
-         Especialidad espec;
+         List<Medico> medicos = handlerMed.listarMedicoPorProvinciaYEspecialidad(model.getProvincia(), model.getEspecialidad());
          List<Horario> listHorarios=null;
+         Especialidad espec = null;
          //Lista de lista de horarios para la vista
          List<List<Horario>> liliHorarios = null;
 %>
@@ -26,12 +26,7 @@
 <html>
     <head>
            <head>
-        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
-        <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Busqueda de cita</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+          <%@ include file="../Components/Head.jsp" %>
         <link href="../CSS/PaginaPrincipalClientes.css" rel="stylesheet">
     </head>
     <body>
@@ -73,8 +68,8 @@
              <div class="row row-padding justify-content-evenly">
                        <div class="alert alert-danger " role="alert">
                             <p class="fs-3">Lo sentimos no hemos encontrado ningun doctor en nuestros registros con
-                              <br> Especialidad: <%=especialidad %>
-                              <br> Pronvincia: <%= provincia %>
+                              <br> Especialidad: <%=model.getEspecialidad() %>
+                              <br> Pronvincia: <%= model.getProvincia() %>
                             </p>
                         </div> 
                    </div> 
