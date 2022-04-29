@@ -130,7 +130,7 @@ public class ControladorRegistro extends HttpServlet {
         request.setAttribute("id", user.getId());
         request.setAttribute("password", user.getClave());
         System.out.println(medico.getId());
-        return "/mavenproject1/configurar-medico-primera-vez";
+        return "/login/show";
     }
 
     private String CrearPaciente(HttpServletRequest request, Usuario user, GeneralHandler general) {

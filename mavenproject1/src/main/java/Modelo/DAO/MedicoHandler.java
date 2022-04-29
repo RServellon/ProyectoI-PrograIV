@@ -35,13 +35,14 @@ public class MedicoHandler extends GeneralHandler {
             try{
                 executor = new SQLExecutor(usernameBD, passwordBD);
                 String valores[] = new String[6];
-                valores[0] = "update medicos set especialidad = ?, costo = ?, ciudad = ?, clinica = ? where medicos id = ?;";
+                valores[0] = "update medicos set especialidad = ?, costo = ?, ciudad = ?, clinica = ? where id = ?;";
                 valores[1] = especialidad;
                 valores[2] = costo;
                 valores[3] = ciudad;
                 valores[4] = clinica;
                 valores[5] = id;
                 executor.prepareStatement(valores);
+                respuesta = true;
                   
             } catch(Exception throwables){
                 throwables.printStackTrace();

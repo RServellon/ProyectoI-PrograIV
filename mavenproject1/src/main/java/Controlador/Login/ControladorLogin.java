@@ -11,6 +11,7 @@ import Modelo.DAO.GeneralHandler;
 import Modelo.DAO.MedicoHandler;
 import Modelo.DAO.PacienteHandler;
 import Modelo.Especialidad;
+import Modelo.Medico;
 import Modelo.Modelo;
 import Modelo.Usuario;
 import java.io.IOException;
@@ -256,6 +257,7 @@ public class ControladorLogin extends HttpServlet {
 
     private String showActionRequest(HttpServletRequest request) {
         Modelo model = (Modelo) request.getAttribute("model");
+        request.getSession(true).invalidate();
         model.getCurrent().setId("");
         model.getCurrent().setClave("");
         return "/Login.jsp";
@@ -269,23 +271,27 @@ public class ControladorLogin extends HttpServlet {
             Usuario user = general.retornaUserPorId(newUser.getId());
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
-            System.out.println("\n Usuario<<<<<<<<<<<<<<<<>>>>>>>>>>>>>");
             System.out.println(user);
-            System.out.println("Usuario<<<<<<<<<<<<<<<<>>>>>>>>>>>>>");
 
             switch (user.getTipo()) {
                 case "admin":
                     return "/mavenproject1/admin-dash-board";
                 case "medico":
+                    
+//                    Medico mm = general.retornaMedicoPorId(newUser.getId());
+//                    if (mm.getEstado().equals("ESP") ) {
+//                        
+//                        showActionRequest(request);
+//                        request.setAttribute("error", "Su solicitud se encuentra en revision");
+//                        return "/Components/LoginError.jsp";
+//                    }
                     return "/mavenproject1/paciente/gestion/perfil";//todo
                 case "paciente":
                     return "/index.jsp";//todo
             }
         } else {
-            System.out.println("entra al error");
             return "/Components/LoginError.jsp";
         }
-            System.out.println("entra al error");
         return "/Components/LoginError.jsp";
     }
 

@@ -117,6 +117,25 @@
 
                         </form>
                     </div>
+                                            
+                                            
+                                            
+                    <div class="row my-5">
+
+                        <div class="col-2" style="border-bottom: 3px solid #20304c">
+
+                        </div>
+                        <div class="col-8 align-items-center text-center" style="border-bottom: 3px solid #20304c">
+                            <h4>
+                                Hola <%=user.getNombre()%>! porfavor termina de configurar la información de tu perfil
+                            </h4>
+
+                        </div>
+                        <div class="col-2" style="border-bottom: 3px solid #20304c">
+
+                        </div>
+                    </div>
+
                     
         </div>
         

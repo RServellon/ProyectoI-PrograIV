@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  *
@@ -24,6 +26,29 @@ public class Fecha {
     public Fecha(String fechaHora) {
         fechaHoraFormateada(fechaHora);
     }
+    
+    public Fecha creearFechaMasDias(int dias) {
+        DateTimeFormatter dtf;
+        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        return new Fecha(dtf.format(fechaHora.plusDays(dias)));
+    }
+
+    public String getDiaLiteral() {
+        return fechaHora.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
+    }
+
+    public int getDiaDelMes() {
+        return fechaHora.getDayOfMonth();
+    }
+
+    public int getDiaDelAnnio() {
+        return fechaHora.getDayOfYear();
+    }
+
+    public String getMesLiteral() {
+        return fechaHora.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+    }
+
 
     public LocalDateTime getFechaHora() {
         return fechaHora;

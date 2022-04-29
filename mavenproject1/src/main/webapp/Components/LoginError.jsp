@@ -1,5 +1,8 @@
 <%-- Document : Login Created on : Apr 13, 2022, 7:04:07 PM Author : @ --%>
+<%
+String error = (String) request.getAttribute("error");
 
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +28,14 @@
 
                     <div class="col-8 col-md-8 col-lg-6 col-xl-5"  >
                         <div class="alert alert-danger " role="alert">
-                            Usuario o contraseña incorrecta
+                            <%if(error == null){%>
+                                Usuario o contraseña incorrecta
+                            
+                            <%}%>
+                            <%if(error != null){%>
+                                <%= error%>
+                            
+                            <%}%>
                         </div> 
                         <div class="ilustration-container " style="text-align:center;"> 
                             <img src="/mavenproject1/assets/ilustrations/medic girl.svg" width="50%" height="50%" >

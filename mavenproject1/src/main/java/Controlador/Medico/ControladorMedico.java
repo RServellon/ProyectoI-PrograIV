@@ -6,11 +6,15 @@ package Controlador.Medico;
 
 import Modelo.Ciudad;
 import Modelo.DAO.GeneralHandler;
+import Modelo.DAO.MedicoHandler;
 import Modelo.Especialidad;
+import Modelo.Fecha;
 import Modelo.Medico;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +44,8 @@ public class ControladorMedico extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
 
-//            HttpSession session = request.getSession(true);
+            HttpSession session = request.getSession(true);
+            GeneralHandler general = new GeneralHandler();
 //            Usuario user = (Usuario) session.getAttribute("user");
 //            System.out.println(user);
 //            request.setAttribute("clave", user.getClave());
@@ -49,23 +54,24 @@ public class ControladorMedico extends HttpServlet {
                     request.getRequestDispatcher("/login/show").forward(request, response);
                     break;
                 case "/mavenproject1/paciente/gestion/perfil":
-                    GeneralHandler general = new GeneralHandler();
-                    HttpSession session = request.getSession(true);
+                    
                     Usuario user = (Usuario) session.getAttribute("user");
                     Medico medico =  general.retornaMedicoPorId(user.getId());
                     System.out.println(medico);
-                    
-                    if (medico.getEstado()==null) {
-                        System.out.println("Primer ingreso, iinigrese a terminar de configurar el perfil");  
+                    //medico.getClinica() == null || medico.getCiudad() == null || medico.getEspecialidad() == null 
+                    if (true) {
                         List<Ciudad> ciudades = general.listarCiudades();
                         session.setAttribute("ciudades", ciudades);
                         List<Especialidad> esp =  general.listarEspecialidades();
                         session.setAttribute("especialidades", esp);
-                        System.out.println(esp);
-                        System.out.println(ciudades);
+                        
+                        DateTimeFormatter dtf;
+                        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                        Fecha fecha = new Fecha(dtf.format(LocalDateTime.now()));
+                        
+                        System.out.println(fecha.toString());
                         request.getRequestDispatcher("/VistaMedico/ConfiguraciónInicialDelPerfil.jsp").forward(request, response);
                     }else{
-                        System.out.println("Ingresar a configurar los datos de configurar el perfil");  
                         request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
                     }
                     
@@ -75,6 +81,7 @@ public class ControladorMedico extends HttpServlet {
                     break;
                 case "/configurar/medico/actualizar/datos":
                     
+                    Usuario usuario = (Usuario) session.getAttribute("user");
                     String especialidad = (String) request.getParameter("especialidad");
                     String codeCiudad = (String) request.getParameter("ciudad");
                     String costoConsulta = (String)request.getParameter("costoConsulta");
@@ -86,6 +93,15 @@ public class ControladorMedico extends HttpServlet {
                     System.out.println(costoConsulta);
                     System.out.println(clinica);
                     System.out.println(foto);
+                    System.out.println(usuario.getId());
+                    
+                    MedicoHandler medicoHandler = new MedicoHandler();
+                    System.out.println(medicoHandler.modificarDatos(usuario.getId(), especialidad, costoConsulta, codeCiudad, clinica));
+                    Medico m = general.retornaMedicoPorId(usuario.getId());
+                    System.out.println("Medico actualizado");
+                    System.out.println(m);
+                    
+                    request.getRequestDispatcher("/login/show").forward(request, response);
                     
                     
                     break;
