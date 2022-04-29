@@ -33,36 +33,10 @@
         <%@ include file  ="../Components/Header.jsp" %>
         
           <div class="container-lg">
-<!--        fila de busqueda(HACERLO EN INCLUDE-->
-              <div class="row row-padding" >
-          <form class="form-inline d-flex" method="POST" name="BusquedaCita" action="search">
-                
-<!--                campo de busqueda especialidad-->
-            <div class="col-sm d-flex">
-                <div class="input-group-prepend">
-                   <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-briefcase-medical icons"></i></span>
-                </div>
-                <input name="Especialidad" type="text" class="form-control fs-4" placeholder="Especialidad" aria-label="Especialidad" aria-describedby="basic-addon1">
-            </div>
+      <!--        fila de busqueda-->
+        <%@ include file  ="/Components/BarraBusqueda.jsp" %>
 
-<!--                campo de busqueda provincia-->
-             <div class="col-sm d-flex col-padding margin-space">
-                <div class="input-group-prepend margin-space">
-                   <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-city icons"></i></span>
-                </div>
-               <input name= "Provincia" type="text" class="form-control fs-4" placeholder="Provincia" aria-label="Provincia" aria-describedby="basic-addon1">
-             </div>
-
- <!--                cboton de submit-->
-              <div class="col-sm d-flex justify-content-evenly">
-                  <div class="">
-                      <button class="btn btn-primary my-2 my-sm-0 boton fs-4" type="submit">Buscar</button>
-                  </div>
-              </div>
-                
-          </form>
-       </div>
-
+        
 <!--    Se realiza un if si no se encuentra informacion para ningun medico-->
      <% if(medicos.isEmpty()){%>
              <div class="row row-padding justify-content-evenly">
@@ -85,7 +59,7 @@
                       <div class="block-size">
                       <img src="../assets/images/retrato-perfil-doc.jpg" class="imagen-perfil">
                       <% espec=handlerMed.retornaEspecialidadPorCodigo(c.getEspecialidad()); %>
-                      <p class="p-especialidad fs-4" title=<%=espec.getDescripcion()%> <%= espec.getNombre()%></p>
+                      <p class="p-especialidad fs-4" title=<%=espec.getDescripcion()%> <%= espec.getNombre()%> > </p>
                       </div>
                       <div>
                        <p class="fs-4 fw-bold p-info-doc"><%=c.getNombre()%></p>
@@ -99,7 +73,7 @@
                       
                
                <!--            Columnas de los horarios-->
-            <div id="scroll" class="container-horarios d-flex" style="overflow-x: auto; overflow-y: auto; white-space: nowrap; max-width: 900px;" >
+            <div id="scroll" class="container-horarios d-flex" style="overflow-x: auto; overflow-y: auto; white-space: nowrap; max-width: 700px;" >
                 <% listHorarios=handlerMed.listarHorarios(c.getId()); 
                  liliHorarios = ser.retornarListaListaHorarios(listHorarios);
                 if(!liliHorarios.isEmpty() || liliHorarios != null){
