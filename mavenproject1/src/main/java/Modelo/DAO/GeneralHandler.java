@@ -5,6 +5,7 @@
 package Modelo.DAO;
 
 import Modelo.Calificacion;
+import Modelo.Cita;
 import Modelo.Ciudad;
 import Modelo.DAO.SQLConnection.SQLExecutor;
 import Modelo.Especialidad;
@@ -29,8 +30,8 @@ import java.util.List;
  * listar medicos aprobados
  */
 public class GeneralHandler {
-//    final String usernameBD = "sa";
-    final String usernameBD = "sas";
+    final String usernameBD = "sa";
+//    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 
@@ -476,4 +477,28 @@ public class GeneralHandler {
         }
         return calif;
     }
+      
+      public Cita retornaCitaPorCodigo(String codigo){
+        Cita cita = new Cita();
+        String sql ="select * from citas where codigo = " + codigo + ";";
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql);
+            while (rs.next()){
+                cita.setId_medico(rs.getString("id_medico"));   
+                cita.setId_paciente(rs.getString("id_paciente"));
+                cita.setFecha(rs.getString("fechaHora"));
+                cita.setEstado(rs.getString("estado"));
+                cita.setAnotaciones(rs.getString("anotaciones"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return cita;
+    }
+    
+      
+    
 }
