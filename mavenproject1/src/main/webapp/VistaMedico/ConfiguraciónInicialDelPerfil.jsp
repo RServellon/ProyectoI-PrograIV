@@ -3,6 +3,7 @@
     Created on : 25 abr. 2022, 15:08:29
     Author     : norma
 --%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Fecha"%>
 <%@page import="Modelo.Especialidad"%>
 <%@page import="java.util.List"%>
@@ -17,6 +18,15 @@
     Fecha fecha5 = fecha1.creearFechaMasDias(4);
     Fecha fecha6 = fecha1.creearFechaMasDias(5);
     Fecha fecha7 = fecha1.creearFechaMasDias(6);
+    
+    List<Fecha> fechas = new ArrayList<Fecha>();
+    fechas.add(fecha1);
+    fechas.add(fecha2);
+    fechas.add(fecha3);
+    fechas.add(fecha4);
+    fechas.add(fecha5);
+    fechas.add(fecha6);
+    fechas.add(fecha7);
     
 
 
@@ -121,527 +131,116 @@
 
 
                              
-                                <div class="col align-items-center text-center my-5"  >
-                                    <div class="row">
+                                <%for(int i = 0; i<7; i++){%>
+                                    <div class="col align-items-center text-center my-5"  >
                                         <div class="row">
-                                            <h6>
-                                                <%= fecha1.getDiaLiteral()%> <%= fecha1.getDiaDelMes()%> de <%= fecha1.getMesLiteral()%>
-                                            </h6>
+                                            <div class="row">
+                                                <h6>
+                                                    <%= fechas.get(i).getDiaLiteral()%> <%= fechas.get(i).getDiaDelMes()%> de <%= fechas.get(i).getMesLiteral()%>
+                                                </h6>
+                                            </div>
+                                            <div class="row">
+                                                <h6>
+                                                    Hora de inicio:
+                                                </h6>
+                                                <div class="col mx-0">
+                                                    <select  name="horaInicio<%=i%>" class='form-control form-control-sm'>
+
+
+                                                        <option value="no" >Nada</option>
+                                                        <option value="07" >7</option>
+                                                        <option value="08" >8</option>
+                                                        <option value="09" >9</option>
+                                                        <option value="10" >10</option>
+                                                        <option value="11" >11</option>
+                                                        <option value="12" >12</option>
+                                                        <option value="13" >13</option>
+                                                        <option value="14" >14</option>
+                                                        <option value="15" >15</option>
+                                                        <option value="16" >16</option>
+                                                        <option value="17" >17</option>
+                                                        <option value="18" >18</option>
+                                                        <option value="19" >19</option>
+                                                        <option value="20" >20</option>
+                                                        <option value="21" >21</option>
+
+
+                                                    </select>
+                                                </div>
+                                                <div class="col mx-0">
+                                                    <select  name="minInicio<%=i%>" class='form-control form-control-sm'>
+                                                        <option value="00" >00</option>
+                                                        <option value="30" >30</option>
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <h6>
+                                                    Hora final:
+                                                </h6>
+                                                <div class="col">
+                                                    <select  name="horaFinal<%=i%>" class='form-control form-control-sm'>
+
+                                                        <option value="no" >Nada</option>
+                                                        <option value="07" >7</option>
+                                                        <option value="08" >8</option>
+                                                        <option value="09" >9</option>
+                                                        <option value="10" >10</option>
+                                                        <option value="11" >11</option>
+                                                        <option value="12" >12</option>
+                                                        <option value="13" >13</option>
+                                                        <option value="14" >14</option>
+                                                        <option value="15" >15</option>
+                                                        <option value="16" >16</option>
+                                                        <option value="17" >17</option>
+                                                        <option value="18" >18</option>
+                                                        <option value="19" >19</option>
+                                                        <option value="20" >20</option>
+                                                        <option value="21" >21</option>
+
+
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <select  name="minFinal<%=i%>" class='form-control form-control-sm'>
+                                                        <option value="30" >30</option>
+                                                        <option value="00" >00</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <h6>
+                                                    Frecuencia de consulta<br>
+                                                    (minutos)
+                                                </h6>
+                                                <input type="number" name="frecuencia<%=i%>" class="form-control form-control-sm" required />
+
+                                            </div>
+
                                         </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora de inicio:
-                                                <select  name="horaInicio1" class='form-control form-control-sm'>
 
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora final:
-                                                <select  name="horaFinal1" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-                                                    <option value="21" >9 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Frecuencia de consulta<br>
-                                                (minutos)
-                                            </h6>
-                                            <input type="number" name="frecuencia1" class="form-control form-control-sm" required />
-
-                                        </div>
-
-                                    </div>
-
-                                </div>  
+                                    </div>  
+                                <%}%>
 
                              
-                                <div class="col align-items-center text-center my-5"  >
-                                    <div class="row">
-                                        <div class="row">
-                                            <h6>
-                                                <%= fecha2.getDiaLiteral()%> <%= fecha2.getDiaDelMes()%> de <%= fecha2.getMesLiteral()%>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora de inicio:
-                                                <select  name="horaInicio2" class='form-control form-control-sm'>
 
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora final:
-                                                <select  name="horaFinal2" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-                                                    <option value="21" >9 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Frecuencia de consulta<br>
-                                                (minutos)
-                                            </h6>
-                                            <input type="number" name="frecuencia2" class="form-control form-control-sm" required />
-
-                                        </div>
-
-                                    </div>
-
-                                </div>  
-
-                             
-                                <div class="col align-items-center text-center my-5"  >
-                                    <div class="row">
-                                        <div class="row">
-                                            <h6>
-                                                <%= fecha3.getDiaLiteral()%> <%= fecha3.getDiaDelMes()%> de <%= fecha3.getMesLiteral()%>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora de inicio:
-                                                <select  name="horaInicio3" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora final:
-                                                <select  name="horaFinal3" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-                                                    <option value="21" >9 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Frecuencia de consulta<br>
-                                                (minutos)
-                                            </h6>
-                                            <input type="number" name="frecuencia3" class="form-control form-control-sm" required />
-
-                                        </div>
-
-                                    </div>
-
-                                </div>  
-
-                             
-                                <div class="col align-items-center text-center my-5"  >
-                                    <div class="row">
-                                        <div class="row">
-                                            <h6>
-                                                <%= fecha4.getDiaLiteral()%> <%= fecha4.getDiaDelMes()%> de <%= fecha4.getMesLiteral()%>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora de inicio:
-                                                <select  name="horaInicio4" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora final:
-                                                <select  name="horaFinal4" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-                                                    <option value="21" >9 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Frecuencia de consulta<br>
-                                                (minutos)
-                                            </h6>
-                                            <input type="number" name="frecuencia4" class="form-control form-control-sm" required />
-
-                                        </div>
-
-                                    </div>
-
-                                </div>  
 
                             </div>
                                             
                                             
-                            <div class="row" style="">
-
-
-                             
-                                <div class="col align-items-center text-center"  >
-                                    <div class="row">
-                                        <div class="row">
-                                            <h6>
-                                                <%= fecha5.getDiaLiteral()%> <%= fecha5.getDiaDelMes()%> de <%= fecha5.getMesLiteral()%>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora de inicio:
-                                                <select  name="horaInicio5" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora final:
-                                                <select  name="horaFinal5" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-                                                    <option value="21" >9 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Frecuencia de consulta<br>
-                                                (minutos)
-                                            </h6>
-                                            <input type="number" name="frecuencia5" class="form-control form-control-sm" required />
-
-                                        </div>
-
-                                    </div>
-
-                                </div>  
-
-                             
-                                <div class="col align-items-center text-center"  >
-                                    <div class="row">
-                                        <div class="row">
-                                            <h6>
-                                                <%= fecha6.getDiaLiteral()%> <%= fecha6.getDiaDelMes()%> de <%= fecha6.getMesLiteral()%>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora de inicio:
-                                                <select  name="horaInicio6" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora final:
-                                                <select  name="horaFinal6" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-                                                    <option value="21" >9 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Frecuencia de consulta<br>
-                                                (minutos)
-                                            </h6>
-                                            <input type="number" name="frecuencia6" class="form-control form-control-sm" required />
-
-                                        </div>
-
-                                    </div>
-
-                                </div>  
-
-                             
-                                <div class="col align-items-center text-center"  >
-                                    <div class="row">
-                                        <div class="row">
-                                            <h6>
-                                                <%= fecha7.getDiaLiteral()%> <%= fecha7.getDiaDelMes()%> de <%= fecha7.getMesLiteral()%>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora de inicio:
-                                                <select  name="horaInicio7" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Hora final:
-                                                <select  name="horaFinal7" class='form-control form-control-sm'>
-
-
-                                                    <option value="07" >7 AM</option>
-                                                    <option value="08" >8 AM</option>
-                                                    <option value="09" >9 AM</option>
-                                                    <option value="10" >10 AM</option>
-                                                    <option value="11" >11 AM</option>
-                                                    <option value="12" >12 AM</option>
-                                                    <option value="13" >1 PM</option>
-                                                    <option value="14" >2 PM</option>
-                                                    <option value="15" >3 PM</option>
-                                                    <option value="16" >4 PM</option>
-                                                    <option value="17" >5 PM</option>
-                                                    <option value="18" >6 PM</option>
-                                                    <option value="19" >7 PM</option>
-                                                    <option value="20" >8 PM</option>
-                                                    <option value="21" >9 PM</option>
-
-
-                                                </select>
-                                            </h6>
-                                        </div>
-                                        <div class="row">
-                                            <h6>
-                                                Frecuencia de consulta<br>
-                                                (minutos)
-                                            </h6>
-                                            <input type="number" name="frecuencia7" class="form-control form-control-sm" required />
-
-                                        </div>
-
-                                    </div>
-
-                                </div>  
-
-                            </div>
+                            
                                
                             
 
-                            </div>
                                             
                                             
                                             
                                             
                                             
 
-                            <div class="row my-5">
+                            <div class="row">
 
                                 <div class="col-2" style="border-top: 3px solid #20304c">
 
