@@ -62,9 +62,12 @@ Esta pagina mostrara los resultados de la busqueda realizada de medicos
             <div class="container-info d-flex" style="max-width: 360px;">
                 <div class="d-flex">
                       <div class="block-size">
-                      <img src="../assets/images/retrato-perfil-doc.jpg" class="imagen-perfil">
+                        <!-- Probando insertar img --> 
+                    <div>
+                        <img src="/mavenproject1/configurar/medico/image?id=<%=c.getId()%>" alt/>
+                    </div>
                       <% espec=handlerMed.retornaEspecialidadPorCodigo(c.getEspecialidad()); %>
-                      <p class="p-especialidad fs-4" title=<%=espec.getDescripcion()%> <%= espec.getNombre()%> > </p>
+                      <p class="p-especialidad fs-4" title= "<%=espec.getDescripcion()%>" <%= espec.getNombre()%> > </p>
                       </div>
                       <div>
                        <p class="fs-4 fw-bold p-info-doc"><%=c.getNombre()%></p>

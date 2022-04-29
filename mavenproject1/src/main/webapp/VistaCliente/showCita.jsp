@@ -18,7 +18,7 @@
 <!--                <div class="col"></div>-->
               <div class="col shadow p-3 mb-5 bg-body rounded" style="max-width: 300px; margin-top: 3em;">
                   <div class="" style="max-height:400px; margin-left: 3em; margin-right: auto;">
-                        <img src="../assets/images/retrato-perfil-doc.jpg" class="" style="border-radius: 50%; max-height: 220px;">
+                        <img src="../assets/images/102.jpg" class="" style="border-radius: 50%; max-height: 220px;">
                   </div>
                   <hr>
                   <div class="d-flex" style="font-size: 20px;">

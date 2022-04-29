@@ -12,22 +12,29 @@ import Modelo.Fecha;
 import Modelo.Medico;
 import Modelo.Usuario;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+import javax.ws.rs.Path;
 
 /**
  *
  * @author norma
  */
-@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos"})
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos", "/configurar/medico/image"})
+@MultipartConfig(location="C:/Users/rebec/OneDrive/Escritorio/img")
 public class ControladorMedico extends HttpServlet {
 
     /**
@@ -42,13 +49,22 @@ public class ControladorMedico extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try ( OutputStream output = response.getOutputStream()) {
 
             HttpSession session = request.getSession(true);
             GeneralHandler general = new GeneralHandler();
 //            Usuario user = (Usuario) session.getAttribute("user");
 //            System.out.println(user);
 //            request.setAttribute("clave", user.getClave());
+
+            MedicoHandler medicoHandler = new MedicoHandler();
+            Usuario usuario = (Usuario) session.getAttribute("user");
+            String especialidad = (String) request.getParameter("especialidad");
+            String codeCiudad = (String) request.getParameter("ciudad");
+            String costoConsulta = (String)request.getParameter("costoConsulta");
+            String clinica = (String) request.getParameter("clinica");
+            //String foto = (String) request.getParameter("foto");
+          
             switch (request.getServletPath()) {
                 case "/mavenproject1/configurar-medico-primera-vez":
                     request.getRequestDispatcher("/login/show").forward(request, response);
@@ -82,30 +98,37 @@ public class ControladorMedico extends HttpServlet {
                     break;
                 case "/configurar/medico/actualizar/datos":
                     
-                    Usuario usuario = (Usuario) session.getAttribute("user");
-                    String especialidad = (String) request.getParameter("especialidad");
-                    String codeCiudad = (String) request.getParameter("ciudad");
-                    String costoConsulta = (String)request.getParameter("costoConsulta");
-                    String clinica = (String) request.getParameter("clinica");
-                    String foto = (String) request.getParameter("foto");
+                    Medico m = general.retornaMedicoPorId(usuario.getId());
+                    //System.out.println(m);
+                    
+                    // Prueba cargar imagen
                     
                     System.out.println(especialidad);
                     System.out.println(codeCiudad);
                     System.out.println(costoConsulta);
                     System.out.println(clinica);
-                    System.out.println(foto);
+                    //System.out.println(foto);
                     System.out.println(usuario.getId());
                     
-                    MedicoHandler medicoHandler = new MedicoHandler();
-                    System.out.println(medicoHandler.modificarDatos(usuario.getId(), especialidad, costoConsulta, codeCiudad, clinica));
-                    Medico m = general.retornaMedicoPorId(usuario.getId());
-                    System.out.println("Medico actualizado");
-                    System.out.println(m);
+                    final Part imagen;
+                    imagen = request.getPart("imagen");
+                    imagen.write(m.getId());
                     
                     request.getRequestDispatcher("/login/show").forward(request, response);
                     
                     
                     break;
+                case "/configurar/medico/image":
+                    String id = request.getParameter("id");
+                    System.out.println("Entra " + id);
+                    
+                    java.nio.file.Path path = FileSystems.getDefault().getPath("C:/Users/rebec/OneDrive/Escritorio/img", id);
+                    
+                    Files.copy(path, output);
+                    output.flush();
+                
+                    break;
+
                 default:
                     request.getRequestDispatcher("/Components/Error.jsp").forward(request, response);
             }

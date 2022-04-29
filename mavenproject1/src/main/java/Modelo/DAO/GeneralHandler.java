@@ -29,8 +29,8 @@ import java.util.List;
  * listar medicos aprobados
  */
 public class GeneralHandler {
-//    final String usernameBD = "sa";
-    final String usernameBD = "sas";
+    final String usernameBD = "sa";
+//    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 
