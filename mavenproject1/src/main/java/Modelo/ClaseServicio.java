@@ -54,7 +54,7 @@ public class ClaseServicio {
         }
         return listlistH;
     }
-    
+     //retornara una lista con con las horas en cada frecuencia LA FECHA Y LA HORA 
     public List<String> horasSegunFrecuencia(Horario horario){
         MedicoHandler handler = new MedicoHandler();
         List<String> horas = new ArrayList();
@@ -75,6 +75,34 @@ public class ClaseServicio {
                     horas.add(fechaB);
                 }
                 
+            }
+        }
+        return horas;
+    }
+    
+    //retornara una lista con con las horas en cada frecuencia SOLO LAS HORAS
+    public List<String> horasSegunFrecuencia2(Horario horario) {
+        MedicoHandler handler = new MedicoHandler();
+        List<String> horas = new ArrayList();
+        //System.out.println("Antes del for " + horario.getHoraInicialSola() + ", " + horario.getHoraFinalSola());
+
+        for (int i = horario.getHoraInicialSola(); i < horario.getHoraFinalSola(); i++) {
+            String f = horario.getFechaHoraInicio().getFormatoyyyyMMdd();
+            String fechaA = f.concat(" " + String.valueOf(i) + ":00");
+            String horaSolaA = String.valueOf(i) + ":00";
+            if (!handler.verificaHoraRegistrada(horario.getId_medico(), fechaA)) {
+                //System.out.println("Dentro " + f.concat(" " + String.valueOf(i) + ":00"));
+                horas.add(horaSolaA);
+            }
+            //System.out.println("frec " + horario.getFrecuencia());
+            if (horario.getFrecuencia().equals("00:30:00.0000000") && horario.getHoraFinalSola() != i) {
+                //System.out.println("Dentro 2 " + horario.getFechaHoraInicio().getFormatoyyyyMMdd().concat(" " + String.valueOf(i) + ":30"));  
+                String fechaB = f.concat(" " + String.valueOf(i) + ":30");
+                String horaSolaB = String.valueOf(i) + ":30";
+                if (!handler.verificaHoraRegistrada(horario.getId_medico(), fechaB)) {
+                    horas.add(horaSolaB);
+                }
+
             }
         }
         return horas;

@@ -4,6 +4,9 @@
  */
 package Controlador.Cliente;
 
+import Modelo.ClaseServicio;
+import Modelo.DAO.MedicoHandler;
+import Modelo.Medico;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,25 +16,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Dell
+ *Me cargara los datos en el jsp ConfirmarCita.jsp
  */
-@WebServlet(name = "ControladorShowCita", urlPatterns = {"/ControladorShowCita"})
+@WebServlet(name = "ControladorShowCita", urlPatterns = {"/VistaCliente/showCita"})
 public class ControladorShowCita extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
          request.setAttribute("model", new ModelShowCita()); //se manda al request
+         
+        String viewUrl = "";
+        switch (request.getServletPath()) {
+            //si me llega el path de login/show entonces ejecuto una logica para mostrar la vista de show
+            case "/VistaCliente/showCita":
+                viewUrl = showCita(request);
+                break;
+        }
+        //en base a lo que retorno el switch en la variable viewUrl realiza el foward respectivo
+        request.getRequestDispatcher(viewUrl).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,5 +75,24 @@ public class ControladorShowCita extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    private String showCita(HttpServletRequest request) {
+       return showActionCita(request);
+    }
+
+    private String showActionCita(HttpServletRequest request) {
+        this.updateModel(request);
+        return "/VistaCliente/showCita.jsp";
+    }
+        
+    void updateModel(HttpServletRequest request) {
+        ModelShowCita model = (ModelShowCita) request.getAttribute("model");
+        
+        MedicoHandler medH = new MedicoHandler();
+        Medico med = medH.retornaMedicoPorId(request.getParameter("idMed"));
+        model.setMedico(med);
+        model.setFecha(request.getParameter("fechaCita"));
+        model.setHoraCita(request.getParameter("horaCita"));
+        System.out.println(model.toString());
+    }
 
 }

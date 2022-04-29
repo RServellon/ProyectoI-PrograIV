@@ -6,17 +6,16 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Modelo.Usuario"%>
-<% Usuario user = (Usuario) session.getAttribute("user"); %>
+<% 
+    Usuario user = (Usuario) session.getAttribute("user"); 
+%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+              <%@ include file="../Components/Head.jsp" %>
               <link href="/mavenproject1/CSS/login.css" rel="stylesheet">
     </head>
     <body>
-        
         <% if(user == null){%>
             <nav class="navbar navbar-light " style="background-color: #20304c;">
                 <a class="navbar-brand mx-4" href="/mavenproject1/index.jsp" style="color: white">
@@ -51,7 +50,7 @@
                 </div>
             </nav>
         <% }%>
-        <% if (user != null){%>
+        <% if (user != null && user.getTipo()=="admin"){%>
         <nav class="navbar navbar-light " style="background-color: #20304c;">
             <a class="navbar-brand mx-4" href="/mavenproject1/index.jsp" style="color: white">
                 <img src="/mavenproject1/assets/Icon pages/home.png">
@@ -100,7 +99,6 @@
         </nav>
         <% }%>
         
-         <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
-        <script src="https://kit.fontawesome.com/d621e66b58.js" crossorigin="anonymous"></script>
+     
     </body>
 </html>

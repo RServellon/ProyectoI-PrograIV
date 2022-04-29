@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<!--ESTA PAGINA MUESTRA LA PAGINA PRINCIPAL DONDE APARECERAN LAS CITAS -->
 <!DOCTYPE html>
 <html>
     <head>

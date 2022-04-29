@@ -21,6 +21,11 @@
          //Lista de lista de horarios para la vista
          List<List<Horario>> liliHorarios = null;
 %>
+
+<!--
+Esta pagina mostrara los resultados de la busqueda realizada de medicos
+-->
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -82,13 +87,15 @@
                 <div class="col-sm pad-horario" style="margin-right:15px;" >
                     <h5><%= liliHorarios.get(i).get(0).getFechaHoraFinal().getFormatoddMMyyyy()%></h5>
                      <%  for(Horario hor: liliHorarios.get(i)){%>
-                     <%List<String> horariosF = ser.horasSegunFrecuencia(hor);
-                     System.out.println("Lista horarios String"+ horariosF.toString());
-                     %>
+                     <%List<String> horariosF = ser.horasSegunFrecuencia2(hor); %>
                  <div style="width:100%; height:130px; overflow-y: scroll;">
                     <% for(String horaF : horariosF){ %>   
                    
-                   <a href="ConfirmarCita.jsp"><p><%= hor.HoraInicio_Final() %></p></a>
+                    <a href="/mavenproject1/VistaCliente/showCita?idMed=<%= c.getId() %>&horaCita=<%=horaF%>&fechaCita=<%= hor.getFechaHoraInicio().getFormatoyyyyMMdd() %>" >
+                        <div>
+                        <button type="button" class="btn btn-hover" style="background-color: #20304c; width:60px; height: 30px; margin-bottom: 2px; color:white; padding: 0;"><%= horaF%></button>
+                        </div>
+                    </a>
                       <%}%>
                  </div>
                    

@@ -14,7 +14,7 @@
     <%@ include file  ="/Components/Header.jsp" %>
         
 
-    <h2>Pagina de bienvenida</h2>
+    <h2>PAGINA DE BIENVENIDA</h2>
 </body>
 </html>
 
