@@ -4,9 +4,7 @@
  */
 package Controlador.Cliente;
 
-import Modelo.ClaseServicio;
-import Modelo.DAO.MedicoHandler;
-import Modelo.Medico;
+import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,23 +12,31 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- *Me cargara los datos en el jsp showCita.jsp
+ *Este servlet se activara a la hora de dar click al boton de confirmar cita, verificara primero que haya una sesion iniciada y si no es asi
+ * entonces lo manda a hacer login, cuando hace login me devuelve a la pagina de confirmar cita para ya poder confirmarla y registrar esa cita 
+ * Me debe de mostrar el showCitasMedicas.jsp del usuario  cuando se confirme y registre esa cita
  */
-@WebServlet(name = "ControladorShowCita", urlPatterns = {"/VistaCliente/showCita"})
-public class ControladorShowCita extends HttpServlet {
+@WebServlet(name = "ControladorConfirmarCita", urlPatterns = {"/VistaCliente/confirmarCita"})
+public class ControladorConfirmarCita extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
-         request.setAttribute("model", new ModelShowCita()); //se manda al request
-         
+        response.setContentType("text/html;charset=UTF-8");
+        System.out.println("ENTREEEEEEEE0");
+        HttpSession session = request.getSession(true);
+        Usuario user = (Usuario) session.getAttribute("user");
+        session.setAttribute("user", user);
+        request.setAttribute("model", new ModelConfirmarCita()); //se manda al request
+
         String viewUrl = "";
         switch (request.getServletPath()) {
             //si me llega el path de login/show entonces ejecuto una logica para mostrar la vista de show
-            case "/VistaCliente/showCita":
-                viewUrl = showCita(request);
+            case "/VistaCliente/confirmarCita":
+                System.out.println("ENTREEEEEE1");
+                viewUrl = "/VistaCliente/showCitasMedicas.jsp";
                 break;
         }
         //en base a lo que retorno el switch en la variable viewUrl realiza el foward respectivo
@@ -75,24 +81,5 @@ public class ControladorShowCita extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    private String showCita(HttpServletRequest request) {
-       return showActionCita(request);
-    }
-
-    private String showActionCita(HttpServletRequest request) {
-        this.updateModel(request);
-        return "/VistaCliente/showCita.jsp";
-    }
-        
-    void updateModel(HttpServletRequest request) {
-        ModelShowCita model = (ModelShowCita) request.getAttribute("model");
-        
-        MedicoHandler medH = new MedicoHandler();
-        Medico med = medH.retornaMedicoPorId(request.getParameter("idMed"));
-        model.setMedico(med);
-        model.setFecha(request.getParameter("fechaCita"));
-        model.setHoraCita(request.getParameter("horaCita"));
-        System.out.println(model.toString());
-    }
 
 }

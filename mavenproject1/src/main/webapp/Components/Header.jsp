@@ -132,7 +132,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" style="color: white" href="/mavenproject1/manage/profile">
-                            <img src="/mavenproject1/assets/Icon pages/profile.png">
+                            <i class="fa-solid fa-user-doctor" style="font-size: 20px;"></i>
                             <label class="form-label" ><%=user.getNombre()%></label>
                         </a>
                     </li>
@@ -164,10 +164,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" style="color:white" href="/mavenproject1/admin-dash-board">
-                            <img src="/mavenproject1/assets/Icon pages/admin-dash.png">
+                        <a class="nav-link active" style="color:white" href="/mavenproject1/VistaCliente/showCitasMedicas.jsp">
+                            <i class="fa-solid fa-calendar-days" style="font-size: 20px;"></i>
 
-                            <label class="form-label" >Admin Settings</label>
+                            <label class="form-label" >Citas</label>
 
                         </a>
                     </li>
