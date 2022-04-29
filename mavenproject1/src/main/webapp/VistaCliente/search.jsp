@@ -81,14 +81,18 @@
                %> 
                 <div class="col-sm pad-horario" style="margin-right:15px;" >
                     <h5><%= liliHorarios.get(i).get(0).getFechaHoraFinal().getFormatoddMMyyyy()%></h5>
+                     <%  for(Horario hor: liliHorarios.get(i)){%>
+                     <%List<String> horariosF = ser.horasSegunFrecuencia(hor);
+                     System.out.println("Lista horarios String"+ horariosF.toString());
+                     %>
                  <div style="width:100%; height:130px; overflow-y: scroll;">
-                   <%  for(Horario hor: liliHorarios.get(i)){%>
-                   <%System.out.println("HORARIO: " + hor);%>
-                   <%System.out.println("PRUEBA: " + ser.horasSegunFrecuencia(hor).toString());%>
+                    <% for(String horaF : horariosF){ %>   
                    
                    <a href="ConfirmarCita.jsp"><p><%= hor.HoraInicio_Final() %></p></a>
-                  <%}%>
+                      <%}%>
                  </div>
+                   
+                   <%}%>
                 </div>
              <%}}%>
             </div> <!-- container horarios-->
