@@ -68,6 +68,7 @@ public class ControladorMedico extends HttpServlet {
                         DateTimeFormatter dtf;
                         dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
                         Fecha fecha = new Fecha(dtf.format(LocalDateTime.now()));
+                        session.setAttribute("fecha", fecha);
                         
                         System.out.println(fecha.toString());
                         request.getRequestDispatcher("/VistaMedico/ConfiguraciónInicialDelPerfil.jsp").forward(request, response);
