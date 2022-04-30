@@ -27,6 +27,13 @@ public class Fecha {
         fechaHoraFormateada(fechaHora);
     }
     
+    public String getFormatoYYYY_MM_DD(){
+        String dia = this.fechaHora.getDayOfMonth() >= 10? ""+this.fechaHora.getDayOfMonth():"0" + this.fechaHora.getDayOfMonth();
+        String mes = this.fechaHora.getMonthValue()>= 10? ""+this.fechaHora.getMonthValue():"0" + this.fechaHora.getMonthValue();
+        
+        return this.fechaHora.getYear()+"-"+mes+"-"+dia;
+    }
+    
     public Fecha creearFechaMasDias(int dias) {
         DateTimeFormatter dtf;
         dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
@@ -146,6 +153,17 @@ public class Fecha {
         DateTimeFormatter f =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
         LocalDateTime dateTime = LocalDateTime.parse(fechaHora, f);
         this.fechaHora = dateTime;
+    }
+    
+    public int getAnnio(){
+        return this.fechaHora.getYear();
+    }
+    
+    public boolean sonDiasIguales(Fecha f){
+        if (f.getDiaDelAnnio()== this.getDiaDelAnnio() && f.getAnnio() == this.getAnnio() ) {
+            return true;
+        }
+        return false;
     }
 
     @Override

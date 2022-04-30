@@ -19,7 +19,18 @@ public class Horario {
     private Fecha fecha_hora_final = new Fecha();
     private String frecuencia;
 
+   
+
+    public void setFecha_hora_inicio(Fecha fecha_hora_inicio) {
+        this.fecha_hora_inicio = fecha_hora_inicio;
+    }
+
+    
     public Horario() {
+    }
+    
+    public boolean sonDiasIguales(Fecha f){
+        return fecha_hora_inicio.sonDiasIguales(f);
     }
 
     public Horario(String id_medico, String fechaHora_inicio, String fechaHora_final, String frecuencia) {
