@@ -5,8 +5,10 @@
 package Controlador.Cliente;
 
 import Modelo.Cita;
+import Modelo.ClaseServicio;
 import Modelo.DAO.GeneralHandler;
 import Modelo.DAO.PacienteHandler;
+import Modelo.Fecha;
 import Modelo.Modelo;
 import Modelo.Usuario;
 import java.io.IOException;
@@ -91,32 +93,58 @@ public class ControladorConfirmarCita extends HttpServlet {
     }
 
     private String actionConfirmarCita(HttpServletRequest request, HttpSession http) {
-        this.updateModel(request, http);
         //me verifica que el usuario este registrado , si no lo esta me manda al login (un nuevo servlet)
          ModelConfirmarCita model = (ModelConfirmarCita) request.getAttribute("model");
-         if(!model.confirmarSesion()){
-             return "";
+         updateModel(request, http);
+         if(model.getUser() == null){ //si no hay ninguna sesion iniciada manda al usuario a hacer login en ControladorLoginCita
+             System.out.println("El usuario es null");
+             return "/login/logcita";
+         }else{ //si hay una sesion iniciada entonces registramos la cita y nos vamos a mostrar las citas del usuario
+             //Registramos la cita
+             confirmarCita(request, http);
+             return "/VistaCliente/showCitasMedicas.jsp";
          }
-        
-        return "/VistaCliente/showCitasMedicas.jsp";
     }
     
     void updateModel(HttpServletRequest request,HttpSession http ) {
         ModelConfirmarCita model = (ModelConfirmarCita) request.getAttribute("model");
         //se extrae el user de la sesion
         Usuario user =(Usuario)http.getAttribute("user");
-        System.out.println("USUARIO SESIOOOON: " + user.toString());
+//      System.out.println("USUARIO SESIOOOON: " + user.toString());
         //se inserta en el modelo
         model.setUser(user);
         //Se llama al handler de Pacientes
         PacienteHandler pacHandler = new PacienteHandler();
         //Se extrae la lista de citas de ese usuario
         List<Cita> list = null;
-        if(model.confirmarSesion()){
+        if(model.getUser() != null){
         list = pacHandler.listarCitasPorIdPaciente(model.getUser().getId());
         }
         //se inserta la lista de citas al modelo
         model.setListCitas(list);
+    }
+
+    private void confirmarCita(HttpServletRequest request, HttpSession http) {
+        //se extrae el id del medico del path
+        String idMedicoCita = request.getParameter("idMed");
+        System.out.println("idMedicoCita: "+idMedicoCita);
+        //Se extrae la hora del path
+        String horaCita = request.getParameter("horaCita");
+        System.out.println("horaCita: "+horaCita);
+        //Se extrae la fecha del path
+        String fechaCita = request.getParameter("fecha");
+        System.out.println("fechaCita: "+fechaCita);
+        //Creamos el objeto fecha
+        String fechaTotal = fechaCita+" "+horaCita+":00.0";
+        System.out.println("fechaTotal: "+fechaTotal);
+        //Se crea el objeto fecha
+        Fecha fecha = new Fecha(fechaTotal);
+        //Creamos estado default del la cita
+        String estadoCita = "ESPERA"; 
+        //Creamos un codigo unico para la cita
+        //....
+        //Extraemos el usuario de la sesion
+        Usuario user = (Usuario) http.getAttribute("user");
     }
 
     

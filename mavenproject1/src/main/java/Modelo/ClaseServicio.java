@@ -27,6 +27,9 @@ public class ClaseServicio {
     private ClaseServicio(){
         
     }
+
+    
+    
    
     public List<List<Horario>> retornarListaListaHorarios(List<Horario> li){
         //String para almacenar el formato de dia
@@ -89,7 +92,13 @@ public class ClaseServicio {
         for (int i = horario.getHoraInicialSola(); i < horario.getHoraFinalSola(); i++) {
             String f = horario.getFechaHoraInicio().getFormatoyyyyMMdd();
             String fechaA = f.concat(" " + String.valueOf(i) + ":00");
-            String horaSolaA = String.valueOf(i) + ":00";
+            String horai = "";
+            if(String.valueOf(i).length() == 1){
+            horai = "0"+i;
+            }else{
+            horai = i+"";
+            }
+            String horaSolaA = horai + ":00";
             if (!handler.verificaHoraRegistrada(horario.getId_medico(), fechaA)) {
                 //System.out.println("Dentro " + f.concat(" " + String.valueOf(i) + ":00"));
                 horas.add(horaSolaA);
@@ -98,7 +107,7 @@ public class ClaseServicio {
             if (horario.getFrecuencia().equals("00:30:00.0000000") && horario.getHoraFinalSola() != i) {
                 //System.out.println("Dentro 2 " + horario.getFechaHoraInicio().getFormatoyyyyMMdd().concat(" " + String.valueOf(i) + ":30"));  
                 String fechaB = f.concat(" " + String.valueOf(i) + ":30");
-                String horaSolaB = String.valueOf(i) + ":30";
+                String horaSolaB = horai + ":30";
                 if (!handler.verificaHoraRegistrada(horario.getId_medico(), fechaB)) {
                     horas.add(horaSolaB);
                 }
@@ -107,5 +116,10 @@ public class ClaseServicio {
         }
         return horas;
     }
-
+    
+    public int generarAleatorio(){
+        int numero = (int)(Math.random()*2000+1);
+        
+        return numero;
+    }
 }

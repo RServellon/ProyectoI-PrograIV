@@ -13,33 +13,16 @@ import java.util.List;
  */
 public class principal {
     public static void main (String [ ] args) {
-
- //clase de servicio para metodos de ayuda
-    ClaseServicio ser = ClaseServicio.instance();
-    //llamamos a la clase handler del medico para utilizar sus metodos en base de datos
-         MedicoHandler handlerMed = new MedicoHandler();
-         List<Medico> medicos = handlerMed.listarMedicoPorProvinciaYEspecialidad("", "Odontologia");
-         Especialidad espec;
-         List<Horario> listHorarios=null;
-         //Lista de lista de horarios para la vista
-         List<List<Horario>> liliHorarios = null;
-
-                        //Aquí las instrucciones del método
-        listHorarios=handlerMed.listarHorarios(medicos.get(0).getId());
-        liliHorarios = ser.retornarListaListaHorarios(listHorarios);
-        /*
-        Josep
-        [[Horario{id_medico=103, horaFechaInicio=SUNDAY, 10 APRIL 2022 8: 0: 0, horaFechaFinal=SUNDAY, 10 APRIL 2022 11: 0: 0, frecuencia=00:30:00.0000000}]]
-        Maria Vargas
-        [[Horario{id_medico=104, horaFechaInicio=SUNDAY, 10 APRIL 2022 10: 0: 0, horaFechaFinal=SUNDAY, 10 APRIL 2022 12: 0: 0, frecuencia=00:30:00.0000000}], 
-        [Horario{id_medico=104, horaFechaInicio=MONDAY, 11 APRIL 2022 4: 0: 0, horaFechaFinal=MONDAY, 11 APRIL 2022 5: 0: 0, frecuencia=00:30:00.0000000}, 
-        Horario{id_medico=104, horaFechaInicio=MONDAY, 11 APRIL 2022 15: 0: 0, horaFechaFinal=MONDAY, 11 APRIL 2022 16: 0: 0, frecuencia=00:30:00.0000000}]]
-        */
-        System.out.println("Lista de Horarios del medico: "+medicos.get(1).getNombre()+"\n"+listHorarios.toString());
-        
-        System.out.println("\nLista de lista de Horarios:" + "\n" + liliHorarios.toString());
-        
-        
-        
+        Fecha fecha = new Fecha("2020-09-12 09:40:30.0");
+        System.out.println("fecha1: "+fecha.getFecha());
+        System.out.println("fecha2: "+fecha.getFormatoyyyyMMdd());
+        System.out.println("fecha3: "+fecha.toString());
+        System.out.println("fecha5: "+fecha.getHoraHHMMSS());
+        System.out.println("fecha6: "+fecha.getHoraHHMMSS2());
+        System.out.println("fecha7: "+fecha.getFormatoyyyyMMdd2());
+        System.out.println("fecha8: "+fecha.getFormatoyyyyMMdd2()+" "+fecha.getHoraHHMMSS2());
+        String fechaHora = fecha.getFormatoyyyyMMdd2()+ " " + fecha.getHoraHHMMSS2();
+         Fecha fecha2 = new Fecha(fechaHora);
+          System.out.println("fecha1: "+fecha2.getFecha());
         }
 }

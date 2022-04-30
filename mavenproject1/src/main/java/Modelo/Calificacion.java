@@ -5,7 +5,6 @@
 package Modelo;
 
 /**
- *
  * @author rebec
  */
 public class Calificacion {
