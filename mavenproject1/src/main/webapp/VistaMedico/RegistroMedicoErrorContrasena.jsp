@@ -44,7 +44,7 @@
 
                             <div class="card bg-glass">
                                 <div class="card-body px-4 ml-6 py-5 px-md-5">
-                                    <form method="POST" name="registrarmedico" action="registrarmedico">
+                                    <form method="POST" name="ControladorRegistro" action="/mavenproject1/registrar/medico">
                                         <!-- 2 column grid layout with text inputs for the first and last names -->
                                         <div class="row">
                                             <div class="col-md-6 mb-4">

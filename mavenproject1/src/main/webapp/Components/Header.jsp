@@ -68,7 +68,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" style="color:white" href="/mavenproject1/admin-dash-board">
+                        <a class="nav-link active" style="color:white" href="/mavenproject1/admin-dash-board/administrar/medicos/show">
                             <img src="/mavenproject1/assets/Icon pages/admin-dash.png">
 
                             <label class="form-label" >Admin Settings</label>

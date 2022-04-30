@@ -272,8 +272,10 @@ public class ControladorLogin extends HttpServlet {
     private String loginAction(HttpServletRequest request, GeneralHandler general) {
         Modelo modelo = (Modelo) request.getAttribute("model");
         Usuario newUser = modelo.getCurrent();
+        System.out.println(newUser);
         if (general.validarLogin(newUser)) {
             Usuario user = general.retornaUserPorId(newUser.getId());
+            System.out.println(user);
             //System.out.println("METODOLOGINACTION: "+user.toString());
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
@@ -284,13 +286,14 @@ public class ControladorLogin extends HttpServlet {
                     return "/admin-dash-board/administrar/medicos/show";
                 case "medico":
                     
-//                    Medico mm = general.retornaMedicoPorId(newUser.getId());
-//                    if (mm.getEstado().equals("ESP") ) {
-//                        
-//                        showActionRequest(request);
-//                        request.setAttribute("error", "Su solicitud se encuentra en revision");
-//                        return "/Components/LoginError.jsp";
-//                    }
+                    Medico mm = general.retornaMedicoPorId(newUser.getId());
+                    System.out.println(mm);
+                    if (mm.getEstado().equals("ESP")) {
+                        
+                        showActionRequest(request);
+                        request.setAttribute("error", "Su solicitud se encuentra en revision");
+                        return "/Components/LoginError.jsp";
+                    }
                     return "/mavenproject1/medico/gestion/perfil";//todo
                 case "paciente":
                   //  System.out.println("ENTRE A PACIENTE");

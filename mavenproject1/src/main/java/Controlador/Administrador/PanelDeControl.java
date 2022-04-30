@@ -8,6 +8,7 @@ import Modelo.DAO.AdminHandler;
 import Modelo.DAO.GeneralHandler;
 import Modelo.DAO.MedicoHandler;
 import Modelo.Especialidad;
+import Modelo.Medico;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +24,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "PanelDeControl", urlPatterns = {"/PanelDeControl", "/mavenproject1/admin-dash-board", "/admin-dash-board", "/admin-dash-board/administrar/medicos/show", "/admin-dash-board/administrar/especialidades/show", "/admin-dash-board/administrar/ciudades/show", "/admin-dash-board/administrar/especialidades/add"})
+@WebServlet(name = "PanelDeControl", urlPatterns = {"/PanelDeControl", "/mavenproject1/admin-dash-board",
+    "/admin-dash-board", "/admin-dash-board/administrar/medicos/show", "/admin-dash-board/administrar/especialidades/show",
+    "/admin-dash-board/administrar/ciudades/show", "/admin-dash-board/administrar/especialidades/add",
+    "/admin-dash-board/administrar/medicos/restringir", "/admin-dash-board/administrar/medicos/reactivar",
+    "/admin-dash-board/administrar/medicos/aceptar","/admin-dash-board/administrar/medicos/rechazar"})
 public class PanelDeControl extends HttpServlet {
 
     /**
@@ -49,8 +54,55 @@ public class PanelDeControl extends HttpServlet {
             switch (request.getServletPath()) {
                 case "/admin-dash-board/administrar/medicos/show":
                     //Listar medicos
+                    List<Medico> aprobados = adminHandler.listarMedicosPorEstado("APRO");
+                    List<Medico> pendientes = adminHandler.listarMedicosPorEstado("ESP");
+                    List<Medico> restringidos = adminHandler.listarMedicosPorEstado("REC");
+                    
+                    System.out.println(aprobados);
+                    System.out.println(pendientes);
+                    System.out.println(restringidos);
+                    
+                    session.setAttribute("aprobados",aprobados);
+                    session.setAttribute("pendientes",pendientes);
+                    session.setAttribute("restringidos",restringidos);
+                    session.setAttribute("adminHandler",adminHandler);
+                    
+                    
                     
                     request.getRequestDispatcher("/VistaAdmin/PanelDeControl.jsp").forward(request, response);
+                    break;
+                case "/admin-dash-board/administrar/medicos/restringir":
+                    //Restringir un medico
+                    String idASuspender = request.getParameter("idASuspender");
+                    
+                    
+                    adminHandler.cambiarEstadoDeMedico(idASuspender, "REC");
+                    request.getRequestDispatcher("/admin-dash-board/administrar/medicos/show").forward(request, response);
+                    break;
+                case "/admin-dash-board/administrar/medicos/reactivar":
+                    //Reactivar  un medico bloqueadp
+                    String idAReactivar = request.getParameter("idAReactivar");
+                    
+                    
+                    adminHandler.cambiarEstadoDeMedico(idAReactivar, "APRO");
+                    request.getRequestDispatcher("/admin-dash-board/administrar/medicos/show").forward(request, response);
+                    break;
+                case "/admin-dash-board/administrar/medicos/aceptar":
+                    //aceptar  un medico nuevo
+                    String idAAceptar = request.getParameter("idAAceptar");
+                    
+                    
+                    adminHandler.cambiarEstadoDeMedico(idAAceptar, "APRO");
+                    request.getRequestDispatcher("/admin-dash-board/administrar/medicos/show").forward(request, response);
+                    break;
+                case "/admin-dash-board/administrar/medicos/rechazar":
+                    //rechazar un medico nuevo
+                    String idARechazar = request.getParameter("idARechazar");
+                    
+                    
+                    adminHandler.borarMedico(idARechazar);
+                    
+                    request.getRequestDispatcher("/admin-dash-board/administrar/medicos/show").forward(request, response);
                     break;
                 case "/admin-dash-board/administrar/especialidades/show":
                     //Listar Especiialidades

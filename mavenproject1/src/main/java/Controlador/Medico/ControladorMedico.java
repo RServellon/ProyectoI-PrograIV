@@ -19,7 +19,10 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +37,7 @@ import javax.ws.rs.Path;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos", "/configurar/medico/image", "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario","/medico/gestionar/horario/procesar", "/administrar/citas"})
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos", "/configurar/medico/image", "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario","/medico/gestionar/horario/procesar", "/administrar/citas", "/mavenproject1//medico/gestion/perfil", "/medico/gestion/inicial", "/mavenproject1/medico/gestion/perfil"})
 @MultipartConfig(location="C:/Users/rebec/OneDrive/Escritorio/img")
 public class ControladorMedico extends HttpServlet {
 
@@ -98,7 +101,7 @@ public class ControladorMedico extends HttpServlet {
                         //aqui se deben cargar los datos de la base y cargar la fecha actual
 
                         Usuario user = (Usuario) session.getAttribute("user");
-                        //MedicoHandler medicoHandler = new MedicoHandler();
+//                        MedicoHandler medicoHandler = new MedicoHandler();
                        String horaInicio = (String) request.getParameter("horaInicio");
                        String horaFinal = (String) request.getParameter("horaFinal");
                        String frecuencia = (String) request.getParameter("frecuencia");
@@ -137,30 +140,32 @@ public class ControladorMedico extends HttpServlet {
                     break;
                 case "/medico/actualizar/informacion":
                     {
-                        //Usuario usuario = (Usuario) session.getAttribute("user");
+                        Usuario usuario1 = (Usuario) session.getAttribute("user");
                         String codeEspecialidad = (String) request.getParameter("especialidad");
-                       // String codeCiudad = (String) request.getParameter("ciudad");
-                        //String costoConsulta = (String) request.getParameter("costoConsulta");
-                        //String clinica = (String) request.getParameter("clinica");
+                        String codeCiudad1 = (String) request.getParameter("ciudad");
+                        String costoConsulta1 = (String) request.getParameter("costoConsulta");
+                        String clinica1 = (String) request.getParameter("clinica");
                         String foto = (String) request.getParameter("foto");
                         String descipcion = (String) request.getParameter("descipcion");
                         
-                        System.out.println(usuario);
+                        System.out.println(usuario1);
                         System.out.println(codeEspecialidad);
-                        System.out.println(codeCiudad);
-                        System.out.println(costoConsulta);
-                        System.out.println(clinica);
+                        System.out.println(codeCiudad1);
+                        System.out.println(costoConsulta1);
+                        System.out.println(clinica1);
                         
                         ///TODO: -> poner que actualize la foto y descripción
                         System.out.println(foto);
                         System.out.println(descipcion);
                         
-                        //MedicoHandler medicoHandler = new MedicoHandler();
-                        System.out.println(medicoHandler.modificarDatos(usuario.getId(), codeEspecialidad, costoConsulta, codeCiudad, clinica));
+//                        MedicoHandler medicoHandler = new MedicoHandler();
+                        System.out.println(medicoHandler.modificarDatos(usuario1.getId(), codeEspecialidad, costoConsulta1, codeCiudad1, clinica1));
                         request.getRequestDispatcher("/medico/gestion/perfil").forward(request, response);
                     }
                     break;
                 case "/medico/gestion/perfil":{
+                    
+                    
                     Usuario user = (Usuario) session.getAttribute("user");
                     Medico medico = general.retornaMedicoPorId(user.getId());
                     List<Ciudad> ciudades = general.listarCiudades();
@@ -168,17 +173,21 @@ public class ControladorMedico extends HttpServlet {
                     List<Especialidad> esp = general.listarEspecialidades();
                     request.setAttribute("especialidades", esp);
                     request.setAttribute("medico", medico);
-                    
+                    System.out.println("medico en /medico/gestion/perfil");
+                    System.out.println(medico);
+
                     request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
                     }
                     break;
+                
                 case "/mavenproject1/medico/gestion/perfil":
                     
                     Usuario user = (Usuario) session.getAttribute("user");
                     Medico medico =  general.retornaMedicoPorId(user.getId());
                     System.out.println(medico);
-                    //medico.getClinica() == null || medico.getCiudad() == null || medico.getEspecialidad() == null 
-                    if (true) {
+                    System.out.println("Entra a  |/mavenproject1/medico/gestion/perfil|");
+                    //
+                    if (medico.getClinica() == null || medico.getCiudad() == null || medico.getEspecialidad() == null) {
                         List<Ciudad> ciudades = general.listarCiudades();
                         session.setAttribute("ciudades", ciudades);
                         List<Especialidad> esp =  general.listarEspecialidades();
@@ -203,24 +212,36 @@ public class ControladorMedico extends HttpServlet {
                     break;
                 case "/configurar/medico/actualizar/datos":
                     
-                    Medico m = general.retornaMedicoPorId(usuario.getId());
+                    System.out.println("Entra a confiig los datos");
+                    
+//                    Medico m = general.retornaMedicoPorId(usuario.getId());
                     //System.out.println(m);
                     
                     // Prueba cargar imagen
-                    
+//                    
                     System.out.println(especialidad);
                     System.out.println(codeCiudad);
                     System.out.println(costoConsulta);
                     System.out.println(clinica);
-                    //System.out.println(foto);
+//                    System.out.println(foto);
+                    System.out.println(medicoHandler.modificarDatos(usuario.getId(), especialidad, costoConsulta, codeCiudad, clinica));
+                    Medico m = general.retornaMedicoPorId(usuario.getId());
+                    System.out.println("Medico actualizado");
+                    System.out.println(m);
                     System.out.println(usuario.getId());
+                    Map<String, List<String>> citasSemanal = this.buidCitas(request, medicoHandler);
+                    this.configurarCitas(citasSemanal, request, medicoHandler, m);
+                    request.getRequestDispatcher("/mavenproject1/medico/gestion/perfil").forward(request, response);//TODO: cambiar a que mande a la parte de confit perfil
                     
-                     final Part imagen;
-                    imagen = request.getPart("imagen");
-                    imagen.write(m.getId());
-                        
+//                    
+//                     final Part imagen;
+//                    imagen = request.getPart("imagen");
+//                    imagen.write(m.getId());
+//                        
+//                    
+//                    request.getRequestDispatcher("/login/show").forward(request, response);
+
                     
-                    request.getRequestDispatcher("/login/show").forward(request, response);
                     
                     
                     break;
@@ -288,6 +309,64 @@ public class ControladorMedico extends HttpServlet {
     
 
     
+    private Map<String, List<String>> buidCitas(HttpServletRequest request, MedicoHandler medicoHandler) {
+        HttpSession session = request.getSession(true);
+        Fecha fechaReferencia = (Fecha) session.getAttribute("fecha");
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        for (int i = 0; i < 7; i++) {
+            List<String> list = new ArrayList<String>();
+            String _inicio = (String) request.getParameter("horaInicio" + i);
+            String _final = (String) request.getParameter("horaFinal" + i);
+            String _frecuencia = (String) request.getParameter("frecuencia" + i);
+            String _annio = String.valueOf(fechaReferencia.getFechaHora().getYear());
+            int mes = fechaReferencia.getFechaHora().getMonthValue();
+            int dia = fechaReferencia.getDiaDelMes();
+            String _mes = mes >= 10 ? String.valueOf(mes) : "0" + String.valueOf(mes);
+            String _dia = dia >= 10 ? String.valueOf(dia) : "0" + String.valueOf(dia);
+            fechaReferencia = fechaReferencia.creearFechaMasDias(1);
+
+            if ((!_inicio.equals("null")) && (!_final.equals("null")) && (!_frecuencia.equals("null"))) {
+                list.add(_inicio);
+                list.add(_final);
+                list.add(_frecuencia);
+                list.add(_annio);
+                list.add(_mes);
+                list.add(_dia);
+
+                map.put(String.valueOf(i), list);
+            }
+        }
+        return map;
+    }
+
+    private void configurarCitas(Map<String, List<String>> citasSemanal, HttpServletRequest request, MedicoHandler medicoHandler, Medico m) {
+
+        for (Map.Entry<String, List<String>> entry : citasSemanal.entrySet()) {
+            String horaInicio = entry.getValue().get(0);
+            String horaFinal = entry.getValue().get(1);
+            String frecuencia = entry.getValue().get(2);
+            String annio = entry.getValue().get(3);
+            String mes = entry.getValue().get(4);
+            String dia = entry.getValue().get(5);
+
+            if ((Integer.parseInt(horaFinal) - Integer.parseInt(horaInicio)) > 0) {
+
+                String strFechaInicio = annio + "-" + mes + "-" + dia + "T" + horaInicio + ":00:00";
+                String strFechaFinal = annio + "-" + mes + "-" + dia + "T" + horaFinal + ":00:00";
+
+                System.out.println("Fecha Inicial");
+                System.out.println(strFechaInicio);
+                System.out.println("Fecha Final");
+                System.out.println(strFechaFinal);
+                String strFrecuencia = frecuencia.equals("00") ? "01:00:00" : "00:30:00";
+                System.out.println(medicoHandler.registrarHorario(m.getId(), strFechaInicio, strFechaFinal, strFrecuencia));
+
+            }
+
+        }
+    }
+
+
 
    
 
