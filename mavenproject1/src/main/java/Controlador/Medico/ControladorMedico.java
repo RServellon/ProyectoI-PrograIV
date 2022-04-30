@@ -57,6 +57,7 @@ public class ControladorMedico extends HttpServlet {
 
             HttpSession session = request.getSession(true);
             GeneralHandler general = new GeneralHandler();
+            
 //            Usuario user = (Usuario) session.getAttribute("user");
 //            System.out.println(user);
 //            request.setAttribute("clave", user.getClave());
