@@ -56,7 +56,7 @@ public class ControladorLogin extends HttpServlet {
             AdminHandler admin = new AdminHandler();
             MedicoHandler medico = new MedicoHandler();
             PacienteHandler pac = new PacienteHandler();
-            System.out.println("path ->>>>>>" + request.getServletPath());
+//            System.out.println("path ->>>>>>" + request.getServletPath());
             
             
             switch (request.getServletPath()) {
@@ -70,7 +70,7 @@ public class ControladorLogin extends HttpServlet {
                     viewUrl=this.show(request);
                 break;
                 case "/login/login":
-                    System.out.println("Case login");
+//                    System.out.println("Case login");
                     viewUrl=this.login(request, general,null);
                     // Retorna citas por id paciente
                     //System.out.println(pac.listarCitasPorIdPaciente("103"));
@@ -234,7 +234,7 @@ public class ControladorLogin extends HttpServlet {
         Modelo modelo = (Modelo) request.getAttribute("model");
         modelo.getCurrent().setClave(request.getParameter("password"));
         modelo.getCurrent().setId(request.getParameter("id"));
-        System.out.println(modelo.getCurrent());
+        //System.out.println(modelo.getCurrent());
     }
 
     private String logout(HttpServletRequest request) {
@@ -271,10 +271,10 @@ public class ControladorLogin extends HttpServlet {
         Usuario newUser = modelo.getCurrent();
         if (general.validarLogin(newUser)) {
             Usuario user = general.retornaUserPorId(newUser.getId());
-            System.out.println("METODOLOGINACTION: "+user.toString());
+            //System.out.println("METODOLOGINACTION: "+user.toString());
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
-            System.out.println(user);
+           // System.out.println(user);
 
             switch (user.getTipo()) {
                 case "admin":
@@ -290,7 +290,7 @@ public class ControladorLogin extends HttpServlet {
 //                    }
                     return "/mavenproject1/paciente/gestion/perfil";//todo
                 case "paciente":
-                    System.out.println("ENTRE A PACIENTE");
+                  //  System.out.println("ENTRE A PACIENTE");
                     return "/index.jsp";//todo
             }
         } else {

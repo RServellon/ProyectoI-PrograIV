@@ -165,8 +165,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" style="color:white" href="/mavenproject1/VistaCliente/showCitasMedicas.jsp">
-                            <i class="fa-solid fa-calendar-days" style="font-size: 20px;"></i>
-
+                            <i class="fa-solid fa-calendar-days" style="font-size: 20px;"></i> 
                             <label class="form-label" >Citas</label>
 
                         </a>

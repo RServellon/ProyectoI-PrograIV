@@ -68,8 +68,21 @@ public class Fecha {
     
     
     
-    public String getFormatoyyyyMMdd(){ //"##/##/##"
+    public String getFormatoyyyyMMdd(){ //"#/#/#"
         return fechaHora.getYear()+"-"+fechaHora.getMonthValue()+"-"+fechaHora.getDayOfMonth();
+    }
+    
+    public String getFormatoyyyyMMdd2(){ //"##/##/##"
+        String anio = String.valueOf(fechaHora.getYear());
+        String mes = String.valueOf(fechaHora.getMonthValue());
+        if(mes.length()==1){
+            mes="0"+mes;
+        }
+        String dia = String.valueOf(fechaHora.getDayOfMonth());
+         if(dia.length()==1){
+            dia="0"+dia;
+        }
+        return anio+"-"+mes+"-"+dia;
     }
     
     public String getHora(){
@@ -85,6 +98,23 @@ public class Fecha {
        int seg = fechaHora.getSecond();
        return  String.format("%d: %d: %d", hora, min, seg);
     }
+    
+    public String getHoraHHMMSS2() {
+        String hora = String.valueOf(fechaHora.getHour());
+        if(hora.length()==1){
+            hora="0"+hora;
+        }
+        String min = String.valueOf(fechaHora.getMinute());
+         if(min.length()==1){
+            min="0"+min;
+        }
+        String seg = String.valueOf(fechaHora.getSecond());
+         if(seg.length()==1){
+            seg="0"+seg;
+        }
+        return hora+":"+min+":"+seg+".0";
+    }
+    
      public String getHoraHHMM(){
        int hora = fechaHora.getHour();
        int  min = fechaHora.getMinute();
@@ -123,5 +153,21 @@ public class Fecha {
         return this.getFecha() + " " + this.getHora();
     }
     
+    public String getInicHoraInicio() { //"##:##"
+        String hora = "";
+        String minutos = " ";
+        if (getHoraHH().length() == 1) {
+            hora = "0" + getHoraHH();
+        } else {
+            hora = getHoraHH();
+        }
+
+        if (getHoraMM().length() == 1) {
+            minutos = getHoraMM() + "0";
+        } else {
+            minutos = getHoraMM();
+        }
+        return hora + ":" + minutos;
+    }
     
 }

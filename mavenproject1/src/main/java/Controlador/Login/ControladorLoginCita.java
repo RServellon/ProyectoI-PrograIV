@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 /**
  *Controlador asociado al controlador ConfirmarCita
  */
-@WebServlet(name = "ControladorLoginCita", urlPatterns = {"/ControladorLoginCita"})
+@WebServlet(name = "ControladorLoginCita", urlPatterns = {"/login/logcita"})
 public class ControladorLoginCita extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,18 +40,8 @@ public class ControladorLoginCita extends HttpServlet {
             PacienteHandler pac = new PacienteHandler();
 
             switch (request.getServletPath()) {
-                case "/loginError":
-                    viewUrl = "/Components/LoginError.jsp";
-                    break;
-                case "/log-out":
-                    viewUrl = this.logout(request);
-                    break;
-                case "/login/show":
+                case "/login/logcita":
                     viewUrl = this.show(request);
-                    break;
-                case "/login/login":
-                    System.out.println("Case login");
-                    viewUrl = this.login(request, general, null);
                     break;
             }
             request.getRequestDispatcher(viewUrl).forward(request, response);
@@ -59,30 +49,6 @@ public class ControladorLoginCita extends HttpServlet {
             System.out.println(e);
         }
     }
-    
-    private void updateModel(HttpServletRequest request) {
-        Modelo modelo = (Modelo) request.getAttribute("model");
-        modelo.getCurrent().setClave(request.getParameter("password"));
-        modelo.getCurrent().setId(request.getParameter("id"));
-        System.out.println(modelo.getCurrent());
-    }
-
-    private String logout(HttpServletRequest request) {
-        return this.logoutAction(request);
-    }
-
-    private String logoutAction(HttpServletRequest request) {
-        HttpSession session = request.getSession(true);
-        session.removeAttribute("user");
-        session.invalidate();
-        return "/index.jsp";
-    }
-
-    private String login(HttpServletRequest request, GeneralHandler general, Usuario newUser) {
-        this.updateModel(request);
-        return this.loginAction(request, general);
-    }
-
     private String show(HttpServletRequest request) {
         return this.showActionRequest(request);
     }
@@ -94,39 +60,31 @@ public class ControladorLoginCita extends HttpServlet {
         model.getCurrent().setClave("");
         return "/Login.jsp";
     }
+    
+    private void updateModel(HttpServletRequest request) {
+        Modelo modelo = (Modelo) request.getAttribute("model");
+        modelo.getCurrent().setClave(request.getParameter("password"));
+        modelo.getCurrent().setId(request.getParameter("id"));
+        System.out.println(modelo.getCurrent());
+    }
+
+    private String login(HttpServletRequest request, GeneralHandler general, Usuario newUser) {
+        this.updateModel(request);
+        return this.loginAction(request, general);
+    }
 
     private String loginAction(HttpServletRequest request, GeneralHandler general) {
         Modelo modelo = (Modelo) request.getAttribute("model");
         Usuario newUser = modelo.getCurrent();
         if (general.validarLogin(newUser)) {
             Usuario user = general.retornaUserPorId(newUser.getId());
-            System.out.println("METODOLOGINACTION: " + user.toString());
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
-            System.out.println(user);
-
-            switch (user.getTipo()) {
-                case "admin":
-                    return "/mavenproject1/admin-dash-board";
-                case "medico":
-
-//                    Medico mm = general.retornaMedicoPorId(newUser.getId());
-//                    if (mm.getEstado().equals("ESP") ) {
-//                        
-//                        showActionRequest(request);
-//                        request.setAttribute("error", "Su solicitud se encuentra en revision");
-//                        return "/Components/LoginError.jsp";
-//                    }
-                    return "/mavenproject1/paciente/gestion/perfil";//todo
-                case "paciente":
-                    System.out.println("ENTRE A PACIENTE");
-                    return "/index.jsp";//todo
-            }
-        } else {
-            return "/Components/LoginError.jsp";
         }
-        return "/Components/LoginError.jsp";
+        //volver a la pagina de show cita
+        return "/index.jsp";//todo
     }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
