@@ -61,7 +61,7 @@
             </div>
 
                     <div>
-                        <form method="POST" name="ControladorMedico" action="/mavenproject1/configurar/medico/actualizar/datos" >
+                        <form method="POST" name="ControladorMedico" action="/mavenproject1/configurar/medico/actualizar/datos" enctype="multipart/form-data" >
                             <div class="row  text-center ">
 
                                 <div class="col" >
@@ -117,7 +117,8 @@
                                 <div class="col-6 text-center" >
                                     <div id="ingresoUser" class="form-outline form-white mb-4">
                                         <label class="form-label" for="typeUser">Seleccione una foto de perfil</label>
-                                        <input type="file" id="nombreUsuario" name="foto" class="form-control form-control-md" />
+                                        <!-- Probando inserat imagen -->
+                                        <input type="file" id="imagen" name="imagen" class="form-control form-control-md" accept="image/*" />
                                     </div>
                                 </div>
                                 
