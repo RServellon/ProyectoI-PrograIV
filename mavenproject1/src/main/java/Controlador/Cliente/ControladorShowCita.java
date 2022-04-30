@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *Me cargara los datos en el jsp ConfirmarCita.jsp
+ *Me cargara los datos en el jsp showCita.jsp
  */
 @WebServlet(name = "ControladorShowCita", urlPatterns = {"/VistaCliente/showCita"})
 public class ControladorShowCita extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
          request.setAttribute("model", new ModelShowCita()); //se manda al request
          
         String viewUrl = "";

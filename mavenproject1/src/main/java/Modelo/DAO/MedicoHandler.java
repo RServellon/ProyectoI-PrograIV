@@ -51,26 +51,8 @@ public class MedicoHandler extends GeneralHandler {
         return respuesta;
     }
     
-    public Cita retornaCitaPorCodigo(String codigo){
-        Cita cita = new Cita();
-        String sql ="select * from citas where codigo = " + codigo + ";";
-        ResultSet rs;
-        
-        try {
-            executor = new SQLExecutor(usernameBD, passwordBD);
-            rs = executor.ejecutaQuery(sql);
-            while (rs.next()){
-                cita.setId_medico(rs.getString("id_medico"));   
-                cita.setId_paciente(rs.getString("id_paciente"));
-                cita.setFecha(rs.getString("fechaHora"));
-                cita.setEstado(rs.getString("estado"));
-                cita.setAnotaciones(rs.getString("anotaciones"));
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return cita;
-    }
+    
+     
     
     public List<Cita> listarCitasPorEstado(String estado, String id_medico){
         List<Cita> lista = new ArrayList<>();

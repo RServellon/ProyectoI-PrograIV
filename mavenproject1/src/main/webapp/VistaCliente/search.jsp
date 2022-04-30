@@ -64,7 +64,7 @@ Esta pagina mostrara los resultados de la busqueda realizada de medicos
                       <div class="block-size">
                       <img src="../assets/images/retrato-perfil-doc.jpg" class="imagen-perfil">
                       <% espec=handlerMed.retornaEspecialidadPorCodigo(c.getEspecialidad()); %>
-                      <p class="p-especialidad fs-4" title=<%=espec.getDescripcion()%> <%= espec.getNombre()%> > </p>
+                      <p class="p-especialidad fs-4" title=<%=espec.getDescripcion()%>><%= espec.getNombre()%> </p>
                       </div>
                       <div>
                        <p class="fs-4 fw-bold p-info-doc"><%=c.getNombre()%></p>

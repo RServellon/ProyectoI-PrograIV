@@ -26,4 +26,10 @@ public class Modelo {
     public void setCurrent(Usuario current) {
         this.current = current;
     }
+
+    @Override
+    public String toString() {
+        return "Modelo{" + "current=" + current + '}';
+    }
+    
 }

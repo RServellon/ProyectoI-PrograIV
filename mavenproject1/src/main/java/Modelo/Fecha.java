@@ -78,6 +78,7 @@ public class Fecha {
        int seg = fechaHora.getSecond();
        return  String.format("%d: %d: %d", hora, min, seg);
     }
+    
     public String getHoraHHMMSS(){
        int hora = fechaHora.getHour();
        int  min = fechaHora.getMinute();

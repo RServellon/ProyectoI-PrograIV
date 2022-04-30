@@ -9,6 +9,8 @@ import Modelo.Cita;
 import Modelo.DAO.SQLConnection.SQLExecutor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -124,6 +126,24 @@ public class PacienteHandler extends GeneralHandler {
         return false;
     }
     
-   
+    public List<Cita> listarCitasPorIdPaciente(String id){
+        List<Cita> lista = new ArrayList<>();
+        Cita cita = null;
+        String sql ="select * from citas where id_paciente = "+ id + ";";
+        String codigo;
+        
+        try{
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql);
+            while(rs.next()){
+                codigo = rs.getString("codigo");                
+                cita = this.retornaCitaPorCodigo(codigo);                
+                lista.add(cita);
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }   
+        return lista;
+    }
 
 }
