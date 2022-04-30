@@ -66,6 +66,8 @@ public class Fecha {
         return fechaHora.getDayOfMonth()+"/"+fechaHora.getMonth()+"/"+fechaHora.getYear();
     }
     
+    
+    
     public String getFormatoyyyyMMdd(){ //"##/##/##"
         return fechaHora.getYear()+"-"+fechaHora.getMonthValue()+"-"+fechaHora.getDayOfMonth();
     }
@@ -109,7 +111,7 @@ public class Fecha {
     }
     
     
-    public void fechaHoraFormateada(String fechaHora){ // "2020-09-12 09:40:30.00"
+    public void fechaHoraFormateada(String fechaHora){ // "2020-09-12 09:40:30.0"
         DateTimeFormatter f =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
         LocalDateTime dateTime = LocalDateTime.parse(fechaHora, f);
         this.fechaHora = dateTime;

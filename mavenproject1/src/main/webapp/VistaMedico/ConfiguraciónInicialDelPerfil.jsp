@@ -203,7 +203,7 @@
                                                     Frecuencia de consulta<br>
                                                 </h6>
                                                 <div class="col">
-                                                    <select  name="minFinal<%=i%>" class='form-control form-control-sm'>
+                                                    <select  name="frecuencia<%=i%>" class='form-control form-control-sm'>
                                                         <option value="null" >Nada</option>
                                                         <option value="30" >Cada 30 Minutos</option>
                                                         <option value="00" >Cada 60 Minutos</option>

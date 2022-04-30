@@ -69,7 +69,7 @@ String error = (String) request.getAttribute("error");
 
                                     <div>
                                         <!--                Aqui se debe de colocar la pagina GENERAL para registrar (quitar registroMedico y registroCliente)-->
-                                        <p class="mb-0">Si no tienes una cuenta registrate <a href="VistaMedico/RegistroMedico.jsp"
+                                        <p class="mb-0">Si no tienes una cuenta registrate <a href="/mavenproject1/VistaMedico/RegistroMedico.jsp"
                                                                                               class="text-primary fw-bold">aqui</a>
                                         </p>
                                     </div>

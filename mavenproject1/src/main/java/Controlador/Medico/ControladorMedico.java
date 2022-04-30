@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -91,6 +94,12 @@ public class ControladorMedico extends HttpServlet {
                     String clinica = (String) request.getParameter("clinica");
                     String foto = (String) request.getParameter("foto");
                     
+                    
+                    
+                    
+                    
+                    
+                    
                     System.out.println(especialidad);
                     System.out.println(codeCiudad);
                     System.out.println(costoConsulta);
@@ -104,7 +113,8 @@ public class ControladorMedico extends HttpServlet {
                     System.out.println("Medico actualizado");
                     System.out.println(m);
                     
-//                    this.buidCitas(request, medicoHandler);
+                    Map<String, List<String>> citasSemanal = this.buidCitas(request, medicoHandler);
+                    this.configurarCitas(citasSemanal, request, medicoHandler, m);
                     
                     request.getRequestDispatcher("/login/show").forward(request, response);//TODO: cambiar a que mande a la parte de confit perfil
                     
@@ -154,6 +164,71 @@ public class ControladorMedico extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private Map<String, List<String>> buidCitas(HttpServletRequest request, MedicoHandler medicoHandler) {
+        HttpSession session = request.getSession(true);
+        Fecha fechaReferencia = (Fecha) session.getAttribute("fecha");
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        for (int i = 0; i < 7; i++) {
+            List<String> list = new ArrayList<String>();
+            String _inicio = (String) request.getParameter("horaInicio"+i);
+            String _final = (String) request.getParameter("horaFinal"+i);
+            String _frecuencia = (String) request.getParameter("frecuencia"+i);
+            String _annio =String.valueOf(fechaReferencia.getFechaHora().getYear());
+            int mes = fechaReferencia.getFechaHora().getMonthValue();
+            int dia = fechaReferencia.getDiaDelMes();
+            String _mes = mes >= 10? String.valueOf(mes): "0"+String.valueOf(mes);
+            String _dia = dia >= 10? String.valueOf(dia): "0"+String.valueOf(dia);
+            fechaReferencia = fechaReferencia.creearFechaMasDias(1);
+            
+            if ((! _inicio.equals("null")) && (!_final.equals("null")) && (!_frecuencia.equals("null"))) {
+                list.add(_inicio);
+                list.add(_final);
+                list.add(_frecuencia);
+                list.add(_annio);
+                list.add(_mes);
+                list.add(_dia);
+
+                map.put(String.valueOf(i), list);
+            }
+        }
+        return map;
+    }
+
+    private void configurarCitas(Map<String, List<String>> citasSemanal, HttpServletRequest request, MedicoHandler medicoHandler, Medico m) {
+        
+
+        
+        for (Map.Entry<String, List<String>> entry : citasSemanal.entrySet()) {
+            String horaInicio=entry.getValue().get(0);
+            String horaFinal=entry.getValue().get(1);
+            String frecuencia=entry.getValue().get(2);
+            String annio=entry.getValue().get(3);
+            String mes=entry.getValue().get(4);
+            String dia=entry.getValue().get(5);
+            
+            if ( (Integer.parseInt(horaFinal) - Integer.parseInt(horaInicio)) > 0 ) {
+              
+                String strFechaInicio = annio + "-" + mes + "-" + dia + "T" + horaInicio + ":00:00";
+                String strFechaFinal = annio + "-" + mes + "-" + dia + "T" + horaFinal + ":00:00";
+                
+                System.out.println("Fecha Inicial");
+                System.out.println(strFechaInicio);
+                System.out.println("Fecha Final");
+                System.out.println(strFechaFinal);
+                String strFrecuencia = frecuencia.equals("00") ? "01:00:00" :"00:30:00";
+                System.out.println(medicoHandler.registrarHorario(m.getId(), strFechaInicio, strFechaFinal, strFrecuencia));
+
+   
+                
+            }
+
+            
+            
+        }
+    }
+
+  
 
     
 
