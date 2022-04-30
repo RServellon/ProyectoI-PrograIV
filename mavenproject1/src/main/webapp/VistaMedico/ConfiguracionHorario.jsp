@@ -7,22 +7,7 @@
 <%@page import="java.util.List"%>
 <%@page import="Modelo.Fecha"%>
 <%
-    Fecha fecha1 = (Fecha) session.getAttribute("fecha");
-    Fecha fecha2 = fecha1.creearFechaMasDias(1);
-    Fecha fecha3 = fecha1.creearFechaMasDias(2);
-    Fecha fecha4 = fecha1.creearFechaMasDias(3);
-    Fecha fecha5 = fecha1.creearFechaMasDias(4);
-    Fecha fecha6 = fecha1.creearFechaMasDias(5);
-    Fecha fecha7 = fecha1.creearFechaMasDias(6);
-
-    List<Fecha> fechas = new ArrayList<Fecha>();
-    fechas.add(fecha1);
-    fechas.add(fecha2);
-    fechas.add(fecha3);
-    fechas.add(fecha4);
-    fechas.add(fecha5);
-    fechas.add(fecha6);
-    fechas.add(fecha7);
+    Fecha fecha = (Fecha) session.getAttribute("fecha");
 
 
 %>
@@ -78,107 +63,126 @@
                     </button>
 
                 </div>
-                <div class="col-10 my-5">
-                    <h5>
-                        Configurar Horario Semanal
-                    </h5>
-                    <div class="row my-2" >
+                
+                <div class="col-10 my-5 ">
+                    <form method="POST" name="ControladorMedico" action="/mavenproject1/medico/gestionar/horario/procesar">
+                        <div class="">
+                            <h5>
+                                Configurar Horario
+                            </h5>
+                            <div class="row my-2" >
 
 
-                        <%for (int i = 0; i < 7; i++) {%>
-                        <div class="col align-items-center text-center my-5"  >
-                            <div class="row">
-                                <div class="row">
-                                    <h6>
-                                        <%= fechas.get(i).getDiaLiteral()%> <%= fechas.get(i).getDiaDelMes()%> de <%= fechas.get(i).getMesLiteral()%>
-                                    </h6>
-                                </div>
-                                <div class="row">
-                                    <h6>
-                                        Hora de inicio:
-                                    </h6>
-                                    <div class="col mx-0">
-                                        <select  name="horaInicio<%=i%>" class='form-control form-control-sm'>
+                                <div class="col align-items-center text-center my-5"  >
+                                    <div class="row">
+                                        <div class="row">
+                                            <h6>
+                                                fecha
+                                            </h6>
+                                            <input type="date" id="start" name="calendario" value="<%= fecha.getFormatoYYYY_MM_DD()%>" min="<%= fecha.getFormatoYYYY_MM_DD()%>" >
+
+                                        </div>
+                                        <div class="row">
+                                            <h6>
+                                                Hora de inicio:
+                                            </h6>
+                                            <div class="col mx-0">
+                                                <select  name="horaInicio" class='form-control form-control-sm'>
 
 
-                                            <option value="null" >Nada</option>
-                                            <option value="07" >7</option>
-                                            <option value="08" >8</option>
-                                            <option value="09" >9</option>
-                                            <option value="10" >10</option>
-                                            <option value="11" >11</option>
-                                            <option value="12" >12</option>
-                                            <option value="13" >13</option>
-                                            <option value="14" >14</option>
-                                            <option value="15" >15</option>
-                                            <option value="16" >16</option>
-                                            <option value="17" >17</option>
-                                            <option value="18" >18</option>
-                                            <option value="19" >19</option>
-                                            <option value="20" >20</option>
-                                            <option value="21" >21</option>
+                                                    <option value="07" >7</option>
+                                                    <option value="08" >8</option>
+                                                    <option value="09" >9</option>
+                                                    <option value="10" >10</option>
+                                                    <option value="11" >11</option>
+                                                    <option value="12" >12</option>
+                                                    <option value="13" >13</option>
+                                                    <option value="14" >14</option>
+                                                    <option value="15" >15</option>
+                                                    <option value="16" >16</option>
+                                                    <option value="17" >17</option>
+                                                    <option value="18" >18</option>
+                                                    <option value="19" >19</option>
+                                                    <option value="20" >20</option>
+                                                    <option value="21" >21</option>
 
 
-                                        </select>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <h6>
+                                                Hora final:
+                                            </h6>
+                                            <div class="col">
+                                                <select  name="horaFinal" class='form-control form-control-sm'>
+
+                                                    <option value="07" >7</option>
+                                                    <option value="08" >8</option>
+                                                    <option value="09" >9</option>
+                                                    <option value="10" >10</option>
+                                                    <option value="11" >11</option>
+                                                    <option value="12" >12</option>
+                                                    <option value="13" >13</option>
+                                                    <option value="14" >14</option>
+                                                    <option value="15" >15</option>
+                                                    <option value="16" >16</option>
+                                                    <option value="17" >17</option>
+                                                    <option value="18" >18</option>
+                                                    <option value="19" >19</option>
+                                                    <option value="20" >20</option>
+                                                    <option value="21" >21</option>
+
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <h6>
+                                                Frecuencia de consulta<br>
+                                            </h6>
+                                            <div class="col">
+                                                <select  name="frecuencia" class='form-control form-control-sm'>
+                                                    <option value="30" >Cada 30 Minutos</option>
+                                                    <option value="00" >Cada 60 Minutos</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
                                     </div>
+                                            <div class="row">
 
-                                </div>
-                                <div class="row">
-                                    <h6>
-                                        Hora final:
-                                    </h6>
-                                    <div class="col">
-                                        <select  name="horaFinal<%=i%>" class='form-control form-control-sm'>
+                                                <div class="col-2" >
 
-                                            <option value="null" >Nada</option>
-                                            <option value="07" >7</option>
-                                            <option value="08" >8</option>
-                                            <option value="09" >9</option>
-                                            <option value="10" >10</option>
-                                            <option value="11" >11</option>
-                                            <option value="12" >12</option>
-                                            <option value="13" >13</option>
-                                            <option value="14" >14</option>
-                                            <option value="15" >15</option>
-                                            <option value="16" >16</option>
-                                            <option value="17" >17</option>
-                                            <option value="18" >18</option>
-                                            <option value="19" >19</option>
-                                            <option value="20" >20</option>
-                                            <option value="21" >21</option>
+                                                </div>
+                                                <div class="col-8 align-items-center text-center">
+                                                    <div id="boton_submit" class="boton-submit">
+                                                        <button class="btn btn-outline-secondary btn-lg px-5" type="submit">Continuar</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2" >
+
+                                                </div>
+                                            </div>
+                                    
+
+                                </div>  
 
 
-                                        </select>
-                                    </div>
 
-                                </div>
-                                <div class="row">
-                                    <h6>
-                                        Frecuencia de consulta<br>
-                                    </h6>
-                                    <div class="col">
-                                        <select  name="frecuencia<%=i%>" class='form-control form-control-sm'>
-                                            <option value="null" >Nada</option>
-                                            <option value="30" >Cada 30 Minutos</option>
-                                            <option value="00" >Cada 60 Minutos</option>
-                                        </select>
-                                    </div>
 
-                                </div>
 
                             </div>
-
-                        </div>  
-                        <%}%>
+                            
 
 
-
-
-
-                    </div>
-                  
-
+                        </div>
+                    </form>
                 </div>
+
 
             </div>
 

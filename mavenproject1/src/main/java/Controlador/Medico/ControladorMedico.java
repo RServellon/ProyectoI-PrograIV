@@ -9,6 +9,7 @@ import Modelo.DAO.GeneralHandler;
 import Modelo.DAO.MedicoHandler;
 import Modelo.Especialidad;
 import Modelo.Fecha;
+import Modelo.Horario;
 import Modelo.Medico;
 import Modelo.Usuario;
 import java.io.IOException;
@@ -30,7 +31,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/medico/gestion/perfil", "/configurar/medico/actualizar/datos", "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario"})
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/medico/gestion/perfil", "/configurar/medico/actualizar/datos", "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario","/medico/gestionar/horario/procesar"})
 public class ControladorMedico extends HttpServlet {
 
     /**
@@ -64,8 +65,53 @@ public class ControladorMedico extends HttpServlet {
                         dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
                         Fecha fecha = new Fecha(dtf.format(LocalDateTime.now()));
                         session.setAttribute("fecha", fecha);
+                        Usuario user = (Usuario) session.getAttribute("user");
+                        System.out.println(user);
+                        
+                       
+                       
+                        
                         
                         request.getRequestDispatcher("/VistaMedico/ConfiguracionHorario.jsp").forward(request, response);
+                    }
+                    break;
+                case "/medico/gestionar/horario/procesar":
+                    {
+                        //aqui se deben cargar los datos de la base y cargar la fecha actual
+
+                        Usuario user = (Usuario) session.getAttribute("user");
+                        MedicoHandler medicoHandler = new MedicoHandler();
+                       String horaInicio = (String) request.getParameter("horaInicio");
+                       String horaFinal = (String) request.getParameter("horaFinal");
+                       String frecuencia = (String) request.getParameter("frecuencia");
+                       String calendario = (String) request.getParameter("calendario");
+                       String strFrecuencia = frecuencia.equals("00") ? "01:00:00" : "00:30:00";
+                       
+                       String strFechaInicio = calendario+"T"+horaInicio+":00:00";
+                       String strFechaFinal= calendario + "T" + horaFinal + ":00:00";
+                       
+                        System.out.println(strFechaInicio);
+                        System.out.println(strFechaFinal);
+                       
+                        if (Integer.parseInt(horaFinal) - Integer.parseInt(horaInicio) > 0) {
+                            
+                            Horario h = medicoHandler.retornaHorario(user.getId(), strFechaInicio);
+                            System.out.println(h);
+//                            if (h.getId_medico() != null ) {
+//                                medicoHandler.borrarHorario(user.getId(), strFechaInicio);
+//                                medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
+//                            }else{
+//                                
+//                            }
+                            medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
+                            
+                            request.getRequestDispatcher("/VistaMedico/ConfiguracionHorario.jsp").forward(request, response);
+                        }else{
+                            //todo error
+                        }
+                       
+                        
+                        
                     }
                     break;
                 case "/medico/actualizar/informacion":
