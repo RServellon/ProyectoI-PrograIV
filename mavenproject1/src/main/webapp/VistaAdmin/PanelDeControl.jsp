@@ -3,7 +3,18 @@
     Created on : 21 abr. 2022, 23:23:09
     Author     : norma
 --%>
+<%@page import="Modelo.DAO.AdminHandler"%>
+<%@page import="java.util.List"%>
+<%@page import="Modelo.Medico"%>
+<%
+    
+List<Medico> aprobados = (List<Medico>) session.getAttribute("aprobados");
+List<Medico> pendientes =  (List<Medico>) session.getAttribute("pendientes");
+List<Medico> restringidos = (List<Medico>) session.getAttribute("restringidos");
+AdminHandler adminHandler = (AdminHandler) session.getAttribute("adminHandler");
 
+
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -64,20 +75,124 @@
                             </div>
                         </div>
                         <div class="row text-center">
-                            <div class="col" style="background: red;">
+                            <div class="col" >
                                 <h6>
                                     Medicos Aprobados
                                 </h6>
+                                <%for(Medico m: aprobados){%>
+                                <div class="col my-1" style="border: 3px solid gray">
+                                    <div class="row my-2">
+
+                                        <div class="col">
+                                            <h6><%=m.getNombre()%></h6>
+                                        </div>
+                                            <%if (m.getCiudad() != null) {%>
+                                            <div class="col">
+                                                <h6><%= adminHandler.retornaEspecialidadPorCodigo(m.getEspecialidad()).getNombre()%></h6>
+                                            </div>
+                                            <div class="col">
+                                                <h6><%= adminHandler.retornaCiudadPorCodigo(m.getCiudad()).getNombre()%></h6>
+                                            </div>
+                                            <div class="col">
+                                                <h6><%=m.getClinica()%></h6>
+                                            </div>
+                                            <%}%>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" >
+
+                                        </div>
+                                        <div class="col mb-2" style="background: red; border-radius: 5px; max-width: 100px; ">
+                                            <a style="color: white; " href="/mavenproject1/admin-dash-board/administrar/medicos/restringir?idASuspender=<%=m.getId()%>" >Suspender</a>
+                                        </div>
+                                        <div class="col" >
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+                                
                             </div>
-                            <div class="col" style="background: blue;">
-                                <h6>
-                                    Nuevas Solicitudes
-                                </h6>
-                            </div>
-                            <div class="col" style="background: green;">
+                            <div class="col" >
                                 <h6>
                                     Medicos Retenidos
                                 </h6>
+                                
+                                <%for (Medico m : restringidos) {%>
+                                <div class="col my-1" style="border: 3px solid gray">
+                                    <div class="row my-2">
+
+                                        <div class="col">
+                                            <h6><%=m.getNombre()%></h6>
+                                        </div>
+                                            <%if (m.getCiudad() != null) {%>
+                                            <div class="col">
+                                                <h6><%= adminHandler.retornaEspecialidadPorCodigo(m.getEspecialidad()).getNombre()%></h6>
+                                            </div>
+                                            <div class="col">
+                                                <h6><%= adminHandler.retornaCiudadPorCodigo(m.getCiudad()).getNombre()%></h6>
+                                            </div>
+                                            <div class="col">
+                                                <h6><%=m.getClinica()%></h6>
+                                            </div>
+                                            <%}%>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" >
+
+                                        </div>
+                                        <div class="col mb-2" style="background: green; border-radius: 5px; max-width: 100px; ">
+                                            <a style="color: white; " href="/mavenproject1/admin-dash-board/administrar/medicos/reactivar?idAReactivar=<%=m.getId()%>" >Reactivar</a>
+                                        </div>
+                                        <div class="col" >
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+                            </div>
+                            <div class="col" >
+                                <h6>
+                                    Nuevas Solicitudes
+                                </h6>
+                                
+                                <%for (Medico m : pendientes) {%>
+                                <div class="col my-1" style="border: 3px solid gray">
+                                    <div class="row my-2">
+
+                                        <div class="col">
+                                            <h6><%=m.getNombre()%></h6>
+                                        </div>
+                                        <%if(m.getCiudad() != null ){%>
+                                            <div class="col">
+                                                <h6><%= adminHandler.retornaEspecialidadPorCodigo(m.getEspecialidad()).getNombre()%></h6>
+                                            </div>
+                                            <div class="col">
+                                                <h6><%= adminHandler.retornaCiudadPorCodigo(m.getCiudad()).getNombre()%></h6>
+                                            </div>
+                                            <div class="col">
+                                                <h6><%=m.getClinica()%></h6>
+                                            </div>
+                                        <%}%>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" >
+
+                                        </div>
+                                        <div class="col mb-2" style="background: green; border-radius: 5px; max-width: 100px; ">
+                                            <a style="color: white; " href="/mavenproject1/admin-dash-board/administrar/medicos/aceptar?idAAceptar=<%=m.getId()%>" >Aceptar</a>
+                                        </div>
+                                        <div class="col mb-2" style="background: red; border-radius: 5px; max-width: 100px; ">
+                                            <a style="color: white; " href="/mavenproject1/admin-dash-board/administrar/medicos/rechazar?idARechazar=<%=m.getId()%>" >Rechazar</a>
+                                        </div>
+                                        <div class="col" >
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+                                
+
                             </div>
                         </div>
                     </div>

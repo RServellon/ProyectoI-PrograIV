@@ -4,6 +4,7 @@
  */
 package Controlador.Login;
 
+import Controlador.Medico.PasswordValidator;
 import Modelo.Cliente;
 import Modelo.DAO.GeneralHandler;
 import Modelo.Medico;
@@ -40,39 +41,84 @@ public class ControladorRegistro extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             request.setAttribute("model", new Modelo());
             String viewUrl = "";
+            GeneralHandler general = new GeneralHandler();
             
             //getting info
             String name = request.getParameter("first-name");
             name+= " "+request.getParameter("last-name");
             String id = request.getParameter("id");
             String pwd = request.getParameter("pwd");
+            String confirmPwd = request.getParameter("pwd-confirmation");
             String tipo = request.getParameter("tipo_usuario");
             
             
-            System.out.println("\n");
-            System.out.println("Estamos en el Controlador de regiistro");
+            request.setAttribute("first-name", name);
+            request.setAttribute("last-name", request.getParameter("last-name"));
+            request.setAttribute("id", id);
+            request.setAttribute("tipo_usuario", tipo);
             
-            Usuario user = new Usuario(id,name,pwd,tipo);
-            System.out.println(user);
-            GeneralHandler general = new GeneralHandler();
             
-            switch (tipo) {
-                case "medico":
-                    System.out.println("Case mediic");
-                    viewUrl=this.CrearMedico(request, user, general);
+            if (pwd.equals(confirmPwd)) {
+                if (general.retornaUserPorId(id).getId() == null) {
                     
-                    break;
-                case "paciente":
-                    System.out.println("Case paciente");
-                    viewUrl=this.CrearPaciente(request, user, general);
+                    switch (PasswordValidator.isValidPassword(pwd)) {
+                        case 1:
+                            
+                            System.out.println("\n");
+                            System.out.println("Estamos en el Controlador de regiistro");
+
+                            Usuario user = new Usuario(id, name, pwd, tipo);
+                            System.out.println(user);
+
+                            switch (tipo) {
+                                case "medico":
+                                    System.out.println("Case mediic");
+                                    viewUrl = this.CrearMedico(request, user, general);
+
+                                    break;
+                                case "paciente":
+                                    System.out.println("Case paciente");
+                                    viewUrl = this.CrearPaciente(request, user, general);
+
+                                    break;
+                                case "admin":
+
+                                    break;
+                            }
+                            request.getRequestDispatcher(viewUrl).forward(request, response);
+                            
+
+                            break;
+                        case -1:
+                            request.setAttribute("error-code", "La contraseña debe tener menos de 20 y más de 8 caracteres de longitud.");
+                            request.getRequestDispatcher("/mavenproject1/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                            break;
+
+                        case -2:
+                            request.setAttribute("error-code", "La contraseña debe tener al menos un carácter en mayúscula.");
+                            request.getRequestDispatcher("/mavenproject1/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+
+                            break;
+
+                        case -3:
+                            request.setAttribute("error-code", "La contraseña debe tener al menos un carácter en minúscula");
+                            request.getRequestDispatcher("/mavenproject1/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+
+                            break;
+
+                    }
                     
-                    break;
-                case "admin":
-                    
-                    break;
+                   
+
+                }else{
+                    request.setAttribute("error-code", "Ya  existe un usuario con ese ID");
+                    request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                }
+            }else{
+                request.setAttribute("error-code", "Las contraseñas no coinciden");
+                request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                
             }
-            request.getRequestDispatcher(viewUrl).forward(request, response);
-            
 
             
            

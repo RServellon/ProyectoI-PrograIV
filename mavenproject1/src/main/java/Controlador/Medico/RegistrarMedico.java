@@ -54,10 +54,11 @@ public class RegistrarMedico extends HttpServlet {
             request.setAttribute("tipo_usuario", userTipe);
             
             
-            
+            System.out.println(password);
+            System.out.println(confirmPassword);
             if (!(password.equals(confirmPassword))) {
                 request.setAttribute("error-code", "Las contraseñas no coinciden");
-                request.getRequestDispatcher("/mavenproject1/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
+                request.getRequestDispatcher("/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
             }
             
             
@@ -76,8 +77,6 @@ public class RegistrarMedico extends HttpServlet {
                             case "administrador":
                                 request.getRequestDispatcher("/mavenproject1/registrar-administrador").forward(request, response);
                                 break;
-                            default:
-                                throw new AssertionError();
                         }
 
                         break;
@@ -97,8 +96,7 @@ public class RegistrarMedico extends HttpServlet {
                         request.getRequestDispatcher("/mavenproject1/VistaMedico/RegistroMedicoErrorContrasena.jsp").forward(request, response);
 
                         break;
-                    default:
-                        throw new AssertionError();
+                    
                 }
             }else{
                 request.setAttribute("error-code", "Ya existe un usuario con la identificación "+id);
