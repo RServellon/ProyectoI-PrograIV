@@ -288,7 +288,7 @@ public class ControladorLogin extends HttpServlet {
 //                        request.setAttribute("error", "Su solicitud se encuentra en revision");
 //                        return "/Components/LoginError.jsp";
 //                    }
-                    return "/mavenproject1/paciente/gestion/perfil";//todo
+                    return "/mavenproject1/medico/gestion/perfil";//todo
                 case "paciente":
                     System.out.println("ENTRE A PACIENTE");
                     return "/index.jsp";//todo

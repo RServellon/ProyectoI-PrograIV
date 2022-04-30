@@ -30,7 +30,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos"})
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/medico/gestion/perfil", "/configurar/medico/actualizar/datos", "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario"})
 public class ControladorMedico extends HttpServlet {
 
     /**
@@ -46,6 +46,7 @@ public class ControladorMedico extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            System.out.println(request.getServletPath());
 
             HttpSession session = request.getSession(true);
             GeneralHandler general = new GeneralHandler();
@@ -56,13 +57,61 @@ public class ControladorMedico extends HttpServlet {
                 case "/mavenproject1/configurar-medico-primera-vez":
                     request.getRequestDispatcher("/login/show").forward(request, response);
                     break;
-                case "/mavenproject1/paciente/gestion/perfil":
+                case "/medico/gestionar/horario":
+                    {
+                        //aqui se deben cargar los datos de la base y cargar la fecha actual
+                        DateTimeFormatter dtf;
+                        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                        Fecha fecha = new Fecha(dtf.format(LocalDateTime.now()));
+                        session.setAttribute("fecha", fecha);
+                        
+                        request.getRequestDispatcher("/VistaMedico/ConfiguracionHorario.jsp").forward(request, response);
+                    }
+                    break;
+                case "/medico/actualizar/informacion":
+                    {
+                        Usuario usuario = (Usuario) session.getAttribute("user");
+                        String codeEspecialidad = (String) request.getParameter("especialidad");
+                        String codeCiudad = (String) request.getParameter("ciudad");
+                        String costoConsulta = (String) request.getParameter("costoConsulta");
+                        String clinica = (String) request.getParameter("clinica");
+                        String foto = (String) request.getParameter("foto");
+                        String descipcion = (String) request.getParameter("descipcion");
+                        
+                        System.out.println(usuario);
+                        System.out.println(codeEspecialidad);
+                        System.out.println(codeCiudad);
+                        System.out.println(costoConsulta);
+                        System.out.println(clinica);
+                        
+                        ///TODO: -> poner que actualize la foto y descripción
+                        System.out.println(foto);
+                        System.out.println(descipcion);
+                        
+                        MedicoHandler medicoHandler = new MedicoHandler();
+                        System.out.println(medicoHandler.modificarDatos(usuario.getId(), codeEspecialidad, costoConsulta, codeCiudad, clinica));
+                        request.getRequestDispatcher("/medico/gestion/perfil").forward(request, response);
+                    }
+                    break;
+                case "/medico/gestion/perfil":{
+                    Usuario user = (Usuario) session.getAttribute("user");
+                    Medico medico = general.retornaMedicoPorId(user.getId());
+                    List<Ciudad> ciudades = general.listarCiudades();
+                    request.setAttribute("ciudades", ciudades);
+                    List<Especialidad> esp = general.listarEspecialidades();
+                    request.setAttribute("especialidades", esp);
+                    request.setAttribute("medico", medico);
+                    
+                    request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
+                    }
+                    break;
+                case "/mavenproject1/medico/gestion/perfil":
                     
                     Usuario user = (Usuario) session.getAttribute("user");
                     Medico medico =  general.retornaMedicoPorId(user.getId());
+                    
                     System.out.println(medico);
-                    //medico.getClinica() == null || medico.getCiudad() == null || medico.getEspecialidad() == null 
-                    if (true) {
+                    if (medico.getClinica() == null || medico.getCiudad() == null || medico.getEspecialidad() == null) {
                         List<Ciudad> ciudades = general.listarCiudades();
                         session.setAttribute("ciudades", ciudades);
                         List<Especialidad> esp =  general.listarEspecialidades();
@@ -78,7 +127,7 @@ public class ControladorMedico extends HttpServlet {
                         
                         request.getRequestDispatcher("/VistaMedico/ConfiguraciónInicialDelPerfil.jsp").forward(request, response);
                     }else{
-                        request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
+                        request.getRequestDispatcher("/medico/gestion/perfil").forward(request, response);
                     }
                     
                         
@@ -116,7 +165,7 @@ public class ControladorMedico extends HttpServlet {
                     Map<String, List<String>> citasSemanal = this.buidCitas(request, medicoHandler);
                     this.configurarCitas(citasSemanal, request, medicoHandler, m);
                     
-                    request.getRequestDispatcher("/login/show").forward(request, response);//TODO: cambiar a que mande a la parte de confit perfil
+                    request.getRequestDispatcher("/mavenproject1/medico/gestion/perfil").forward(request, response);//TODO: cambiar a que mande a la parte de confit perfil
                     
                     
                     break;
