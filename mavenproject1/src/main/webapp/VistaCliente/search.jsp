@@ -73,7 +73,7 @@
                       
                
                <!--            Columnas de los horarios-->
-            <div id="scroll" class="container-horarios d-flex" style="overflow-x: auto; overflow-y: auto; white-space: nowrap; max-width: 900px;" >
+            <div id="scroll" class="container-horarios d-flex" style="overflow-x: auto; overflow-y: auto; white-space: nowrap; max-width: 700px;" >
                 <% listHorarios=handlerMed.listarHorarios(c.getId()); 
                  liliHorarios = ser.retornarListaListaHorarios(listHorarios);
                 if(!liliHorarios.isEmpty() || liliHorarios != null){
