@@ -1,4 +1,3 @@
-
 -- Se borran las secuencias
 drop sequence sec_usuarios;
 drop sequence sec_especialidades;
@@ -42,10 +41,10 @@ create table usuarios(id int not null, nombre varchar(20) not null, clave varcha
 create table administradores(id int not null);
 create table medicos(id int not null, especialidad int null, costo decimal(11,4) null, ciudad int  null, clinica varchar(20) null, estado varchar(20) not null);
 create table pacientes(id int not null);
-create table horarios(id_medico int not null, fechaHoraInicio smalldatetime not null, fechaHoraFinal smalldatetime not null, frecuencia time not null);
+create table horarios(id_medico int not null, fechaHoraInicio datetime not null, fechaHoraFinal datetime not null, frecuencia time not null);
 create table ciudades(codigo int not null, nombre varchar(20) not null, provincia varchar(20) not null);
 create table especialidades(codigo int not null, nombre varchar(20) not null, descripcion text null);
-create table citas(codigo int not null, id_medico int not null, id_paciente int not null, fechaHora smalldatetime not null, estado varchar(20) not null, anotaciones text not null);
+create table citas(codigo int not null, id_medico int not null, id_paciente int not null, fechaHora datetime not null, estado varchar(20) not null, anotaciones text not null);
 create table calificaciones(id_medico int not null, id_paciente int not null, calificacion varchar(20) not null);
 
 -- Se crean todas las llaves
@@ -105,7 +104,7 @@ alter table ciudades
 alter table horarios 
 	add constraint horarios_ck1 Check (frecuencia in ('00:30:00','01:00:00'));
 alter table citas 
-	add constraint citas_ck1 Check (estado in ('FINALIZADO','REGISTRADO', 'CANCELADO'));
+	add constraint citas_ck1 Check (estado in ('FINALIZADO','REGISTRADO', 'CANCELADO', 'ESPERA'));
 alter table calificaciones 
 	add constraint calificaciones_ck1 Check(calificacion in ('EXCELENTE','ACEPTABLE','DEFICIENTE'));
 

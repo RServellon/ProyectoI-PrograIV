@@ -516,6 +516,22 @@ public class GeneralHandler {
         }
         return false;
     }
+     
+    public boolean cambiarEstadoCita(String codigo, String estado){
+        try{
+            String valores1[] = new String[3];
+            valores1[0] = "update citas set estado = ? where codigo = ?;";
+            valores1[1] = estado;
+            valores1[2] = codigo;
+
+            executor.prepareStatement(valores1);
+            return true;
+            
+        } catch(Exception throwables){
+            throwables.printStackTrace();
+        }
+        return false;
+    }
     
     
 }
