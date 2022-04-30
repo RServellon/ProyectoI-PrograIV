@@ -98,10 +98,13 @@ public class ControladorConfirmarCita extends HttpServlet {
          updateModel(request, http);
          if(model.getUser() == null){ //si no hay ninguna sesion iniciada manda al usuario a hacer login en ControladorLoginCita
              System.out.println("El usuario es null");
-             return "/login/logcita";
+              http.setAttribute("confirm", "0"); //me indica que el usuario no esta registrado y le dio click a confirmar cita
+              System.out.println("MANDE EL CONFIRM A LA SESION"+ http.getAttribute("confirm"));
+             return "/login/login";
          }else{ //si hay una sesion iniciada entonces registramos la cita y nos vamos a mostrar las citas del usuario
              //Registramos la cita
              confirmarCita(request, http);
+             http.setAttribute("confirm", "1");
              return "/VistaCliente/showCitasMedicas.jsp";
          }
     }
