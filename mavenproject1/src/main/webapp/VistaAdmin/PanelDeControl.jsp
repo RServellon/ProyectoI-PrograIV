@@ -18,7 +18,7 @@
         <%@ include file  ="/Components/Header.jsp" %>
         
         
-        <div class="mx-0  vh-100" id="contenedor-dash">
+        <div  >
            
             <div class="row justify-content-center  vh-100">
                 <div class="col-3  h-100">
@@ -27,34 +27,24 @@
                         <hr>
                         <ul class="nav nav-pills flex-column mb-auto">
                             <li class="nav-item">
-                                <a href="#" class="nav-link active bg-white " aria-current="page" style="color: black">
-                                    Home
+                                <a href="/mavenproject1/admin-dash-board/administrar/medicos/show" class="nav-link active bg-white " aria-current="page" style="color: black">
+                                    Admnistrar Medicos
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link text-white">
+                                <a href="/mavenproject1/admin-dash-board/administrar/especialidades/show" class="nav-link text-white">
                                     
-                                    Dashboard
+                                    Admnistrar Especialidades
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link text-white">
+                                <a href="/mavenproject1/admin-dash-board/administrar/ciudades/show" class="nav-link text-white">
                                     
-                                    Orders
+                                    Administrar Ciudades
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="nav-link text-white">
-                                    
-                                    Products
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link text-white">
-                                    
-                                    Customers
-                                </a>
-                            </li>
+                          
+                        
                         </ul>
                         <hr>
                     </div>
@@ -62,7 +52,34 @@
                 <div class="col-9  h-100 my-5" >
                     <!--border border-3-->
                     <div class="container" id="main" style="border-radius: 9px; height: 80%; overflow: scroll;"  >
-                        Lasdasadasd
+                        <div class="row text-center">
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                                <h5>
+                                    Administrar Medicos
+                                </h5>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col" style="background: red;">
+                                <h6>
+                                    Medicos Aprobados
+                                </h6>
+                            </div>
+                            <div class="col" style="background: blue;">
+                                <h6>
+                                    Nuevas Solicitudes
+                                </h6>
+                            </div>
+                            <div class="col" style="background: green;">
+                                <h6>
+                                    Medicos Retenidos
+                                </h6>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

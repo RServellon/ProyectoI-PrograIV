@@ -149,7 +149,7 @@ public class MedicoHandler extends GeneralHandler {
     
      public Horario retornaHorario(String id_medico, String fechaHoraInicio){
         Horario horario = new Horario();
-        String sql ="select * from horarios where id_medico = " + id_medico + " and fechaHoraInicio = " + fechaHoraInicio+ ";";
+        String sql ="select * from horarios where id_medico = '" + id_medico + "' and fechaHoraInicio = '" + fechaHoraInicio+ "' ;";
         ResultSet rs;
         
         try {

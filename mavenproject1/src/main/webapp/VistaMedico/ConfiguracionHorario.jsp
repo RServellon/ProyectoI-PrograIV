@@ -63,14 +63,16 @@
                     </button>
 
                 </div>
+                <div  class="col-3"></div>
                 
-                <div class="col-10 my-5 ">
+                
+                <div class="col-4 my-5 ">
                     <form method="POST" name="ControladorMedico" action="/mavenproject1/medico/gestionar/horario/procesar">
                         <div class="">
                             <h5>
                                 Configurar Horario
                             </h5>
-                            <div class="row my-2" >
+                            <div class="row my-3" >
 
 
                                 <div class="col align-items-center text-center my-5"  >
@@ -182,6 +184,8 @@
                         </div>
                     </form>
                 </div>
+                                            
+                                            <div  class="col-3"></div>
 
 
             </div>

@@ -282,7 +282,7 @@ public class ControladorLogin extends HttpServlet {
 
             switch (user.getTipo()) {
                 case "admin":
-                    return "/mavenproject1/admin-dash-board";
+                    return "/admin-dash-board/administrar/medicos/show";
                 case "medico":
                     
 //                    Medico mm = general.retornaMedicoPorId(newUser.getId());

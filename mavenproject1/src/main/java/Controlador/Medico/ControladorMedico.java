@@ -33,7 +33,7 @@ import javax.ws.rs.Path;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos", "/configurar/medico/image"})
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos", "/configurar/medico/image", "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario","/medico/gestionar/horario/procesar", "/administrar/citas"})
 @MultipartConfig(location="C:/Users/rebec/OneDrive/Escritorio/img")
 public class ControladorMedico extends HttpServlet {
 
@@ -68,7 +68,109 @@ public class ControladorMedico extends HttpServlet {
                 case "/mavenproject1/configurar-medico-primera-vez":
                     request.getRequestDispatcher("/login/show").forward(request, response);
                     break;
-                case "/mavenproject1/paciente/gestion/perfil":
+                case "/administrar/citas":
+                    
+                    
+                    //TODO hacer lo de gestión de ciitas de x medico
+                    request.getRequestDispatcher("/VistaMedico/GestionarCitas.jsp").forward(request, response);
+                    break;
+                case "/medico/gestionar/horario":
+                    {
+                        //aqui se deben cargar los datos de la base y cargar la fecha actual
+                        DateTimeFormatter dtf;
+                        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                        Fecha fecha = new Fecha(dtf.format(LocalDateTime.now()));
+                        session.setAttribute("fecha", fecha);
+                        Usuario user = (Usuario) session.getAttribute("user");
+                        System.out.println(user);
+                        
+                       
+                       
+                        
+                        
+                        request.getRequestDispatcher("/VistaMedico/ConfiguracionHorario.jsp").forward(request, response);
+                    }
+                    break;
+                case "/medico/gestionar/horario/procesar":
+                    {
+                        //aqui se deben cargar los datos de la base y cargar la fecha actual
+
+                        Usuario user = (Usuario) session.getAttribute("user");
+                        MedicoHandler medicoHandler = new MedicoHandler();
+                       String horaInicio = (String) request.getParameter("horaInicio");
+                       String horaFinal = (String) request.getParameter("horaFinal");
+                       String frecuencia = (String) request.getParameter("frecuencia");
+                       String calendario = (String) request.getParameter("calendario");
+                       String strFrecuencia = frecuencia.equals("00") ? "01:00:00" : "00:30:00";
+                       
+                       String strFechaInicio = calendario+"T"+horaInicio+":00:00";
+                       String strFechaFinal= calendario + "T" + horaFinal + ":00:00";
+                       
+                        System.out.println(strFechaInicio);
+                        System.out.println(strFechaFinal);
+                        System.out.println(user);
+                        
+                        
+                       
+                        if (Integer.parseInt(horaFinal) - Integer.parseInt(horaInicio) > 0) {
+                            
+                            Horario h = medicoHandler.retornaHorario(user.getId(), strFechaInicio);
+                            System.out.println(h);
+                            if (h.getId_medico() != null ) {
+                                medicoHandler.borrarHorario(user.getId(), strFechaInicio);
+                                medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
+                            }else{
+                                
+                              medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
+                            }
+                            
+                            request.getRequestDispatcher("/VistaMedico/ConfiguracionHorario.jsp").forward(request, response);
+                        }else{
+                            //todo error
+                        }
+                       
+                        
+                        
+                    }
+                    break;
+                case "/medico/actualizar/informacion":
+                    {
+                        Usuario usuario = (Usuario) session.getAttribute("user");
+                        String codeEspecialidad = (String) request.getParameter("especialidad");
+                        String codeCiudad = (String) request.getParameter("ciudad");
+                        String costoConsulta = (String) request.getParameter("costoConsulta");
+                        String clinica = (String) request.getParameter("clinica");
+                        String foto = (String) request.getParameter("foto");
+                        String descipcion = (String) request.getParameter("descipcion");
+                        
+                        System.out.println(usuario);
+                        System.out.println(codeEspecialidad);
+                        System.out.println(codeCiudad);
+                        System.out.println(costoConsulta);
+                        System.out.println(clinica);
+                        
+                        ///TODO: -> poner que actualize la foto y descripción
+                        System.out.println(foto);
+                        System.out.println(descipcion);
+                        
+                        MedicoHandler medicoHandler = new MedicoHandler();
+                        System.out.println(medicoHandler.modificarDatos(usuario.getId(), codeEspecialidad, costoConsulta, codeCiudad, clinica));
+                        request.getRequestDispatcher("/medico/gestion/perfil").forward(request, response);
+                    }
+                    break;
+                case "/medico/gestion/perfil":{
+                    Usuario user = (Usuario) session.getAttribute("user");
+                    Medico medico = general.retornaMedicoPorId(user.getId());
+                    List<Ciudad> ciudades = general.listarCiudades();
+                    request.setAttribute("ciudades", ciudades);
+                    List<Especialidad> esp = general.listarEspecialidades();
+                    request.setAttribute("especialidades", esp);
+                    request.setAttribute("medico", medico);
+                    
+                    request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
+                    }
+                    break;
+                case "/mavenproject1/medico/gestion/perfil":
                     
                     Usuario user = (Usuario) session.getAttribute("user");
                     Medico medico =  general.retornaMedicoPorId(user.getId());
