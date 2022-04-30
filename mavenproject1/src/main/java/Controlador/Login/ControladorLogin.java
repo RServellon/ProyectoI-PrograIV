@@ -72,6 +72,10 @@ public class ControladorLogin extends HttpServlet {
                 case "/login/login":
 //                    System.out.println("Case login");
                     viewUrl=this.login(request, general,null);
+                    
+                    // Cita existe
+                    //System.out.println(general.verificaCitaExiste("200"));
+                    
                     // Retorna citas por id paciente
                     //System.out.println(pac.listarCitasPorIdPaciente("103"));
 //                        System.out.println("Sii");
@@ -288,7 +292,7 @@ public class ControladorLogin extends HttpServlet {
 //                        request.setAttribute("error", "Su solicitud se encuentra en revision");
 //                        return "/Components/LoginError.jsp";
 //                    }
-                    return "/mavenproject1/paciente/gestion/perfil";//todo
+                    return "/mavenproject1/medico/gestion/perfil";//todo
                 case "paciente":
                   //  System.out.println("ENTRE A PACIENTE");
                     return "/index.jsp";//todo

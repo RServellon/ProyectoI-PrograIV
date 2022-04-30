@@ -46,7 +46,7 @@ public class ControladorSesion extends HttpServlet {
             
             switch (user.getTipo()) {
                 case "medico":
-                    request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
+                    request.getRequestDispatcher("/medico/gestion/perfil").forward(request, response);
                     break;
                 case "paciente":
                     request.getRequestDispatcher("/VistaCliente/GestionarPerfil.jsp").forward(request, response);

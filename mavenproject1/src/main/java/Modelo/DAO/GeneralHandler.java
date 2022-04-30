@@ -499,6 +499,23 @@ public class GeneralHandler {
         return cita;
     }
     
-      
+     public boolean verificaCitaExiste(String codigo){
+        String sql ="select * from citas;";
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql);
+            while (rs.next()){
+                if(rs.getString("codigo").equals(codigo)){
+                    return true;
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+    
     
 }
