@@ -1,9 +1,17 @@
+<%@page import="Modelo.Medico"%>
 <%@page import="Modelo.DAO.MedicoHandler"%>
 <%@page import="Controlador.Cliente.ModelShowCita"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
-//modelo que tiene el medico, la hora(en stiring) y la fecha (en string)
  MedicoHandler medH = new MedicoHandler();
+ //Extraemos datos de la sesion
+ String idMedico =(String) session.getAttribute("idMedico");
+ String horaCita=(String) session.getAttribute("horaCita");;
+ String fechaCita=(String) session.getAttribute("fechaCita");
+ System.out.println("med: "+ idMedico+" horaCita: "+horaCita+" fecha: "+fechaCita);
+ //creamos al medico:
+ Medico med = medH.retornaMedicoPorId(idMedico);
+//modelo que tiene el medico, la hora(en stiring) y la fecha (en string)
  ModelShowCita model = (ModelShowCita) request.getAttribute("model"); 
 %>
 <!DOCTYPE html>

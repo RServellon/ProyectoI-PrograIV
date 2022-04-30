@@ -7,6 +7,7 @@ package Controlador.Cliente;
 import Modelo.ClaseServicio;
 import Modelo.DAO.MedicoHandler;
 import Modelo.Medico;
+import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *Me cargara los datos en el jsp showCita.jsp
@@ -25,12 +27,15 @@ public class ControladorShowCita extends HttpServlet {
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
          request.setAttribute("model", new ModelShowCita()); //se manda al request
+         //se extrae la sesion
+         HttpSession session = request.getSession(true);
+         Usuario user = (Usuario) session.getAttribute("user");
          
-        String viewUrl = "";
+         String viewUrl = "";
         switch (request.getServletPath()) {
             //si me llega el path de login/show entonces ejecuto una logica para mostrar la vista de show
             case "/VistaCliente/showCita":
-                viewUrl = showCita(request);
+                viewUrl = showCita(request, session);
                 break;
         }
         //en base a lo que retorno el switch en la variable viewUrl realiza el foward respectivo
@@ -75,16 +80,18 @@ public class ControladorShowCita extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    private String showCita(HttpServletRequest request) {
-       return showActionCita(request);
+    private String showCita(HttpServletRequest request, HttpSession session) {
+       return showActionCita(request, session);
     }
 
-    private String showActionCita(HttpServletRequest request) {
-        this.updateModel(request);
+    private String showActionCita(HttpServletRequest request, HttpSession session) {
+        this.updateModel(request, session);
+        this.updateSesion(request, session);
         return "/VistaCliente/showCita.jsp";
     }
         
-    void updateModel(HttpServletRequest request) {
+    //actualizara el modelo y la sesion
+    void updateModel(HttpServletRequest request, HttpSession session) {
         ModelShowCita model = (ModelShowCita) request.getAttribute("model");
         
         MedicoHandler medH = new MedicoHandler();
@@ -93,6 +100,16 @@ public class ControladorShowCita extends HttpServlet {
         model.setFecha(request.getParameter("fechaCita"));
         model.setHoraCita(request.getParameter("horaCita"));
         System.out.println(model.toString());
+    }
+
+    private void updateSesion(HttpServletRequest request, HttpSession session) {
+        String idMedico = request.getParameter("idMed");
+        String horaCita = request.getParameter("horaCita");
+        String fechaCita = request.getParameter("fechaCita");
+        //mandamos a la sesion los datos
+        session.setAttribute("horaCita", horaCita);
+        session.setAttribute("fechaCita", fechaCita);
+        session.setAttribute("idMedico", idMedico);
     }
 
 }
