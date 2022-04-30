@@ -124,11 +124,9 @@ public class PanelDeControl extends HttpServlet {
                     Especialidad especialidad = new Especialidad(id, nombre, descripcion);
                     Especialidad especialidaddb = adminHandler.retornaEspecialidadPorCodigo(id);
                     if (especialidaddb.getCodigo() == null) {
-                        //codigo disponible
                         adminHandler.registrarEspecialidad(especialidad);
                     }
-                    
-                    
+                                        
                     
                     
                     request.getRequestDispatcher("/admin-dash-board/administrar/especialidades/show").forward(request, response);

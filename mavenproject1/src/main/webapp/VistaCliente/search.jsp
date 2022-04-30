@@ -99,7 +99,6 @@ Esta pagina mostrara los resultados de la busqueda realizada de medicos
                      <%List<String> horariosF = ser.horasSegunFrecuencia2(hor); %>
                  <div style="width:100%; height:130px; overflow-y: scroll;">
                     <% for(String horaF : horariosF){ %>   
-                   
                     <a href="/mavenproject1/VistaCliente/showCita?idMed=<%= c.getId() %>&horaCita=<%=horaF%>&fechaCita=<%= hor.getFechaHoraInicio().getFormatoyyyyMMdd() %>" >
                         <div>
                         <button type="button" class="btn btn-hover" style="background-color: #20304c; width:60px; height: 30px; margin-bottom: 2px; color:white; padding: 0;"><%= horaF%></button>

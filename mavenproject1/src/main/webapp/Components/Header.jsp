@@ -76,13 +76,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="/mavenproject1/VistaCliente/PaginaPrincipal.jsp">
-                            <img src="/mavenproject1/assets/Icon pages/search.png">
-
-                            <label class="form-label" >Buscar</label>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" style="color: white" href="/mavenproject1/manage/profile">
                             <img src="/mavenproject1/assets/Icon pages/profile.png">
                             <label class="form-label" ><%=user.getNombre()%></label>
@@ -113,21 +106,6 @@
 
                             <label class="form-label" >About</label>
 
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" style="color:white" href="/mavenproject1/admin-dash-board">
-                            <img src="/mavenproject1/assets/Icon pages/admin-dash.png">
-
-                            <label class="form-label" >Admin Settings</label>
-
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="/mavenproject1/VistaCliente/PaginaPrincipal.jsp">
-                            <img src="/mavenproject1/assets/Icon pages/search.png">
-
-                            <label class="form-label" >Buscar</label>
                         </a>
                     </li>
                     <li class="nav-item">
