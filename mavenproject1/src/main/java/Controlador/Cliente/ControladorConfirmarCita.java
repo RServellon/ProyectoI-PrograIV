@@ -6,6 +6,7 @@ package Controlador.Cliente;
 
 import Modelo.Cita;
 import Modelo.DAO.GeneralHandler;
+import Modelo.DAO.PacienteHandler;
 import Modelo.Modelo;
 import Modelo.Usuario;
 import java.io.IOException;
@@ -90,6 +91,13 @@ public class ControladorConfirmarCita extends HttpServlet {
     }
 
     private String actionConfirmarCita(HttpServletRequest request, HttpSession http) {
+        this.updateModel(request, http);
+        //me verifica que el usuario este registrado , si no lo esta me manda al login (un nuevo servlet)
+         ModelConfirmarCita model = (ModelConfirmarCita) request.getAttribute("model");
+         if(!model.confirmarSesion()){
+             return "";
+         }
+        
         return "/VistaCliente/showCitasMedicas.jsp";
     }
     
@@ -97,11 +105,19 @@ public class ControladorConfirmarCita extends HttpServlet {
         ModelConfirmarCita model = (ModelConfirmarCita) request.getAttribute("model");
         //se extrae el user de la sesion
         Usuario user =(Usuario)http.getAttribute("user");
+        System.out.println("USUARIO SESIOOOON: " + user.toString());
         //se inserta en el modelo
         model.setUser(user);
+        //Se llama al handler de Pacientes
+        PacienteHandler pacHandler = new PacienteHandler();
         //Se extrae la lista de citas de ese usuario
         List<Cita> list = null;
-        
+        if(model.confirmarSesion()){
+        list = pacHandler.listarCitasPorIdPaciente(model.getUser().getId());
+        }
+        //se inserta la lista de citas al modelo
+        model.setListCitas(list);
     }
+
     
 }
