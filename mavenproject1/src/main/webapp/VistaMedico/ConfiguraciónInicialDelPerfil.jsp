@@ -28,6 +28,10 @@
     fechas.add(fecha6);
     fechas.add(fecha7);
     
+    System.out.println(fechas);
+    System.out.println(ciudades);
+    System.out.println(especialidades);
+    
 
 
 %>
@@ -61,7 +65,7 @@
             </div>
 
                     <div>
-                        <form method="POST" name="ControladorMedico" action="/mavenproject1/configurar/medico/actualizar/datos" enctype="multipart/form-data" >
+                        <form method="POST" name="ControladorMedico" action="/mavenproject1/configurar/medico/actualizar/datos"  >
                             <div class="row  text-center ">
 
                                 <div class="col" >

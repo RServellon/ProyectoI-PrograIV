@@ -56,7 +56,7 @@ public class ControladorLogin extends HttpServlet {
             AdminHandler admin = new AdminHandler();
             MedicoHandler medico = new MedicoHandler();
             PacienteHandler pac = new PacienteHandler();
-            
+            System.out.println(request.getServletPath());
             
             switch (request.getServletPath()) {
                 case "/loginError":

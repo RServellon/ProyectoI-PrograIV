@@ -37,7 +37,7 @@ import javax.ws.rs.Path;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos", "/configurar/medico/image", "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario","/medico/gestionar/horario/procesar", "/administrar/citas", "/mavenproject1//medico/gestion/perfil", "/medico/gestion/inicial", "/mavenproject1/medico/gestion/perfil"})
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos", "/configurar/medico/image", "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario","/medico/gestionar/horario/procesar", "/administrar/citas", "/mavenproject1/medico/gestion/perfil", "/medico/gestion/inicial"})
 @MultipartConfig(location="C:/Users/rebec/OneDrive/Escritorio/img")
 public class ControladorMedico extends HttpServlet {
 
@@ -69,6 +69,7 @@ public class ControladorMedico extends HttpServlet {
             String costoConsulta = (String)request.getParameter("costoConsulta");
             String clinica = (String) request.getParameter("clinica");
           
+            System.out.println(request.getServletPath());
             switch (request.getServletPath()) {
                 case "/mavenproject1/configurar-medico-primera-vez":
                     request.getRequestDispatcher("/login/show").forward(request, response);
@@ -122,17 +123,17 @@ public class ControladorMedico extends HttpServlet {
                         
                         if (Integer.parseInt(horaFinal) - Integer.parseInt(horaInicio) > 0) {
                             medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
-//                            Horario h = medicoHandler.retornaHorario(user.getId(), strFechaInicio);
-//                            System.out.println(h);
-//                            if (h.getId_medico() != null ) {
-//                                System.out.println("Entra y borra user");
-//                                medicoHandler.borrarHorario(user.getId(), strFechaInicio);
-//                                medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
-//                            }else{
-//                                System.out.println("Entra y borra user");
-//                                System.out.println(user);
-//                              medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
-//                            }
+                            Horario h = medicoHandler.retornaHorario(user.getId(), strFechaInicio);
+                            System.out.println(h);
+                            if (h.getId_medico() != null ) {
+                                System.out.println("Entra y borra user");
+                                medicoHandler.borrarHorario(user.getId(), strFechaInicio);
+                                medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
+                            }else{
+                                System.out.println("Entra y borra user");
+                                System.out.println(user);
+                              medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
+                            }
                             
                             request.getRequestDispatcher("/VistaMedico/ConfiguracionHorario.jsp").forward(request, response);
                         }else{
