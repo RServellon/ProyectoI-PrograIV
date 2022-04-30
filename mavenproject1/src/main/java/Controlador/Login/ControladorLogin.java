@@ -271,6 +271,7 @@ public class ControladorLogin extends HttpServlet {
         Usuario newUser = modelo.getCurrent();
         if (general.validarLogin(newUser)) {
             Usuario user = general.retornaUserPorId(newUser.getId());
+            System.out.println("METODOLOGINACTION: "+user.toString());
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
             System.out.println(user);
@@ -289,6 +290,7 @@ public class ControladorLogin extends HttpServlet {
 //                    }
                     return "/mavenproject1/paciente/gestion/perfil";//todo
                 case "paciente":
+                    System.out.println("ENTRE A PACIENTE");
                     return "/index.jsp";//todo
             }
         } else {

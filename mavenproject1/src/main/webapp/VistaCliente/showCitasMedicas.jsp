@@ -5,12 +5,13 @@
 --%>
 <%
     System.out.println("ENTREEE 2");
-//     Usuario user = (Usuario) session.getAttribute("user"); 
-//    if(user == null){
+     //Usuario user = (Usuario) session.getAttribute("user"); 
+//    System.out.println(user.toString());
+//     if(user == null){
 //     System.out.println("no hay usuario registrado");
-//    }else{
-//     System.out.println(user.toString());
-//    }
+//     }else{
+//      System.out.println(user.toString());
+//     }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

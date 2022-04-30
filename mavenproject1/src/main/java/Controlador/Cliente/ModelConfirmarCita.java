@@ -5,33 +5,54 @@
 package Controlador.Cliente;
 
 import Modelo.Cita;
+import Modelo.Usuario;
+import java.util.List;
 
 /**
  *
  * @author Dell
  */
 public class ModelConfirmarCita {
-    Cita cita;
+    Usuario user;
+    List<Cita> listCitas;
 
-    public ModelConfirmarCita(Cita cita) {
-        this.cita = cita;
+    public ModelConfirmarCita(Usuario user, List<Cita> listCitas) {
+        this.user = user;
+        this.listCitas = listCitas;
     }
 
     public ModelConfirmarCita() {
-        cita = null;
+        user = null;
+        listCitas = null;
     }
 
-    public Cita getCita() {
-        return cita;
+    public Usuario getUser() {
+        return user;
     }
 
-    public void setCita(Cita cita) {
-        this.cita = cita;
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
+
+    public List<Cita> getListCitas() {
+        return listCitas;
+    }
+
+    public void setListCitas(List<Cita> listCitas) {
+        this.listCitas = listCitas;
     }
 
     @Override
     public String toString() {
-        return "ModelConfirmarCita{" + "cita=" + cita + '}';
+        return "ModelConfirmarCita{" + "user=" + user + ", listCitas=" + listCitas + '}';
     }
+    
+    public boolean confirmarSesion(){
+        if(user.getId() == null){
+            return false; //no existe sesion
+        }
+        return true; //existe sesion
+    }
+    
     
 }

@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-              <%@ include file="../Components/Head.jsp" %>
+              <%@ include file="/Components/Head.jsp" %>
               <link href="/mavenproject1/CSS/login.css" rel="stylesheet">
     </head>
     <body>

@@ -4,9 +4,13 @@
  */
 package Controlador.Cliente;
 
+import Modelo.Cita;
+import Modelo.DAO.GeneralHandler;
+import Modelo.Modelo;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,18 +29,17 @@ public class ControladorConfirmarCita extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println("ENTREEEEEEEE0");
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("user");
-        session.setAttribute("user", user);
-        request.setAttribute("model", new ModelConfirmarCita()); //se manda al request
-
+            request.setAttribute("model", new ModelConfirmarCita()); //se manda al request
+           HttpSession session = request.getSession(true);
+           Usuario user = (Usuario) session.getAttribute("user");
+           
+          // request.setAttribute("model", new ModelConfirmarCita()); //se manda al request
+          
         String viewUrl = "";
         switch (request.getServletPath()) {
             //si me llega el path de login/show entonces ejecuto una logica para mostrar la vista de show
             case "/VistaCliente/confirmarCita":
-                System.out.println("ENTREEEEEE1");
-                viewUrl = "/VistaCliente/showCitasMedicas.jsp";
+                viewUrl = showConfirmarCita(request, session);
                 break;
         }
         //en base a lo que retorno el switch en la variable viewUrl realiza el foward respectivo
@@ -82,4 +85,23 @@ public class ControladorConfirmarCita extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private String showConfirmarCita(HttpServletRequest request, HttpSession http) {
+       return actionConfirmarCita(request, http);
+    }
+
+    private String actionConfirmarCita(HttpServletRequest request, HttpSession http) {
+        return "/VistaCliente/showCitasMedicas.jsp";
+    }
+    
+    void updateModel(HttpServletRequest request,HttpSession http ) {
+        ModelConfirmarCita model = (ModelConfirmarCita) request.getAttribute("model");
+        //se extrae el user de la sesion
+        Usuario user =(Usuario)http.getAttribute("user");
+        //se inserta en el modelo
+        model.setUser(user);
+        //Se extrae la lista de citas de ese usuario
+        List<Cita> list = null;
+        
+    }
+    
 }
