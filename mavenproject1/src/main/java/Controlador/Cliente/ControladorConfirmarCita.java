@@ -125,6 +125,7 @@ public class ControladorConfirmarCita extends HttpServlet {
     }
 
     private void confirmarCita(HttpServletRequest request, HttpSession http) {
+        PacienteHandler pacH = new PacienteHandler();
         //se extrae el id del medico del path
         String idMedicoCita = request.getParameter("idMed");
         System.out.println("idMedicoCita: "+idMedicoCita);
@@ -135,16 +136,19 @@ public class ControladorConfirmarCita extends HttpServlet {
         String fechaCita = request.getParameter("fecha");
         System.out.println("fechaCita: "+fechaCita);
         //Creamos el objeto fecha
-        String fechaTotal = fechaCita+" "+horaCita+":00.0";
+        String fechaTotal = fechaCita+" "+horaCita+":00"; // ##:##:##
         System.out.println("fechaTotal: "+fechaTotal);
-        //Se crea el objeto fecha
-        Fecha fecha = new Fecha(fechaTotal);
-        //Creamos estado default del la cita
         String estadoCita = "ESPERA"; 
-        //Creamos un codigo unico para la cita
-        //....
         //Extraemos el usuario de la sesion
         Usuario user = (Usuario) http.getAttribute("user");
+        //creeamo el objeto codigo
+        ClaseServicio ser = ClaseServicio.instance();
+        String codigo = ser.generarAleatorio();
+        //Registramos la cita
+        if( pacH.registrarCita(codigo, idMedicoCita, user.getId(), fechaTotal, "")){
+            System.out.println("Se registro la cita");
+        }
+        
     }
 
     

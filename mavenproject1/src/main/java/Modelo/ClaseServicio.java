@@ -3,6 +3,7 @@
  */
 package Modelo;
 
+import Modelo.DAO.GeneralHandler;
 import Modelo.DAO.MedicoHandler;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,9 +118,14 @@ public class ClaseServicio {
         return horas;
     }
     
-    public int generarAleatorio(){
-        int numero = (int)(Math.random()*2000+1);
-        
-        return numero;
+    public String generarAleatorio(){
+        GeneralHandler gen = new GeneralHandler();
+        String cod = "2001";
+        int numero;
+        while(gen.verificaCitaExiste(cod)){
+            numero = (int)(Math.random()*5000+2000);
+            cod=String.valueOf(numero);
+        }
+        return cod;
     }
 }

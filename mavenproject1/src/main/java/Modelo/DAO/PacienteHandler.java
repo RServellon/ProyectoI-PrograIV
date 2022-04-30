@@ -23,7 +23,9 @@ public class PacienteHandler extends GeneralHandler {
     
     
       public boolean registrarCita(String codigo, String id_medico, String id_paciente, String fechaHora, String anotaciones){
+          System.out.println("entro al metodo: medico="+id_medico+" paciente="+id_paciente);
         if(this.verificaUsuarioExiste(id_medico) && this.verificaUsuarioExiste(id_paciente)){
+             System.out.println("entro al metodo 2");
              try{
                 executor = new SQLExecutor(usernameBD, passwordBD);
                 String valores1[] = new String[7];
@@ -32,10 +34,11 @@ public class PacienteHandler extends GeneralHandler {
                 valores1[2] = id_medico;
                 valores1[3] = id_paciente;
                 valores1[4] = fechaHora; // con este formato 2022-04-10 16:00:00
-                valores1[5] = "REGISTRADO"; // todas las citas empiezan siendo registradas
+                valores1[5] = "ESPERA"; // todas las citas empiezan en espera hasta que el medico confirme
                 valores1[6] = anotaciones;
 
                 executor.prepareStatement(valores1);
+                System.out.println("entro al metodo 3 true se registro");
                 return true;
 
             } catch(Exception throwables){

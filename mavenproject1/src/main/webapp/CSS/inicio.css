@@ -1,0 +1,23 @@
+body{
+
+    /* We put the image */
+    background-image: "/mavenproject1/assets/ilustrations/medic girl.svg";
+    /* We set it the backgorund image in cover value*/
+    background-size: cover;
+    /* place the image centered, vertical and horizontaly*/
+    background-position: center center;
+    /*This so that the image is not repeated*/
+    background-repeat: no-repeat;
+    /*we place the background-image as fixed*/
+    background-attachment: fixed;
+    /*a default background color is shown in case the image does not load*/
+    background-color: cornflowerblue;
+    /* recomendable padding and margin */
+    margin: 0;
+    padding: 0;
+    /* letras de su contenido */
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+
+}

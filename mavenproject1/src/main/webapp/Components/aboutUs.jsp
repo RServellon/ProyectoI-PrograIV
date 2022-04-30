@@ -13,6 +13,8 @@
     </head>
     <body>
         <%@ include file  ="/Components/Header.jsp" %>
-        <h1>About US!</h1>
+        <p class="fs-3 text-center">REBECA SERVELLON</p>
+        <p class="fs-3 text-center">NORMAN BETANCOURT</p>
+        <p class="fs-3 text-center">HECTOR MENDEZ</p>
     </body>
 </html>
