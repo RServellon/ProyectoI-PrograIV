@@ -20,6 +20,8 @@
          Especialidad espec = null;
          //Lista de lista de horarios para la vista
          List<List<Horario>> liliHorarios = null;
+         String flag = (String)request.getAttribute("flag");
+         System.out.println(flag);
 %>
 
 <!--
@@ -59,12 +61,19 @@ Esta pagina mostrara los resultados de la busqueda realizada de medicos
         <div class="row row-padding row-margin border border-3 shadow p-3 mb-5 bg-body rounded-3 d-flex" >
 <!--            informacion de cada medico -->
 <!--             Columna de informacion del medico-->
+      
             <div class="container-info d-flex" style="max-width: 360px;">
+                  
                 <div class="d-flex">
-                      <div class="block-size">
-                      <img src="../assets/images/retrato-perfil-doc.jpg" class="imagen-perfil">
+                 
+                    <div class="block-size">
+                          <!-- Probando insertar img -->
+                    <div>
+                        <img src="/mavenproject1/configurar/medico/image?id=<%=c.getId()%>" width="150" alt/>
+                    </div>
+                   
                       <% espec=handlerMed.retornaEspecialidadPorCodigo(c.getEspecialidad()); %>
-                      <p class="p-especialidad fs-4" title=<%=espec.getDescripcion()%>><%= espec.getNombre()%> </p>
+                      <p class="p-especialidad fs-4" title= "<%=espec.getDescripcion()%>" <%= espec.getNombre()%> > </p>
                       </div>
                       <div>
                        <p class="fs-4 fw-bold p-info-doc"><%=c.getNombre()%></p>
@@ -91,7 +100,7 @@ Esta pagina mostrara los resultados de la busqueda realizada de medicos
                  <div style="width:100%; height:130px; overflow-y: scroll;">
                     <% for(String horaF : horariosF){ %>   
                    
-                    <a href="/mavenproject1/VistaCliente/showCita?idMed=<%= c.getId() %>&horaCita=<%=horaF%>&fechaCita=<%= hor.getFechaHoraInicio().getFormatoyyyyMMdd2() %>" >
+                    <a href="/mavenproject1/VistaCliente/showCita?idMed=<%= c.getId() %>&horaCita=<%=horaF%>&fechaCita=<%= hor.getFechaHoraInicio().getFormatoyyyyMMdd() %>" >
                         <div>
                         <button type="button" class="btn btn-hover" style="background-color: #20304c; width:60px; height: 30px; margin-bottom: 2px; color:white; padding: 0;"><%= horaF%></button>
                         </div>
