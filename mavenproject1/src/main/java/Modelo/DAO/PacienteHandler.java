@@ -24,6 +24,12 @@ public class PacienteHandler extends GeneralHandler {
     
       public boolean registrarCita(String codigo, String id_medico, String id_paciente, String fechaHora, String anotaciones){
           System.out.println("entro al metodo: medico="+id_medico+" paciente="+id_paciente);
+          if(this.verificaUsuarioExiste(id_medico)){
+              System.out.println("Se encontro al medico");
+          }
+          if(this.verificaUsuarioExiste(id_paciente)){
+              System.out.println("Se encontro al paciente");
+          }
         if(this.verificaUsuarioExiste(id_medico) && this.verificaUsuarioExiste(id_paciente)){
              System.out.println("entro al metodo 2");
              try{

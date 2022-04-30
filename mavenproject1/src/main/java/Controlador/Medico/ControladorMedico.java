@@ -9,6 +9,7 @@ import Modelo.DAO.GeneralHandler;
 import Modelo.DAO.MedicoHandler;
 import Modelo.Especialidad;
 import Modelo.Fecha;
+import Modelo.Horario;
 import Modelo.Medico;
 import Modelo.Usuario;
 import java.io.IOException;
@@ -96,7 +97,7 @@ public class ControladorMedico extends HttpServlet {
                         //aqui se deben cargar los datos de la base y cargar la fecha actual
 
                         Usuario user = (Usuario) session.getAttribute("user");
-                        MedicoHandler medicoHandler = new MedicoHandler();
+                        //MedicoHandler medicoHandler = new MedicoHandler();
                        String horaInicio = (String) request.getParameter("horaInicio");
                        String horaFinal = (String) request.getParameter("horaFinal");
                        String frecuencia = (String) request.getParameter("frecuencia");
@@ -135,11 +136,11 @@ public class ControladorMedico extends HttpServlet {
                     break;
                 case "/medico/actualizar/informacion":
                     {
-                        Usuario usuario = (Usuario) session.getAttribute("user");
+                        //Usuario usuario = (Usuario) session.getAttribute("user");
                         String codeEspecialidad = (String) request.getParameter("especialidad");
-                        String codeCiudad = (String) request.getParameter("ciudad");
-                        String costoConsulta = (String) request.getParameter("costoConsulta");
-                        String clinica = (String) request.getParameter("clinica");
+                       // String codeCiudad = (String) request.getParameter("ciudad");
+                        //String costoConsulta = (String) request.getParameter("costoConsulta");
+                        //String clinica = (String) request.getParameter("clinica");
                         String foto = (String) request.getParameter("foto");
                         String descipcion = (String) request.getParameter("descipcion");
                         
@@ -153,7 +154,7 @@ public class ControladorMedico extends HttpServlet {
                         System.out.println(foto);
                         System.out.println(descipcion);
                         
-                        MedicoHandler medicoHandler = new MedicoHandler();
+                        //MedicoHandler medicoHandler = new MedicoHandler();
                         System.out.println(medicoHandler.modificarDatos(usuario.getId(), codeEspecialidad, costoConsulta, codeCiudad, clinica));
                         request.getRequestDispatcher("/medico/gestion/perfil").forward(request, response);
                     }

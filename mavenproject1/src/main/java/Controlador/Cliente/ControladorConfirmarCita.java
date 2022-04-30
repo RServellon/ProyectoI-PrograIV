@@ -128,7 +128,7 @@ public class ControladorConfirmarCita extends HttpServlet {
         PacienteHandler pacH = new PacienteHandler();
         //se extrae el id del medico del path
         String idMedicoCita = request.getParameter("idMed");
-        System.out.println("idMedicoCita: "+idMedicoCita);
+        System.out.println("idMedicoCita:"+idMedicoCita);
         //Se extrae la hora del path
         String horaCita = request.getParameter("horaCita");
         System.out.println("horaCita: "+horaCita);

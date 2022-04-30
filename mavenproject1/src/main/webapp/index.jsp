@@ -20,14 +20,17 @@
                      <i class="fa-solid fa-calendar-days" style="font-size: 30px; margin-right: 1em;"></i> 
                      <p class="fs-5">Aqui podras ver tus citas agendadas(necesitas logearte para ver esta opcion)</p>
                 </div>
+                
                 <div class="d-flex" style="margin-top: 2em; color: #20304c;">
                      <i class="fa-solid fa-magnifying-glass" style="font-size: 30px; margin-right: 1em;"></i>
                      <p class="fs-5">Aqui podras buscar y agendar una cita con el medico que necesites</p>
                 </div> 
+                
                 <div class="d-flex" style="margin-top: 2em; color: #20304c;">
                     <i class="fa-solid fa-arrow-right-to-bracket" style="font-size: 30px; margin-right: 1em;"></i> 
                      <p class="fs-5">Opcion de logeo para iniciar sesion o registrarte en el sistema</p>
                 </div>
+                
                 <div class="d-flex" style="margin-top: 2em; color: #20304c;">
                     <i class="fa-solid fa-circle-info" style="font-size: 30px; margin-right:1em;"></i>
                     <p class="fs-5">Seccion para mas informacion y contacto!</p>

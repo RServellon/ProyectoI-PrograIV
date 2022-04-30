@@ -42,7 +42,7 @@
                   </div>
                   
                   <div class="d-flex justify-content-center align-items-center">
-                  <form method="POST" name="ConfirmarCita" action="/mavenproject1/VistaCliente/confirmarCita?idMed= <%=model.getMedico().getId()%>&fecha=<%=model.getFecha()%>&horaCita=<%=model.getHoraCita()%>">
+                  <form method="POST" name="ConfirmarCita" action="/mavenproject1/VistaCliente/confirmarCita?idMed=<%=model.getMedico().getId()%>&fecha=<%=model.getFecha()%>&horaCita=<%=model.getHoraCita()%>">
                       <button type="submit" class="btn btn-primary" style="background-color:#20304c; width: 200px;">Confirmar cita</button>
                   </form>
                   </div>
