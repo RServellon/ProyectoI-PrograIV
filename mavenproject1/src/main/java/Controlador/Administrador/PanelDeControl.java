@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "PanelDeControl", urlPatterns = {"/PanelDeControl", "/mavenproject1/admin-dash-board",
     "/admin-dash-board", "/admin-dash-board/administrar/medicos/show", "/admin-dash-board/administrar/especialidades/show",
-    "/admin-dash-board/administrar/ciudades/show", "/admin-dash-board/administrar/especialidades/add",
+    "/admin-dash-board/administrar/ciudades/show", "/admin-dash-board/administrar/especialidades/add", "/admin-dash-board/administrar/ciudades/add",
     "/admin-dash-board/administrar/medicos/restringir", "/admin-dash-board/administrar/medicos/reactivar",
     "/admin-dash-board/administrar/medicos/aceptar","/admin-dash-board/administrar/medicos/rechazar"})
 public class PanelDeControl extends HttpServlet {

@@ -39,8 +39,7 @@
                             </li>
                             <li>
                                 <a href="/mavenproject1/admin-dash-board/administrar/ciudades/show" class="nav-link   active  bg-white " aria-current="page" style="color: black">
-
-                                    Administrar Ciudadess
+                                    Administrar Ciudades
                                 </a>
                             </li>
 
@@ -52,7 +51,31 @@
                 <div class="col-9  h-100 my-5" >
                     <!--border border-3-->
                     <div class="container" id="main" style="border-radius: 9px; height: 80%; overflow: scroll;"  >
-                        Administrar Ciudades
+                        <div class="row">
+                            <div>
+                                <h5 class="text-center"> Administrar ciudades </h5>
+                            </div>
+                            <div style=" width: 700px; margin-left: 5em; margin-top: 5em;">
+                                <form method="POST" name="PanelDeControl" action="/mavenproject1/admin-dash-board/administrar/ciudades/add" >
+                                    <div>
+                                        <h5 class="fs-4 text-center">Digite la ciudad a listar</h5>
+                                    </div>
+                                    <div class="d-flex" style="margin-top:1em; ">
+                                    <div class="input-group-prepend d-flex">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="fa-solid fa-city" style="font-size: 30px"></i>
+                                        </span>
+                                    </div>
+                                    <input name="Ciudad"  type="text" class="form-control fs-4" placeholder="Ciudad" aria-label="ciudad" aria-describedby="basic-addon1">  
+                                    <div> 
+                                        <button type="submit" class="btn btn-primary" style="background-color:#20304c; width: 200px; height: 100%;">Listar ciudad</button>
+                                    </div>
+                                    </div><!-- Div de digitar ciudad -->
+                                    
+                                   
+                                </form>
+                            </div><!-- div del form -->
+                        </div>
                     </div>
                 </div>
             </div>
