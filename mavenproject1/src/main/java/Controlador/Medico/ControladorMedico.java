@@ -140,26 +140,26 @@ public class ControladorMedico extends HttpServlet {
                     break;
                 case "/medico/actualizar/informacion":
                     {
-                        usuario = (Usuario) session.getAttribute("user");
+                        Usuario usuario1 = (Usuario) session.getAttribute("user");
                         String codeEspecialidad = (String) request.getParameter("especialidad");
-                        codeCiudad = (String) request.getParameter("ciudad");
-                         costoConsulta = (String) request.getParameter("costoConsulta");
-                         clinica = (String) request.getParameter("clinica");
+                        String codeCiudad1 = (String) request.getParameter("ciudad");
+                        String costoConsulta1 = (String) request.getParameter("costoConsulta");
+                        String clinica1 = (String) request.getParameter("clinica");
                         String foto = (String) request.getParameter("foto");
                         String descipcion = (String) request.getParameter("descipcion");
                         
-                        System.out.println(usuario);
+                        System.out.println(usuario1);
                         System.out.println(codeEspecialidad);
-                        System.out.println(codeCiudad);
-                        System.out.println(costoConsulta);
-                        System.out.println(clinica);
+                        System.out.println(codeCiudad1);
+                        System.out.println(costoConsulta1);
+                        System.out.println(clinica1);
                         
                         ///TODO: -> poner que actualize la foto y descripción
                         System.out.println(foto);
                         System.out.println(descipcion);
                         
 //                        MedicoHandler medicoHandler = new MedicoHandler();
-                        System.out.println(medicoHandler.modificarDatos(usuario.getId(), codeEspecialidad, costoConsulta, codeCiudad, clinica));
+                        System.out.println(medicoHandler.modificarDatos(usuario1.getId(), codeEspecialidad, costoConsulta1, codeCiudad1, clinica1));
                         request.getRequestDispatcher("/medico/gestion/perfil").forward(request, response);
                     }
                     break;
@@ -173,7 +173,9 @@ public class ControladorMedico extends HttpServlet {
                     List<Especialidad> esp = general.listarEspecialidades();
                     request.setAttribute("especialidades", esp);
                     request.setAttribute("medico", medico);
-                    
+                    System.out.println("medico en /medico/gestion/perfil");
+                    System.out.println(medico);
+
                     request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
                     }
                     break;
