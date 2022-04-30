@@ -72,6 +72,10 @@ public class ControladorLogin extends HttpServlet {
                 case "/login/login":
                     System.out.println("Case login");
                     viewUrl=this.login(request, general,null);
+                    
+                    // Cita existe
+                    //System.out.println(general.verificaCitaExiste("200"));
+                    
                     // Retorna citas por id paciente
                     //System.out.println(pac.listarCitasPorIdPaciente("103"));
 //                        System.out.println("Sii");

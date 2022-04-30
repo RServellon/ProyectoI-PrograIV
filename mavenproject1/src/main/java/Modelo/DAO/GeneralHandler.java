@@ -30,8 +30,8 @@ import java.util.List;
  * listar medicos aprobados
  */
 public class GeneralHandler {
-//    final String usernameBD = "sa";
-    final String usernameBD = "sas";
+    final String usernameBD = "sa";
+//    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 
@@ -499,6 +499,23 @@ public class GeneralHandler {
         return cita;
     }
     
-      
+     public boolean verificaCitaExiste(String codigo){
+        String sql ="select * from citas;";
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql);
+            while (rs.next()){
+                if(rs.getString("codigo").equals(codigo)){
+                    return true;
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+    
     
 }
