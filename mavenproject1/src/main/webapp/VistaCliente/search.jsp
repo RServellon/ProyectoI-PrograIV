@@ -20,6 +20,8 @@
          Especialidad espec = null;
          //Lista de lista de horarios para la vista
          List<List<Horario>> liliHorarios = null;
+         String flag = (String)request.getAttribute("flag");
+         System.out.println(flag);
 %>
 
 <!--
@@ -59,13 +61,17 @@ Esta pagina mostrara los resultados de la busqueda realizada de medicos
         <div class="row row-padding row-margin border border-3 shadow p-3 mb-5 bg-body rounded-3 d-flex" >
 <!--            informacion de cada medico -->
 <!--             Columna de informacion del medico-->
+      
             <div class="container-info d-flex" style="max-width: 360px;">
+                  
                 <div class="d-flex">
-                      <div class="block-size">
-                        <!-- Probando insertar img --> 
+                 
+                    <div class="block-size">
+                          <!-- Probando insertar img -->
                     <div>
-                        <img src="/mavenproject1/configurar/medico/image?id=<%=c.getId()%>" alt/>
+                        <img src="/mavenproject1/configurar/medico/image?id=<%=c.getId()%>" width="150" alt/>
                     </div>
+                   
                       <% espec=handlerMed.retornaEspecialidadPorCodigo(c.getEspecialidad()); %>
                       <p class="p-especialidad fs-4" title= "<%=espec.getDescripcion()%>" <%= espec.getNombre()%> > </p>
                       </div>

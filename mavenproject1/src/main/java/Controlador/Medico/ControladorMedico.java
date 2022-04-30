@@ -49,7 +49,7 @@ public class ControladorMedico extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( OutputStream output = response.getOutputStream()) {
+        try {
 
             HttpSession session = request.getSession(true);
             GeneralHandler general = new GeneralHandler();
@@ -63,7 +63,6 @@ public class ControladorMedico extends HttpServlet {
             String codeCiudad = (String) request.getParameter("ciudad");
             String costoConsulta = (String)request.getParameter("costoConsulta");
             String clinica = (String) request.getParameter("clinica");
-            //String foto = (String) request.getParameter("foto");
           
             switch (request.getServletPath()) {
                 case "/mavenproject1/configurar-medico-primera-vez":
@@ -86,13 +85,15 @@ public class ControladorMedico extends HttpServlet {
                         Fecha fecha = new Fecha(dtf.format(LocalDateTime.now()));
                         session.setAttribute("fecha", fecha);
                         
+                       
+                        
                         System.out.println(fecha.toString());
                         request.getRequestDispatcher("/VistaMedico/ConfiguraciónInicialDelPerfil.jsp").forward(request, response);
                     }else{
                         request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
                     }
                     
-                        
+                  
                     
                     
                     break;
@@ -110,28 +111,34 @@ public class ControladorMedico extends HttpServlet {
                     //System.out.println(foto);
                     System.out.println(usuario.getId());
                     
-                    final Part imagen;
+                     final Part imagen;
                     imagen = request.getPart("imagen");
                     imagen.write(m.getId());
+                        
                     
                     request.getRequestDispatcher("/login/show").forward(request, response);
                     
                     
                     break;
                 case "/configurar/medico/image":
+                    
+                    OutputStream output = response.getOutputStream();
                     String id = request.getParameter("id");
-                    System.out.println("Entra " + id);
+                    System.out.println("Entra ");
                     
                     java.nio.file.Path path = FileSystems.getDefault().getPath("C:/Users/rebec/OneDrive/Escritorio/img", id);
-                    
+
                     Files.copy(path, output);
                     output.flush();
-                
+                    
                     break;
 
                 default:
                     request.getRequestDispatcher("/Components/Error.jsp").forward(request, response);
+                    break;
             }
+        } catch(Exception e){
+           System.out.println("Ha ocurrido un error: "+ e);  
         }
     }
 
