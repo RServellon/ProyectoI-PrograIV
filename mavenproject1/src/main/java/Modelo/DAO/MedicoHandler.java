@@ -160,7 +160,7 @@ public class MedicoHandler extends GeneralHandler {
                 horario.setFechaHoraInicio(rs.getString("fechaHoraInicio"));
                 horario.setFechaHoraFinal(rs.getString("fechaHoraFinal"));
                 horario.setFrecuencia(rs.getString("frecuencia"));
-                
+                System.out.println(horario);
                 
             }
         } catch (SQLException throwables) {

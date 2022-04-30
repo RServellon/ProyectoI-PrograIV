@@ -111,23 +111,28 @@ public class ControladorMedico extends HttpServlet {
                        String strFechaInicio = calendario+"T"+horaInicio+":00:00";
                        String strFechaFinal= calendario + "T" + horaFinal + ":00:00";
                        
+                        System.out.println(calendario);
+                        System.out.println(frecuencia);
+                        System.out.println(horaFinal);
+                        System.out.println(horaInicio);
                         System.out.println(strFechaInicio);
                         System.out.println(strFechaFinal);
                         System.out.println(user);
                         
                         
-                       
                         if (Integer.parseInt(horaFinal) - Integer.parseInt(horaInicio) > 0) {
-                            
-                            Horario h = medicoHandler.retornaHorario(user.getId(), strFechaInicio);
-                            System.out.println(h);
-                            if (h.getId_medico() != null ) {
-                                medicoHandler.borrarHorario(user.getId(), strFechaInicio);
-                                medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
-                            }else{
-                                
-                              medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
-                            }
+                            medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
+//                            Horario h = medicoHandler.retornaHorario(user.getId(), strFechaInicio);
+//                            System.out.println(h);
+//                            if (h.getId_medico() != null ) {
+//                                System.out.println("Entra y borra user");
+//                                medicoHandler.borrarHorario(user.getId(), strFechaInicio);
+//                                medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
+//                            }else{
+//                                System.out.println("Entra y borra user");
+//                                System.out.println(user);
+//                              medicoHandler.registrarHorario(user.getId(), strFechaInicio, strFechaFinal, strFrecuencia);
+//                            }
                             
                             request.getRequestDispatcher("/VistaMedico/ConfiguracionHorario.jsp").forward(request, response);
                         }else{
@@ -187,23 +192,21 @@ public class ControladorMedico extends HttpServlet {
                     System.out.println(medico);
                     System.out.println("Entra a  |/mavenproject1/medico/gestion/perfil|");
                     //
+                    List<Ciudad> ciudades = general.listarCiudades();
+                    session.setAttribute("ciudades", ciudades);
+                    List<Especialidad> esp =  general.listarEspecialidades();
+                    session.setAttribute("especialidades", esp);
+                    DateTimeFormatter dtf;
+                    dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                    Fecha fecha = new Fecha(dtf.format(LocalDateTime.now()));
+                    session.setAttribute("fecha", fecha);
                     if (medico.getClinica() == null || medico.getCiudad() == null || medico.getEspecialidad() == null) {
-                        List<Ciudad> ciudades = general.listarCiudades();
-                        session.setAttribute("ciudades", ciudades);
-                        List<Especialidad> esp =  general.listarEspecialidades();
-                        session.setAttribute("especialidades", esp);
-                        
-                        DateTimeFormatter dtf;
-                        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-                        Fecha fecha = new Fecha(dtf.format(LocalDateTime.now()));
-                        session.setAttribute("fecha", fecha);
-                        
-                       
                         
                         System.out.println(fecha.toString());
                         request.getRequestDispatcher("/VistaMedico/ConfiguraciónInicialDelPerfil.jsp").forward(request, response);
                     }else{
-                        request.getRequestDispatcher("/VistaMedico/GestionarPerfil.jsp").forward(request, response);
+                        System.out.println("ENTRA A GESTIONAR EL OERFIIL");
+                        request.getRequestDispatcher("/medico/gestion/perfil").forward(request, response);
                     }
                     
                   
