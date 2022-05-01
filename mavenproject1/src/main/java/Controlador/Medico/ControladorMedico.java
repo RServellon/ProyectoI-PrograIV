@@ -43,7 +43,8 @@ import javax.ws.rs.Path;
     "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos", "/configurar/medico/image", 
     "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario",
     "/medico/gestionar/horario/procesar", "/administrar/citas", "/mavenproject1/medico/gestion/perfil",
-    "/medico/gestion/inicial"})
+    "/medico/gestion/inicial", "/medico/gestionar/citas/aceptar","/medico/gestionar/citas/descartar",
+    "/medico/gestionar/citas/concluir", "/medico/gestionar/citas/concluir/update" })
 @MultipartConfig(location="C:/Users/rebec/OneDrive/Escritorio/img")
 public class ControladorMedico extends HttpServlet {
 
@@ -80,6 +81,46 @@ public class ControladorMedico extends HttpServlet {
             switch (request.getServletPath()) {
                 case "/mavenproject1/configurar-medico-primera-vez":
                     request.getRequestDispatcher("/login/show").forward(request, response);
+                    break;
+                case "/medico/gestionar/citas/aceptar":
+                    //aceptar la cita de un paciente
+                    String citaAceptada = request.getParameter("citaAceptada");
+                    System.out.println(citaAceptada);
+                    pacienteHandler.cambiarEstadoCita(citaAceptada, "REGISTRADO");
+                    
+                    
+                    request.getRequestDispatcher("/administrar/citas").forward(request, response);
+                    break;
+                case "/medico/gestionar/citas/descartar":
+                    //descartar la cita de un paciente
+                    String citaDescartada = request.getParameter("citaDescartada");
+                    System.out.println(citaDescartada);
+                    pacienteHandler.cambiarEstadoCita(citaDescartada, "CANCELADO");
+                    
+                    
+                    request.getRequestDispatcher("/administrar/citas").forward(request, response);
+                    break;
+                case "/medico/gestionar/citas/concluir":
+                    //finalizar la cita de un paciente
+                    String citaConcluida = request.getParameter("citaConcluida");
+                    System.out.println(citaConcluida);
+                    Cita citaObj = general.retornaCitaPorCodigo(citaConcluida);
+                    Usuario pacienteObj = general.retornaUserPorId(citaObj.getId_paciente());
+                    session.setAttribute("citaConcluida", citaConcluida);
+                    session.setAttribute("citaObj", citaObj);
+                    session.setAttribute("pacienteObj", pacienteObj);
+                    request.getRequestDispatcher("/VistaMedico/CouncluirCita.jsp").forward(request, response);   
+                    break;
+                case "/medico/gestionar/citas/concluir/update":
+                    //mandar datos por backend y relistar la info nueva
+                    String anotaciones = request.getParameter("anotaciones");
+                    String citaConcluidap = (String) session.getAttribute("citaConcluida");
+                    System.out.println(anotaciones);
+                    System.out.println(citaConcluidap);
+                    pacienteHandler.concluirCita(citaConcluidap, anotaciones);
+                    
+                    
+                    request.getRequestDispatcher("/administrar/citas").forward(request, response);
                     break;
                 case "/administrar/citas":
                     String estado = request.getParameter("estado");

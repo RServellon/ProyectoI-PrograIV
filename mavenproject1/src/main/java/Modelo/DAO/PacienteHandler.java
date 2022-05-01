@@ -121,6 +121,41 @@ public class PacienteHandler extends GeneralHandler {
         return false;
     }
     
+    public boolean cambiarEstadoCita( String idCita, String Estado){
+        try{
+            String valores1[] = new String[3];
+            valores1[0] = "update citas set estado = ? where codigo = ?;";
+            valores1[1] = Estado;
+            valores1[2] = idCita;
+            
+
+            executor.prepareStatement(valores1);
+            return true;
+            
+         } catch(Exception throwables){
+                throwables.printStackTrace();
+            }
+        return false;
+    }
+    
+    
+    public boolean concluirCita( String idCita, String anotaciones){
+        try{
+            String valores1[] = new String[3];
+            valores1[0] = "update citas set anotaciones = ?, estado = 'FINALIZADO' where codigo = ?;";
+            valores1[1] = anotaciones;
+            valores1[2] = idCita;
+            
+
+            executor.prepareStatement(valores1);
+            return true;
+            
+         } catch(Exception throwables){
+                throwables.printStackTrace();
+            }
+        return false;
+    }
+    
     public List<Cita> listarCitasPorIdPaciente(String id){
         List<Cita> lista = new ArrayList<>();
         Cita cita = null;
