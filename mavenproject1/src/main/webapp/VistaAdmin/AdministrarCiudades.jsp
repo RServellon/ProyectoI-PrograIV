@@ -1,9 +1,15 @@
-<%-- 
-    Document   : AdministrarCiudades
-    Created on : 30 abr. 2022, 9:08:52
-    Author     : norma
---%>
 
+<%@page import="Modelo.Ciudad"%>
+<%@page import="java.util.List"%>
+<% 
+   String registrado =(String) request.getAttribute("registrado");
+   if(registrado != null){
+     if(!registrado.equals("")){
+      registrado = "1";
+    }
+   }
+   
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +24,7 @@
         <%@ include file  ="/Components/Header.jsp" %>
 
 
-        <div  >
+        <div>
 
             <div class="row justify-content-center  vh-100">
                 <div class="col-3  h-100">
@@ -55,25 +61,35 @@
                             <div>
                                 <h5 class="text-center"> Administrar ciudades </h5>
                             </div>
+                            
                             <div style=" width: 700px; margin-left: 5em; margin-top: 5em;">
                                 <form method="POST" name="PanelDeControl" action="/mavenproject1/admin-dash-board/administrar/ciudades/add" >
-                                    <div>
-                                        <h5 class="fs-4 text-center">Digite la ciudad a listar</h5>
-                                    </div>
+                                    <div class="d-flex" style="margin-top:1em; ">
+                                        <div class="input-group-prepend d-flex">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-city" style="font-size: 30px"></i>
+                                            </span>
+                                        </div>
+                                        <input name="Provincia"  type="text" class="form-control fs-4" placeholder="Ingrese la provincia" aria-label="ciudad" aria-describedby="basic-addon1" required>  
+                                    </div><!-- Div de digitar provincia -->
+                                    
                                     <div class="d-flex" style="margin-top:1em; ">
                                     <div class="input-group-prepend d-flex">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <i class="fa-solid fa-city" style="font-size: 30px"></i>
+                                             <i class="fa-solid fa-tree-city" style="font-size: 30px"></i>
                                         </span>
                                     </div>
-                                    <input name="Ciudad"  type="text" class="form-control fs-4" placeholder="Ciudad" aria-label="ciudad" aria-describedby="basic-addon1">  
-                                    <div> 
-                                        <button type="submit" class="btn btn-primary" style="background-color:#20304c; width: 200px; height: 100%;">Listar ciudad</button>
-                                    </div>
+                                        <input name="Ciudad"  type="text" class="form-control fs-4" placeholder="Ingrese la ciudad" aria-label="ciudad" aria-describedby="basic-addon1" required>  
                                     </div><!-- Div de digitar ciudad -->
-                                    
-                                   
+                                    <div style="margin-top:1em; margin-left: 14em;"> 
+                                        <button type="submit" class="btn btn-primary" style="background-color:#20304c; width: 200px; height: 50px;">Registrar ciudad</button>
+                                    </div>
                                 </form>
+                                <% if(registrado == "1"){ %>
+                                <div class="alert alert-success" role="alert" style="margin-top: 1em;">
+                                    <p class="text-center">Ciudad registrada exitosamente</p>
+                                </div>
+                                <% } %>
                             </div><!-- div del form -->
                         </div>
                     </div>

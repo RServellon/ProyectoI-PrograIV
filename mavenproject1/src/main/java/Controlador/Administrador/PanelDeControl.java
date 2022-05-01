@@ -4,6 +4,8 @@
  */
 package Controlador.Administrador;
 
+import Modelo.Ciudad;
+import Modelo.ClaseServicio;
 import Modelo.DAO.AdminHandler;
 import Modelo.DAO.GeneralHandler;
 import Modelo.DAO.MedicoHandler;
@@ -107,7 +109,6 @@ public class PanelDeControl extends HttpServlet {
                 case "/admin-dash-board/administrar/especialidades/show":
                     //Listar Especiialidades
                     List<Especialidad> especialidades = general.listarEspecialidades();
-                    
                     session.setAttribute("especialidades", especialidades);
                     request.getRequestDispatcher("/VistaAdmin/AdministrarEspecialidades.jsp").forward(request, response);
                     break;
@@ -117,22 +118,30 @@ public class PanelDeControl extends HttpServlet {
                     String id = (String) request.getParameter("idEspecialidad");
                     String descripcion = (String) request.getParameter("descripcion");
                     
-                    System.out.println(nombre);
-                    System.out.println(id);
-                    System.out.println(descripcion);
-                    
                     Especialidad especialidad = new Especialidad(id, nombre, descripcion);
                     Especialidad especialidaddb = adminHandler.retornaEspecialidadPorCodigo(id);
                     if (especialidaddb.getCodigo() == null) {
                         adminHandler.registrarEspecialidad(especialidad);
-                    }
-                                        
-                    
-                    
+                    }              
                     request.getRequestDispatcher("/admin-dash-board/administrar/especialidades/show").forward(request, response);
                     break;
+                    case "/admin-dash-board/administrar/ciudades/add":
+                    ClaseServicio ser = ClaseServicio.instance();
+                    String ciudad = (String) request.getParameter("Ciudad");
+                    String provincia = (String) request.getParameter("Provincia");
+                    String codigo = ser.generarAleatorio();
+                    //creamos la ciudad
+                    Ciudad city = new Ciudad(codigo,ciudad,provincia);
+                    adminHandler.registrarCiudad(city);
+                    request.setAttribute("registrado", "1"); //manda 1 si se registro correctamente
+                    request.getRequestDispatcher("/admin-dash-board/administrar/ciudades/show").forward(request, response);
+                    break; 
                 case "/admin-dash-board/administrar/ciudades/show":
-                    //Listar ciudades
+                    // Listar ciudades
+                    //mandamos las ciudades para listarlas
+                    List<Ciudad> ciudades = general.listarCiudades();
+                    session.setAttribute("ciudades", ciudades);
+                    
                     request.getRequestDispatcher("/VistaAdmin/AdministrarCiudades.jsp").forward(request, response);
                     break;
             }
