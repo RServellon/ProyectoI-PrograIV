@@ -6,6 +6,7 @@ package Modelo.DAO;
 
 import Modelo.Calificacion;
 import Modelo.Cita;
+import Modelo.Cliente;
 import Modelo.DAO.SQLConnection.SQLExecutor;
 import Modelo.Horario;
 import Modelo.Medico;
@@ -51,13 +52,56 @@ public class MedicoHandler extends GeneralHandler {
         return respuesta;
     }
     
+    public List<Cita> listarCitasPorEstadoYNombrePaciente(String estado, String id_medico, String id_paciente) {
+        List<Cita> lista = new ArrayList<>();
+        Cita cita = null;
+        String sql="";
+        
+        System.out.println(estado);
+        System.out.println(id_paciente);
+        if (id_paciente.length() == 0 && estado.length() >0) {
+            sql = "select * from citas where estado = '" + estado + "' and id_medico = '" + id_medico + "'  order by fechaHora ;";
+        }else
+        {
+            if (id_paciente.length()>0 && estado.length() == 0) {
+                sql = "select * from citas where id_paciente = '" + id_paciente + "' and id_medico = '" + id_medico + "'  order by fechaHora ;";
+            }else
+            {
+                if (id_paciente.length() == 0 && estado.length() == 0 ) {
+                    sql = "select * from citas where id_medico = '" + id_medico + "'  order by fechaHora ;";
+                }else{
+                    sql = "select * from citas where id_medico = '" + id_medico + "' and id_paciente = '" + id_paciente + "' and estado = '" + estado + "'  order by fechaHora ;";
+                }
+            }
+        }
+        String codigo;
+
+        try {
+            System.out.println(sql);
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            ResultSet rs = executor.ejecutaQuery(sql);
+            while (rs.next()) {
+                codigo = rs.getString("codigo");
+                //ojo esto acá pierde el id del medico
+                cita = this.retornaCitaPorCodigo22(codigo);
+                lista.add(cita);
+                
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return lista;
+    }
+    
     
      
     
     public List<Cita> listarCitasPorEstado(String estado, String id_medico){
         List<Cita> lista = new ArrayList<>();
         Cita cita = null;
-        String sql ="select * from citas where estado = '"+ estado +"' and id_medico = " + id_medico + ";";
+        String sql ="select * from citas where estado = '"+ estado +"' and id_medico = '"+ id_medico +"';";
         String codigo;
          
         try{

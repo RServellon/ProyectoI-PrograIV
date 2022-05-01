@@ -6,7 +6,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Medico"%>
-<%@page import="Controlador.Cliente.ModelBusquedaCita"%>
+<%@page import="Controlador.Cliente.ModelBusquedaCita"%> 
 
 <%
          //clase de servicio para metodos de ayuda

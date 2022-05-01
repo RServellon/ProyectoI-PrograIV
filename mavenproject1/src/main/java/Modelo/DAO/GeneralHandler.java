@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class GeneralHandler {
 //    final String usernameBD = "sa";
-    final String usernameBD = "sa";
+    final String usernameBD = "sas";
     final String passwordBD = "password";
     SQLExecutor executor;
 
@@ -488,6 +488,28 @@ public class GeneralHandler {
             rs = executor.ejecutaQuery(sql);
             while (rs.next()){
                 cita.setId_medico(rs.getString("id_medico"));   
+                cita.setId_paciente(rs.getString("id_paciente"));
+                cita.setFecha(rs.getString("fechaHora"));
+                cita.setEstado(rs.getString("estado"));
+                cita.setAnotaciones(rs.getString("anotaciones"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return cita;
+    }
+      
+      
+      public Cita retornaCitaPorCodigo22(String codigo){
+        Cita cita = new Cita();
+        String sql ="select * from citas where codigo = " + codigo + ";";
+        ResultSet rs;
+        
+        try {
+            executor = new SQLExecutor(usernameBD, passwordBD);
+            rs = executor.ejecutaQuery(sql);
+            while (rs.next()){
+                cita.setId_medico(codigo);   
                 cita.setId_paciente(rs.getString("id_paciente"));
                 cita.setFecha(rs.getString("fechaHora"));
                 cita.setEstado(rs.getString("estado"));
