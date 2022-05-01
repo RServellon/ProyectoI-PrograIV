@@ -99,8 +99,7 @@ public class PanelDeControl extends HttpServlet {
                     //rechazar un medico nuevo
                     String idARechazar = request.getParameter("idARechazar");
                     
-                    
-                    adminHandler.borarMedico(idARechazar);
+                    general.borrarUsuario(idARechazar, "medico");
                     
                     request.getRequestDispatcher("/admin-dash-board/administrar/medicos/show").forward(request, response);
                     break;

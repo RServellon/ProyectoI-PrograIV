@@ -4,9 +4,11 @@
  */
 package Controlador.Medico;
 
+import Modelo.Cita;
 import Modelo.Ciudad;
 import Modelo.DAO.GeneralHandler;
 import Modelo.DAO.MedicoHandler;
+import Modelo.DAO.PacienteHandler;
 import Modelo.Especialidad;
 import Modelo.Fecha;
 import Modelo.Horario;
@@ -37,7 +39,11 @@ import javax.ws.rs.Path;
  *
  * @author norma
  */
-@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez", "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos", "/configurar/medico/image", "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario","/medico/gestionar/horario/procesar", "/administrar/citas", "/mavenproject1/medico/gestion/perfil", "/medico/gestion/inicial"})
+@WebServlet(name = "ControladorMedico", urlPatterns = {"/ControladorMedico", "/mavenproject1/configurar-medico-primera-vez",
+    "/mavenproject1/paciente/gestion/perfil", "/configurar/medico/actualizar/datos", "/configurar/medico/image", 
+    "/medico/gestion/perfil", "/medico/actualizar/informacion", "/medico/gestionar/horario",
+    "/medico/gestionar/horario/procesar", "/administrar/citas", "/mavenproject1/medico/gestion/perfil",
+    "/medico/gestion/inicial"})
 @MultipartConfig(location="C:/Users/rebec/OneDrive/Escritorio/img")
 public class ControladorMedico extends HttpServlet {
 
@@ -63,6 +69,7 @@ public class ControladorMedico extends HttpServlet {
 //            request.setAttribute("clave", user.getClave());
 
             MedicoHandler medicoHandler = new MedicoHandler();
+            PacienteHandler pacienteHandler = new PacienteHandler();
             Usuario usuario = (Usuario) session.getAttribute("user");
             String especialidad = (String) request.getParameter("especialidad");
             String codeCiudad = (String) request.getParameter("ciudad");
@@ -75,7 +82,23 @@ public class ControladorMedico extends HttpServlet {
                     request.getRequestDispatcher("/login/show").forward(request, response);
                     break;
                 case "/administrar/citas":
+                    String estado = request.getParameter("estado");
+                    String idCliente = request.getParameter("idCliente");
                     
+                    if (estado == null) {
+                        estado = "";
+                    }
+                    if (idCliente == null) {
+                        idCliente = "";
+                    }
+                    
+                    List<Cita> citas = medicoHandler.listarCitasPorEstadoYNombrePaciente(estado, usuario.getId() , idCliente);
+                  
+
+                    
+                    request.setAttribute("estado", estado);
+                    request.setAttribute("idCliente", idCliente);
+                    session.setAttribute("citas", citas);
                     
                     //TODO hacer lo de gestión de ciitas de x medico
                     request.getRequestDispatcher("/VistaMedico/GestionarCitas.jsp").forward(request, response);
