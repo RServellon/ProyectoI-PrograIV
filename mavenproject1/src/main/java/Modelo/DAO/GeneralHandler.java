@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class GeneralHandler {
 //    final String usernameBD = "sa";
-    final String usernameBD = "sas";
+    final String usernameBD = "sa";
     final String passwordBD = "password";
     SQLExecutor executor;
 

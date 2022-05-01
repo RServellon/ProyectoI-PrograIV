@@ -2,6 +2,7 @@
 <%@page import="Modelo.Ciudad"%>
 <%@page import="java.util.List"%>
 <% 
+    List<Ciudad> ciudades = (List<Ciudad>) session.getAttribute("ciudades");
    String registrado =(String) request.getAttribute("registrado");
    if(registrado != null){
      if(!registrado.equals("")){
@@ -58,11 +59,32 @@
                     <!--border border-3-->
                     <div class="container" id="main" style="border-radius: 9px; height: 80%; overflow: scroll;"  >
                         <div class="row">
+                            <div class="col">
+                                <h6 class="text-center">
+                                    Ciudades Actuales
+                                </h6>
+
+                                <%for (Ciudad c: ciudades) {%>
+                                <div class="row my-2 mx-1" style=" border: 3px solid #20304c ">
+                                    <p>
+                                        Provincia: <%=c.getProvincia() %>
+                                    </p>
+                                    <p>
+                                       Ciudad: <%= c.getNombre() %> 
+                                    </p>
+                                    <p>
+                                        ID:<%= c.getCodigo() %>
+                                    </p>
+                                    <br>
+                                </div>
+                                <%}%>
+                            </div>
+                            <div class="col">
                             <div>
                                 <h5 class="text-center"> Administrar ciudades </h5>
                             </div>
                             
-                            <div style=" width: 700px; margin-left: 5em; margin-top: 5em;">
+                            <div style=" width: 500px; margin-left: 5em; margin-top: 5em;">
                                 <form method="POST" name="PanelDeControl" action="/mavenproject1/admin-dash-board/administrar/ciudades/add" >
                                     <div class="d-flex" style="margin-top:1em; ">
                                         <div class="input-group-prepend d-flex">
@@ -81,7 +103,7 @@
                                     </div>
                                         <input name="Ciudad"  type="text" class="form-control fs-4" placeholder="Ingrese la ciudad" aria-label="ciudad" aria-describedby="basic-addon1" required>  
                                     </div><!-- Div de digitar ciudad -->
-                                    <div style="margin-top:1em; margin-left: 14em;"> 
+                                    <div style="margin-top:1em; margin-left: 10em;"> 
                                         <button type="submit" class="btn btn-primary" style="background-color:#20304c; width: 200px; height: 50px;">Registrar ciudad</button>
                                     </div>
                                 </form>
@@ -91,7 +113,8 @@
                                 </div>
                                 <% } %>
                             </div><!-- div del form -->
-                        </div>
+                            </div><!-- columna 2 -->
+                        </div><!-- FILA -->
                     </div>
                 </div>
             </div>
